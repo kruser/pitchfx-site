@@ -1,4 +1,6 @@
 pitchfx-site
 ============
 
-A website for searching PitchFX data
+A webapp for searching PitchFX data.
+
+If you are seeing this message, the site is incomplete.
