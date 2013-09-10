@@ -39,7 +39,7 @@ To access for the batter with the ID 150275 for the month of August 2013
   
 To access for the pitcher with the ID 89231 for the month of August 2013
 
-    http://localhost:3000/api/atbats?batter=89231&start=8/1/2013&end=9/1/2013
+    http://localhost:3000/api/atbats?pitcher=89231&start=8/1/2013&end=9/1/2013
   
 Note, the start and end dates take simple javascript date formats as they are parsed with *new Date(str)*.
 
@@ -52,6 +52,6 @@ And, to get a full list of players, simply HTTP GET the following
 
     http://localhost:3000/api/players
     
-If you know a players ID, you can retrieve the player in question with a GET to...
+If you know a players ID, like 89231, you can retrieve the player in question with a GET to...
 
-    http://localhost:3000/api/players/{{playerId}}
+    http://localhost:3000/api/players/89231
