@@ -27,7 +27,8 @@ To install and start this node application, execute these commands
     node app
 
 ### APIs
-This site, in addition to having an awesome UI, provides two APIs. Yes, just two.
+This site, in addition to having an awesome UI, provides two APIs. Yes, just two. These APIs do not support paging
+at this time as the UI doesn't need or want them. Adding paging should be a trivial exercise for a later date.
 
 #### At-Bats API
 You can access at-bats for any batter or pitcher in any time frame by using the atbats API. Example usage is as follows.
