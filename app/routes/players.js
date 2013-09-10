@@ -19,8 +19,8 @@ exports.query = function(req, res) {
 
 	var query = {};
 	var options = {
-			'sort' : 'last'
-		};
+		'sort' : 'last'
+	};
 	if (search) {
 		var splitty = search.split(" ");
 		if (splitty.length > 1) {
@@ -30,11 +30,15 @@ exports.query = function(req, res) {
 			};
 		} else {
 			query = {
-				'first' : new RegExp(search, 'i')
+				'$or' : [ {
+					'first' : new RegExp(search, 'i')
+				}, {
+					'last' : new RegExp(search, 'i')
+				} ]
 			};
 		}
-	} 
-	
+	}
+
 	console.log(query);
 
 	MongoClient.connect("mongodb://localhost:27017/mlbatbat", function(err, db) {
