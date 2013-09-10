@@ -1,5 +1,13 @@
 var MongoClient = require('mongodb').MongoClient;
 
+/**
+ * Query atbats for a batter or a pitcher. If there
+ * isn't a "batter" or "pitcher" query parameter than
+ * this method will throw a 500.
+ * 
+ * @param req - the express request
+ * @param res - the express response
+ */
 exports.query = function(req, res) {
 
 	/* Supported parameters */
@@ -14,6 +22,11 @@ exports.query = function(req, res) {
 	}
 	if (pitcher) {
 		query.pitcher = parseInt(pitcher);
+	}
+	if (!pitcher && !batter)
+	{
+		res.send(500, { error: 'pitcher or batter parameters are required' });
+		return;
 	}
 	if (start && end) {
 		query.start_tfs_zulu = {

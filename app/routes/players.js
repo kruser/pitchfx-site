@@ -1,5 +1,11 @@
 var MongoClient = require('mongodb').MongoClient;
 
+/**
+ * Get a player by ID. The req.params.id is expected to be populated
+ * 
+ * @param req - the express request
+ * @param res - the express response
+ */
 exports.getPlayer = function(req, res) {
 	var query = {
 		'id' : parseInt(req.params.id)
@@ -12,6 +18,14 @@ exports.getPlayer = function(req, res) {
 	});
 }
 
+/**
+ * Query against all players using a string query. When the query
+ * is more than one word, simply split the query and search against
+ * the "first" and "last" fields.
+ * 
+ * @param req - the express request
+ * @param res - the express response
+ */
 exports.query = function(req, res) {
 
 	/* Supported parameters */
