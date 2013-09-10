@@ -33,9 +33,11 @@ This site, in addition to having an awesome UI, provides two APIs. Yes, just two
 You can access at-bats for any batter or pitcher in any time frame by using the atbats API. Example usage is as follows.
 
 To access for the batter with the ID 150275 for the month of August 2013
+
   http://localhost:3000/api/atbats?batter=150275&start=8/1/2013&end=9/1/2013
   
 To access for the pitcher with the ID 89231 for the month of August 2013
+
   http://localhost:3000/api/atbats?batter=89231&start=8/1/2013&end=9/1/2013
   
 Note, the start and end dates take simple javascript date formats as they are parsed with *new Date(str)*.
