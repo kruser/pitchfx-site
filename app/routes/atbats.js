@@ -1,9 +1,4 @@
-var mongo = require('mongodb');
-
-var server = new mongo.Server('localhost', 27017, {
-	auto_reconnect : true
-});
-db = new mongo.Db('mlbatbat', server);
+var MongoClient = require('mongodb').MongoClient;
 
 exports.findAll = function(req, res) {
 
@@ -14,17 +9,33 @@ exports.findAll = function(req, res) {
 	var end = req.query.end;
 
 	var query = {};
-
 	if (batter) {
-		query.batter = batter;
+		query.batter = parseInt(batter);
 	}
 	if (pitcher) {
-		query.pitcher = pitcher;
+		query.pitcher = parseInt(pitcher);
+	}
+	if (start && end) {
+		query.start_tfs_zulu = {
+			'$gte' : new Date(start),
+			'$lte' : new Date(end)
+		};
+	} else if (start) {
+		query.start_tfs_zulu = {
+			'$gte' : new Date(start)
+		};
+	} else if (end) {
+		query.start_tfs_zulu = {
+			'$lt' : new Date(end)
+		};
 	}
 
-	db.collection('atbats', function(err, collection) {
-		collection.find(query).toArray(function(err, docs) {
-			res.send(docs);
+	console.log(query);
+	MongoClient.connect("mongodb://localhost:27017/mlbatbat", function(err, db) {
+		db.collection('atbats').find(query).toArray(function(err, docs) {
+			res.json(docs);
+			db.close();
 		});
 	});
+
 };
