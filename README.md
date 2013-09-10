@@ -45,4 +45,12 @@ Note, the start and end dates take simple javascript date formats as they are pa
 #### Players API
 To get at bats for a batter or a pitcher you'll first need to know that players ID. You can use the player API to retrieve such information.
 
-TODO: kruser
+    http://localhost:3000/api/players?search=joe%20mau
+    
+And, to get a full list of players, simply HTTP GET the following
+
+    http://localhost:3000/api/players
+    
+If you know a players ID, you can retrieve the player in question with a GET to...
+
+    http://localhost:3000/api/players/{{playerId}}

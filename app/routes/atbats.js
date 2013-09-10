@@ -1,6 +1,6 @@
 var MongoClient = require('mongodb').MongoClient;
 
-exports.findAll = function(req, res) {
+exports.query = function(req, res) {
 
 	/* Supported parameters */
 	var batter = req.query.batter;
@@ -30,7 +30,6 @@ exports.findAll = function(req, res) {
 		};
 	}
 
-	console.log(query);
 	MongoClient.connect("mongodb://localhost:27017/mlbatbat", function(err, db) {
 		db.collection('atbats').find(query).toArray(function(err, docs) {
 			res.json(docs);

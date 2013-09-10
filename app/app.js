@@ -5,9 +5,12 @@ var express = require('express');
 var http = require('http');
 var path = require('path');
 var atbats = require('./routes/atbats');
+var players = require('./routes/players');
 
 var app = express();
-app.get('/api/atbats', atbats.findAll);
+app.get('/api/atbats', atbats.query);
+app.get('/api/players', players.query);
+app.get('/api/players/:id', players.getPlayer);
 
 app.set('port', process.env.PORT || 3000);
 app.use(express.static(path.join(__dirname, 'public')));
