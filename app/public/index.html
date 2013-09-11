@@ -1,6 +1,70 @@
-<html>
-<script type="text/javascript" src="javascripts/test.js"></script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="">
+<meta name="author" content="Ryan Kruse">
+<link rel="shortcut icon"
+	href="http://getbootstrap.com/assets/ico/favicon.png">
+
+<title>Advanced Player Statistics</title>
+
+<!-- CSS BEGIN -->
+<link rel="stylesheet"
+	href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-theme.min.css">
+<!-- CSS END -->
+
+<!-- FONTS BEGIN -->
+<link
+	href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css"
+	rel="stylesheet">
+<!-- FONTS END -->
+</head>
+
 <body>
-	<h1>whoa</h1>
+	<header class="navbar navbar-inverse navbar-fixed-top bs-docs-nav" role="banner">
+		<div class="container">
+			<div class="navbar-header">
+				<button class="navbar-toggle" type="button">
+					<span class="sr-only">Toggle navigation</span> <span
+						class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+				<a href="/" class="navbar-brand">PitchFX</a>
+			</div>
+			<nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
+				<ul class="nav navbar-nav">
+					<li><a href="/">HOME</a></li>
+					<li><a href="#what">WHAT</a></li>
+					<li><a href="#how">HOW</a></li>
+					<li><a href="#who">WHO</a></li>
+				</ul>
+			</nav>
+		</div>
+	</header>
+	<div ng-view></div>
+
+	<!-- LIB BEGIN -->
+	<script type="text/javascript" language="javascript"
+		src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0-rc.2/angular.min.js"></script>
+	<script type="text/javascript" language="javascript"
+		src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0-rc.2/angular-route.min.js"></script>
+	<script type="text/javascript" language="javascript" src="lib/base.js"></script>
+	<!-- LIB END -->
+
+	<!-- SITE JS BEGIN -->
+	<script type="text/javascript" language="javascript"
+		src="javascripts/pitchfx-site.deps.js"></script>
+	<script>
+		goog.require('kruser.Entry');
+	</script>
+	<!-- SITE JS END -->
+
 </body>
+
+
 </html>
