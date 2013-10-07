@@ -1,24 +1,67 @@
 <div class="kruser-home">
-	<div class="jumbotron">
+	<div class="jumbotron off">
 		<div class="container">
 			<h1>PitchFX Search</h1>
 			<div class="row">
 				<div class="col-md-6">
-					<input style="width:100%;" type="text" placeholder="Search for batters"></input>
+					<input class="form-control" type="text" placeholder="Search for batters"></input>
 				</div>
 				<div class="col-md-6">
-					<input style="width:100%;" type="text" placeholder="Search for pitchers"></input>
+					<input class="form-control" type="text" placeholder="Search for pitchers"></input>
 				</div>
 			</div>
 		</div>
 	</div>
-	<div id="what" class="container">
-		<h2>What</h2>
+	<div id="what" class="jumbotron on">
+		<div class="container">
+			<h2>Research, Report, Investigate</h2>
+			<p>
+				We allow you to search through any player's pitches and at-bats with
+				quick facets on things like <strong>batted ball angles,
+					pitch speed, pitch types, hit type</strong>, and many others.
+			</p>
+		</div>
 	</div>
-	<div id="how" class="container">
-		<h2>How</h2>
+	<div id="how" class="jumbotron off">
+		<div class="container">
+			<h2>How</h2>
+			<p>
+				Using the <a href="https://github.com/kruser/atbat-mongodb"
+					target="_blank">atbat-mongodb</a> project, we pull pitch and at-bat
+				data from each day's baseball games and store it in our own MongoDB
+				database. This site differs from other PitchFX search sites in that
+				it front-loads most of the data for a player into your browser and
+				lets your browser do the work. This makes facetting much, much
+				quicker.
+			</p>
+			<p>Data from each day will be available by 6AM EST on the
+				following day.</p>
+			<p><strong>Problems?</strong> If you find any issues with this site you can report them through the <a href="https://github.com/kruser/pitchfx-site/issues" target="_blank">GitHub project</a>.</p>
+		</div>
 	</div>
-	<div id="who" class="container">
-		<h2>Who</h2>
+	<div id="who" class="jumbotron on">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-3 col-sm-4 col-xs-5">
+					<img alt=""
+						src="http://1.gravatar.com/avatar/049809472da1bf1352d2b4302d6880ab?size=400"
+						class="img-rounded img-responsive"></img>
+				</div>
+				<div class="col-md-9 col-sm-8 col-xs-7">
+					<h2>Who</h2>
+					<p>
+						My name is <strong>Ryan Kruse</strong>, a professional software
+						engineer from Austin, TX.
+					</p>
+					<p>
+						<a class="icon-twitter icon-2x"
+							href="https://twitter.com/RyanKruse"></a> <a
+							class="icon-linkedin icon-2x"
+							href="http://www.linkedin.com/in/ryankruse/"></a> <a
+							class="icon-envelope icon-2x" href="mailto:ryan@kruseonline.net"></a>
+					</p>
+				</div>
+			</div>
+		</div>
 	</div>
 </div>
