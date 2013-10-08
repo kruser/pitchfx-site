@@ -1,0 +1,22 @@
+/* @override 
+	http://localhost:3000/stylesheets/theme.css */
+
+body {
+	padding-top: 50px;
+}
+
+.kruser-home .jumbotron {
+	margin-bottom: 0;
+}
+.kruser-home {
+	background-color: #eee;
+}
+.kruser-home .jumbotron.off {
+	background: rgba(255, 255, 255, .75)
+}
+.kruser-home a[class^="icon-"] {
+	margin-right: .2em;
+}
+.kruser-home a[class^="icon-"]:hover {
+	text-decoration: none;
+}
