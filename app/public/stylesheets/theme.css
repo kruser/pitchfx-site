@@ -9,10 +9,11 @@ body {
 	margin-bottom: 0;
 }
 .kruser-home {
-	background-color: #eee;
+	background: url('/images/ball.svg') #eee;
+	background-size: 100%;
 }
 .kruser-home .jumbotron.off {
-	background: rgba(255, 255, 255, .75)
+	background: rgba(255, 255, 255, .97)
 }
 .kruser-home a[class^="icon-"] {
 	margin-right: .2em;
