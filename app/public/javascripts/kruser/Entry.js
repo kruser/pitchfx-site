@@ -20,7 +20,7 @@ module.config([ '$routeProvider', '$locationProvider',
 				controller : kruser.controllers.searchController
 			});
 
-			$locationProvider.html5Mode(true).hashPrefix('!');
+			$locationProvider.html5Mode(false).hashPrefix('!');
 		} ]);
 
 module.service('playerService', kruser.services.playerService);

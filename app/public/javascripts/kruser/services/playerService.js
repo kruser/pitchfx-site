@@ -21,7 +21,8 @@ kruser.services.playerService = [ '$http', '$q', '$log', function($http, $q, $lo
      */
     this.searchPlayers = function(searchText) {
         var params = {
-            search : searchText
+            search : searchText,
+            size : 10
         };
         return $http.get('/api/players', {
             params : params
