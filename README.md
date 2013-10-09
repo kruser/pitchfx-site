@@ -27,8 +27,7 @@ To install and start this node application, execute these commands
     node app
 
 ### APIs
-This site, in addition to having an awesome UI, provides two APIs. Yes, just two. These APIs do not support paging
-at this time as the UI doesn't need or want them. Adding paging should be a trivial exercise for a later date.
+This site, in addition to having an awesome UI, provides two APIs. Yes, just two.
 
 #### At-Bats API
 You can access at-bats for any batter or pitcher in any time frame by using the atbats API. Example usage is as follows.
@@ -55,3 +54,10 @@ And, to get a full list of players, simply HTTP GET the following
 If you know a players ID, like 89231, you can retrieve the player in question with a GET to...
 
     http://localhost:3000/api/players/89231
+
+The players API also supports the paging parameters *from* and *size*. For example...
+
+    http://localhost:3000/api/players?from=0&size=20
+    http://localhost:3000/api/players?from=20&size=20
+    http://localhost:3000/api/players?from=40&size=20
+
