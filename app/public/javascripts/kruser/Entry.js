@@ -1,38 +1,28 @@
+/**
+ * Sets up our AngularJS module
+ */
 goog.provide('kruser.Entry');
 
-var exports = kruser.Entry;
+goog.require('kruser.controllers.searchController');
+goog.require('kruser.services.playerService');
 
-/**
- * Sets up THE master angular app for this web application. This here is real!
- */
-(function(global)
-{
-    "use strict";
+var moduleName = 'kruser.Entry';
+var module = angular.module(moduleName, [ 'ui.bootstrap' ]);
 
-    var Entry = angular.isDefined(exports) ? exports : global.Entry =
-    {};
+module.config([ '$routeProvider', '$locationProvider',
+		function($routeProvider, $locationProvider) {
+			$routeProvider.when('/batter/:playerId', {
+				templateUrl : 'partials/kruser/batters/batter.html'
+			}).when('/pitcher/:playerId', {
+				templateUrl : 'partials/kruser/pitchers/pitcher.html'
+			}).otherwise({
+				templateUrl : 'partials/kruser/marketing/home.html',
+				controller : kruser.controllers.searchController
+			});
 
-    Entry.name = 'kruser.Entry';
+			$locationProvider.html5Mode(true).hashPrefix('!');
+		} ]);
 
-    var module = angular.module(Entry.name, [ 'ngRoute' ]);
+module.service('playerService', kruser.services.playerService);
 
-    module.config([ '$routeProvider', '$locationProvider', function($routeProvider, $locationProvider)
-    {
-        $routeProvider.when('/batter/:playerId',
-        {
-            templateUrl : 'partials/kruser/batters/batter.html'
-        }).when('/pitcher/:playerId',
-        {
-            templateUrl : 'partials/kruser/pitchers/pitcher.html'
-        }).otherwise(
-        {
-            templateUrl : 'partials/kruser/marketing/home.html'
-        });
-        
-        $locationProvider.html5Mode(true).hashPrefix('!');
-    } ]);
-
-    angular.bootstrap(document, [ Entry.name ]);
-    return module;
-
-}(this));
+angular.bootstrap(document, [ moduleName ]);
