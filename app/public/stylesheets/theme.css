@@ -5,6 +5,7 @@ body {
 	padding-top: 50px;
 }
 
+/* @group Home Page Stuff */
 .kruser-home .jumbotron {
 	margin-bottom: 0;
 }
@@ -20,4 +21,12 @@ body {
 }
 .kruser-home a[class^="icon-"]:hover {
 	text-decoration: none;
+}
+/* @end */
+.player-header {
+	
+}
+.player-header .jumbotron {
+	background: rgba(255, 255, 255, .85);
+	padding: 1em;
 }
