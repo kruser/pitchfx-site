@@ -1,6 +1,7 @@
 goog.provide('kruser.services.playerService');
 
 goog.require('kruser.pojos.Player');
+goog.require('kruser.pojos.PlayerInfo');
 
 /**
  * An AngularJS service with functions to interact with player centric web
@@ -8,6 +9,19 @@ goog.require('kruser.pojos.Player');
  */
 kruser.services.playerService = [ '$http', '$q', '$log', function($http, $q, $log) {
     "use strict";
+
+    /**
+     * Get player info including things like, name, height, weight, etc.
+     * 
+     * @param {string}
+     *            playerId
+     * @returns {Promise<kruser.pojo.PlayerInfo>} the playerInfo data
+     */
+    this.getPlayerInfo = function(playerId) {
+        return $http.get('/api/player_info/' + playerId).then(function(response) {
+            return new kruser.pojos.PlayerInfo(response.data);
+        });
+    }
 
     /**
      * Web service function to retrieve all players. Normally this would be a

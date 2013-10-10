@@ -23,10 +23,13 @@ body {
 	text-decoration: none;
 }
 /* @end */
-.player-header {
-	
-}
-.player-header .jumbotron {
+.player-header .full {
 	background: rgba(255, 255, 255, .85);
 	padding: 1em;
+}
+.player-header-bio {
+	margin-left: 1em;
+}
+.player-header-bio h3 {
+	margin: .3em 0;
 }

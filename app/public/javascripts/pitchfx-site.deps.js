@@ -5,4 +5,5 @@ goog.addDependency('../javascripts/kruser/controllers/playerHeaderController.js'
 goog.addDependency('../javascripts/kruser/controllers/searchController.js', ['kruser.controllers.searchController'], []);
 goog.addDependency('../javascripts/kruser/directives/playerHeader.js', ['kruser.directives.playerHeader'], ['kruser.controllers.playerHeaderController']);
 goog.addDependency('../javascripts/kruser/pojos/Player.js', ['kruser.pojos.Player'], []);
-goog.addDependency('../javascripts/kruser/services/playerService.js', ['kruser.services.playerService'], ['kruser.pojos.Player']);
+goog.addDependency('../javascripts/kruser/pojos/PlayerInfo.js', ['kruser.pojos.PlayerInfo'], []);
+goog.addDependency('../javascripts/kruser/services/playerService.js', ['kruser.services.playerService'], ['kruser.pojos.Player', 'kruser.pojos.PlayerInfo']);
