@@ -6,6 +6,7 @@ var http = require('http');
 var path = require('path');
 var atbats = require('./routes/atbats');
 var players = require('./routes/players');
+var playerInfo = require('./routes/playerInfo');
 
 var app = express();
 app.use(express.compress());
@@ -16,6 +17,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.get('/api/atbats', atbats.query);
 app.get('/api/players', players.query);
 app.get('/api/players/:id', players.getPlayer);
+app.get('/api/player_info/:id', playerInfo.getPlayer);
 
 app.set('port', process.env.PORT || 3000);
 
