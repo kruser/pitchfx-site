@@ -8,10 +8,10 @@
 						<h3>{{playerInfo.name_display_first_last}}</h3>
 						<div> <strong>{{playerInfo.team_name}}</strong> </div> 
 						<small>
-						<div> <strong>Height:</strong> {{playerInfo.height_feet}}'{{playerInfo.heigh_inches}}", <strong>Weight:</strong> {{playerInfo.weight}}lbs </div>
+						<div> <strong>Height:</strong> {{playerInfo.height_feet}}'{{playerInfo.height_inches}}", <strong>Weight:</strong> {{playerInfo.weight}}lbs </div>
 						<div> <strong>Bats:</strong> {{playerInfo.bats}}, <strong>Throws:</strong> {{playerInfo.throws}} </div>
-						<div> <strong>Born:</strong> {{playerInfo.birth_date}}, ({{playerInfo.age}} yrs) </div>
-						<div> <strong>MLB Debut:</strong> {{playerInfo.pro_debut_date}} </div>
+						<div> <strong>Born:</strong> {{playerInfo.getBirthDate() | date:'M/d/yyyy'}}, ({{playerInfo.age}} yrs) </div>
+						<div> <strong>MLB Debut:</strong> {{playerInfo.getMlbDebut() | date:'M/d/yyyy'}} </div>
 						</small>
 					</div>
 				</div>
