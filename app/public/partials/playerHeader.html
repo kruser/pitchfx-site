@@ -5,14 +5,12 @@
 				<div class="col-md-5 col-md-offset-2">
 					<img class="img-responsive img-rounded pull-left" ng-src="http://mlb.mlb.com/images/players/mugshot/ph_{{playerId}}.jpg">
 					<div class="player-header-bio pull-left">
-						<h3>{{playerInfo.name_display_first_last}}</h3>
-						<div> <strong>{{playerInfo.team_name}}</strong> </div> 
-						<small>
-						<div> <strong>Height:</strong> {{playerInfo.height_feet}}'{{playerInfo.height_inches}}", <strong>Weight:</strong> {{playerInfo.weight}}lbs </div>
-						<div> <strong>Bats:</strong> {{playerInfo.bats}}, <strong>Throws:</strong> {{playerInfo.throws}} </div>
-						<div> <strong>Born:</strong> {{playerInfo.getBirthDate() | date:'M/d/yyyy'}}, ({{playerInfo.age}} yrs) </div>
-						<div> <strong>MLB Debut:</strong> {{playerInfo.getMlbDebut() | date:'M/d/yyyy'}} </div>
-						</small>
+						<h3>{{playerInfo.name_display_first_last}}</small></h3>
+						<div class="label label-default">{{playerInfo.team_name}}</div>
+						<div><strong>Position:</strong> {{playerInfo.primary_position_txt}}, <strong>Bats:</strong> {{playerInfo.bats}}, <strong>Throws:</strong> {{playerInfo.throws}} </div>
+						<div><strong>Height:</strong> {{playerInfo.height_feet}}'{{playerInfo.height_inches}}", <strong>Weight:</strong> {{playerInfo.weight}}lbs </div>
+						<div><strong>Born:</strong> {{playerInfo.getBirthDate() | date:'M/d/yyyy'}}, ({{playerInfo.age}} yrs) </div>
+						<div><strong>Status:</strong> {{playerInfo.status}}, <strong>Debut:</strong> {{playerInfo.getMlbDebut() | date:'M/d/yyyy'}} </div>
 					</div>
 				</div>
 			</div>
