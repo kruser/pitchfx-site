@@ -8,7 +8,7 @@ goog.require('kruser.services.playerService');
 goog.require('kruser.directives.playerHeader');
 
 var moduleName = 'kruser.Entry';
-var module = angular.module(moduleName, [ 'ui.bootstrap' ]);
+var module = angular.module(moduleName, [ 'ui.bootstrap', 'ngRoute', 'ngTouch' ]);
 
 module.config([ '$routeProvider', '$locationProvider',
 		function($routeProvider, $locationProvider) {
