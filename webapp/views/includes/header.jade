@@ -1,0 +1,22 @@
+header.navbar.navbar-default.navbar-fixed-top
+  div.container
+    div.navbar-header
+      a.navbar-brand PitchFX Site
+      button.navbar-toggle(type='button' data-toggle='collapse' data-target='#navbar-main')
+        span.icon-bar
+        span.icon-bar
+        span.icon-bar
+    div#navbar-main.navbar-collapse.collapse
+      ul.nav.navbar-nav
+        li.dropdown
+          a.dropdown-toggle(data-toggle='dropdown' href='#') About
+            span.caret
+          ul.dropdown-menu
+            li
+              a(tabindex='-1' href='/#what') What For
+            li
+              a(tabindex='-1' href='/#how') The Data
+            li
+              a(tabindex='-1' href='/#who') The Developer
+        li
+          a(href='/#issues') Got Issues?

@@ -1,0 +1,35 @@
+/* @override 
+	http://localhost:3000/stylesheets/theme.css */
+
+body {
+	padding-top: 50px;
+}
+
+/* @group Home Page Stuff */
+.kruser-home .jumbotron {
+	margin-bottom: 0;
+}
+.kruser-home {
+	background: url('/images/ball.svg') #eee fixed;
+	background-size: 100%;
+}
+.kruser-home .jumbotron.off {
+	background: rgba(255, 255, 255, .95)
+}
+.kruser-home a.fa {
+	margin-right: .2em;
+}
+.kruser-home a.fa:hover {
+	text-decoration: none;
+}
+/* @end */
+.player-header .full {
+	background: rgba(255, 255, 255, .85);
+	padding: 1em;
+}
+.player-header-bio {
+	margin-left: 1em;
+}
+.player-header-bio h3 {
+	margin: .3em 0 .1em 0;
+}
