@@ -1,4 +1,3 @@
-
 /**
  * Module dependencies.
  */
@@ -6,10 +5,15 @@
 var express = require('express');
 var http = require('http');
 var path = require('path');
+
+/* Routing Pages */
 var routes = require('./routes');
-var atbats = require('./routes/apis/atbats');
-var players = require('./routes/apis/players');
-var playerInfo = require('./routes/apis/playerInfo');
+var player = require('./routes/player');
+
+/* API Requires */
+var atbatsApi = require('./routes/apis/atbats');
+var playersApi = require('./routes/apis/players');
+var playerInfoApi = require('./routes/apis/playerInfo');
 
 var app = express();
 
@@ -31,18 +35,19 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // development only
 if ('development' == app.get('env')) {
-  app.use(express.errorHandler());
+    app.use(express.errorHandler());
 }
 
 // APIs
-app.get('/api/atbats', atbats.query);
-app.get('/api/players', players.query);
-app.get('/api/players/:id', players.getPlayer);
-app.get('/api/player_info/:id', playerInfo.getPlayer);
+app.get('/api/atbats', atbatsApi.query);
+app.get('/api/players', playersApi.query);
+app.get('/api/players/:id', playersApi.getPlayer);
+app.get('/api/player_info/:id', playerInfoApi.getPlayer);
 
 // Page Templates
 app.get('/', routes.index);
+app.get('/player/:player', player.page);
 
-http.createServer(app).listen(app.get('port'), function(){
-  console.log('Express server listening on port ' + app.get('port'));
+http.createServer(app).listen(app.get('port'), function() {
+    console.log('Express server listening on port ' + app.get('port'));
 });
