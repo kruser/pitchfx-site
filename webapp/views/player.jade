@@ -2,13 +2,13 @@ extends layout
 
 block content
   div.kruser-home
-    div.jumbotron.off(ng-controller='searchController')
+    div.jumbotron.off
       div.container
         h1 PitchFX Search
-          input.form-control(ng-model='playerSelection' typeahead-wait-ms='200' typeahead-loading='playersLoading' 
-            typeahead='player as player.getFullName() for player in searchPlayers($viewValue)' 
-            typeahead-on-select='playerSelected()'
-            type='text' placeholder='Search for a player by name')
+        input.form-control(ng-model='batterSelection' typeahead-wait-ms='200' typeahead-loading='battersLoading' 
+          typeahead='batter as batter.getFullName() for batter in searchBatters($viewValue)' 
+          typeahead-on-select='batterSelected()'
+          type='text' placeholder='Search for a player')
     div#what.jumbotron.on
       div.container
         h2 Research, Learn, Report
