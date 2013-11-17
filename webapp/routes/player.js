@@ -8,7 +8,7 @@ exports.page = function(req, res) {
     mlb.getPlayerInfo(playerId, function(player) {
         if (player) {
             res.render('player', {
-                title : 'Justin Morneau',
+                title : player.name_display_first_last,
                 playerInfo : player
             });
         } else {

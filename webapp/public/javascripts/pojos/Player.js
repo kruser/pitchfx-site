@@ -19,3 +19,16 @@ pojos.Player = function(dataObj) {
 pojos.Player.prototype.getFullName = function() {
     return this.first + ' ' + this.last;
 }
+
+/**
+ * Use this method to make a name into something that can be part
+ * of a URL.
+ * 
+ * @memberof pojos.Player
+ * @instance
+ * @returns {string} the url friendly name
+ */
+pojos.Player.prototype.getUrlFriendlyName = function() {
+    var url = this.first + '-' + this.last;
+    return url.replace(/\./g,'').toLowerCase();
+}
