@@ -10,7 +10,7 @@ var MongoClient = require('mongodb').MongoClient;
  */
 exports.getPlayer = function(req, res) {
     var query = {
-        'id' : parseInt(req.params.id)
+        'id' : parseInt(req.params.playerId)
     };
     MongoClient.connect("mongodb://localhost:27017/mlbatbat", function(err, db) {
         db.collection('players').findOne(query, function(err, doc) {

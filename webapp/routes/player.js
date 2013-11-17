@@ -4,7 +4,7 @@ var mlb = require('../services/mlb');
  * GET player page.
  */
 exports.page = function(req, res) {
-    var playerId = req.params.player[1];
+    var playerId = req.params.playerId;
     mlb.getPlayerInfo(playerId, function(player) {
         if (player) {
             res.render('player', {

@@ -24,7 +24,7 @@ controllers.searchController = [ '$scope', '$log', '$window', 'playerService', f
     $scope.playerSelected = function() {
         if ($scope.playerSelection && $scope.playerSelection.id) {
             var player = $scope.playerSelection;
-            var url = '/player/' + player.id + '-' + player.getUrlFriendlyName();
+            var url = '/player/' + player.id + '/' + player.getUrlFriendlyName();
             $window.location.href = url;
         }
     };

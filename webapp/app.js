@@ -54,16 +54,15 @@ app.param(function(name, fn) {
 });
 
 // APIs
-app.param('id', /^\d+$/);
+app.param('playerId', /^\d+$/);
 app.get('/api/atbats', atbatsApi.query);
 app.get('/api/players', playersApi.query);
-app.get('/api/players/:id', playersApi.getPlayer);
-app.get('/api/player_info/:id', playerInfoApi.getPlayer);
+app.get('/api/players/:playerId', playersApi.getPlayer);
+app.get('/api/player_info/:playerId', playerInfoApi.getPlayer);
 
 // Page Templates
 app.get('/', routes.index);
-app.param('player', /^(\d+).+$/);
-app.get('/player/:player', player.page);
+app.get('/player/:playerId/:playerName', player.page);
 
 http.createServer(app).listen(app.get('port'), function() {
     console.log('Express server listening on port ' + app.get('port'));

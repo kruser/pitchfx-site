@@ -11,7 +11,7 @@ var mlb = require('../../services/mlb');
  *            the express response
  */
 exports.getPlayer = function(req, res) {
-    var playerId = req.params.id;
+    var playerId = req.params.playerId;
     mlb.getPlayerInfo(playerId, function(player) {
         if (player) {
             res.json(player);
