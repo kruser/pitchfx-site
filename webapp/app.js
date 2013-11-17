@@ -38,7 +38,23 @@ if ('development' == app.get('env')) {
     app.use(express.errorHandler());
 }
 
+/* Setup regex parsing of params */
+app.param(function(name, fn) {
+    if (fn instanceof RegExp) {
+        return function(req, res, next, val) {
+            var captures;
+            if (captures = fn.exec(String(val))) {
+                req.params[name] = captures;
+                next();
+            } else {
+                next('route');
+            }
+        }
+    }
+});
+
 // APIs
+app.param('id', /^\d+$/);
 app.get('/api/atbats', atbatsApi.query);
 app.get('/api/players', playersApi.query);
 app.get('/api/players/:id', playersApi.getPlayer);
@@ -46,6 +62,7 @@ app.get('/api/player_info/:id', playerInfoApi.getPlayer);
 
 // Page Templates
 app.get('/', routes.index);
+app.param('player', /^(\d+).+$/);
 app.get('/player/:player', player.page);
 
 http.createServer(app).listen(app.get('port'), function() {

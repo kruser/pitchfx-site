@@ -1,5 +1,5 @@
 var request = require('request');
-var http = require('http');
+var mlb = require('../../services/mlb');
 
 /**
  * Get player_info from MLBAM by ID. The req.params.id is expected to be
@@ -11,17 +11,14 @@ var http = require('http');
  *            the express response
  */
 exports.getPlayer = function(req, res) {
-    request('http://mlb.mlb.com/lookup/json/named.player_info.bam?sport_code=%27mlb%27&player_id=' + req.params.id, function(error, response, data) {
-        if (response.statusCode === 200) {
-            var json = JSON.parse(data);
-            if (json.player_info && json.player_info.queryResults) {
-                res.json(json.player_info.queryResults.row);
-            } else {
-                res.end();
-            }
+    var playerId = req.params.id;
+    mlb.getPlayerInfo(playerId, function(player) {
+        if (player) {
+            res.json(player);
         } else {
-            res.writeHead(response.statusCode);
-            res.end()
+            var msg = 'Can not find player: ' + playerId;
+            console.error(msg)
+            res.send(404, msg);
         }
-    })
+    });
 };
