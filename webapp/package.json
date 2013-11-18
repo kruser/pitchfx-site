@@ -9,6 +9,8 @@
     "express": "3.x",
     "jade": "*",
     "mongodb": "*",
-    "request": "*"
+    "request": "*",
+    "node.extend": "*",
+    "moment": "*"
   }
 }

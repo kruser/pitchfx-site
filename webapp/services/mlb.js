@@ -1,4 +1,5 @@
 var request = require('request');
+var PlayerInfo = require('../pojos/mlb/PlayerInfo').PlayerInfo;
 
 /**
  * Get player_info from MLBAM by ID. populated
@@ -14,7 +15,7 @@ exports.getPlayerInfo = function(playerId, callback) {
         if (response.statusCode === 200) {
             var json = JSON.parse(data);
             if (json.player_info && json.player_info.queryResults) {
-                callback(json.player_info.queryResults.row);
+                callback(new PlayerInfo(json.player_info.queryResults.row));
                 return;
             }
         }
