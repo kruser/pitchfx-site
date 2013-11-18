@@ -1,10 +1,9 @@
 /**
  * Sets up our AngularJS module
  */
-var moduleName = 'Entry';
-var module = angular.module(moduleName, [ 'ui.bootstrap', 'ngTouch' ]);
+var app = angular.module('pitchfx', [ 'ui.bootstrap', 'ngTouch' ]);
+app.controller('searchController', controllers.searchController);
+app.service('playerService', services.playerService);
 
-module.controller('searchController', controllers.searchController);
-module.service('playerService', services.playerService);
 
-angular.bootstrap(document, [ moduleName ]);
+app.directive('kruserPlayerStats', directives.playerStats);
