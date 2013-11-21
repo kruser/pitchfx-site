@@ -10,8 +10,9 @@ directives.battingStats = [ 'playerService', '$log', function(playerService, $lo
         restrict : 'E',
         replace : true,
         scope : {
-            'playerId' : '=',
+            'playerId' : '@',
         },
-        templateUrl : '/partials/battingStats.html'
+        templateUrl : '/partials/battingStats.html',
+        controller : controllers.battingStatsController,
     };
 } ];

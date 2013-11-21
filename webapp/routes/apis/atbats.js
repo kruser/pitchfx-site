@@ -13,8 +13,8 @@ exports.query = function(req, res) {
 	/* Supported parameters */
 	var batter = req.query.batter;
 	var pitcher = req.query.pitcher;
-	var start = req.query.start;
-	var end = req.query.end;
+	var start = req.query.from;
+	var end = req.query.to;
 
 	var query = {};
 	if (batter) {

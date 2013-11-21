@@ -27,8 +27,8 @@ services.playerService = [ '$http', '$q', '$log', function($http, $q, $log) {
      * 
      * @param {string}
      *            searchText - the text to search
-     * @returns {Promise<pojos.Player>} a promise, when fufilled
-     *          contains an array of data objects representing players
+     * @returns {Promise<pojos.Player>} a promise, when fufilled contains an
+     *          array of data objects representing players
      */
     this.searchPlayers = function(searchText) {
         var params = {
@@ -46,6 +46,29 @@ services.playerService = [ '$http', '$q', '$log', function($http, $q, $log) {
                 }
             }
             return players;
+        });
+    };
+
+    /**
+     * Get at bats for a batter
+     * 
+     * @param {int}
+     *            playerId - the player id of the batter
+     * @param {Date}
+     *            from
+     * @param {Date}
+     *            to
+     */
+    this.getAtBatsForBatter = function(playerId, from, to) {
+        var params = {
+            batter : playerId,
+            from : from,
+            to : to,
+        };
+        return $http.get('/api/atbats', {
+            params : params
+        }).then(function(result) {
+            return result.data;
         });
     };
 
