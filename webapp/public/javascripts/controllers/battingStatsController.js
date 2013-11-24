@@ -48,6 +48,10 @@ controllers.battingStatsController = [ '$scope', '$log', 'playerService', 'stats
             /* Percentage Stats */
             $scope.battingAverage = statsService.BA;
             $scope.wOBA = statsService.wOBA;
+            $scope.obp = statsService.obp;
+            $scope.slg = statsService.slg;
+            $scope.babip = statsService.babip;
+            $scope.rmi = statsService.rmi;
 
             /* Counting Stats */
             $scope.abs = statsService.atbats;
@@ -56,10 +60,11 @@ controllers.battingStatsController = [ '$scope', '$log', 'playerService', 'stats
             $scope.doubles = statsService.doubles;
             $scope.triples = statsService.triples;
             $scope.homeRuns = statsService.homeRuns;
+            $scope.strikeouts = statsService.strikeouts;
             $scope.walks = statsService.walks;
             $scope.iWalks = statsService.iWalks;
             $scope.hitByPitch = statsService.hitByPitch;
-            $scope.sacrifices = statsService.sacrifices;
+            $scope.sacrifices = statsService.sacBunts + statsService.sacFlies;
             $scope.rboe = statsService.rboe;
         }
     }
