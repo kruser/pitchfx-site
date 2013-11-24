@@ -27,6 +27,32 @@ services.statsService = [ '$log', function($log) {
     }
 
     /**
+     * To be called when accumulation is complete.
+     */
+    this.completeStats = function() {
+        this.calcBattingAverage();
+        this.calcWOBA();
+    }
+
+    /**
+     * Weighted OBA calculation
+     */
+    this.calcWOBA = function() {
+        if (this.plateAppearances) {
+            this.wOBA = ((this.walks * 0.72) + (this.hitByPitch * 0.75) + (this.singles * 0.9) + (this.doubles * 1.24) + (this.triples * 1.56) + (this.homeRuns * 1.95) + (this.rboe * 0.92)) / this.plateAppearances;
+        }
+    }
+
+    /**
+     * Batting average calculation
+     */
+    this.calcBattingAverage = function() {
+        if (this.atbats) {
+            this.BA = (this.singles + this.doubles + this.triples + this.homeRuns) / this.atbats;
+        }
+    }
+
+    /**
      * @param {*}
      *            atBat - an at bat
      */
@@ -50,6 +76,8 @@ services.statsService = [ '$log', function($log) {
             this.walks++;
         } else if (event.indexOf('sac') >= 0) {
             this.sacrifices++;
+        } else if (event.indexOf('hit by pitch') >= 0) {
+            this.hitByPitch++;
         } else if (event.indexOf('error') >= 0) {
             this.rboe++;
             this.atbats++;
@@ -60,13 +88,6 @@ services.statsService = [ '$log', function($log) {
         }
 
         this.plateAppearances++;
-
-        if (this.atbats) {
-            this.BA = (this.singles + this.doubles + this.triples + this.homeRuns) / this.atbats;
-        }
-        if (this.plateAppearances) {
-            this.wOBA = ((this.walks * 0.72) + (this.hitByPitch * 0.75) + (this.singles * 0.9) + (this.doubles*1.24) + (this.triples*1.56) + (this.homeRuns*1.95) + (this.rboe*0.92)) / this.plateAppearances;
-        }
     }
 
     this.resetStats();

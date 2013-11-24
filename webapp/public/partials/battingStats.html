@@ -1,18 +1,70 @@
 <div class="rk-batting-stats row">
-	<div class="col-md-4"><div class="well">filters panel</div></div>
-	<div class="col-md-8">
-		<div ng-show="loading">Loading....</div>
-		<h2>{{battingAverage | number:3 }} BA</h2>
-		<div class="progress">
-			<div class="progress-bar progress-bar-info" role="progressbar"
-				style="width: {{battingAverage*100}}%">
+	<div class="col-md-4">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3 class="panel-title">Filters</h3>
 			</div>
+			<form class="form panel-body">
+				<div class="form-group">
+					<label class="control-label">Pitcher Hand</label>
+					<div>
+						<label class="radio-inline"><input type="radio"
+							ng-model="filters.pitcherHand" value="">Any</label> <label
+							class="radio-inline"><input type="radio"
+							ng-model="filters.pitcherHand" " value="L">Left</label> <label
+							class="radio-inline"><input type="radio"
+							ng-model="filters.pitcherHand" " value="R">Right</label>
+					</div>
+				</div>
+			</form>
 		</div>
-		<h2>{{wOBA | number:3 }} wOBA</h2>
+	</div>
+	<div class="col-md-8">
+		<table class="table table-bordered">
+			<thead>
+				<tr>
+					<th>AB</th>
+					<th>PA</th>
+					<th>1B</th>
+					<th>2B</th>
+					<th>3B</th>
+					<th>HR</th>
+					<th>BB</th>
+					<th>iBB</th>
+					<th>HBP</th>
+					<th>Sac</th>
+					<th class="hidden-xs">RBOE</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>{{abs}}</td>
+					<td>{{plateAppearances}}</td>
+					<td>{{singles}}</td>
+					<td>{{doubles}}</td>
+					<td>{{triples}}</td>
+					<td>{{homeRuns}}</td>
+					<td>{{walks}}</td>
+					<td>{{iWalks}}</td>
+					<td>{{hitByPitch}}</td>
+					<td>{{sacrifices}}</td>
+					<td class="hidden-xs">{{rboe}}</td>
+				</tr>
+			</tbody>
+		</table>
+		<h4>
+			{{battingAverage | number:3 }} <small>BA</small>
+		</h4>
 		<div class="progress">
 			<div class="progress-bar progress-bar-info" role="progressbar"
-				style="width: {{wOBA*100}}%">
-			</div>
+				style="width: {{battingAverage*100}}%"></div>
+		</div>
+		<h4>
+			{{wOBA | number:3 }} <small>wOBA</small>
+		</h4>
+		<div class="progress">
+			<div class="progress-bar progress-bar-info" role="progressbar"
+				style="width: {{wOBA*100}}%"></div>
 		</div>
 	</div>
 </div>

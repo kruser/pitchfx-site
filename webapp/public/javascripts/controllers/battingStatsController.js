@@ -5,25 +5,77 @@ var controllers = controllers || {};
  */
 controllers.battingStatsController = [ '$scope', '$log', 'playerService', 'statsService', function($scope, $log, playerService, statsService) {
 
+    $scope.atbats = [];
+    $scope.battingAverage = 0.0;
+    $scope.wOBA = 0.0;
+
+    $scope.filters = {
+        pitcherHand : '',
+    };
+
+    $scope.$watch('filters.pitcherHand', function(filters) {
+        $scope.runStats();
+    });
+
     /**
      * Setup the controller
      */
     function init() {
         $scope.loading = true;
-        $scope.atbats = [];
-        $scope.battingAverage = 0.0;
-        $scope.wOBA = 0.0;
-
-        statsService.resetStats();
         playerService.getAtBatsForBatter($scope.playerId).then(function(atbats) {
             $scope.atbats = atbats;
-            for ( var i = 0; i < $scope.atbats.length; i++) {
-                statsService.accumulateAtBat($scope.atbats[i]);
-            }
-            $scope.battingAverage = statsService.BA;
-            $scope.wOBA = statsService.wOBA;
+            $scope.runStats();
             $scope.loading = false;
         });
+    }
+
+    /**
+     * Run the filters and stats against the atBats
+     */
+    $scope.runStats = function() {
+        if ($scope.atbats.length > 0) {
+            $log.debug('Running Stats');
+            statsService.resetStats();
+            for ( var i = 0; i < $scope.atbats.length; i++) {
+                var atbat = $scope.atbats[i];
+                if ($scope.passesFilter(atbat)) {
+                    statsService.accumulateAtBat(atbat);
+                }
+            }
+
+            statsService.completeStats();
+            
+            /* Percentage Stats */
+            $scope.battingAverage = statsService.BA;
+            $scope.wOBA = statsService.wOBA;
+
+            /* Counting Stats */
+            $scope.abs = statsService.atbats;
+            $scope.plateAppearances = statsService.plateAppearances;
+            $scope.singles = statsService.singles;
+            $scope.doubles = statsService.doubles;
+            $scope.triples = statsService.triples;
+            $scope.homeRuns = statsService.homeRuns;
+            $scope.walks = statsService.walks;
+            $scope.iWalks = statsService.iWalks;
+            $scope.hitByPitch = statsService.hitByPitch;
+            $scope.sacrifices = statsService.sacrifices;
+            $scope.rboe = statsService.rboe;
+        }
+    }
+
+    /**
+     * Checks to see if the atbat passes the filters
+     * 
+     * @param {*}
+     *            atbat - the atbat to check against the scope's filter object
+     * @returns {Boolean} true if the atbat passes the filters
+     */
+    $scope.passesFilter = function(atbat) {
+        if ($scope.filters.pitcherHand && atbat.p_throws !== $scope.filters.pitcherHand) {
+            return false;
+        }
+        return true;
     }
 
     init();
