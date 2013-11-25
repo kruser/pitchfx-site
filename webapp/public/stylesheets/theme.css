@@ -26,13 +26,21 @@ body {
 	text-decoration: none;
 }
 /* @end */
+.player-header .mug-container {
+	background: #fff;
+	padding: .25em;
+	border-radius: 6px;
+}
+.player-header .mug {
+	width: 3.5em;
+}
 .player-header .full {
 	background: rgba(255, 255, 255, .85);
 	padding: 1em;
 }
 
 .player-header-bio {
-	margin-left: 1em;
+	margin-left: .5em;
 }
 
 .player-header-bio h3 {

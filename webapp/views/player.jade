@@ -4,29 +4,23 @@ block content
   div.player-header(style='background-image:url(http://mlb.mlb.com/images/players/525x330/'+playerInfo.player_id+'.jpg)')
     div.full
       div.container
-        img.img-responsive.img-rounded.pull-left(src='http://mlb.mlb.com/images/players/mugshot/ph_'+playerInfo.player_id+'.jpg')
+        div.mug-container.pull-left
+          img.mug.img-responsive.img-rounded(src='http://mlb.mlb.com/images/players/mugshot/ph_'+playerInfo.player_id+'.jpg')
         div.player-header-bio.pull-left
-          h3= playerInfo.name_display_first_last
-          div.label.label-default= playerInfo.team_name
+          h3= playerInfo.name_display_first_last 
+            |  
+            small
+              span.label.label-default #{playerInfo.team_name}
           div
-            strong Position:
-            |  #{playerInfo.primary_position_txt}, 
+            | #{playerInfo.primary_position_txt} | 
             strong Bats:
-            |  #{playerInfo.bats}, 
+            |  #{playerInfo.bats} 
             strong Throws:
-            |  #{playerInfo.throws} 
-          div
-            strong Height:
-            |  #{playerInfo.height_feet}'#{playerInfo.height_inches}", 
-            strong Weight:
-            |  #{playerInfo.weight}lbs 
+            |  #{playerInfo.throws} |
+            | #{playerInfo.height_feet}'#{playerInfo.height_inches}", 
+            | #{playerInfo.weight}lbs 
           div
             strong Born:
             |  #{playerInfo.getBirthDate().format('M/d/YYYY')} (#{playerInfo.age} yrs) 
-          div
-            strong Status:
-            |  #{playerInfo.status},  
-            strong Debut:
-            |  #{playerInfo.getMlbDebut().format('M/d/YYYY')}
   div.container
     rk-batting-stats(player-id=playerInfo.player_id player-position=playerInfo.primary_position)
