@@ -27,6 +27,10 @@
 					</div>
 					<div class="form-group">
 						<label class="control-label">Runners</label>
+						<div class="btn-group btn-group-sm btn-group-justified runners-gate">
+					        <a type="button" class="btn btn-default" ng-model="filters.runners.gate" btn-radio="'OR'">Any of</a>
+					        <a type="button" class="btn btn-default" ng-model="filters.runners.gate" btn-radio="'AND'">All of</a>
+					    </div>
 						<div class="btn-group btn-group-sm btn-group-justified">
 					        <a type="button" class="btn btn-default" ng-model="filters.runners.empty" btn-checkbox>Empty</a>
 					        <a type="button" class="btn btn-default" ng-model="filters.runners.first" btn-checkbox>1st</a>

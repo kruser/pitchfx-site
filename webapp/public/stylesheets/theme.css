@@ -53,3 +53,6 @@ body {
 .rk-batting-stats .progress {
 	margin-bottom: 0px;
 }
+.rk-batting-stats .runners-gate {
+	margin-bottom: .25em;
+}
