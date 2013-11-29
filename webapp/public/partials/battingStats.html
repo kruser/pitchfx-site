@@ -6,6 +6,12 @@
 			</div>
 			<form class="form panel-body">
 				<div class="form-group">
+					<label class="control-label">Date Range</label>
+					<input class="form-control" type="date" placeholder="Start date" ng-model="filters.date.start">
+					<br>
+					<input class="form-control" type="date" placeholder="End date" ng-model="filters.date.end">
+				</div>
+				<div class="form-group">
 					<label class="control-label">Pitcher Hand</label>
 					<div class="btn-group btn-group-sm btn-group-justified">
 				        <a type="button" class="btn btn-default" ng-model="filters.pitcherHand" btn-radio="''">Either</a>
@@ -96,7 +102,7 @@
 				</div>
 			</div>
 			<div class="col-sm-6 form-group">
-				<h4>{{rmi | number:3 }} <small>RMI</small></h4>
+				<h4>{{rmi | number:3 }} <small tooltip="Runner Movement Indicator (RMI), measures the ability for a batter to move their runners around the bases. For example, with a runner on first, the batter can move them a potential three bases. If they actually move them one base, they are awarded a 0.333 RMI.">RMI</small></h4>
 				<div class="progress">
 					<div class="progress-bar progress-bar-info" role="progressbar" style="width: {{rmi*100}}%"></div>
 				</div>

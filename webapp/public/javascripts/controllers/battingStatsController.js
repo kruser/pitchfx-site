@@ -11,9 +11,20 @@ controllers.battingStatsController = [ '$scope', '$log', 'playerService', 'stats
 
     $scope.filters = {
         pitcherHand : '',
+        date : {
+            start : '2010-01-01',
+            end : moment().format('YYYY-MM-DD')
+        }
     };
 
     $scope.$watch('filters.pitcherHand', function(filters) {
+        $scope.runStats();
+    });
+    $scope.$watch('filters.date.start', function(filters) {
+        $log.debug($scope.filters.date.start);
+        $scope.runStats();
+    });
+    $scope.$watch('filters.date.end', function(filters) {
         $scope.runStats();
     });
 

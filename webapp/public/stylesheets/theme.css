@@ -50,3 +50,6 @@ body {
 .rk-batting-stats {
 	margin-top: 1.25em;
 }
+.rk-batting-stats .progress {
+	margin-bottom: 0px;
+}
