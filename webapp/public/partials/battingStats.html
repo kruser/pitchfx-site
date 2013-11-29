@@ -1,112 +1,119 @@
-<div class="rk-batting-stats row">
-	<div class="col-md-4">
-		<div class="panel panel-default">
-			<div class="panel-heading">
-				<h3 class="panel-title">Filters</h3>
-			</div>
-			<form class="form panel-body">
-				<div class="form-group">
-					<label class="control-label">Date Range</label>
-					<input class="form-control" type="date" placeholder="Start date" ng-model="filters.date.start">
-					<br>
-					<input class="form-control" type="date" placeholder="End date" ng-model="filters.date.end">
-				</div>
-				<div class="form-group">
-					<label class="control-label">Pitcher Hand</label>
-					<div class="btn-group btn-group-sm btn-group-justified">
-				        <a type="button" class="btn btn-default" ng-model="filters.pitcherHand" btn-radio="''">Either</a>
-				        <a type="button" class="btn btn-default" ng-model="filters.pitcherHand"" btn-radio="'L'">Left</a>
-				        <a type="button" class="btn btn-default" ng-model="filters.pitcherHand"" btn-radio="'R'">Right</a>
-				    </div>
-				</div>
-				<div class="form-group">
-					<label class="control-label">Runners</label>
-					<div class="btn-group btn-group-sm btn-group-justified">
-				        <a type="button" class="btn btn-default" ng-model="filters.runners.empty" btn-checkbox>Empty</a>
-				        <a type="button" class="btn btn-default" ng-model="filters.runners.first" btn-checkbox>1st</a>
-				        <a type="button" class="btn btn-default" ng-model="filters.runners.second" btn-checkbox>2nd</a>
-				        <a type="button" class="btn btn-default" ng-model="filters.runners.third" btn-checkbox>3rd</a>
-				    </div>
-				</div>
-			</form>
-		</div>
+<div class="rk-batting-stats">
+	<div class="col-md-12 text-center" ng-show="loading">
+		<br><br>
+		<i class="fa fa-spinner fa-spin fa-4x"></i>
+		<h3>Loading at-bats...</h3>
 	</div>
-	<div class="col-md-8">
-		<table class="table table-bordered">
-			<thead>
-				<tr>
-					<th>PA</th>
-					<th>AB</th>
-					<th>1B</th>
-					<th>2B</th>
-					<th>3B</th>
-					<th>HR</th>
-					<th>RBI</th>
-					<th>BB</th>
-					<th>iBB</th>
-					<th>HBP</th>
-					<th class="hidden-xs">Sac</th>
-					<th class="hidden-xs">RBOE</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					<td>{{plateAppearances}}</td>
-					<td>{{abs}}</td>
-					<td>{{singles}}</td>
-					<td>{{doubles}}</td>
-					<td>{{triples}}</td>
-					<td>{{homeRuns}}</td>
-					<td>{{rbi}}</td>
-					<td>{{walks}}</td>
-					<td>{{iWalks}}</td>
-					<td>{{hitByPitch}}</td>
-					<td class="hidden-xs">{{sacrifices}}</td>
-					<td class="hidden-xs">{{rboe}}</td>
-				</tr>
-			</tbody>
-		</table>
-		<div class="row">
-			<div class="col-sm-6 form-group">
-				<h4>{{wOBA | number:3 }} <small>wOBA</small></h4>
-				<div class="progress">
-					<div class="progress-bar progress-bar-info" role="progressbar" style="width: {{wOBA*100}}%"></div>
+	<div class="row" ng-hide="loading">
+		<div class="col-md-4">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h3 class="panel-title">Filters</h3>
 				</div>
-			</div>
-			<div class="col-sm-6 form-group">
-				<h4>{{battingAverage | number:3 }} <small>BA</small></h4>
-				<div class="progress">
-					<div class="progress-bar progress-bar-info" role="progressbar" style="width: {{battingAverage*100}}%"></div>
-				</div>
+				<form class="form panel-body">
+					<div class="form-group">
+						<label class="control-label">Date Range</label>
+						<input class="form-control" type="date" placeholder="Start date" ng-model="filters.date.start">
+						<br>
+						<input class="form-control" type="date" placeholder="End date" ng-model="filters.date.end">
+					</div>
+					<div class="form-group">
+						<label class="control-label">Pitcher Hand</label>
+						<div class="btn-group btn-group-sm btn-group-justified">
+					        <a type="button" class="btn btn-default" ng-model="filters.pitcherHand" btn-radio="''">Either</a>
+					        <a type="button" class="btn btn-default" ng-model="filters.pitcherHand"" btn-radio="'L'">Left</a>
+					        <a type="button" class="btn btn-default" ng-model="filters.pitcherHand"" btn-radio="'R'">Right</a>
+					    </div>
+					</div>
+					<div class="form-group">
+						<label class="control-label">Runners</label>
+						<div class="btn-group btn-group-sm btn-group-justified">
+					        <a type="button" class="btn btn-default" ng-model="filters.runners.empty" btn-checkbox>Empty</a>
+					        <a type="button" class="btn btn-default" ng-model="filters.runners.first" btn-checkbox>1st</a>
+					        <a type="button" class="btn btn-default" ng-model="filters.runners.second" btn-checkbox>2nd</a>
+					        <a type="button" class="btn btn-default" ng-model="filters.runners.third" btn-checkbox>3rd</a>
+					    </div>
+					</div>
+				</form>
 			</div>
 		</div>
-		<div class="row">
-			<div class="col-sm-6 form-group">
-				<h4>{{obp | number:3 }} <small>OBP</small></h4>
-				<div class="progress">
-					<div class="progress-bar progress-bar-info" role="progressbar" style="width: {{obp*100}}%"></div>
+		<div class="col-md-8">
+			<table class="table table-bordered">
+				<thead>
+					<tr>
+						<th>PA</th>
+						<th>AB</th>
+						<th>1B</th>
+						<th>2B</th>
+						<th>3B</th>
+						<th>HR</th>
+						<th>RBI</th>
+						<th>BB</th>
+						<th>iBB</th>
+						<th>HBP</th>
+						<th class="hidden-xs">Sac</th>
+						<th class="hidden-xs">RBOE</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>{{plateAppearances}}</td>
+						<td>{{abs}}</td>
+						<td>{{singles}}</td>
+						<td>{{doubles}}</td>
+						<td>{{triples}}</td>
+						<td>{{homeRuns}}</td>
+						<td>{{rbi}}</td>
+						<td>{{walks}}</td>
+						<td>{{iWalks}}</td>
+						<td>{{hitByPitch}}</td>
+						<td class="hidden-xs">{{sacrifices}}</td>
+						<td class="hidden-xs">{{rboe}}</td>
+					</tr>
+				</tbody>
+			</table>
+			<div class="row">
+				<div class="col-sm-6 form-group">
+					<h4>{{wOBA | number:3 }} <small>wOBA</small></h4>
+					<div class="progress">
+						<div class="progress-bar progress-bar-info" role="progressbar" style="width: {{wOBA*100}}%"></div>
+					</div>
+				</div>
+				<div class="col-sm-6 form-group">
+					<h4>{{battingAverage | number:3 }} <small>BA</small></h4>
+					<div class="progress">
+						<div class="progress-bar progress-bar-info" role="progressbar" style="width: {{battingAverage*100}}%"></div>
+					</div>
 				</div>
 			</div>
-			<div class="col-sm-6 form-group">
-				<h4>{{slg | number:3 }} <small>SLG</small></h4>
-				<div class="progress">
-					<div class="progress-bar progress-bar-info" role="progressbar" style="width: {{slg*100}}%"></div>
+			<div class="row">
+				<div class="col-sm-6 form-group">
+					<h4>{{obp | number:3 }} <small>OBP</small></h4>
+					<div class="progress">
+						<div class="progress-bar progress-bar-info" role="progressbar" style="width: {{obp*100}}%"></div>
+					</div>
 				</div>
-		</div>
-		</div>
-		<div class="row">
-			<div class="col-sm-6 form-group">
-				<h4>{{babip | number:3 }} <small>BABIP</small></h4>
-				<div class="progress">
-					<div class="progress-bar progress-bar-info" role="progressbar" style="width: {{babip*100}}%"></div>
+				<div class="col-sm-6 form-group">
+					<h4>{{slg | number:3 }} <small>SLG</small></h4>
+					<div class="progress">
+						<div class="progress-bar progress-bar-info" role="progressbar" style="width: {{slg*100}}%"></div>
+					</div>
+			</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-6 form-group">
+					<h4>{{babip | number:3 }} <small>BABIP</small></h4>
+					<div class="progress">
+						<div class="progress-bar progress-bar-info" role="progressbar" style="width: {{babip*100}}%"></div>
+					</div>
+				</div>
+				<div class="col-sm-6 form-group">
+					<h4>{{rmi | number:3 }} <small tooltip="Runner Movement Indicator (RMI), measures the ability for a batter to move their runners around the bases. For example, with a runner on first, the batter can move them a potential three bases. If they actually move them one base, they are awarded a 0.333 RMI.">RMI</small></h4>
+					<div class="progress">
+						<div class="progress-bar progress-bar-info" role="progressbar" style="width: {{rmi*100}}%"></div>
+					</div>
 				</div>
 			</div>
-			<div class="col-sm-6 form-group">
-				<h4>{{rmi | number:3 }} <small tooltip="Runner Movement Indicator (RMI), measures the ability for a batter to move their runners around the bases. For example, with a runner on first, the batter can move them a potential three bases. If they actually move them one base, they are awarded a 0.333 RMI.">RMI</small></h4>
-				<div class="progress">
-					<div class="progress-bar progress-bar-info" role="progressbar" style="width: {{rmi*100}}%"></div>
-				</div>
-			</div>
-		</div>
+		</div>		
 	</div>
 </div>

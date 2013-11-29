@@ -8,6 +8,7 @@ controllers.battingStatsController = [ '$scope', '$log', 'playerService', 'stats
     $scope.atbats = [];
     $scope.battingAverage = 0.0;
     $scope.wOBA = 0.0;
+    $scope.loading = true;
 
     $scope.filters = {
         pitcherHand : '',
