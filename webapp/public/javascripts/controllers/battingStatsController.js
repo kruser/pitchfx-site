@@ -13,27 +13,36 @@ controllers.battingStatsController = [ '$scope', '$log', 'playerService', 'stats
         pitcherHand : '',
         date : {
             start : '2010-01-01',
-            end : moment().format('YYYY-MM-DD')
+            start_moment : moment('2010-01-01'),
+            end : moment().format('YYYY-MM-DD'),
+            end_moment : moment().add('days', 1),
         }
     };
 
-    $scope.$watch('filters.pitcherHand', function(filters) {
-        $scope.runStats();
-    });
-    $scope.$watch('filters.date.start', function(filters) {
-        $log.debug($scope.filters.date.start);
-        $scope.runStats();
-    });
-    $scope.$watch('filters.date.end', function(filters) {
-        $scope.runStats();
-    });
+    /**
+     * Sets up all the watchers on filter variables
+     */
+    function setupWatchers() {
+        $scope.$watch('filters.pitcherHand', function(filters) {
+            $scope.runStats();
+        });
+        $scope.$watch('filters.date.start', function(filters) {
+            $scope.filters.date.start_moment = moment($scope.filters.date.start);
+            $scope.runStats();
+        });
+        $scope.$watch('filters.date.end', function(filters) {
+            $scope.filters.date.end_moment = moment($scope.filters.date.end).add('days', 1);
+            $scope.runStats();
+        });
+    }
 
     /**
      * Setup the controller
      */
     function init() {
+        setupWatchers();
         $scope.loading = true;
-        playerService.getAtBatsForBatter($scope.playerId).then(function(atbats) {
+        playerService.getAtBatsForBatter($scope.playerId, $scope.filters.date.start, $scope.filters.date.end).then(function(atbats) {
             $scope.atbats = atbats;
             $scope.runStats();
             $scope.loading = false;
@@ -55,7 +64,7 @@ controllers.battingStatsController = [ '$scope', '$log', 'playerService', 'stats
             }
 
             statsService.completeStats();
-            
+
             /* Percentage Stats */
             $scope.battingAverage = statsService.BA;
             $scope.wOBA = statsService.wOBA;
@@ -89,6 +98,8 @@ controllers.battingStatsController = [ '$scope', '$log', 'playerService', 'stats
      */
     $scope.passesFilter = function(atbat) {
         if ($scope.filters.pitcherHand && atbat.p_throws !== $scope.filters.pitcherHand) {
+            return false;
+        } else if ($scope.filters.date.start_moment.isAfter(atbat.start_tfs_zulu) || $scope.filters.date.end_moment.isBefore(atbat.start_tfs_zulu)) {
             return false;
         }
         return true;
