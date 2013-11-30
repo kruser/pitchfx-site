@@ -133,7 +133,8 @@ controllers.battingStatsController = [ '$scope', '$log', '$timeout', 'playerServ
         var hitTypeChart = new Highcharts.Chart({
             chart : {
                 type : 'scatter',
-                renderTo : 'hipScatter'
+                renderTo : 'hipScatter',
+                backgroundColor:'transparent'
             },
             credits : {
                 enabled : false

@@ -56,3 +56,8 @@ body {
 .rk-batting-stats .runners-gate {
 	margin-bottom: .25em;
 }
+#hipScatter {
+	background: url('/images/stadiums/1.svg') no-repeat;
+	background-size: 100%;
+	background-position: 1em em;
+}
