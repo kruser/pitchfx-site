@@ -105,37 +105,113 @@ controllers.battingStatsController = [ '$scope', '$log', '$timeout', 'playerServ
     $scope.renderCharts = function() {
         /* render charts with a timeout to let the screen size snap first */
         $timeout(function() {
-            var series = [];
-            for ( var trajectory in statsService.trajectories) {
-                series.push([ trajectory, statsService.trajectories[trajectory] ]);
-            }
-            var hitTypeChart = new Highcharts.Chart({
-                chart : {
-                    renderTo : 'hipTypes'
-                },
-                credits : {
-                    enabled : false
-                },
-                plotOptions : {
-                    pie : {
-                        dataLabels : {
-                            color : '#eee',
-                            distance : -40,
-                            enabled : true,
-                            format : '<b>{point.name}</b><br>{point.y} ({point.percentage:.1f}%)'
-                        }
-                    }
+            $scope.renderHipTypes();
+            $scope.renderHipScatter();
+        }, 10);
+    }
+
+    /**
+     * The scatter plot for hit balls
+     */
+    $scope.renderHipScatter = function() {
+        var series = [];
+        for ( var trajectory in statsService.hitBalls) {
+            series.push({
+                name : trajectory,
+                data : statsService.hitBalls[trajectory]
+            });
+        }
+        var hitTypeChart = new Highcharts.Chart({
+            chart : {
+                type : 'scatter',
+                renderTo : 'hipScatter'
+            },
+            credits : {
+                enabled : false
+            },
+            title : {
+                text : 'Hit Balls'
+            },
+            xAxis : {
+                labels : {
+                    enabled : false,
                 },
                 title : {
-                    text : 'Hit Balls'
+                    enabled : false,
                 },
-                series : [ {
-                    name : 'Hit Balls',
-                    type : 'pie',
-                    data : series
-                } ]
-            });
-        }, 10);
+                lineWidth : 0,
+                minorGridLineWidth : 0,
+                lineColor : 'transparent',
+                minorTickLength : 0,
+                tickLength : 0
+            },
+            yAxis : {
+                labels : {
+                    enabled : false,
+                },
+                title : {
+                    enabled : false,
+                },
+                gridLineColor: 'transparent'
+            },
+            plotOptions : {
+                scatter : {
+                    marker : {
+                        radius : 5,
+                        states : {
+                            hover : {
+                                enabled : true,
+                                lineColor : 'rgb(100,100,100)'
+                            }
+                        }
+                    },
+                    states : {
+                        hover : {
+                            marker : {
+                                enabled : false
+                            }
+                        }
+                    },
+                }
+            },
+            series : series
+        });
+    }
+
+    /**
+     * The pie chart for hit ball types
+     */
+    $scope.renderHipTypes = function() {
+        var series = [];
+        for ( var trajectory in statsService.hitBalls) {
+            series.push([ trajectory, statsService.hitBalls[trajectory].length ]);
+        }
+        var hitTypeChart = new Highcharts.Chart({
+            chart : {
+                renderTo : 'hipTypes'
+            },
+            credits : {
+                enabled : false
+            },
+            plotOptions : {
+                pie : {
+                    dataLabels : {
+                        color : '#eee',
+                        distance : -40,
+                        enabled : true,
+                        format : '<b>{point.name}</b><br>{point.y} ({point.percentage:.1f}%)'
+                    }
+                }
+            },
+            title : {
+                text : 'Hit Balls'
+            },
+            series : [ {
+                name : 'Hit Balls',
+                type : 'pie',
+                data : series
+            } ]
+        });
     }
 
     /**

@@ -28,7 +28,7 @@ services.statsService = [ '$log', function($log) {
         this.rboe = 0;
         this.runnersPotentialBases = 0;
         this.runnersMovedBases = 0;
-        this.trajectories = {};
+        this.hitBalls = {};
     }
 
     /**
@@ -99,27 +99,16 @@ services.statsService = [ '$log', function($log) {
     }
 
     /**
-     * Increment the trajectory count for a specified type
-     * 
-     * @param {String}
-     *            trajectory - the trajectory to increment, e.g. 'grounder',
-     *            'liner'
-     */
-    this.incrementTrajectory = function(trajectory) {
-        if (!this.trajectories[trajectory]) {
-            this.trajectories[trajectory] = 1;
-        } else {
-            this.trajectories[trajectory]++;
-        }
-    }
-
-    /**
      * @param {*}
      *            atBat - an at bat
      */
     this.accumulateAtBat = function(atBat) {
         if (atBat.hip && atBat.hip.trajectory) {
-            this.incrementTrajectory(atBat.hip.trajectory.toLowerCase());
+            var trajectory = atBat.hip.trajectory.toLowerCase();
+            if (!this.hitBalls[trajectory]) {
+                this.hitBalls[trajectory] = [];
+            }
+            this.hitBalls[trajectory].push([atBat.hip.x, 0 - atBat.hip.y]);
         } 
 
         this.runnersMovedBases += atBat.runnersMovedBases;
