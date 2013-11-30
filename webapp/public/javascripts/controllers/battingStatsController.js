@@ -102,6 +102,7 @@ controllers.battingStatsController = [ '$scope', '$log', '$timeout', 'playerServ
             $scope.hitByPitch = statsService.hitByPitch;
             $scope.sacrifices = statsService.sacBunts + statsService.sacFlies;
             $scope.rboe = statsService.rboe;
+            $scope.rbi = statsService.rbi;
 
             $scope.renderCharts();
         }

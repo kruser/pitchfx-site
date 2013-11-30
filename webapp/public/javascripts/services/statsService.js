@@ -21,6 +21,7 @@ services.statsService = [ '$log', function($log) {
         this.plateAppearances = 0;
         this.iWalks = 0;
         this.walks = 0;
+        this.rbi = 0;
         this.hitByPitch = 0;
         this.sacBunts = 0;
         this.sacFlies = 0;
@@ -108,11 +109,19 @@ services.statsService = [ '$log', function($log) {
             if (!this.hitBalls[trajectory]) {
                 this.hitBalls[trajectory] = [];
             }
-            this.hitBalls[trajectory].push([atBat.hip.x, 0 - atBat.hip.y]);
-        } 
+            this.hitBalls[trajectory].push([ atBat.hip.x, 0 - atBat.hip.y ]);
+        }
 
         this.runnersMovedBases += atBat.runnersMovedBases;
         this.runnersPotentialBases += atBat.runnersPotentialBases;
+
+        if (atBat.runner && atBat.runner.length > 0) {
+            for ( var i = 0; i < atBat.runner.length; i++) {
+                if (atBat.runner[i].rbi === 'T') {
+                    this.rbi++;
+                }
+            }
+        }
 
         var event = atBat.event.toLowerCase();
         if (event.indexOf('single') >= 0) {
