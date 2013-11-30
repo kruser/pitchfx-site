@@ -71,5 +71,27 @@ services.playerService = [ '$http', '$q', '$log', function($http, $q, $log) {
             return result.data;
         });
     };
+    
+    /**
+     * Get at-bats for a pitcher
+     * @param {int}
+     *            playerId - the player id of the batter
+     * @param {Date}
+     *            from
+     * @param {Date}
+     *            to
+     */
+    this.getAtBatsForPitcher = function(playerId, from, to) {
+        var params = {
+            pitcher : playerId,
+            from : from,
+            to : to,
+        };
+        return $http.get('/api/atbats', {
+            params : params
+        }).then(function(result) {
+            return result.data;
+        });
+    };
 
 } ];

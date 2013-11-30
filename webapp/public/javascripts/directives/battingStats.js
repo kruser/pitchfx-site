@@ -11,6 +11,7 @@ directives.battingStats = [ 'playerService', '$log', function(playerService, $lo
         replace : true,
         scope : {
             'playerId' : '@',
+            'playerPosition' : '@'
         },
         templateUrl : '/partials/battingStats.html',
         controller : controllers.battingStatsController,

@@ -31,7 +31,7 @@ controllers.battingStatsController = [ '$scope', '$log', '$timeout', 'playerServ
      * Sets up all the watchers on filter variables
      */
     function setupWatchers() {
-        $scope.$watch('[filters.pitcherHand, filters.runners.gate, filters.runners.empty, filters.runners.first, filters.runners.second, filters.runners.third]', function(filters) {
+        $scope.$watch('[filters.pitcherHand, filters.batterHand, filters.runners.gate, filters.runners.empty, filters.runners.first, filters.runners.second, filters.runners.third]', function(filters) {
             $scope.runStats();
         }, true);
         $scope.$watch('filters.date.start', function(filters) {
@@ -50,11 +50,19 @@ controllers.battingStatsController = [ '$scope', '$log', '$timeout', 'playerServ
     function init() {
         setupWatchers();
         $scope.loading = true;
-        playerService.getAtBatsForBatter($scope.playerId, $scope.filters.date.start, $scope.filters.date.end).then(function(atbats) {
-            $scope.atbats = atbats;
-            $scope.runStats();
-            $scope.loading = false;
-        });
+        if ($scope.playerPosition === '1') {
+            playerService.getAtBatsForPitcher($scope.playerId, $scope.filters.date.start, $scope.filters.date.end).then(function(atbats) {
+                $scope.atbats = atbats;
+                $scope.runStats();
+                $scope.loading = false;
+            });
+        } else {
+            playerService.getAtBatsForBatter($scope.playerId, $scope.filters.date.start, $scope.filters.date.end).then(function(atbats) {
+                $scope.atbats = atbats;
+                $scope.runStats();
+                $scope.loading = false;
+            });
+        }
     }
 
     /**
@@ -152,7 +160,7 @@ controllers.battingStatsController = [ '$scope', '$log', '$timeout', 'playerServ
                 title : {
                     enabled : false,
                 },
-                gridLineColor: 'transparent'
+                gridLineColor : 'transparent'
             },
             plotOptions : {
                 scatter : {
@@ -223,6 +231,8 @@ controllers.battingStatsController = [ '$scope', '$log', '$timeout', 'playerServ
      */
     $scope.passesFilter = function(atbat) {
         if ($scope.filters.pitcherHand && atbat.p_throws !== $scope.filters.pitcherHand) {
+            return false;
+        } else if ($scope.filters.batterHand && atbat.stand !== $scope.filters.batterHand) {
             return false;
         } else if ($scope.filters.date.start_moment.isAfter(atbat.start_tfs_zulu) || $scope.filters.date.end_moment.isBefore(atbat.start_tfs_zulu)) {
             return false;

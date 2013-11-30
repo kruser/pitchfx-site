@@ -18,7 +18,15 @@
 						<br>
 						<input class="form-control" type="date" placeholder="End date" ng-model="filters.date.end">
 					</div>
-					<div class="form-group">
+					<div class="form-group" ng-show="playerPosition === '1'">
+						<label class="control-label">Batter Hand</label>
+						<div class="btn-group btn-group-sm btn-group-justified">
+					        <a type="button" class="btn btn-default" ng-model="filters.batterHand" btn-radio="''">Either</a>
+					        <a type="button" class="btn btn-default" ng-model="filters.batterHand"" btn-radio="'L'">Left</a>
+					        <a type="button" class="btn btn-default" ng-model="filters.batterHand"" btn-radio="'R'">Right</a>
+					    </div>
+					</div>
+					<div class="form-group" ng-show="playerPosition !== '1'">
 						<label class="control-label">Pitcher Hand</label>
 						<div class="btn-group btn-group-sm btn-group-justified">
 					        <a type="button" class="btn btn-default" ng-model="filters.pitcherHand" btn-radio="''">Either</a>
