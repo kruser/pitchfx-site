@@ -2,11 +2,11 @@ header.navbar.navbar-default.navbar-fixed-top
   div.container
     div.navbar-header
       a.navbar-brand PitchFX Site
-      button.navbar-toggle(type='button' data-toggle='collapse' data-target='#navbar-main')
+      button.navbar-toggle(ng-click='openMenu = !openMenu' type='button' data-toggle='collapse' data-target='#navbar-main')
         span.icon-bar
         span.icon-bar
         span.icon-bar
-    div#navbar-main.navbar-collapse.collapse.pull-right
+    div#navbar-main.navbar-collapse.collapse.pull-right(ng-class="{'in':openMenu}")
       ul.nav.navbar-nav
         li.dropdown
           a.dropdown-toggle(data-toggle='dropdown' href='') About

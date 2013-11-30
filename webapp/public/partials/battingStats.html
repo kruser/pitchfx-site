@@ -7,10 +7,11 @@
 	<div class="row" ng-hide="loading">
 		<div class="col-md-4">
 			<div class="panel panel-default">
-				<div class="panel-heading">
-					<h3 class="panel-title">Filters</h3>
+				<div class="panel-heading clearfix" ng-click="filtersOpen = !filtersOpen">
+					<h3 class="panel-title pull-left">Filters</h3>
+					<span class="pull-right visible-xs fa" ng-class="{'fa-chevron-circle-down':filtersOpen, 'fa-chevron-circle-up':!filtersOpen}"></span>
 				</div>
-				<form class="form panel-body">
+				<form class="form panel-body" ng-class="{'hidden-xs':!filtersOpen}">
 					<div class="form-group">
 						<label class="control-label">Date Range</label>
 						<input class="form-control" type="date" placeholder="Start date" ng-model="filters.date.start">
