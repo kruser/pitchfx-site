@@ -28,6 +28,7 @@ services.statsService = [ '$log', function($log) {
         this.rboe = 0;
         this.runnersPotentialBases = 0;
         this.runnersMovedBases = 0;
+        this.trajectories = {};
     }
 
     /**
@@ -40,8 +41,9 @@ services.statsService = [ '$log', function($log) {
         this.calcOBP();
         this.calcBABIP();
         this.calcRMI();
+        $log.debug(this.trajectories);
     }
-    
+
     /**
      * Calculates Runners Moved Indicator
      */
@@ -97,13 +99,32 @@ services.statsService = [ '$log', function($log) {
     }
 
     /**
+     * Increment the trajectory count for a specified type
+     * 
+     * @param {String}
+     *            trajectory - the trajectory to increment, e.g. 'grounder',
+     *            'liner'
+     */
+    this.incrementTrajectory = function(trajectory) {
+        if (!this.trajectories[trajectory]) {
+            this.trajectories[trajectory] = 1;
+        } else {
+            this.trajectories[trajectory]++;
+        }
+    }
+
+    /**
      * @param {*}
      *            atBat - an at bat
      */
     this.accumulateAtBat = function(atBat) {
+        if (atBat.hip && atBat.hip.trajectory) {
+            this.incrementTrajectory(atBat.hip.trajectory.toLowerCase());
+        } 
+
         this.runnersMovedBases += atBat.runnersMovedBases;
         this.runnersPotentialBases += atBat.runnersPotentialBases;
-        
+
         var event = atBat.event.toLowerCase();
         if (event.indexOf('single') >= 0) {
             this.singles++;
