@@ -58,6 +58,6 @@ body {
 }
 #hipScatter {
 	background: url('/images/stadiums/1.svg') no-repeat;
-	background-size: 100%;
-	background-position: 1em em;
+	background-size: 100% 80%;
+	background-position-y: 25px;
 }

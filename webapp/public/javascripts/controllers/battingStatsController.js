@@ -134,7 +134,7 @@ controllers.battingStatsController = [ '$scope', '$log', '$timeout', 'playerServ
             chart : {
                 type : 'scatter',
                 renderTo : 'hipScatter',
-                backgroundColor:'transparent'
+                backgroundColor : 'transparent'
             },
             credits : {
                 enabled : false
@@ -143,6 +143,8 @@ controllers.battingStatsController = [ '$scope', '$log', '$timeout', 'playerServ
                 text : 'Hit Balls'
             },
             xAxis : {
+                min : 0,
+                max : 250,
                 labels : {
                     enabled : false,
                 },
@@ -156,6 +158,8 @@ controllers.battingStatsController = [ '$scope', '$log', '$timeout', 'playerServ
                 tickLength : 0
             },
             yAxis : {
+                min : -250,
+                max : 0,
                 labels : {
                     enabled : false,
                 },
