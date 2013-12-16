@@ -3,6 +3,9 @@
 body {
 	padding-top: 50px;
 }
+.container.container-full {
+	padding: 0px;
+}
 
 /* @group Home Page Stuff */
 .kruser-home .jumbotron {
@@ -26,6 +29,16 @@ body {
 	text-decoration: none;
 }
 /* @end */
+.player-header {
+	background-size: 100%;
+}
+.player-header.well {
+	padding: 0px;
+}
+.player-header .full {
+	background: rgba(255, 255, 255, .85);
+	padding: .5em .75em;
+}
 .player-header .mug-container {
 	background: #fff;
 	padding: .25em;
@@ -34,27 +47,22 @@ body {
 .player-header .mug {
 	width: 3.5em;
 }
-.player-header .full {
-	background: rgba(255, 255, 255, .85);
-	padding: 1em;
-}
-
 .player-header-bio {
 	margin-left: .5em;
 }
 
 .player-header-bio h3 {
-	margin: .3em 0 .1em 0;
+	margin: .5em 0 .1em 0;
 }
 
-.rk-batting-stats {
-	margin-top: 1.25em;
-}
 .rk-batting-stats .progress {
 	margin-bottom: 0px;
 }
 .rk-batting-stats .runners-gate {
 	margin-bottom: .25em;
+}
+.rk-filters input.form-control {
+	padding: 8px .5em;
 }
 #hipScatter {
 	background: url('/images/stadiums/1.svg') no-repeat;

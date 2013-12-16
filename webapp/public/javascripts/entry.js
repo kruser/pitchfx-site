@@ -6,3 +6,4 @@ app.service('playerService', services.playerService);
 app.service('statsService', services.statsService);
 app.controller('searchController', controllers.searchController);
 app.directive('rkBattingStats', directives.battingStats);
+app.directive('rkFilters', directives.filters);
