@@ -14,6 +14,7 @@ var player = require('./routes/player');
 var atbatsApi = require('./routes/apis/atbats');
 var playersApi = require('./routes/apis/players');
 var playerInfoApi = require('./routes/apis/playerInfo');
+var statsApi = require('./routes/apis/stats');
 
 var app = express();
 
@@ -49,7 +50,7 @@ app.param(function(name, fn) {
             } else {
                 next('route');
             }
-        }
+        };
     }
 });
 
@@ -59,6 +60,7 @@ app.get('/api/atbats', atbatsApi.query);
 app.get('/api/players', playersApi.query);
 app.get('/api/players/:playerId', playersApi.getPlayer);
 app.get('/api/player_info/:playerId', playerInfoApi.getPlayer);
+app.get('/api/stats/:playerId/:type', statsApi.query);
 
 // Page Templates
 app.get('/', routes.index);

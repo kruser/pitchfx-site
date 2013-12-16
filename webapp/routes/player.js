@@ -13,7 +13,6 @@ exports.page = function(req, res) {
             });
         } else {
             var msg = 'Can not find player: ' + playerId;
-            console.error(msg)
             res.send(404, msg);
         }
     });

@@ -10,7 +10,7 @@ var extend = require('node.extend');
  */
 PlayerInfo = function(dataObj) {
     extend(this, dataObj);
-}
+};
 
 /**
  * @memberof pojos.PlayerInfo
@@ -19,7 +19,7 @@ PlayerInfo = function(dataObj) {
  */
 PlayerInfo.prototype.getBirthDate = function() {
     return moment(this.birth_date);
-}
+};
 
 /**
  * @memberof pojos.PlayerInfo
@@ -31,6 +31,6 @@ PlayerInfo.prototype.getMlbDebut = function() {
         return moment(this.pro_debut_date);
     }
     return undefined;
-}
+};
 
 exports.PlayerInfo = PlayerInfo;

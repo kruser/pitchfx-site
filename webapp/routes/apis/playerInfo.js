@@ -17,7 +17,7 @@ exports.getPlayer = function(req, res) {
             res.json(player);
         } else {
             var msg = 'Can not find player: ' + playerId;
-            console.error(msg)
+            console.error(msg);
             res.send(404, msg);
         }
     });

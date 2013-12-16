@@ -18,7 +18,7 @@ services.playerService = [ '$http', '$q', '$log', function($http, $q, $log) {
         return $http.get('/api/player_info/' + playerId).then(function(response) {
             return new pojos.PlayerInfo(response.data);
         });
-    }
+    };
 
     /**
      * Web service function to retrieve all players. Normally this would be a

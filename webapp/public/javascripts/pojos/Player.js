@@ -9,7 +9,7 @@ var pojos = pojos || {};
  */
 pojos.Player = function(dataObj) {
     angular.extend(this, dataObj);
-}
+};
 
 /**
  * @memberof pojos.Player
@@ -18,7 +18,7 @@ pojos.Player = function(dataObj) {
  */
 pojos.Player.prototype.getFullName = function() {
     return this.first + ' ' + this.last;
-}
+};
 
 /**
  * Use this method to make a name into something that can be part
@@ -31,4 +31,4 @@ pojos.Player.prototype.getFullName = function() {
 pojos.Player.prototype.getUrlFriendlyName = function() {
     var url = this.first + '-' + this.last;
     return url.replace(/\./g,'').toLowerCase();
-}
+};

@@ -9,7 +9,7 @@ var pojos = pojos || {};
  */
 pojos.PlayerInfo = function(dataObj) {
     angular.extend(this, dataObj);
-}
+};
 
 /**
  * @memberof pojos.PlayerInfo
@@ -18,7 +18,7 @@ pojos.PlayerInfo = function(dataObj) {
  */
 pojos.PlayerInfo.prototype.getBirthDate = function() {
     return moment(this.birth_date).toDate();
-}
+};
 
 /**
  * @memberof pojos.PlayerInfo
@@ -30,4 +30,4 @@ pojos.PlayerInfo.prototype.getMlbDebut = function() {
         return moment(this.pro_debut_date).toDate();
     }
     return undefined;
-}
+};

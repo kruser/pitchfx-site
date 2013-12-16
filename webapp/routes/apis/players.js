@@ -10,7 +10,7 @@ var MongoClient = require('mongodb').MongoClient;
  */
 exports.getPlayer = function(req, res) {
     var query = {
-        'id' : parseInt(req.params.playerId)
+        'id' : parseInt(req.params.playerId, 10)
     };
     MongoClient.connect("mongodb://localhost:27017/mlbatbat", function(err, db) {
         db.collection('players').findOne(query, function(err, doc) {
@@ -18,7 +18,7 @@ exports.getPlayer = function(req, res) {
             db.close();
         });
     });
-}
+};
 
 /**
  * Query against all players using a string query. When the query is more than

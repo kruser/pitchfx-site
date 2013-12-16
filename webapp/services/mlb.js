@@ -21,5 +21,5 @@ exports.getPlayerInfo = function(playerId, callback) {
         }
         callback(undefined);
         return;
-    })
+    });
 };

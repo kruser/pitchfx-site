@@ -1,7 +1,7 @@
 var directives = directives || {};
 
 /**
- * The directive to show all 
+ * The directive to show all
  */
 directives.battingStats = [ 'playerService', '$log', function(playerService, $log) {
     "use strict";
