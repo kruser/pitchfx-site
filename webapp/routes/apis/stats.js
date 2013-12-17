@@ -23,6 +23,8 @@ exports.query = function(req, res) {
     }
 
     adjustQueryByFilter(query, filter);
+    
+    console.log(JSON.stringify(query, null, 4));
 
     MongoClient.connect("mongodb://localhost:27017/mlbatbat", function(err, db) {
         db.collection('atbats').find(query).toArray(function(err, docs) {
@@ -220,26 +222,109 @@ function accumulateAtBat(atBat, results) {
  */
 function adjustQueryByFilter(query, filter) {
 
+    var topLevelFilters = [];
     if (filter.pitcherHand) {
-        query.p_throws = filter.pitcherHand;
+        topLevelFilters.push({
+            'p_throws' : filter.pitcherHand
+        });
     }
     if (filter.batterHand) {
-        query.stand = filter.batterHand;
+        topLevelFilters.push({
+            'stand' : filter.batterHand
+        });
     }
+
+    var runnerQuery = buildRunnersQuery(filter.runners);
+    if (runnerQuery) {
+        topLevelFilters.push(runnerQuery);
+    }
+
     if (filter.date) {
         if (filter.date.start && filter.date.end) {
-            query.start_tfs_zulu = {
-                '$gte' : new Date(filter.date.start),
-                '$lte' : new Date(filter.date.end)
-            };
+            topLevelFilters.push({
+                'start_tfs_zulu' : {
+                    '$gte' : new Date(filter.date.start),
+                    '$lte' : new Date(filter.date.end)
+                }
+            });
         } else if (filter.date.start) {
-            query.start_tfs_zulu = {
-                '$gte' : new Date(filter.date.start)
-            };
+            topLevelFilters.push({
+                'start_tfs_zulu' : {
+                    '$gte' : new Date(filter.date.start)
+                }
+            });
         } else if (filter.date.end) {
-            query.start_tfs_zulu = {
-                '$lt' : new Date(filter.date.end)
-            };
+            topLevelFilters.push({
+                'start_tfs_zulu' : {
+                    '$lt' : new Date(filter.date.end)
+                }
+            });
         }
     }
+    query.$and = topLevelFilters;
+}
+
+/**
+ * Add the base runners filter to the query if we have any
+ * 
+ * @param {*}
+ *            runners - the runners portion of the filter
+ * @returns {*}
+ */
+function buildRunnersQuery(runners) {
+    if (runners && runners.gate) {
+        var bases = [];
+        if (runners.first) {
+            bases.push({
+                'pitch.on_1b' : {
+                    '$exists' : true
+                }
+            });
+        }
+        if (runners.second) {
+            bases.push({
+                'pitch.on_2b' : {
+                    '$exists' : true
+                }
+            });
+        }
+        if (runners.third) {
+            bases.push({
+                'pitch.on_3b' : {
+                    '$exists' : true
+                }
+            });
+        }
+        if (runners.empty) {
+            bases.push({
+                '$and' : [ {
+                    'pitch.on_1b' : {
+                        '$exists' : false
+                    }
+                }, {
+                    'pitch.on_2b' : {
+                        '$exists' : false
+                    }
+                }, {
+                    'pitch.on_3b' : {
+                        '$exists' : false
+                    }
+                } ]
+            });
+        }
+        if (bases.length > 0) {
+            runnerFilter = {};
+            if (runners.gate === 'OR') {
+                return {
+                    '$or' : bases,
+                };
+            } else {
+                return {
+                    '$and' : bases,
+                };
+            }
+            return runnerFilter;
+        }
+    }
+    return undefined;
 }
