@@ -54,15 +54,17 @@ app.param(function(name, fn) {
     }
 });
 
-// APIs
+/* API Parameter Enforcement */
 app.param('playerId', /^\d+$/);
+
+/* API Endpoints */
 app.get('/api/atbats', atbatsApi.query);
 app.get('/api/players', playersApi.query);
 app.get('/api/players/:playerId', playersApi.getPlayer);
 app.get('/api/player_info/:playerId', playerInfoApi.getPlayer);
 app.get('/api/stats/:playerId/:type', statsApi.query);
 
-// Page Templates
+/* Page Templates */
 app.get('/', routes.index);
 app.get('/player/:playerId/:playerName', player.page);
 
