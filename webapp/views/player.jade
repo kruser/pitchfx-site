@@ -26,7 +26,9 @@ block content
                 |  #{playerInfo.getBirthDate().format('M/d/YYYY')} (#{playerInfo.age} yrs) 
               div
                 strong MLB Debut:
-                |  #{playerInfo.getMlbDebut().format('M/d/YYYY')}
+                |  #{playerInfo.getMlbDebut().format('M/d/YYYY')}, 
+                strong Status:
+                |  #{playerInfo.status} 
         rk-filters(player-id=playerInfo.player_id player-position=playerInfo.primary_position)
       div.col-sm-8.col-md-8.col-lg-9.col-xl-9
         rk-batting-stats(player-id=playerInfo.player_id player-position=playerInfo.primary_position)
