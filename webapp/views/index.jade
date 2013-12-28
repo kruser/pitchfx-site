@@ -9,7 +9,7 @@ block content
             typeahead='player as player.getFullName() for player in searchPlayers($viewValue)' 
             typeahead-on-select='playerSelected()'
             type='text' placeholder='Search for a player by name')
-    div#what.jumbotron.on
+    div#about.jumbotron.on
       div.container
         h2 Research, Learn, Report
         p 
@@ -23,14 +23,12 @@ block content
           |Using the 
           a(href='https://github.com/kruser/atbat-mongodb' target='_blank') atbat-mongodb
           |  project, we pull pitch and at-bat data from each day's baseball games and store
-          | it in our own MongoDB database. This site differs from other PitchFX search sites
-          | in that it front-loads most of the data for a player into your browser and lets
-          | your browser do the work. This makes facetting much, much quicker.
+          | it in our own MongoDB database. 
         p
           |Data from each day will be available by 6AM EST on the following day.
     div#issues.jumbotron.on
       div.container
-        h2 Got Problems or Suggestions?
+        h2 Got Issues or Suggestions?
         p
           |If you find any issues with this site or simply want to make a suggestion, you can
           | create an issue on the 
@@ -40,7 +38,7 @@ block content
           |Be sure to search first to make sure your issue doesn't already exist. If it does, feel
           | free to comment on the existing issue. I'm more likely to prioritize an issue with lots
           | and lots of comments.
-    div#who.jumbotron.off
+    div#ryan.jumbotron.off
       div.container
         div.row
           div.col-md-3.col-sm-4.col-xs-12
