@@ -6,7 +6,13 @@ header.navbar.navbar-default.navbar-fixed-top
         span.icon-bar
         span.icon-bar
         span.icon-bar
-    div#navbar-main.navbar-collapse.collapse.pull-right(ng-class="{'in':openMenu}")
+    div#navbar-main.navbar-collapse.collapse.navbar-right(ng-class="{'in':openMenu}")
+      form.navbar-form.navbar-left(ng-controller='searchController')
+        div.form-group
+          input.form-control(ng-model='playerSelection' typeahead-wait-ms='200' typeahead-loading='playersLoading' 
+            typeahead='player as player.getFullName() for player in searchPlayers($viewValue)' 
+            typeahead-on-select='playerSelected()'
+            type='text' placeholder='Find a player')
       ul.nav.navbar-nav
         li
           a(href='/#about') About 

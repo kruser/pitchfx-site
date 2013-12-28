@@ -1,6 +1,18 @@
 extends layout
 
 block content
+  header.navbar.navbar-default.navbar-fixed-top
+    div.container
+      div.navbar-header
+        a.navbar-brand PitchFX Site
+        button.navbar-toggle(ng-click='openMenu = !openMenu' type='button' data-toggle='collapse' data-target='#navbar-main')
+          span.icon-bar
+          span.icon-bar
+          span.icon-bar
+      div#navbar-main.navbar-collapse.collapse.navbar-right(ng-class="{'in':openMenu}")
+        ul.nav.navbar-nav
+          li
+            a(href='/#issues') Got Issues?
   div.kruser-home(ng-app='home')
     div.jumbotron.off(ng-controller='searchController')
       div.container
