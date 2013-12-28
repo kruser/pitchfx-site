@@ -1,7 +1,7 @@
 <div class="rk-filters panel panel-default">
 	<div class="panel-heading clearfix"
 		ng-click="filtersOpen = !filtersOpen">
-		<h3 class="panel-title pull-left">Splits</h3>
+		<h3 class="panel-title pull-left">Filters</h3>
 		<span class="pull-right visible-xs fa"
 			ng-class="{'fa-chevron-circle-down':filtersOpen, 'fa-chevron-circle-up':!filtersOpen}"></span>
 	</div>
@@ -66,6 +66,23 @@
                 <a type="button" class="btn btn-default" ng-model="filters.outs.1" btn-checkbox>1</a> 
                 <a type="button" class="btn btn-default" ng-model="filters.outs.2" btn-checkbox>2</a> 
                 <a type="button" class="btn btn-default" ng-model="filters.outs.3" btn-checkbox>3</a> 
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label">Inning</label>
+            <div class="btn-group btn-group-sm btn-group-justified">
+                <a type="button" class="btn btn-default" ng-model="filters.inning.1" btn-checkbox>1</a> 
+                <a type="button" class="btn btn-default" ng-model="filters.inning.2" btn-checkbox>2</a> 
+                <a type="button" class="btn btn-default" ng-model="filters.inning.3" btn-checkbox>3</a> 
+                <a type="button" class="btn btn-default" ng-model="filters.inning.4" btn-checkbox>4</a> 
+                <a type="button" class="btn btn-default" ng-model="filters.inning.5" btn-checkbox>5</a> 
+            </div>
+            <div class="btn-group btn-group-sm btn-group-justified">
+                <a type="button" class="btn btn-default" ng-model="filters.inning.6" btn-checkbox>5</a> 
+                <a type="button" class="btn btn-default" ng-model="filters.inning.7" btn-checkbox>7</a> 
+                <a type="button" class="btn btn-default" ng-model="filters.inning.8" btn-checkbox>8</a> 
+                <a type="button" class="btn btn-default" ng-model="filters.inning.9" btn-checkbox>9</a> 
+                <a type="button" class="btn btn-default" ng-model="filters.inning.extra" btn-checkbox>Extra</a> 
             </div>
         </div>
 	</form>
