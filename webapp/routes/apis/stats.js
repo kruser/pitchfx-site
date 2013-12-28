@@ -23,7 +23,7 @@ exports.query = function(req, res) {
     }
 
     adjustQueryByFilter(query, filter);
-    
+
     console.log(JSON.stringify(query, null, 4));
 
     MongoClient.connect("mongodb://localhost:27017/mlbatbat", function(err, db) {
@@ -232,6 +232,26 @@ function adjustQueryByFilter(query, filter) {
         topLevelFilters.push({
             'stand' : filter.batterHand
         });
+    }
+
+    if (filter.outs) {
+        var outs = [];
+        
+        if (filter.outs['0']) {
+            outs.push(0);
+        }
+        if (filter.outs['1']) {
+            outs.push(1);
+        }
+        if (filter.outs['2']) {
+            outs.push(2);
+        }
+        if (filter.outs['3']) {
+            outs.push(3);
+        }
+        if (outs.length > 0) {
+            topLevelFilters.push({'o':{'$in': outs}});
+        }
     }
 
     var runnerQuery = buildRunnersQuery(filter.runners);

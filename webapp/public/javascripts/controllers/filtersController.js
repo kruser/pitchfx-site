@@ -18,6 +18,11 @@ controllers.filtersController = [ '$scope', '$log', '$timeout', 'playerService',
             first : false,
             second : false,
             third : false,
+        },
+        outs : {
+            0 : false,
+            1 : false,
+            2 : false,
         }
     };
 
@@ -25,8 +30,8 @@ controllers.filtersController = [ '$scope', '$log', '$timeout', 'playerService',
      * Get stats from the backend service
      */
     $scope.runStats = function() {
-        statsService.getStats($scope.playerId, getStatType($scope.playerPosition), $scope.filters).then(function(result){
-            
+        statsService.getStats($scope.playerId, getStatType($scope.playerPosition), $scope.filters).then(function(result) {
+
         });
     };
 
@@ -49,7 +54,7 @@ controllers.filtersController = [ '$scope', '$log', '$timeout', 'playerService',
      * Sets up all the watchers on filter variables
      */
     function setupWatchers() {
-        $scope.$watch('[filters.date.start, filters.date.end, filters.pitcherHand, filters.batterHand, filters.runners.gate, filters.runners.empty, filters.runners.first, filters.runners.second, filters.runners.third]', function(filters) {
+        $scope.$watch('[filters.outs.0, filters.outs.1, filters.outs.2, filters.outs.3, filters.date.start, filters.date.end, filters.pitcherHand, filters.batterHand, filters.runners.gate, filters.runners.empty, filters.runners.first, filters.runners.second, filters.runners.third]', function(filters) {
             $scope.runStats();
         }, true);
     }
