@@ -60,10 +60,13 @@ function calculateResults(docs) {
         rboe : 0,
         runnersPotentialBases : 0,
         runnersMovedBases : 0,
-        hitBalls : {}
+        hitBalls : {},
+        pitches : []
     };
     for ( var i = 0; i < docs.length; i++) {
-        accumulateAtBat(docs[i], results);
+        var atbatDoc = docs[i];
+        accumulateAtBat(atbatDoc, results);
+        //results.pitches = results.pitches.concat(atbatDoc.pitch);
     }
     completeStats(results);
 
@@ -234,63 +237,6 @@ function adjustQueryByFilter(query, filter) {
         });
     }
 
-    if (filter.inning) {
-        var inning = [];
-        if (filter.inning['1']) {
-            inning.push(1);
-        }
-        if (filter.inning['2']) {
-            inning.push(2);
-        }
-        if (filter.inning['3']) {
-            inning.push(3);
-        }
-        if (filter.inning['4']) {
-            inning.push(4);
-        }
-        if (filter.inning['5']) {
-            inning.push(5);
-        }
-        if (filter.inning['6']) {
-            inning.push(6);
-        }
-        if (filter.inning['7']) {
-            inning.push(7);
-        }
-        if (filter.inning['8']) {
-            inning.push(8);
-        }
-        if (filter.inning['9']) {
-            inning.push(9);
-        }
-
-        if (filter.inning.extra && inning.length > 0) {
-            topLevelFilters.push({
-                '$or' : [ {
-                    'inning.number' : {
-                        '$gt' : 9
-                    }
-                }, {
-                    'inning.number' : {
-                        '$in' : inning
-                    }
-                } ]
-            });
-        } else if (inning.length > 0) {
-            topLevelFilters.push({
-                'inning.number' : {
-                    '$in' : inning
-                }
-            });
-        } else if (filter.inning.extra) {
-            topLevelFilters.push({
-                'inning.number' : {
-                    '$gt' : 9
-                }
-            });
-        }
-    }
-
     if (filter.outs) {
         var outs = [];
 
@@ -314,7 +260,12 @@ function adjustQueryByFilter(query, filter) {
             });
         }
     }
-
+    
+    var inningsQuery = buildInningQuery(filter.inning); 
+    if (inningsQuery) {
+        topLevelFilters.push(inningsQuery);
+    }
+    
     var runnerQuery = buildRunnersQuery(filter.runners);
     if (runnerQuery) {
         topLevelFilters.push(runnerQuery);
@@ -343,6 +294,72 @@ function adjustQueryByFilter(query, filter) {
         }
     }
     query.$and = topLevelFilters;
+}
+
+/**
+ * Create a query block based on the innings filter
+ * @param {*}
+ *            inning - the innings portion of the filter
+ * 
+ */
+function buildInningQuery(inning) {
+    if (inning) {
+        var innings = [];
+        if (inning['1']) {
+            innings.push(1);
+        }
+        if (inning['2']) {
+            innings.push(2);
+        }
+        if (inning['3']) {
+            innings.push(3);
+        }
+        if (inning['4']) {
+            innings.push(4);
+        }
+        if (inning['5']) {
+            innings.push(5);
+        }
+        if (inning['6']) {
+            innings.push(6);
+        }
+        if (inning['7']) {
+            innings.push(7);
+        }
+        if (inning['8']) {
+            innings.push(8);
+        }
+        if (inning['9']) {
+            innings.push(9);
+        }
+
+        if (inning.extra && inning.length > 0) {
+            return {
+                '$or' : [ {
+                    'inning.number' : {
+                        '$gt' : 9
+                    }
+                }, {
+                    'inning.number' : {
+                        '$in' : innings
+                    }
+                } ]
+            };
+        } else if (inning.length > 0) {
+            return {
+                'inning.number' : {
+                    '$in' : innings
+                }
+            };
+        } else if (inning.extra) {
+            return {
+                'inning.number' : {
+                    '$gt' : 9
+                }
+            };
+        }
+        return undefined;
+    }
 }
 
 /**
