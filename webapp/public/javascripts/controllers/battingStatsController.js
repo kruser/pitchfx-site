@@ -5,7 +5,7 @@ var controllers = controllers || {};
  */
 controllers.battingStatsController = [ '$scope', '$log', '$timeout', 'playerService', 'statsService', function($scope, $log, $timeout, playerService, statsService) {
 
-    $scope.loading = false;
+    $scope.loading = true;
     $scope.statsService = statsService;
 
     /**
@@ -17,6 +17,7 @@ controllers.battingStatsController = [ '$scope', '$log', '$timeout', 'playerServ
                 $scope.stats = statsService.stats;
                 $scope.renderCharts();
                 $log.debug($scope.stats);
+                $scope.loading = false;
             }
         }, true);
     }

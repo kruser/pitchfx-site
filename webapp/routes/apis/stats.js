@@ -61,12 +61,10 @@ function calculateResults(docs) {
         runnersPotentialBases : 0,
         runnersMovedBases : 0,
         hitBalls : {},
-        pitches : []
     };
     for ( var i = 0; i < docs.length; i++) {
         var atbatDoc = docs[i];
         accumulateAtBat(atbatDoc, results);
-        //results.pitches = results.pitches.concat(atbatDoc.pitch);
     }
     completeStats(results);
 
