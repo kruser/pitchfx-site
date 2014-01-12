@@ -1,14 +1,13 @@
 var services = services || {};
 
 /**
- * An AngularJS service with stat aggregator functions and web service calls
- * into the stats API
+ * An AngularJS service to aid in retrieval of pitches based on a filter
  */
 services.pitchesService = [ '$log', '$http', function($log, $http) {
     "use strict";
 
     /**
-     * Get stats from the backend
+     * Get pitches from the backend
      * 
      * @param {int}
      *            playerId - the player ID

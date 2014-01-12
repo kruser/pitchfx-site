@@ -331,7 +331,7 @@ function buildInningQuery(inning) {
             innings.push(9);
         }
 
-        if (inning.extra && inning.length > 0) {
+        if (inning.extra && innings.length > 0) {
             return {
                 '$or' : [ {
                     'inning.number' : {
@@ -343,7 +343,7 @@ function buildInningQuery(inning) {
                     }
                 } ]
             };
-        } else if (inning.length > 0) {
+        } else if (innings.length > 0) {
             return {
                 'inning.number' : {
                     '$in' : innings

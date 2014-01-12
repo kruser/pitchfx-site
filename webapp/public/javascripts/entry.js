@@ -5,6 +5,7 @@ var app = angular.module('pitchfx', [ 'ui.bootstrap', 'ngTouch', 'ngRoute' ]);
 app.service('filtersService', services.filtersService);
 app.service('playerService', services.playerService);
 app.service('statsService', services.statsService);
+app.service('pitchesService', services.pitchesService);
 app.controller('searchController', controllers.searchController);
 app.directive('rkBattingStats', directives.battingStats);
 app.directive('rkFilters', directives.filters);
@@ -15,6 +16,7 @@ app.config([ '$routeProvider', '$locationProvider', function($routeProvider, $lo
         templateUrl : '/partials/atbats.html',
     }).when('/pitches', {
         meta : 'pitches',
+        controller : controllers.pitchStatsController,
         templateUrl : '/partials/pitches.html',
     }).when('/scouting', {
         meta : 'scouting',
