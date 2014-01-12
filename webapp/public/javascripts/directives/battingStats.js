@@ -3,7 +3,7 @@ var directives = directives || {};
 /**
  * The directive to show all
  */
-directives.battingStats = [ 'playerService', '$log', function(playerService, $log) {
+directives.battingStats = [ 'playerService', '$log', '$route', function(playerService, $log, $route) {
     "use strict";
 
     return {
@@ -14,6 +14,12 @@ directives.battingStats = [ 'playerService', '$log', function(playerService, $lo
             'playerPosition' : '@'
         },
         templateUrl : '/partials/battingStats.html',
-        controller : controllers.battingStatsController,
+        link : function(scope, element, attrs) {
+            scope.$on('$routeChangeSuccess', function(event, toState, toParams, fromState, fromParams) {
+                if (toState && toState.$$route) {
+                    scope.link = toState.$$route.meta;
+                }
+            });
+        }
     };
 } ];

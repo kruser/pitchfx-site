@@ -1,0 +1,114 @@
+<div class="rk-at-bats">
+	<div class="text-center" ng-show="loading">
+		<br>
+		<br> <i class="fa fa-spinner fa-spin fa-4x"></i>
+		<h3>Loading at-bats...</h3>
+	</div>
+	<div ng-hide="loading">
+		<table class="table table-condensed">
+			<thead>
+				<tr>
+					<th>PA</th>
+					<th>AB</th>
+					<th>1B</th>
+					<th>2B</th>
+					<th>3B</th>
+					<th>HR</th>
+					<th>RBI</th>
+					<th>SO</th>
+					<th>BB</th>
+					<th class="hidden-xs">iBB</th>
+					<th class="hidden-xs">HBP</th>
+					<th class="hidden-xs">Sac</th>
+					<th class="hidden-xs">RBOE</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>{{stats.plateAppearances}}</td>
+					<td>{{stats.atbats}}</td>
+					<td>{{stats.singles}}</td>
+					<td>{{stats.doubles}}</td>
+					<td>{{stats.triples}}</td>
+					<td>{{stats.homeRuns}}</td>
+					<td>{{stats.rbi}}</td>
+					<td>{{stats.strikeouts}}</td>
+					<td>{{stats.walks}}</td>
+					<td class="hidden-xs">{{stats.iWalks}}</td>
+					<td class="hidden-xs">{{stats.hitByPitch}}</td>
+					<td class="hidden-xs">{{stats.sacBunts + stats.sacFlies}}</td>
+					<td class="hidden-xs">{{stats.rboe}}</td>
+				</tr>
+			</tbody>
+		</table>
+		<div class="row">
+			<div class="col-xs-6 form-group">
+				<h4>
+					{{stats.wOBA | number:3 }} <small>wOBA</small>
+				</h4>
+				<div class="progress">
+					<div class="progress-bar progress-bar-info" role="progressbar"
+						style="width: {{stats.wOBA*100}}%"></div>
+				</div>
+			</div>
+			<div class="col-xs-6 form-group">
+				<h4>
+					{{stats.BA | number:3 }} <small>BA</small>
+				</h4>
+				<div class="progress">
+					<div class="progress-bar progress-bar-info" role="progressbar"
+						style="width: {{stats.BA*100}}%"></div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-6 form-group">
+				<h4>
+					{{stats.obp | number:3 }} <small>OBP</small>
+				</h4>
+				<div class="progress">
+					<div class="progress-bar progress-bar-info" role="progressbar"
+						style="width: {{stats.obp*100}}%"></div>
+				</div>
+			</div>
+			<div class="col-xs-6 form-group">
+				<h4>
+					{{stats.slg | number:3 }} <small>SLG</small>
+				</h4>
+				<div class="progress">
+					<div class="progress-bar progress-bar-info" role="progressbar"
+						style="width: {{stats.slg*100}}%"></div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-6 form-group">
+				<h4>
+					{{stats.babip | number:3 }} <small>BABIP</small>
+				</h4>
+				<div class="progress">
+					<div class="progress-bar progress-bar-info" role="progressbar"
+						style="width: {{stats.babip*100}}%"></div>
+				</div>
+			</div>
+			<div class="col-xs-6 form-group">
+				<h4>
+					{{stats.rmi | number:3 }} <small
+						tooltip="Runner Movement Indicator (RMI), measures the ability for a batter to move their runners around the bases. For example, with a runner on first, the batter can move them a potential three bases. If they actually move them one base, they are awarded a 0.333 RMI.">RMI</small>
+				</h4>
+				<div class="progress">
+					<div class="progress-bar progress-bar-info" role="progressbar"
+						style="width: {{stats.rmi*100}}%"></div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-6">
+				<div id="hipTypes"></div>
+			</div>
+			<div id="hipScatterContainer" class="col-sm-6">
+				<div id="hipScatter"></div>
+			</div>
+	   </div>
+	</div>
+</div>
