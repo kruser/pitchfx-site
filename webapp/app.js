@@ -15,6 +15,7 @@ var atbatsApi = require('./routes/apis/atbats');
 var playersApi = require('./routes/apis/players');
 var playerInfoApi = require('./routes/apis/playerInfo');
 var statsApi = require('./routes/apis/stats');
+var pitchesApi = require('./routes/apis/pitches');
 
 var app = express();
 
@@ -63,6 +64,7 @@ app.get('/api/players', playersApi.query);
 app.get('/api/players/:playerId', playersApi.getPlayer);
 app.get('/api/player_info/:playerId', playerInfoApi.getPlayer);
 app.get('/api/stats/:playerId/:type', statsApi.query);
+app.get('/api/pitches/:playerId/:type', pitchesApi.query);
 
 /* Page Templates */
 app.get('/', routes.index);

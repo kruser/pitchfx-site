@@ -2,6 +2,7 @@
  * Sets up our AngularJS module
  */
 var app = angular.module('pitchfx', [ 'ui.bootstrap', 'ngTouch', 'ngRoute' ]);
+app.service('filtersService', services.filtersService);
 app.service('playerService', services.playerService);
 app.service('statsService', services.statsService);
 app.controller('searchController', controllers.searchController);

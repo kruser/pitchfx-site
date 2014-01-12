@@ -3,7 +3,7 @@ var controllers = controllers || {};
 /**
  * A controller that manages hitting stats for a player
  */
-controllers.filtersController = [ '$scope', '$log', '$timeout', 'playerService', 'statsService', function($scope, $log, $timeout, playerService, statsService) {
+controllers.filtersController = [ '$scope', '$log', '$timeout', 'filtersService', function($scope, $log, $timeout, filtersService) {
 
     $scope.filters = {
         pitcherHand : '',
@@ -26,45 +26,8 @@ controllers.filtersController = [ '$scope', '$log', '$timeout', 'playerService',
         }
     };
 
-    /**
-     * Get stats from the backend service
-     */
-    $scope.runStats = function() {
-        statsService.getStats($scope.playerId, getStatType($scope.playerPosition), $scope.filters).then(function(result) {
+    $scope.$watch('[filters]', function(filters) {
+        filtersService.filters = filters;
+    }, true);
 
-        });
-    };
-
-    /**
-     * Get our "type" based on position number.
-     * 
-     * @param {int}
-     *            position
-     * @returns {string} - the position type
-     */
-    function getStatType(position) {
-        if (position === '1') {
-            return 'pitcher';
-        } else {
-            return 'batter';
-        }
-    }
-
-    /**
-     * Sets up all the watchers on filter variables
-     */
-    function setupWatchers() {
-        $scope.$watch('[filters]', function(filters) {
-            $scope.runStats();
-        }, true);
-    }
-
-    /**
-     * Setup the controller
-     */
-    function init() {
-        setupWatchers();
-    }
-
-    init();
 } ];

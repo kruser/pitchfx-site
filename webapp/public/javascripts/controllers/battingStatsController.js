@@ -3,22 +3,21 @@ var controllers = controllers || {};
 /**
  * A controller that manages hitting stats for a player
  */
-controllers.battingStatsController = [ '$scope', '$log', '$timeout', 'playerService', 'statsService', function($scope, $log, $timeout, playerService, statsService) {
+controllers.battingStatsController = [ '$scope', '$log', '$timeout', 'filtersService', 'statsService', function($scope, $log, $timeout, filtersService, statsService) {
 
     $scope.loading = true;
-    $scope.statsService = statsService;
+    $scope.filtersService = filtersService;
 
     /**
      * Setup the controller
      */
     function init() {
-        $scope.$watch('statsService.statCounter', function(statCounter) {
-            if (statCounter) {
-                $scope.stats = statsService.stats;
+        $scope.$watch('filtersService.filters', function(filters) {
+            statsService.getStats($scope.playerId, $scope.playerType, filters).then(function(stats) {
+                $scope.stats = stats;
                 $scope.renderCharts();
-                $log.debug($scope.stats);
                 $scope.loading = false;
-            }
+            });
         }, true);
     }
 
