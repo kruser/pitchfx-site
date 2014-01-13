@@ -5,42 +5,44 @@
 		<h3>Loading at-bats...</h3>
 	</div>
 	<div ng-hide="loading">
-		<table class="table table-condensed">
-			<thead>
-				<tr>
-					<th>PA</th>
-					<th>AB</th>
-					<th>1B</th>
-					<th>2B</th>
-					<th>3B</th>
-					<th>HR</th>
-					<th>RBI</th>
-					<th>SO</th>
-					<th>BB</th>
-					<th class="hidden-xs">iBB</th>
-					<th class="hidden-xs">HBP</th>
-					<th class="hidden-xs">Sac</th>
-					<th class="hidden-xs">RBOE</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					<td>{{stats.plateAppearances}}</td>
-					<td>{{stats.atbats}}</td>
-					<td>{{stats.singles}}</td>
-					<td>{{stats.doubles}}</td>
-					<td>{{stats.triples}}</td>
-					<td>{{stats.homeRuns}}</td>
-					<td>{{stats.rbi}}</td>
-					<td>{{stats.strikeouts}}</td>
-					<td>{{stats.walks}}</td>
-					<td class="hidden-xs">{{stats.iWalks}}</td>
-					<td class="hidden-xs">{{stats.hitByPitch}}</td>
-					<td class="hidden-xs">{{stats.sacBunts + stats.sacFlies}}</td>
-					<td class="hidden-xs">{{stats.rboe}}</td>
-				</tr>
-			</tbody>
-		</table>
+	   <div class="table-responsive">
+			<table class="table table-condensed">
+				<thead>
+					<tr>
+						<th>PA</th>
+						<th>AB</th>
+						<th>1B</th>
+						<th>2B</th>
+						<th>3B</th>
+						<th>HR</th>
+						<th>RBI</th>
+						<th>SO</th>
+						<th>BB</th>
+						<th>iBB</th>
+						<th>HBP</th>
+						<th>Sac</th>
+						<th>RBOE</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>{{stats.plateAppearances}}</td>
+						<td>{{stats.atbats}}</td>
+						<td>{{stats.singles}}</td>
+						<td>{{stats.doubles}}</td>
+						<td>{{stats.triples}}</td>
+						<td>{{stats.homeRuns}}</td>
+						<td>{{stats.rbi}}</td>
+						<td>{{stats.strikeouts}}</td>
+						<td>{{stats.walks}}</td>
+						<td>{{stats.iWalks}}</td>
+						<td>{{stats.hitByPitch}}</td>
+						<td>{{stats.sacBunts + stats.sacFlies}}</td>
+						<td>{{stats.rboe}}</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
 		<div class="row">
 			<div class="col-xs-6 form-group">
 				<h4>
