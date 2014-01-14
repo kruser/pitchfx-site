@@ -8,6 +8,9 @@ controllers.pitchStatsController = [ '$scope', '$log', '$timeout', 'filtersServi
     $scope.loading = true;
     $scope.filtersService = filtersService;
     $scope.pitchTypes = [];
+    $scope.model = {
+        selectedPitch : {}
+    };
 
     /**
      * Setup the controller
@@ -16,9 +19,40 @@ controllers.pitchStatsController = [ '$scope', '$log', '$timeout', 'filtersServi
         $scope.$watch('filtersService.filters', function(filters) {
             pitchesService.getPitches($scope.playerId, $scope.playerType, filters).then(function(pitches) {
                 aggregatePitchStats(pitches);
+                $timeout(function() {
+                    renderPitchSpeeds([ [ 0, 1 ], [ 10, 20 ], [ 2, 34 ] ]);
+                }, 10);
                 $scope.loading = false;
             });
         }, true);
+    }
+
+    function renderPitchSpeeds(speedData) {
+        new Highcharts.StockChart({
+            chart : {
+                alignTicks : false,
+                renderTo : 'pitchSpeeds',
+            },
+
+            rangeSelector : {
+                selected : 1
+            },
+
+            title : {
+                text : 'AAPL Stock Volume'
+            },
+
+            series : [ {
+                type : 'column',
+                name : 'AAPL Stock Volume',
+                data : speedData,
+                dataGrouping : {
+                    units : [ [ 'week', // unit name
+                    [ 1 ] // allowed multiples
+                    ], [ 'month', [ 1, 2, 3, 4, 6 ] ] ]
+                }
+            } ]
+        });
     }
 
     /**
