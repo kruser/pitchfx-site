@@ -1,7 +1,7 @@
 /**
  * Sets up our AngularJS module
  */
-var app = angular.module('pitchfx', [ 'ui.bootstrap', 'ngTouch', 'ngRoute' ]);
+var app = angular.module('pitchfx', [ 'ui.bootstrap', 'ngTouch', 'ngRoute', 'jmdobry.angular-cache' ]);
 app.service('filtersService', services.filtersService);
 app.service('playerService', services.playerService);
 app.service('statsService', services.statsService);
