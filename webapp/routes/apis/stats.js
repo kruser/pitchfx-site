@@ -62,9 +62,11 @@ function calculateResults(docs) {
         runnersMovedBases : 0,
         hitBalls : {},
     };
-    for ( var i = 0; i < docs.length; i++) {
-        var atbatDoc = docs[i];
-        accumulateAtBat(atbatDoc, results);
+    if (docs) {
+        for ( var i = 0; i < docs.length; i++) {
+            var atbatDoc = docs[i];
+            accumulateAtBat(atbatDoc, results);
+        }
     }
     completeStats(results);
 
@@ -181,10 +183,11 @@ function accumulateAtBat(atBat, results) {
     if (event.indexOf('single') >= 0) {
         results.singles++;
         results.atbats++;
-    } else if (event.indexOf('double') >= 0) {
+    } else if (event === 'double') {
+        console.log(event);
         results.doubles++;
         results.atbats++;
-    } else if (event.indexOf('triple') >= 0) {
+    } else if (event === 'triple') {
         results.triples++;
         results.atbats++;
     } else if (event.indexOf('home') >= 0) {
@@ -258,12 +261,12 @@ function adjustQueryByFilter(query, filter) {
             });
         }
     }
-    
-    var inningsQuery = buildInningQuery(filter.inning); 
+
+    var inningsQuery = buildInningQuery(filter.inning);
     if (inningsQuery) {
         topLevelFilters.push(inningsQuery);
     }
-    
+
     var runnerQuery = buildRunnersQuery(filter.runners);
     if (runnerQuery) {
         topLevelFilters.push(runnerQuery);
@@ -296,6 +299,7 @@ function adjustQueryByFilter(query, filter) {
 
 /**
  * Create a query block based on the innings filter
+ * 
  * @param {*}
  *            inning - the innings portion of the filter
  * 
