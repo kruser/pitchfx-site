@@ -11,6 +11,10 @@ controllers.pitchStatsController = [ '$scope', '$log', '$timeout', 'filtersServi
     $scope.model = {
         selectedPitch : {}
     };
+    $scope.pitchSpeeds = {
+        categories : [],
+        series : [],
+    };
 
     /**
      * Setup the controller
@@ -20,38 +24,55 @@ controllers.pitchStatsController = [ '$scope', '$log', '$timeout', 'filtersServi
             pitchesService.getPitches($scope.playerId, $scope.playerType, filters).then(function(pitches) {
                 aggregatePitchStats(pitches);
                 $timeout(function() {
-                    renderPitchSpeeds([ [ 0, 1 ], [ 10, 20 ], [ 2, 34 ] ]);
+                    renderPitchSpeeds();
                 }, 10);
                 $scope.loading = false;
             });
         }, true);
     }
 
-    function renderPitchSpeeds(speedData) {
-        new Highcharts.StockChart({
+    /**
+     * REnder pitch speeds chart
+     */
+    function renderPitchSpeeds() {
+        new Highcharts.Chart({
             chart : {
-                alignTicks : false,
-                renderTo : 'pitchSpeeds',
+                type : 'area',
+                zoomType : 'x',
+                renderTo : 'pitchSpeeds'
             },
-
-            rangeSelector : {
-                selected : 1
+            credits : {
+                enabled : false
             },
-
             title : {
-                text : 'AAPL Stock Volume'
+                text : 'Pitch Speeds'
             },
-
-            series : [ {
-                type : 'column',
-                name : 'AAPL Stock Volume',
-                data : speedData,
-                dataGrouping : {
-                    units : [ [ 'week', // unit name
-                    [ 1 ] // allowed multiples
-                    ], [ 'month', [ 1, 2, 3, 4, 6 ] ] ]
+            xAxis : {
+                categories : $scope.pitchSpeeds.categories,
+                title : {
+                    text : 'MPH',
                 }
-            } ]
+            },
+            yAxis : {
+                title : {
+                    text : 'Pitch Frequency'
+                },
+            },
+            tooltip : {
+                shared : true,
+            },
+            plotOptions : {
+                area : {
+                    stacking : 'normal',
+                    lineColor : '#666666',
+                    lineWidth : 1,
+                    marker : {
+                        lineWidth : 1,
+                        lineColor : '#666666'
+                    }
+                }
+            },
+            series : $scope.pitchSpeeds.series
         });
     }
 
@@ -64,6 +85,9 @@ controllers.pitchStatsController = [ '$scope', '$log', '$timeout', 'filtersServi
      */
     function aggregatePitchStats(pitches) {
         var pitchTypes = {};
+        var pitchSpeeds = {};
+        var minSpeed = null;
+        var maxSpeed = null;
         if (pitches) {
             for ( var i = 0; i < pitches.length; i++) {
                 var pitch = new pojos.Pitch(pitches[i]);
@@ -72,7 +96,7 @@ controllers.pitchStatsController = [ '$scope', '$log', '$timeout', 'filtersServi
                 if (!aggregator) {
                     aggregator = {
                         pitchCode : pitchCode,
-                        displayName : pitch.getPitchDisplayName(),
+                        displayName : pojos.Pitch.getPitchDisplayName(pitch.getPitchType()),
                         count : 0,
                         ball : 0,
                         strike : 0,
@@ -124,6 +148,23 @@ controllers.pitchStatsController = [ '$scope', '$log', '$timeout', 'filtersServi
                 } else if (hipTrajectory === 'popup') {
                     aggregator.popup++;
                 }
+                var speed = parseInt(pitch.start_speed, 10);
+                if (speed) {
+
+                    if (!minSpeed || minSpeed > speed) {
+                        minSpeed = speed;
+                    }
+                    if (!maxSpeed || maxSpeed < speed) {
+                        maxSpeed = speed;
+                    }
+
+                    var speedKey = speed + ':' + pitchCode;
+                    if (pitchSpeeds[speedKey]) {
+                        pitchSpeeds[speedKey]++;
+                    } else {
+                        pitchSpeeds[speedKey] = 1;
+                    }
+                }
             }
         }
 
@@ -132,6 +173,48 @@ controllers.pitchStatsController = [ '$scope', '$log', '$timeout', 'filtersServi
             model.push(pitchTypes[key]);
         }
         $scope.pitchTypes = model;
+        buildPitchSpeedSeries(pitchSpeeds, minSpeed, maxSpeed, Object.keys(pitchTypes));
+    }
+
+    /**
+     * Builds up the series and categories necessary to print the highcharts
+     * 
+     * @param {Object}
+     *            pitchSpeeds
+     * @param {number}
+     *            minSpeed
+     * @param {number}
+     *            maxSpeed
+     * @param {Array}
+     *            pitchCodes
+     */
+    function buildPitchSpeedSeries(pitchSpeeds, minSpeed, maxSpeed, pitchTypes, pitchCodes) {
+        $log.debug(pitchTypes);
+        $scope.pitchSpeeds.categories = pitchTypes;
+        var series = [];
+
+        var allSpeeds = [];
+        for ( var j = 0; j < pitchTypes.length; j++) {
+            var vertical = {
+                name : pojos.Pitch.getPitchDisplayName(pitchTypes[j]),
+                data : [],
+            };
+            for ( var i = minSpeed; i <= maxSpeed; i++) {
+                if (j === 0) {
+                    allSpeeds.push(i);
+                }
+                var key = i + ':' + pitchTypes[j];
+                var frequency = pitchSpeeds[key];
+                if (frequency) {
+                    vertical.data.push(frequency);
+                } else {
+                    vertical.data.push(null);
+                }
+            }
+            series.push(vertical);
+        }
+        $scope.pitchSpeeds.categories = allSpeeds;
+        $scope.pitchSpeeds.series = series;
     }
 
     init();

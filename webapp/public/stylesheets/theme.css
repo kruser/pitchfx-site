@@ -69,3 +69,6 @@ body {
 	background-size: 100% 80%;
 	background-position-y: 25px;
 }
+#pitchSpeeds {
+	height: 250px;
+}

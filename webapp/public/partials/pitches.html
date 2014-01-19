@@ -10,7 +10,6 @@
 					class="pitch-table table table-condensed table-striped">
 					<thead>
 						<tr>
-							<th></th>
 							<th tooltip="The type of pitch" tooltip-append-to-body="true">Pitch</th>
 							<th tooltip="Total count of these pitches"
 								tooltip-append-to-body="true">#</th>
@@ -41,7 +40,6 @@
 					</thead>
 					<tr
 						ng-repeat="row in pitchTypes | orderBy:'count':true | limitTo:8">
-						<td><input type="checkbox" ng-model="model.selectedPitch[row.pitchCode]"></input></td>
 						<td>{{row.displayName}}</td>
 						<td>{{row.count}}</td>
 						<td tooltip="{{row.ball}}" tooltip-append-to-body="true">{{row.ball/row.count*100|number:1}}%</td>
@@ -61,7 +59,7 @@
 			</div>
 		</div>
 		<div class="row">
-		  <div class="col-md-4 col-sm-6">
+		  <div class="col-md-12">
 		      <div id="pitchSpeeds"></div>
 		  </div>
 		</div>

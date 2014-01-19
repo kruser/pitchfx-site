@@ -103,10 +103,10 @@ pojos.Pitch.prototype.getPitchType = function() {
  * Curveball KC Knuckle Curve EP Ephuus CH Change-up SC Screwball KN Knuckleball
  * UN Unknown
  * 
+ * @param {string} the pitch code, e.g. 'FC', 'FF'
  * @returns {string} the pitch name
  */
-pojos.Pitch.prototype.getPitchDisplayName = function() {
-    var pitchCode = this.getPitchType();
+pojos.Pitch.getPitchDisplayName = function(pitchCode) {
     switch (pitchCode) {
     case 'FA':
         return 'Fastball';
