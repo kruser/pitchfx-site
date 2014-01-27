@@ -1,0 +1,12 @@
+{
+  "globals": {
+    "angular": true,
+    "moment": true,
+    "Modernizr": true,
+    "Highcharts": true,
+    "require": true,
+    "__dirname" : true,
+    "console" : true,
+    "process" : true
+  }
+}

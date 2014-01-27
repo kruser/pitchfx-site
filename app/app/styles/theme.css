@@ -1,0 +1,74 @@
+/* @override 
+	http://localhost:3000/stylesheets/theme.css */
+body {
+	padding-top: 50px;
+}
+.container.container-full {
+	padding: 0px;
+}
+
+/* @group Home Page Stuff */
+.kruser-home .jumbotron {
+	margin-bottom: 0;
+}
+
+.kruser-home {
+	background: url('/images/ball.svg') #eee fixed;
+	background-size: 100%;
+}
+
+.kruser-home .jumbotron.off {
+	background: rgba(255, 255, 255, .95)
+}
+
+.kruser-home a.fa {
+	margin-right: .2em;
+}
+
+.kruser-home a.fa:hover {
+	text-decoration: none;
+}
+/* @end */
+.player-header {
+	background-size: 100%;
+}
+.player-header.well {
+	padding: 0px;
+}
+.player-header .full {
+	background: rgba(255, 255, 255, .85);
+	padding: .5em .75em;
+}
+.player-header .mug-container {
+	background: #fff;
+	padding: .25em;
+	border-radius: 6px;
+}
+.player-header .mug {
+	width: 3.5em;
+}
+.player-header-bio {
+	margin-left: .5em;
+}
+
+.player-header-bio h3 {
+	margin: .5em 0 .1em 0;
+}
+
+.rk-batting-stats .progress {
+	margin-bottom: 0px;
+}
+.rk-batting-stats .runners-gate {
+	margin-bottom: .25em;
+}
+.rk-filters input.form-control {
+	padding: 8px .5em;
+}
+#hipScatter {
+	background: url('/images/stadiums/1.svg') no-repeat;
+	background-size: 100% 80%;
+	background-position-y: 25px;
+}
+#pitchSpeeds {
+	height: 300px;
+}
