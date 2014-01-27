@@ -3,6 +3,9 @@
 body {
 	padding-top: 50px;
 }
+.avatar {
+	width: 8em;
+}
 .container.container-full {
 	padding: 0px;
 }
