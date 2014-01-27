@@ -141,7 +141,12 @@ module.exports = function(grunt) {
         // so
         // additional tasks can operate on them
         useminPrepare : {
-            html : [ '<%= yeoman.app %>/<%= yeoman.views %>/index.html', '<%= yeoman.app %>/<%= yeoman.views %>/index.jade' ],
+            html : [ 
+              '<%= yeoman.app %>/<%= yeoman.views %>/index.html', 
+              '<%= yeoman.app %>/<%= yeoman.views %>/index.jade', 
+              '<%= yeoman.app %>/<%= yeoman.views %>/templates/head.html',
+              '<%= yeoman.app %>/<%= yeoman.views %>/templates/scripts.html',
+            ],
             options : {
                 dest : '<%= yeoman.dist %>'
             }
@@ -149,7 +154,7 @@ module.exports = function(grunt) {
 
         // Performs rewrites based on rev and the useminPrepare configuration
         usemin : {
-            html : [ '<%= yeoman.views %>/{,*/}*.html', '<%= yeoman.views %>/{,*/}*.jade' ],
+            html : [ '<%= yeoman.views %>/{,*/}*.html', '<%= yeoman.views %>/{,*/}*.jade', '<%= yeoman.views %>/{,*/}*.ejs' ],
             css : [ '<%= yeoman.dist %>/styles/{,*/}*.css' ],
             options : {
                 assetsDirs : [ '<%= yeoman.dist %>' ]
@@ -169,20 +174,11 @@ module.exports = function(grunt) {
         },
         htmlmin : {
             dist : {
-                options : {
-                // Optional configurations that you can uncomment to use
-                // removeCommentsFromCDATA: true,
-                // collapseBooleanAttributes: true,
-                // removeAttributeQuotes: true,
-                // removeRedundantAttributes: true,
-                // useShortDoctype: true,
-                // removeEmptyAttributes: true,
-                // removeOptionalTags: true*/
-                },
+                options : {},
                 files : [ {
                     expand : true,
                     cwd : '<%= yeoman.app %>/<%= yeoman.views %>',
-                    src : [ '*.html', 'partials/*.html', 'includes/*.htl' ],
+                    src : [ '*.html', 'partials/*.html', 'templates/*.html' ],
                     dest : '<%= yeoman.views %>'
                 } ]
             }
@@ -225,12 +221,6 @@ module.exports = function(grunt) {
                     src : '**/*.jade',
                 }, {
                     expand : true,
-                    dot : true,
-                    cwd : '<%= yeoman.app %>/<%= yeoman.views %>',
-                    dest : '<%= yeoman.views %>',
-                    src : '**/*.ejs',
-                }, {
-                    expand : true,
                     cwd : '.tmp/images',
                     dest : '<%= yeoman.dist %>/images',
                     src : [ 'generated/*' ]
@@ -269,34 +259,6 @@ module.exports = function(grunt) {
             dist : [ 'copy:styles', 'imagemin', 'copy:svgs', 'htmlmin' ]
         },
 
-        // By default, your `index.html`'s <!-- Usemin block --> will take care
-        // of
-        // minification. These next options are pre-configured if you do not
-        // wish
-        // to use the Usemin blocks.
-        // cssmin: {
-        // dist: {
-        // files: {
-        // '<%= yeoman.dist %>/styles/main.css': [
-        // '.tmp/styles/{,*/}*.css',
-        // '<%= yeoman.app %>/styles/{,*/}*.css'
-        // ]
-        // }
-        // }
-        // },
-        // uglify: {
-        // dist: {
-        // files: {
-        // '<%= yeoman.dist %>/scripts/scripts.js': [
-        // '<%= yeoman.dist %>/scripts/scripts.js'
-        // ]
-        // }
-        // }
-        // },
-        // concat: {
-        // dist: {}
-        // },
-
         // Test settings
         karma : {
             unit : {
@@ -305,29 +267,63 @@ module.exports = function(grunt) {
             }
         }
     });
-
+    
     grunt.registerTask('express-keepalive', 'Keep grunt running', function() {
         this.async();
-    });
+      });
 
-    grunt.registerTask('serve', function(target) {
+      grunt.registerTask('serve', function (target) {
         if (target === 'dist') {
-            return grunt.task.run([ 'build', 'express:prod', 'open', 'express-keepalive' ]);
+          return grunt.task.run(['build', 'express:prod', 'open', 'express-keepalive']);
         }
 
-        grunt.task.run([ 'clean:server', 'concurrent:server', 'autoprefixer', 'express:dev', 'open', 'watch' ]);
-    });
+        grunt.task.run([
+          'clean:server',
+          'concurrent:server',
+          'autoprefixer',
+          'express:dev',
+          'open',
+          'watch'
+        ]);
+      });
 
-    grunt.registerTask('server', function() {
+      grunt.registerTask('server', function () {
         grunt.log.warn('The `server` task has been deprecated. Use `grunt serve` to start a server.');
-        grunt.task.run([ 'serve' ]);
-    });
+        grunt.task.run(['serve']);
+      });
 
-    grunt.registerTask('test', [ 'clean:server', 'concurrent:test', 'autoprefixer', 'karma' ]);
+      grunt.registerTask('test', [
+        'clean:server',
+        'concurrent:test',
+        'autoprefixer',
+        'karma'
+      ]);
 
-    grunt.registerTask('build', [ 'clean:dist', 'useminPrepare', 'concurrent:dist', 'autoprefixer', 'concat', 'ngmin', 'copy:dist', 'cdnify', 'cssmin', 'uglify', 'rev', 'usemin' ]);
+      grunt.registerTask('build', [
+        'clean:dist',
+        'useminPrepare',
+        'concurrent:dist',
+        'autoprefixer',
+        'concat',
+        'ngmin',
+        'copy:dist',
+        'cdnify',
+        'cssmin',
+        'uglify',
+        'rev',
+        'usemin'
+      ]);
 
-    grunt.registerTask('heroku', [ 'build', 'clean:heroku', 'copy:heroku' ]);
+      grunt.registerTask('heroku', [
+        'build',
+        'clean:heroku',
+        'copy:heroku'    
+      ]);
 
-    grunt.registerTask('default', [ 'newer:jshint', 'test', 'build' ]);
+      grunt.registerTask('default', [
+        'newer:jshint',
+        'test',
+        'build'
+      ]);
+      
 };
