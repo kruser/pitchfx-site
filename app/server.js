@@ -32,11 +32,21 @@ app.configure(function() {
 });
 
 // Controllers
-var api = require('./lib/controllers/api');
+var atbatsApi = require('./lib/controllers/apis/atbats');
+var playersApi = require('./lib/controllers/apis/players');
+var playerInfoApi = require('./lib/controllers/apis/playerInfo');
+var statsApi = require('./lib/controllers/apis/stats');
+var pitchesApi = require('./lib/controllers/apis/pitches');
 var controllers = require('./lib/controllers');
 
 // Server Routes
-app.get('/api/awesomeThings', api.awesomeThings);
+app.get('/api/atbats', atbatsApi.query);
+app.get('/api/players', playersApi.query);
+app.get('/api/players/:playerId', playersApi.getPlayer);
+app.get('/api/player_info/:playerId', playerInfoApi.getPlayer);
+app.get('/api/stats/:playerId/:type', statsApi.query);
+app.get('/api/pitches/:playerId/:type', pitchesApi.query);
+app.get('/player/:playerId/:playerName', controllers.player);
 
 // Angular Routes
 app.get('/partials/*', controllers.partials);

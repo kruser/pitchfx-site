@@ -1,10 +1,26 @@
-<script src="bower_components/angular/angular.js"></script>
 
 <!-- build:js(app) scripts/modules.js -->
+<script src="bower_components/angular/angular.js"></script>
 <script src="bower_components/angular-route/angular-route.js"></script>
+<script src="bower_components/angular-touch/angular-touch.js"></script>
+<script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+<script src="bower_components/angular-cache/dist/angular-cache.js"></script>
+<script src="bower_components/moment/moment.js"></script>
 <!-- endbuild -->
 
 <!-- build:js({.tmp,app}) scripts/scripts.js -->
-<script src="scripts/app.js"></script>
-<script src="scripts/controllers/main.js"></script>
+<script src="scripts/pojos/Player.js"></script>
+<script src="scripts/pojos/PlayerInfo.js"></script>
+<script src="scripts/pojos/Pitch.js"></script>
+<script src="scripts/services/playerService.js"></script>
+<script src="scripts/services/statsService.js"></script>
+<script src="scripts/services/filtersService.js"></script>
+<script src="scripts/services/pitchesService.js"></script>
+<script src="scripts/controllers/searchController.js"></script>
+<script src="scripts/controllers/battingStatsController.js"></script>
+<script src="scripts/controllers/pitchStatsController.js"></script>
+<script src="scripts/controllers/filtersController.js"></script>
+<script src="scripts/directives/battingStats.js"></script>
+<script src="scripts/directives/filters.js"></script>
+<script src="scripts/entry.js"></script>
 <!-- endbuild -->
