@@ -1,0 +1,9 @@
+<div class="rk-batting-stats">
+{{activeTab}}
+	<ul class="nav nav-tabs">
+	  <li ng-class="{'active':link === 'atbats'}"><a href="#/at-bats">At Bats</a></li>
+	  <li ng-class="{'active':link === 'pitches'}"><a href="#/pitches">Pitches</a></li>
+	  <li ng-class="{'active':link === 'scouting'}"><a href="#/scouting">Scout Assist</a></li>
+	</ul>
+	<div ng-view></div>
+</div>
