@@ -1,0 +1,74 @@
+<!doctype html>
+<html>
+<% include templates/head.html %>
+<body ng-app="pitchfx">
+	<header class="navbar navbar-default navbar-fixed-top">
+		<div class="container">
+			<div class="navbar-header">
+				<a class="navbar-brand">PitchFX Site</a>
+				<button ng-click="openMenu = !openMenu" type="button"
+					data-toggle="collapse" data-target="#navbar-main"
+					class="navbar-toggle">
+					<span class="icon-bar"></span><span class="icon-bar"></span><span
+						class="icon-bar"></span>
+				</button>
+			</div>
+			<div id="navbar-main" ng-class="{'in':openMenu}"
+				class="navbar-collapse collapse navbar-right">
+				<form ng-controller="searchController"
+					class="navbar-form navbar-left">
+					<div class="form-group">
+						<input ng-model="playerSelection" typeahead-wait-ms="200"
+							typeahead-loading="playersLoading"
+							typeahead="player as player.getFullName() for player in searchPlayers($viewValue)"
+							typeahead-on-select="playerSelected()" type="text"
+							placeholder="Find a player" class="form-control">
+					</div>
+				</form>
+				<ul class="nav navbar-nav">
+					<li><a href="/#about">About </a></li>
+					<li><a href="/#issues">Got Issues?</a></li>
+				</ul>
+			</div>
+		</div>
+	</header>
+	<br>
+	<div class="container container-full">
+		<div class="col-sm-4 col-md-4 col-lg-3 col-xl-3">
+			<div
+				style="background-image: url(http://mlb.mlb.com/images/players/525x330/408045.jpg)"
+				class="player-header well well-sm">
+				<div class="full">
+					<div class="clearfix">
+						<div class="mug-container pull-left">
+							<img
+								src="http://mlb.mlb.com/images/players/mugshot/ph_408045.jpg"
+								class="mug img-responsive img-rounded">
+						</div>
+						<div class="player-header-bio pull-left">
+							<h3>Joe Mauer</h3>
+							<span class="label label-default">Minnesota Twins</span>
+						</div>
+					</div>
+					<div>
+						1B | <strong>Bats:</strong> L <strong>Throws:</strong> R | 6'5",
+						230lbs
+					</div>
+					<div>
+						<strong>Born:</strong> 4/2/1983 (30 yrs)
+					</div>
+					<div>
+						<strong>MLB Debut:</strong> 4/1/2004, <strong>Status:</strong>
+						Active
+					</div>
+				</div>
+			</div>
+			<rk-filters player-id="408045" player-position="3"></rk-filters>
+		</div>
+		<div class="col-sm-8 col-md-8 col-lg-9 col-xl-9">
+			<rk-batting-stats player-id="408045" player-position="3"></rk-batting-stats>
+		</div>
+	</div>
+</body>
+<% include templates/scripts.html %>
+</html>
