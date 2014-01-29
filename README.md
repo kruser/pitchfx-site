@@ -1,21 +1,26 @@
 If you are seeing this message, the site is not yet complete.
 ============
 
-pitchfx-site
+PitchFX.org
 ============
 
 ### Overview
-A webapp for searching PitchFX data. This app is built with the following technologies.
+PitchFX.org is are webapp for searching PitchFX data. This app is built with a MEAN stack, meaning the following technologies.
 
-* Node.js - serves the static web content and REST APIs
-* AngularJS - client side UI framework
 * MongoDB - all data is stored in a MongoDB database that has been created using the <a href="https://github.com/kruser/atbat-mongodb">atbat-mongodb project</a>
+* ExpressJS - a web application framework for node
+* AngularJS - client side UI framework
+* Node.js - serves the static web content and REST APIs
 
 ### Installation
 
 #### Prereqs
 
-You'll need to install MongoDB and Node.js. Installation of those two pieces of software is beyond the scope of this document.
+You'll need to install the following technologies first.
+* MongoDB
+* Node.js
+
+Installation of those two pieces of software is beyond the scope of this document.
 
 You'll also need to setup your atbat database using the ETL program <a href="https://github.com/kruser/atbat-mongodb">atbat-mongodb project</a>
 
@@ -24,7 +29,7 @@ To install and start this node application, execute these commands
 
     cd app
     npm install
-    node app
+    grunt serve
 
 ### APIs
 This site, in addition to having an awesome UI, provides two APIs. Yes, just two.
