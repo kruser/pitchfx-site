@@ -75,3 +75,7 @@ body {
 #pitchSpeeds {
 	height: 300px;
 }
+.developer-info {
+    border-bottom: 1px dashed #ccc;  
+    margin-bottom: 1em;
+} 
