@@ -36,37 +36,35 @@
 	<div class="container container-full">
 		<div class="col-sm-4 col-md-4 col-lg-3 col-xl-3">
 			<div
-				style="background-image: url(http://mlb.mlb.com/images/players/525x330/408045.jpg)"
+				style="background-image: url(http://mlb.mlb.com/images/players/525x330/<%= playerInfo.player_id %>.jpg)"
 				class="player-header well well-sm">
 				<div class="full">
 					<div class="clearfix">
 						<div class="mug-container pull-left">
 							<img
-								src="http://mlb.mlb.com/images/players/mugshot/ph_408045.jpg"
+								src="http://mlb.mlb.com/images/players/mugshot/ph_<%= playerInfo.player_id %>.jpg"
 								class="mug img-responsive img-rounded">
 						</div>
 						<div class="player-header-bio pull-left">
-							<h3>Joe Mauer</h3>
-							<span class="label label-default">Minnesota Twins</span>
+							<h3><%= playerInfo.name_display_first_last %></h3>
+							<span class="label label-default"><%= playerInfo.team_name %></span>
 						</div>
 					</div>
 					<div>
-						1B | <strong>Bats:</strong> L <strong>Throws:</strong> R | 6'5",
-						230lbs
+						<%= playerInfo.primary_position_txt %> | <strong>Bats:</strong> <%= playerInfo.bats %> <strong>Throws:</strong> <%= playerInfo.throws %> | <%= playerInfo.height_feet %>'<%= playerInfo.height_inches %>", <%= playerInfo.weight %>lbs
 					</div>
 					<div>
-						<strong>Born:</strong> 4/2/1983 (30 yrs)
+						<strong>Born:</strong> <%= playerInfo.getBirthDate().format('M/d/YYYY') %> (<%= playerInfo.age %> yrs)
 					</div>
 					<div>
-						<strong>MLB Debut:</strong> 4/1/2004, <strong>Status:</strong>
-						Active
+						<strong>MLB Debut:</strong> <%= playerInfo.getMlbDebut().format('M/d/YYYY') %>, <strong>Status:</strong> <%= playerInfo.status %> 
 					</div>
 				</div>
 			</div>
-			<rk-filters player-id="408045" player-position="3"></rk-filters>
+			<rk-filters player-id="<%= playerInfo.player_id %>" player-position="<%= playerInfo.primary_position %>"></rk-filters>
 		</div>
 		<div class="col-sm-8 col-md-8 col-lg-9 col-xl-9">
-			<rk-batting-stats player-id="408045" player-position="3"></rk-batting-stats>
+			<rk-batting-stats player-id="<%= playerInfo.player_id %>" player-position="<%= playerInfo.primary_position %>"></rk-batting-stats>
 		</div>
 	</div>
 </body>
