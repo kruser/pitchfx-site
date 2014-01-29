@@ -184,7 +184,6 @@ function accumulateAtBat(atBat, results) {
         results.singles++;
         results.atbats++;
     } else if (event === 'double') {
-        console.log(event);
         results.doubles++;
         results.atbats++;
     } else if (event === 'triple') {
