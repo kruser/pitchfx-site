@@ -20,7 +20,7 @@
 	<header class="navbar navbar-default navbar-fixed-top">
 		<div class="container">
 			<div class="navbar-header">
-				<a class="navbar-brand">Pitchfx.org</a>
+				<a class="navbar-brand">PitchFX.org</a>
 				<button ng-click="openMenu = !openMenu" type="button"
 					data-toggle="collapse" data-target="#navbar-main"
 					class="navbar-toggle">
@@ -31,7 +31,7 @@
 			<div id="navbar-main" ng-class="{'in':openMenu}"
 				class="navbar-collapse collapse navbar-right">
 				<ul class="nav navbar-nav">
-					<li><a href="/#issues">Got Issues?</a></li>
+					<li><a target="_blank" href="https://github.com/kruser/pitchfx-site/issues">Got Issues?</a></li>
 				</ul>
 			</div>
 		</div>
@@ -51,15 +51,74 @@
 		</div>
 		<div id="about" class="jumbotron on">
 			<div class="container">
-				<h2>Research & Report</h2>
+				<h2>About</h2>
 				<p>
-					PitchFX.org allows you to search through any player's pitches and at-bats
-					with quick facets on things like <strong>batted ball
-						angles, pitch speed, pitch types, hit type</strong>, and many others.
+					Welcome to PitchFX.org, where we have a database of MLB atbat and pitch data going back to the 2010 season. 
+					This site provides a way for you to view that data for any pitcher or batter based on filters you define, such as  
+					<strong>batted ball angles, pitch speed, pitch types, hit type, base-out states</strong>, and many others.
+				</p>
+				<p>
+				    PitchFX.org is in it's infancy, but can be much, much more. Here is how you can help:
+				</p>
+				<h3 class="text-success">Ideas</h3>
+				<p>
+					    If you have an <strong>idea</strong> for a feature, file an issue on our <a href="https://github.com/kruser/pitchfx-site/issues">GitHub page</a>. 
+					    We read every submission. If you find your idea has already been submitted, please comment and watch the issue. Issues that are generating a lot of interest will bubble to the top of the queue.
+				</p>
+				<h3 class="text-success">Code</h3>
+				<p>
+					    If you're a <strong>developer</strong>, I invite you to look through the feature requests and implement them. Developers that contribute significantly
+					    to the project will get visibility in our <a href="#developers">Developers</a> section.
 				</p>
 			</div>
 		</div>
-		<div id="how" class="jumbotron off">
+		<div id="developers" class="jumbotron off">
+            <div class="container">
+                <h2>The Developers</h2>
+                <div class="row developer-info">
+                    <div class="col-md-2 col-sm-4 col-xs-6">
+                        <img
+                            src="http://1.gravatar.com/avatar/049809472da1bf1352d2b4302d6880ab?size=400"
+                            class="img-circle img-responsive img-thumbnail">
+                        <h3 class="text-center visible-xs">Ryan Kruse</h3>
+                    </div>
+                    <div class="col-md-9 col-sm-8 col-xs-6">
+                        <h3 class="hidden-xs">Ryan Kruse</h3>
+                        <p>
+                            I'm the creator of
+                            PitchFX.org and a software developer from Austin, TX. Originally
+                            from Minnesota, I'm an avid Twins fan. I love baseball and
+                            writing software.
+                        </p>
+                        <p>
+                            <a href="https://twitter.com/RyanKruse"
+                                class="fa fa-twitter fa-2x"></a><a
+                                href="http://www.linkedin.com/in/ryankruse"
+                                class="fa fa-linkedin fa-2x"></a><a
+                                href="mailto:ryan@kruseonline.net" class="fa fa-envelope fa-2x"></a><a
+                                href="https://github.com/kruser/" class="fa fa-github fa-2x"></a>
+                        </p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-2 col-sm-4 col-xs-6">
+                        <img
+                            src="http://upload.wikimedia.org/wikipedia/commons/7/7c/User_font_awesome.svg"
+                            class="img-circle img-responsive img-thumbnail">
+                        <h3 class="text-center visible-xs">Your Name Here</h3>
+                    </div>
+                    <div class="col-md-9 col-sm-8 col-xs-6">
+                        <h3 class="hidden-xs">Your Name Here</h3>
+                        <p>
+                            Are you a software engineer with
+                            a love of baseball? Visit our <a href="https://github.com/kruser/pitchfx-site">GitHub</a> page to
+                            join in.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+		<div id="data" class="jumbotron on">
 			<div class="container">
 				<h2>The Data</h2>
 				<p>
@@ -72,79 +131,18 @@
 					following day.</p>
 			</div>
 		</div>
-		<div id="issues" class="jumbotron on">
+
+		<div class="jumbotron off">
             <div class="container">
-                <h2>Got Issues or Suggestions?</h2>
                 <p>
-                    If you find any issues with this site or simply want to make a
-                    suggestion, you can create an issue on the <a
-                        href="https://github.com/kruser/pitchfx-site/issues"
-                        target="_blank">GitHub project page</a>.
+                <small>
+                PitchFX.org is not affiliated with MLB, MLBAM or Sportsvision, although we
+                are very grateful to those organizations for their technological advancements
+                that have made this site possible.
+                </small>
                 </p>
-                <p>Be sure to search first to make sure your issue doesn't
-                    already exist. If it does, feel free to comment on the existing
-                    issue. I'm more likely to prioritize an issue with lots and lots of
-                    comments.</p>
             </div>
         </div>
-		<div id="issues" class="jumbotron off">
-			<div class="container">
-				<h2>What's this about?</h2>
-				<p>
-				    PitchFX.org is an open-source, community developed application
-				    built around a database of game, atbat and pitch data. Developers are able to <a href="https://github.com/kruser/pitchfx-site">fork the PitchFX.org code</a>
-				    and submit enhancements back to the site via pull requests.
-				</p>
-				<p>PitchFX.org is not affiliated in any way with <a href="http://mlb.com">MLB</a>, MLBAM or <a href="http://www.sportvision.com/">Sportvision</a>, although it is grateful
-				for the technological advancements achieved by all of those organizations.</p>
-			</div>
-		</div>
-		<div id="ryan" class="jumbotron on">
-			<div class="container">
-				<h2>The Developers</h2>
-				<div class="row developer-info">
-					<div class="col-md-2 col-sm-4 col-xs-6">
-						<img
-							src="http://1.gravatar.com/avatar/049809472da1bf1352d2b4302d6880ab?size=400"
-							class="img-circle img-responsive img-thumbnail">
-						<h3 class="text-center visible-xs">Ryan Kruse</h3>
-					</div>
-					<div class="col-md-9 col-sm-8 col-xs-6">
-						<h3 class="hidden-xs">Ryan Kruse</h3>
-						<p>
-							I'm the creator of
-							PitchFX.org and a software developer from Austin, TX. Originally
-							from Minnesota, I'm an avid Twins fan. I love baseball and
-							writing software.
-						</p>
-						<p>
-							<a href="https://twitter.com/RyanKruse"
-								class="fa fa-twitter fa-2x"></a><a
-								href="http://www.linkedin.com/in/ryankruse"
-								class="fa fa-linkedin fa-2x"></a><a
-								href="mailto:ryan@kruseonline.net" class="fa fa-envelope fa-2x"></a><a
-								href="https://github.com/kruser/" class="fa fa-github fa-2x"></a>
-						</p>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-md-2 col-sm-4 col-xs-6">
-						<img
-							src="http://upload.wikimedia.org/wikipedia/commons/7/7c/User_font_awesome.svg"
-							class="img-circle img-responsive img-thumbnail">
-						<h3 class="text-center visible-xs">Your Name Here</h3>
-					</div>
-					<div class="col-md-9 col-sm-8 col-xs-6">
-						<h3 class="hidden-xs">Your Name Here</h3>
-						<p>
-							Are you a software engineer with
-							a love of baseball? Visit our <a href="https://github.com/kruser/pitchfx-site">GitHub</a> page to
-							join in.
-						</p>
-					</div>
-				</div>
-			</div>
-		</div>
 	</div>
 </body>
 <% include templates/scripts.html %>
