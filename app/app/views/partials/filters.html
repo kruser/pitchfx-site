@@ -10,11 +10,11 @@
 			<label class="control-label">Date Range</label>
 			<div class="row">
 				<div class="col-xs-6 col-sm-12">
-					<input class="form-control" ng-required type="date" placeholder="Start date" ng-model="filters.date.start">
+					<input class="form-control" ng-required type="date" placeholder="Start date" ng-model="filters.date.start" min="2010-01-01">
     				<br class="hidden-xs">
 				</div>
 				<div class="col-xs-6 col-sm-12">
-					<input class="form-control" ng-required type="date" placeholder="End date" ng-model="filters.date.end">
+					<input class="form-control" ng-required type="date" placeholder="End date" ng-model="filters.date.end" min="2010-01-01">
 				</div>
 			</div>
 		</div>

@@ -6,6 +6,10 @@ var controllers = controllers || {};
 controllers.filtersController = [ '$scope', '$log', '$timeout', '$angularCacheFactory', 'filtersService', function($scope, $log, $timeout, $angularCacheFactory, filtersService) {
     var filterCache = $angularCacheFactory('filterCache', {
         storageMode : 'localStorage',
+        maxAge: 3600000,
+        deleteOnExpire: 'aggressive',
+        recycleFreq: 60000,
+        cacheFlushInterval: 3600000,
     });
 
     var filtersFromCache = filterCache.get('filters');
@@ -16,7 +20,7 @@ controllers.filtersController = [ '$scope', '$log', '$timeout', '$angularCacheFa
             pitcherHand : '',
             batterHand : '',
             date : {
-                start : '2010-01-01',
+                start : getStartingDate(),
                 end : moment().format('YYYY-MM-DD'),
             },
             runners : {
@@ -38,5 +42,23 @@ controllers.filtersController = [ '$scope', '$log', '$timeout', '$angularCacheFa
         filterCache.put('filters', filters);
         filtersService.filters = filters;
     }, true);
+    
+    /**
+     * Gets the recommended starting date for the filters.
+     * 
+     * If we're in May or later, the starting date will be the 1st of the current year.
+     * If we're earlier than May, the starting date will be the 1st of the prior year.
+     */
+    function getStartingDate() {
+        var currentMonth = moment().month();
+        var currentYear = moment().year();
+        if (currentMonth < 4) {
+            /* last year */
+            return moment([currentYear - 1, 0, 1]).format('YYYY-MM-DD');
+        } else {
+            /* this year */
+            return moment([currentYear, 0, 1]).format('YYYY-MM-DD');
+        }
+    }
 
 } ];
