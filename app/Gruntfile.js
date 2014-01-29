@@ -144,7 +144,7 @@ module.exports = function(grunt) {
             html : [ 
               '<%= yeoman.app %>/<%= yeoman.views %>/index.html', 
               '<%= yeoman.app %>/<%= yeoman.views %>/index.jade', 
-              '<%= yeoman.app %>/<%= yeoman.views %>/templates/head.html',
+              '<%= yeoman.app %>/<%= yeoman.views %>/templates/css.html',
               '<%= yeoman.app %>/<%= yeoman.views %>/templates/scripts.html',
             ],
             options : {
