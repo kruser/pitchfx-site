@@ -11,7 +11,8 @@ directives.filters = [ 'playerService', '$log', function(playerService, $log) {
         replace : true,
         scope : {
             'playerId' : '@',
-            'playerPosition' : '@'
+            'playerPosition' : '@',
+            'playerBats' : '@'
         },
         templateUrl : '/partials/filters.html',
         controller : controllers.filtersController,
