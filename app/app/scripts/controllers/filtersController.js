@@ -34,6 +34,11 @@ controllers.filtersController = [ '$scope', '$log', '$timeout', '$angularCacheFa
                 0 : false,
                 1 : false,
                 2 : false,
+            },
+            gameType : {
+                S : false,
+                R : true,
+                P : false,
             }
         };
     }
