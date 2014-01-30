@@ -68,7 +68,7 @@ function adjustQueryByFilter(query, filter) {
         }
         if (outs.length > 0) {
             topLevelFilters.push({
-                'atbat.o' : {
+                'atbat.o_start' : {
                     '$in' : outs
                 }
             });
