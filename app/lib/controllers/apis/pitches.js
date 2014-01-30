@@ -66,13 +66,32 @@ function adjustQueryByFilter(query, filter) {
         if (filter.outs['2']) {
             outs.push(2);
         }
-        if (filter.outs['3']) {
-            outs.push(3);
-        }
         if (outs.length > 0) {
             topLevelFilters.push({
                 'atbat.o' : {
                     '$in' : outs
+                }
+            });
+        }
+    }
+    
+    if (filter.gameType) {
+        var gameTypes = [];
+        if (filter.gameType['S']) {
+            gameTypes.push('S');
+        }
+        if (filter.gameType['R']) {
+            gameTypes.push('R');
+        }
+        if (filter.gameType['P']) {
+            gameTypes.push('D');
+            gameTypes.push('L');
+            gameTypes.push('W');
+        }
+        if (gameTypes.length > 0) {
+            topLevelFilters.push({
+                'game.game_type' : {
+                    '$in' : gameTypes
                 }
             });
         }
