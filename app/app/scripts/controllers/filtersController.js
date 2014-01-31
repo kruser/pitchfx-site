@@ -15,6 +15,11 @@ controllers.filtersController = [ '$scope', '$log', '$timeout', '$angularCacheFa
     var filtersFromCache = filterCache.get('filters');
     if (filtersFromCache && filtersFromCache.length > 0) {
         $scope.filters = filtersFromCache[0];
+        if ($scope.playerPosition === '1') {
+            $scope.filters.pitcherHand = '';
+        } else if ($scope.playerBats !== 'S') {
+            $scope.filters.batterHand = '';
+        }
     } else {
         $scope.filters = {
             pitcherHand : '',
