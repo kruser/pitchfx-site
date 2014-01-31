@@ -3,7 +3,7 @@ var controllers = controllers || {};
 /**
  * A controller that manages hitting stats for a player
  */
-controllers.pitchStatsController = [ '$scope', '$log', '$timeout', 'filtersService', 'pitchesService', function($scope, $log, $timeout, filtersService, pitchesService) {
+controllers.pitchStatsController = [ '$rootScope', '$scope', '$log', '$timeout', 'filtersService', 'pitchesService', function($rootScope, $scope, $log, $timeout, filtersService, pitchesService) {
 
     $scope.loading = true;
     $scope.filtersService = filtersService;
@@ -21,12 +21,14 @@ controllers.pitchStatsController = [ '$scope', '$log', '$timeout', 'filtersServi
      */
     function init() {
         $scope.$watch('filtersService.filters', function(filters) {
+            filtersService.loadingData = true;
             pitchesService.getPitches($scope.playerId, $scope.playerType, filters).then(function(pitches) {
                 aggregatePitchStats(pitches);
                 $timeout(function() {
                     renderPitchSpeeds();
                 }, 10);
                 $scope.loading = false;
+                filtersService.loadingData = false;
             });
         }, true);
     }

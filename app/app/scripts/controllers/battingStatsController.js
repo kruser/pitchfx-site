@@ -13,10 +13,12 @@ controllers.battingStatsController = [ '$scope', '$log', '$timeout', 'filtersSer
      */
     function init() {
         $scope.$watch('filtersService.filters', function(filters) {
+            filtersService.loadingData = true;
             statsService.getStats($scope.playerId, $scope.playerType, filters).then(function(stats) {
                 $scope.stats = stats;
                 $scope.renderCharts();
                 $scope.loading = false;
+                filtersService.loadingData = false;
             });
         }, true);
     }
