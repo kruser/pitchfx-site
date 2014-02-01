@@ -3,8 +3,10 @@ var controllers = controllers || {};
 /**
  * A controller that manages hitting stats for a player
  */
-controllers.battingStatsController = [ '$scope', '$log', '$timeout', 'filtersService', 'statsService', function($scope, $log, $timeout, filtersService, statsService) {
+controllers.battingStatsController = [ '$scope', '$log', '$timeout', 'filtersService', 'statsService', '$window', function($scope, $log, $timeout, filtersService, statsService, $window) {
 
+    var hipChart = undefined;
+    var hipScatter = undefined;
     $scope.loading = true;
     $scope.filtersService = filtersService;
 
@@ -16,28 +18,44 @@ controllers.battingStatsController = [ '$scope', '$log', '$timeout', 'filtersSer
             filtersService.loadingData = true;
             statsService.getStats($scope.playerId, $scope.playerType, filters).then(function(stats) {
                 $scope.stats = stats;
-                $scope.renderCharts();
+                renderCharts();
                 $scope.loading = false;
                 filtersService.loadingData = false;
             });
         }, true);
+        angular.element($window).bind('resize', function() {
+            resizeChart(hipChart);
+            resizeChart(hipScatter);
+        });
     }
-
+    
+    /**
+     * Resize the chart heigh to the width of the bootstrap container
+     */
+    function resizeChart(chart) {
+        if (chart) {
+            var square = chart.container.parentNode.offsetWidth;
+            chart.setSize(square, square, false);
+        }
+    }
+    
     /**
      * Renders advanced charts
      */
-    $scope.renderCharts = function() {
+    function renderCharts() {
         /* render charts with a timeout to let the screen size snap first */
         $timeout(function() {
-            $scope.renderHipTypes();
-            $scope.renderHipScatter();
+            renderHipTypes();
+            renderHipScatter();
+            resizeChart(hipChart);
+            resizeChart(hipScatter);
         }, 10);
     };
 
     /**
      * The scatter plot for hit balls
      */
-    $scope.renderHipScatter = function() {
+    function renderHipScatter() {
         var series = [];
         for ( var trajectory in $scope.stats.hitBalls) {
             series.push({
@@ -45,7 +63,7 @@ controllers.battingStatsController = [ '$scope', '$log', '$timeout', 'filtersSer
                 data : $scope.stats.hitBalls[trajectory]
             });
         }
-        new Highcharts.Chart({
+        hipScatter = new Highcharts.Chart({
             chart : {
                 type : 'scatter',
                 renderTo : 'hipScatter',
@@ -111,12 +129,12 @@ controllers.battingStatsController = [ '$scope', '$log', '$timeout', 'filtersSer
     /**
      * The pie chart for hit ball types
      */
-    $scope.renderHipTypes = function() {
+    function renderHipTypes() {
         var series = [];
         for ( var trajectory in $scope.stats.hitBalls) {
             series.push([ trajectory, $scope.stats.hitBalls[trajectory].length ]);
         }
-        new Highcharts.Chart({
+        hipChart = new Highcharts.Chart({
             chart : {
                 renderTo : 'hipTypes'
             },
@@ -135,7 +153,7 @@ controllers.battingStatsController = [ '$scope', '$log', '$timeout', 'filtersSer
             },
             title : {
                 text : '',
-                enabled: false
+                enabled : false
             },
             series : [ {
                 name : 'Hit Balls',
