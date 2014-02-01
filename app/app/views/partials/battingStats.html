@@ -1,11 +1,6 @@
 <div class="rk-batting-stats">
 	<ul class="nav nav-tabs">
 	   <li ng-repeat="tab in tabs" ng-class="{'active':tab.active}"><a ng-href="#/{{tab.route}}"><i class="fa fa-circle-o" ng-class="{'fa-dot-circle-o':tab.active && !filtersService.loadingData, 'fa-spin fa-spinner':tab.active && filtersService.loadingData}"></i> {{tab.label}}</a></li>
-	   <!-- 
-	  <li ng-class="{'active':link === 'atbats'}"><a href="#/at-bats"><i class="fa fa-circle-o" ng-class="{'fa-dot-circle-o':link === 'atbats' && !filtersService.loadingData, 'fa-spin fa-spinner':filtersService.loadingData}"></i> At Bats</a></li>
-	  <li ng-class="{'active':link === 'pitches'}"><a href="#/pitches"><i class="fa fa-circle-o" ng-class="{'fa-dot-circle-o':link === 'pitches' && !filtersService.loadingData, 'fa-spin fa-spinner':filtersService.loadingData}"></i> Pitches</a></li>
-	  <li ng-class="{'active':link === 'scouting'}"><a href="#/scouting"><i class="fa fa-circle-o" ng-class="{'fa-dot-circle-o':link === 'scouting' && !filtersService.loadingData, 'fa-spin fa-spinner':filtersService.loadingData}"></i> Scout Assist</a></li>
-	    -->
 	</ul>
 	<div ng-view></div>
 </div>

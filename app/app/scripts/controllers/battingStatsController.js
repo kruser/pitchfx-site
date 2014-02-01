@@ -55,7 +55,8 @@ controllers.battingStatsController = [ '$scope', '$log', '$timeout', 'filtersSer
                 enabled : false
             },
             title : {
-                text : 'Hit Balls'
+                text : '',
+                enabled : false
             },
             xAxis : {
                 min : 0,
@@ -133,7 +134,8 @@ controllers.battingStatsController = [ '$scope', '$log', '$timeout', 'filtersSer
                 }
             },
             title : {
-                text : 'Hit Balls'
+                text : '',
+                enabled: false
             },
             series : [ {
                 name : 'Hit Balls',
