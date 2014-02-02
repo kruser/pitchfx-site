@@ -69,8 +69,7 @@ body {
 }
 #hipScatter {
 	background: url('/images/stadiums/1.svg') no-repeat;
-	background-size: 100% 80%;
-	background-position-y: 25px;
+	background-size: 100%;
 }
 #pitchSpeeds {
 	height: 300px;

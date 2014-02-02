@@ -28,7 +28,7 @@ controllers.battingStatsController = [ '$scope', '$log', '$timeout', 'filtersSer
             resizeChart(hipScatter);
         });
     }
-    
+
     /**
      * Resize the chart heigh to the width of the bootstrap container
      */
@@ -38,7 +38,7 @@ controllers.battingStatsController = [ '$scope', '$log', '$timeout', 'filtersSer
             chart.setSize(square, square, false);
         }
     }
-    
+
     /**
      * Renders advanced charts
      */
@@ -50,7 +50,8 @@ controllers.battingStatsController = [ '$scope', '$log', '$timeout', 'filtersSer
             resizeChart(hipChart);
             resizeChart(hipScatter);
         }, 10);
-    };
+    }
+    ;
 
     /**
      * The scatter plot for hit balls
@@ -67,7 +68,12 @@ controllers.battingStatsController = [ '$scope', '$log', '$timeout', 'filtersSer
             chart : {
                 type : 'scatter',
                 renderTo : 'hipScatter',
-                backgroundColor : 'transparent'
+                backgroundColor : 'transparent',
+                margin : [ 0, 0, 0, 0 ],
+                spacingTop : 0,
+                spacingBottom : 0,
+                spacingLeft : 0,
+                spacingRight : 0
             },
             credits : {
                 enabled : false
@@ -80,7 +86,7 @@ controllers.battingStatsController = [ '$scope', '$log', '$timeout', 'filtersSer
                 min : 0,
                 max : 250,
                 labels : {
-                    enabled : false,
+                    enabled : true,
                 },
                 title : {
                     enabled : false,
@@ -92,10 +98,10 @@ controllers.battingStatsController = [ '$scope', '$log', '$timeout', 'filtersSer
                 tickLength : 0
             },
             yAxis : {
-                min : -250,
                 max : 0,
+                min : -250,
                 labels : {
-                    enabled : false,
+                    enabled : true,
                 },
                 title : {
                     enabled : false,
@@ -124,7 +130,8 @@ controllers.battingStatsController = [ '$scope', '$log', '$timeout', 'filtersSer
             },
             series : series
         });
-    };
+    }
+    ;
 
     /**
      * The pie chart for hit ball types
@@ -136,13 +143,19 @@ controllers.battingStatsController = [ '$scope', '$log', '$timeout', 'filtersSer
         }
         hipChart = new Highcharts.Chart({
             chart : {
-                renderTo : 'hipTypes'
+                renderTo : 'hipTypes',
+                margin : [ 0, 0, 0, 0 ],
+                spacingTop : 0,
+                spacingBottom : 0,
+                spacingLeft : 0,
+                spacingRight : 0
             },
             credits : {
                 enabled : false
             },
             plotOptions : {
                 pie : {
+                    size : '100%',
                     dataLabels : {
                         color : '#eee',
                         distance : -40,
@@ -161,7 +174,8 @@ controllers.battingStatsController = [ '$scope', '$log', '$timeout', 'filtersSer
                 data : series
             } ]
         });
-    };
+    }
+    ;
 
     init();
 } ];
