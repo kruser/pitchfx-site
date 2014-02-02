@@ -13,12 +13,13 @@ services.pitchesService = [ '$log', '$http', function($log, $http) {
      *            playerId - the player ID
      * @param {string}
      *            type - one of (batter|pitcher)
-     * @param {*}
-     *            filter - the filter object
+     * @param {*} atbatFilter - the atbat filter object
+     * @param {*} pitchFilter - the pitch filter object
      */
-    this.getPitches = function(playerId, type, filter) {
+    this.getPitches = function(playerId, type, atbatFilter, pitchFilter) {
         var params = {
             filter : filter,
+            pitchFilter : pitchFilter,
         };
         return $http.get('/api/pitches/' + playerId + '/' + type, {
             params : params

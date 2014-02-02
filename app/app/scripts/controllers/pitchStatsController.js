@@ -15,14 +15,27 @@ controllers.pitchStatsController = [ '$rootScope', '$scope', '$log', '$timeout',
         categories : [],
         series : [],
     };
+    $scope.filters = {
+        balls : {
+            0 : false,
+            1 : false,
+            2 : false,
+            3 : false,
+        },
+        strikes : {
+            0 : false,
+            1 : false,
+            2 : false,
+        },
+    };
 
     /**
      * Setup the controller
      */
     function init() {
-        $scope.$watch('filtersService.filters', function(filters) {
+        $scope.$watch('filtersService.filters', function(atbatFilters) {
             filtersService.loadingData = true;
-            pitchesService.getPitches($scope.playerId, $scope.playerType, filters).then(function(pitches) {
+            pitchesService.getPitches($scope.playerId, $scope.playerType, atbatFilters, $scope.filters).then(function(pitches) {
                 aggregatePitchStats(pitches);
                 $timeout(function() {
                     renderPitchSpeeds();

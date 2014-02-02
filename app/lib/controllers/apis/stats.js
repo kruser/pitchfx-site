@@ -260,13 +260,13 @@ function adjustQueryByFilter(query, filter) {
     
     if (filter.gameType) {
         var gameTypes = [];
-        if (filter.gameType['S']) {
+        if (filter.gameType.S) {
             gameTypes.push('S');
         }
-        if (filter.gameType['R']) {
+        if (filter.gameType.R) {
             gameTypes.push('R');
         }
-        if (filter.gameType['P']) {
+        if (filter.gameType.P) {
             gameTypes.push('D');
             gameTypes.push('L');
             gameTypes.push('W');

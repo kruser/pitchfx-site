@@ -38,7 +38,8 @@ services.playerService = [ '$http', '$q', '$log', function($http, $q, $log) {
         return $http.get('/api/players', {
             params : params
         }).then(function(result) {
-            var players = new Array();
+            var players;
+            players = [];
             if (result.data && result.data.length > 0) {
                 for ( var i = 0; i < result.data.length; i++) {
                     var player = new pojos.Player(result.data[i]);

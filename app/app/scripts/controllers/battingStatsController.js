@@ -5,8 +5,8 @@ var controllers = controllers || {};
  */
 controllers.battingStatsController = [ '$scope', '$log', '$timeout', 'filtersService', 'statsService', '$window', function($scope, $log, $timeout, filtersService, statsService, $window) {
 
-    var hipChart = undefined;
-    var hipScatter = undefined;
+    var hipChart = null;
+    var hipScatter = null;
     $scope.loading = true;
     $scope.filtersService = filtersService;
 
@@ -51,7 +51,6 @@ controllers.battingStatsController = [ '$scope', '$log', '$timeout', 'filtersSer
             resizeChart(hipScatter);
         }, 10);
     }
-    ;
 
     /**
      * The scatter plot for hit balls
@@ -131,7 +130,6 @@ controllers.battingStatsController = [ '$scope', '$log', '$timeout', 'filtersSer
             series : series
         });
     }
-    ;
 
     /**
      * The pie chart for hit ball types
@@ -175,7 +173,6 @@ controllers.battingStatsController = [ '$scope', '$log', '$timeout', 'filtersSer
             } ]
         });
     }
-    ;
 
     init();
 } ];

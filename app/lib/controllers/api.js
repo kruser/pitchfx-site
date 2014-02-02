@@ -1,5 +1,3 @@
-'use strict';
-
 exports.awesomeThings = function(req, res) {
   res.json([
     {
