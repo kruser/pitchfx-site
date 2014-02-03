@@ -18,7 +18,7 @@ services.pitchesService = [ '$log', '$http', function($log, $http) {
      */
     this.getPitches = function(playerId, type, atbatFilter, pitchFilter) {
         var params = {
-            filter : filter,
+            atbatFilter : atbatFilter,
             pitchFilter : pitchFilter,
         };
         return $http.get('/api/pitches/' + playerId + '/' + type, {

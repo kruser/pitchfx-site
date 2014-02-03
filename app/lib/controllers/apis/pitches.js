@@ -10,19 +10,21 @@ var MongoClient = require('mongodb').MongoClient;
  *            the express response
  */
 exports.query = function(req, res) {
-
-    /* Supported parameters */
-    var filter = JSON.parse(req.query.filter);
-
     var playerId = parseInt(req.params.playerId, 10);
-    var query = {};
+    var query = {
+        '$and' : [],
+    };
     if (req.params.type === 'batter') {
         query['atbat.batter'] = playerId;
     } else {
         query['atbat.pitcher'] = playerId;
     }
 
-    adjustQueryByFilter(query, filter);
+    var atbatFilter = JSON.parse(req.query.atbatFilter);
+    adjustQueryByAtBatFilter(query, atbatFilter);
+
+    var pitchFilter = JSON.parse(req.query.pitchFilter);
+    adjustQueryByPitchFilter(query, pitchFilter);
 
     console.log(JSON.stringify(query, null, 4));
 
@@ -35,12 +37,50 @@ exports.query = function(req, res) {
 };
 
 /**
+ * Adjust the DB query by the incoming pitch filter
+ * 
+ * @param {*}
+ *            query
+ * @param {*}
+ *            filter the filter
+ */
+function adjustQueryByPitchFilter(query, filter) {
+    var topLevelFilters = [];
+    if (filter.balls) {
+        var balls = [];
+
+        if (filter.balls['0']) {
+            balls.push(0);
+        }
+        if (filter.balls['1']) {
+            balls.push(1);
+        }
+        if (filter.balls['2']) {
+            balls.push(2);
+        }
+        if (filter.balls['3']) {
+            balls.push(3);
+        }
+        if (balls.length > 0) {
+            /* need to update atbat-mongodb with this info
+            topLevelFilters.push({
+                'b' : {
+                    '$in' : balls
+                }
+            });
+            */
+        }
+    }
+    query.$and.concat(topLevelFilters);
+}
+
+/**
  * Adjusts the mongoDB query using the filter provided from the API call
  * 
  * @param query
  * @param filter
  */
-function adjustQueryByFilter(query, filter) {
+function adjustQueryByAtBatFilter(query, filter) {
 
     var topLevelFilters = [];
     if (filter.pitcherHand) {
@@ -74,7 +114,7 @@ function adjustQueryByFilter(query, filter) {
             });
         }
     }
-    
+
     if (filter.gameType) {
         var gameTypes = [];
         if (filter.gameType.S) {
@@ -129,7 +169,7 @@ function adjustQueryByFilter(query, filter) {
             });
         }
     }
-    query.$and = topLevelFilters;
+    query.$and.concat(topLevelFilters);
 }
 
 /**
