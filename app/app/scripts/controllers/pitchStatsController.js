@@ -10,6 +10,19 @@ controllers.pitchStatsController = [ '$rootScope', '$scope', '$log', '$timeout',
     var wobaDestroyFunction = null;
     var wobaSeries = [];
 
+    var plateBoundaries = [ {
+        label : {
+            text : 'plate'
+        },
+        value : 0.709,
+        width : 1,
+        color : 'rgba(49,126,172,.5)',
+    }, {
+        value : -0.709,
+        width : 1,
+        color : 'rgba(49,126,172,.5)',
+    } ];
+
     $scope.loading = true;
     $scope.filtersService = filtersService;
     $scope.pitchTypes = [];
@@ -82,7 +95,8 @@ controllers.pitchStatsController = [ '$rootScope', '$scope', '$log', '$timeout',
                 },
                 startOnTick : true,
                 endOnTick : true,
-                showLastLabel : true
+                showLastLabel : true,
+                plotLines : plateBoundaries,
             },
             yAxis : {
                 max : 5,
@@ -136,7 +150,8 @@ controllers.pitchStatsController = [ '$rootScope', '$scope', '$log', '$timeout',
                 },
                 startOnTick : true,
                 endOnTick : true,
-                showLastLabel : true
+                showLastLabel : true,
+                plotLines : plateBoundaries,
             },
             yAxis : {
                 max : 5,
@@ -240,9 +255,9 @@ controllers.pitchStatsController = [ '$rootScope', '$scope', '$log', '$timeout',
         var minSpeed = null;
         var maxSpeed = null;
         whiffSeries = [];
-        
+
         /* initialize to set the relative bubble sizes */
-        wobaSeries = [[0,-10,0], [0,-10,5]];
+        wobaSeries = [ [ 0, -10, 0 ], [ 0, -10, 5 ] ];
 
         if (pitches) {
             for ( var i = 0; i < pitches.length; i++) {
