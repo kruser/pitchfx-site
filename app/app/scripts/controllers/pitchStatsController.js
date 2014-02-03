@@ -7,6 +7,8 @@ controllers.pitchStatsController = [ '$rootScope', '$scope', '$log', '$timeout',
 
     var whiffsDestroyFunction = null;
     var whiffSeries = [];
+    var wobaDestroyFunction = null;
+    var wobaSeries = [];
 
     $scope.loading = true;
     $scope.filtersService = filtersService;
@@ -43,6 +45,7 @@ controllers.pitchStatsController = [ '$rootScope', '$scope', '$log', '$timeout',
                 $timeout(function() {
                     renderPitchSpeeds();
                     renderWhiffsChart();
+                    renderWobaChart();
                 }, 10);
                 $scope.loading = false;
                 filtersService.loadingData = false;
@@ -54,21 +57,21 @@ controllers.pitchStatsController = [ '$rootScope', '$scope', '$log', '$timeout',
      * Render the wOBA bubble chart
      */
     function renderWobaChart() {
-        if (whiffsDestroyFunction) {
-            whiffsDestroyFunction();
+        if (wobaDestroyFunction) {
+            wobaDestroyFunction();
         }
-        var whiffChart = new Highcharts.Chart({
+        var wobaChart = new Highcharts.Chart({
             chart : {
-                type : 'scatter',
+                type : 'bubble',
                 zoomType : 'xy',
-                renderTo : 'whiffsChart',
+                renderTo : 'wobaChart',
             },
             credits : {
                 enabled : false
             },
             title : {
                 text : '',
-                enabled : false
+                enabled : false,
             },
             xAxis : {
                 max : 2,
@@ -91,33 +94,17 @@ controllers.pitchStatsController = [ '$rootScope', '$scope', '$log', '$timeout',
             legend : {
                 enabled : false,
             },
-            plotOptions : {
-                scatter : {
-                    marker : {
-                        radius : 5,
-                        states : {
-                            hover : {
-                                enabled : true,
-                                lineColor : 'rgb(100,100,100)'
-                            }
-                        }
-                    },
-                    states : {
-                        hover : {
-                            marker : {
-                                enabled : false
-                            }
-                        }
-                    },
-                }
-            },
             series : [ {
-                name : 'Whiffs',
-                color : 'rgba(223, 83, 83, .2)',
-                data : whiffSeries,
+                name : 'wOBA Value',
+                data : wobaSeries,
+                color : 'rgb(136, 193, 73)',
+                marker : {
+                    fillOpacity : 0.1,
+                    lineColor : 'rgb(136, 193, 73, 0.1)'
+                }
             } ]
         });
-        whiffsDestroyFunction = chartingService.keepSquare(whiffChart);
+        wobaDestroyFunction = chartingService.keepSquare(wobaChart);
     }
 
     /**
@@ -253,6 +240,10 @@ controllers.pitchStatsController = [ '$rootScope', '$scope', '$log', '$timeout',
         var minSpeed = null;
         var maxSpeed = null;
         whiffSeries = [];
+        
+        /* initialize to set the relative bubble sizes */
+        wobaSeries = [[0,-10,0], [0,-10,5]];
+
         if (pitches) {
             for ( var i = 0; i < pitches.length; i++) {
                 var pitch = new pojos.Pitch(pitches[i]);
@@ -279,6 +270,14 @@ controllers.pitchStatsController = [ '$rootScope', '$scope', '$log', '$timeout',
                     pitchTypes[pitchCode] = aggregator;
                 }
                 aggregator.count++;
+
+                var wOba = pitch.getWeightedObaValue();
+                if (angular.isDefined(wOba)) {
+                    if (angular.isDefined(pitch.px) && angular.isDefined(pitch.pz)) {
+                        wobaSeries.push([ pitch.px, pitch.pz, wOba ]);
+                    }
+                }
+
                 if (pitch.isBall()) {
                     aggregator.ball++;
                 } else {

@@ -62,6 +62,30 @@ pojos.Pitch.prototype.isOut = function() {
 };
 
 /**
+ * @returns {number} if this pitch resulted in an event that contributes to
+ *          weighted on-base average, that value is returned here. In the case
+ *          the pitch doesn't result in an event, this function returned
+ *          undefined.
+ */
+pojos.Pitch.prototype.getWeightedObaValue = function() {
+    if (this.hip && this.hip.des) {
+        var des = this.hip.des;
+        if (/single/i.test(des)) {
+            return 0.9;
+        } else if (/double/i.test(des)) {
+            return 1.24;
+        } else if (/triple/i.test(des)) {
+            return 1.56;
+        } else if (/home run/i.test(des)) {
+            return 1.95;
+        } else if (/field error/i.test(des)) {
+            return 1.56;
+        } 
+    }
+    return undefined;
+};
+
+/**
  * 
  * @returns {String} if the pitch was hit in play (hip), this gets the
  *          trajectory as one of 'liner|grounder|flyball|popup'
@@ -103,7 +127,8 @@ pojos.Pitch.prototype.getPitchType = function() {
  * Curveball KC Knuckle Curve EP Ephuus CH Change-up SC Screwball KN Knuckleball
  * UN Unknown
  * 
- * @param {string} the pitch code, e.g. 'FC', 'FF'
+ * @param {string}
+ *            the pitch code, e.g. 'FC', 'FF'
  * @returns {string} the pitch name
  */
 pojos.Pitch.getPitchDisplayName = function(pitchCode) {
