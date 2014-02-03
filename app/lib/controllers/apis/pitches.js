@@ -23,8 +23,10 @@ exports.query = function(req, res) {
     var atbatFilter = JSON.parse(req.query.atbatFilter);
     adjustQueryByAtBatFilter(query, atbatFilter);
 
+    /*
     var pitchFilter = JSON.parse(req.query.pitchFilter);
     adjustQueryByPitchFilter(query, pitchFilter);
+    */
 
     console.log(JSON.stringify(query, null, 4));
 
@@ -71,7 +73,7 @@ function adjustQueryByPitchFilter(query, filter) {
             */
         }
     }
-    query.$and.concat(topLevelFilters);
+    query.$and = query.$and.concat(topLevelFilters);
 }
 
 /**
@@ -169,7 +171,7 @@ function adjustQueryByAtBatFilter(query, filter) {
             });
         }
     }
-    query.$and.concat(topLevelFilters);
+    query.$and = query.$and.concat(topLevelFilters);
 }
 
 /**

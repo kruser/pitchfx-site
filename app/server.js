@@ -24,9 +24,9 @@ app.configure(function() {
     app.engine('html', require('ejs').renderFile);
     app.set('view engine', 'html');
     app.use(express.logger('dev'));
+    app.use(express.compress());
     app.use(express.bodyParser());
     app.use(express.methodOverride());
-    app.use(express.compress());
 
     // Router needs to be last
     app.use(app.router);
