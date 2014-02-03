@@ -51,6 +51,76 @@ controllers.pitchStatsController = [ '$rootScope', '$scope', '$log', '$timeout',
     }
 
     /**
+     * Render the wOBA bubble chart
+     */
+    function renderWobaChart() {
+        if (whiffsDestroyFunction) {
+            whiffsDestroyFunction();
+        }
+        var whiffChart = new Highcharts.Chart({
+            chart : {
+                type : 'scatter',
+                zoomType : 'xy',
+                renderTo : 'whiffsChart',
+            },
+            credits : {
+                enabled : false
+            },
+            title : {
+                text : '',
+                enabled : false
+            },
+            xAxis : {
+                max : 2,
+                min : -2,
+                title : {
+                    enabled : true,
+                    text : 'Plate Offset (ft)'
+                },
+                startOnTick : true,
+                endOnTick : true,
+                showLastLabel : true
+            },
+            yAxis : {
+                max : 5,
+                min : 0,
+                title : {
+                    text : 'Height (ft)'
+                }
+            },
+            legend : {
+                enabled : false,
+            },
+            plotOptions : {
+                scatter : {
+                    marker : {
+                        radius : 5,
+                        states : {
+                            hover : {
+                                enabled : true,
+                                lineColor : 'rgb(100,100,100)'
+                            }
+                        }
+                    },
+                    states : {
+                        hover : {
+                            marker : {
+                                enabled : false
+                            }
+                        }
+                    },
+                }
+            },
+            series : [ {
+                name : 'Whiffs',
+                color : 'rgba(223, 83, 83, .2)',
+                data : whiffSeries,
+            } ]
+        });
+        whiffsDestroyFunction = chartingService.keepSquare(whiffChart);
+    }
+
+    /**
      * Renders the whiffs
      */
     function renderWhiffsChart() {
@@ -220,7 +290,7 @@ controllers.pitchStatsController = [ '$rootScope', '$scope', '$log', '$timeout',
                     if (pitch.isWhiff()) {
                         aggregator.whiff++;
                         if (angular.isDefined(pitch.px) && angular.isDefined(pitch.pz)) {
-                            whiffSeries.push([pitch.px, pitch.pz]);
+                            whiffSeries.push([ pitch.px, pitch.pz ]);
                         }
                     }
                 }

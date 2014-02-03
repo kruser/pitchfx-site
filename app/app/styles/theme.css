@@ -67,10 +67,12 @@ body {
 .rk-filters input.form-control {
 	padding: 8px .5em;
 }
+/*
 #hipScatter {
 	background: url('/images/stadiums/1.svg') no-repeat;
 	background-size: 100%;
 }
+*/
 #pitchSpeeds {
 	height: 300px;
 }

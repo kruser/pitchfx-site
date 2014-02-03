@@ -56,6 +56,7 @@ controllers.battingStatsController = [ '$scope', '$log', '$timeout', 'filtersSer
                 type : 'scatter',
                 renderTo : 'hipScatter',
                 backgroundColor : 'transparent',
+                plotBackgroundImage: '/images/stadiums/1.svg',
                 margin : [ 0, 0, 0, 0 ],
                 spacingTop : 0,
                 spacingBottom : 0,

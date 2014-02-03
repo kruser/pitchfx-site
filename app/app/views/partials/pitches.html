@@ -4,31 +4,34 @@
 		<h3>Loading pitches...</h3>
 	</div>
 	<div ng-hide="loading">
-        <div class="panel panel-default" style="margin-top:.25em;">
-          <div class="panel-body row">
-            <div class="col-sm-6">
-	            <label class="control-label">Balls</label>
-	            <div class="btn-group btn-group-sm btn-group-justified">
-	                <a type="button" class="btn btn-default" ng-model="filters.balls.0" btn-checkbox>0</a> 
-	                <a type="button" class="btn btn-default" ng-model="filters.balls.1" btn-checkbox>1</a> 
-	                <a type="button" class="btn btn-default" ng-model="filters.balls.2" btn-checkbox>2</a> 
-	                <a type="button" class="btn btn-default" ng-model="filters.balls.3" btn-checkbox>3</a> 
-	            </div>
-            </div>
-            <div class="col-sm-6">
-                <label class="control-label">Strikes</label>
-                <div class="btn-group btn-group-sm btn-group-justified">
-                    <a type="button" class="btn btn-default" ng-model="filters.strikes.0" btn-checkbox>0</a> 
-                    <a type="button" class="btn btn-default" ng-model="filters.strikes.1" btn-checkbox>1</a> 
-                    <a type="button" class="btn btn-default" ng-model="filters.strikes.2" btn-checkbox>2</a> 
-                </div>
-            </div>
-          </div>
-        </div>
+		<div class="panel panel-default" style="margin-top: .25em;">
+			<div class="panel-body row">
+				<div class="col-sm-6">
+					<label class="control-label">Balls</label>
+					<div class="btn-group btn-group-sm btn-group-justified">
+						<a type="button" class="btn btn-default"
+							ng-model="filters.balls.0" btn-checkbox>0</a> <a type="button"
+							class="btn btn-default" ng-model="filters.balls.1" btn-checkbox>1</a>
+						<a type="button" class="btn btn-default"
+							ng-model="filters.balls.2" btn-checkbox>2</a> <a type="button"
+							class="btn btn-default" ng-model="filters.balls.3" btn-checkbox>3</a>
+					</div>
+				</div>
+				<div class="col-sm-6">
+					<label class="control-label">Strikes</label>
+					<div class="btn-group btn-group-sm btn-group-justified">
+						<a type="button" class="btn btn-default"
+							ng-model="filters.strikes.0" btn-checkbox>0</a> <a type="button"
+							class="btn btn-default" ng-model="filters.strikes.1" btn-checkbox>1</a>
+						<a type="button" class="btn btn-default"
+							ng-model="filters.strikes.2" btn-checkbox>2</a>
+					</div>
+				</div>
+			</div>
+		</div>
 		<div class="row">
 			<div class="col-md-12 table-responsive">
-				<table
-					class="pitch-table table table-condensed table-striped">
+				<table class="pitch-table table table-condensed table-striped">
 					<thead>
 						<tr>
 							<th tooltip="The type of pitch" tooltip-append-to-body="true">Pitch</th>
@@ -55,7 +58,8 @@
 							<th
 								tooltip="Pitches resulting in a fly ball, no matter the outcome"
 								tooltip-append-to-body="true">FB</th>
-							<th tooltip="Pitches resulting in a pop up, no matter the outcome"
+							<th
+								tooltip="Pitches resulting in a pop up, no matter the outcome"
 								tooltip-append-to-body="true">PU</th>
 						</tr>
 					</thead>
@@ -64,7 +68,7 @@
 						<td>{{row.displayName}}</td>
 						<td>{{row.count}}</td>
 						<td tooltip="{{row.ball}}" tooltip-append-to-body="true">{{row.ball/row.count*100|number:1}}%</td>
-						<td tooltip="{{row.strike}}" tooltip-append-to-body="true">{{row.strike/row.count*100|number:1}}%</td> 
+						<td tooltip="{{row.strike}}" tooltip-append-to-body="true">{{row.strike/row.count*100|number:1}}%</td>
 						<td tooltip="{{row.swing}}" tooltip-append-to-body="true">{{row.swing/row.count*100|number:1}}%</td>
 						<td tooltip="{{row.whiff}}" tooltip-append-to-body="true">{{row.whiff/row.count*100|number:1}}%</td>
 						<td tooltip="{{row.foul}}" tooltip-append-to-body="true">{{row.foul/row.count*100|number:1}}%</td>
@@ -80,50 +84,40 @@
 			</div>
 		</div>
 		<div class="row">
-		  <div class="col-md-12">
-               <div class="panel panel-default">
-                 <div class="panel-heading">
-                   <h3 class="panel-title">Pitch Speeds</h3>
-                 </div>
-                 <div class="panel-body">
-		            <div id="pitchSpeeds"></div>
-                 </div>
-               </div>
-           </div>
+			<div class="col-md-12">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h3 class="panel-title">Pitch Speeds</h3>
+					</div>
+					<div class="panel-body">
+						<div id="pitchSpeeds"></div>
+					</div>
+				</div>
+			</div>
 		</div>
 		<div class="row">
-            <div class="col-sm-6">
-                <div class="panel panel-default">
-                  <div class="panel-heading">
-                    <h3 class="panel-title">Whiffs</h3>
-                  </div>
-                  <div class="panel-body">
-                    <div id="whiffsChart"></div>
-                  </div>
-                </div>
-            </div>
-            <div class="col-sm-6">
-                <div class="panel panel-default">
-                  <div class="panel-heading">
-                    <h3 class="panel-title">BIP Trajectory</h3>
-                  </div>
-                  <div class="panel-body">
-                    <div id="hipScatter"></div>
-                  </div>
-                </div>
-            </div>
-            <!-- 
-            <div class="col-sm-4">
-                <div class="panel panel-default">
-                  <div class="panel-heading">
-                    <h3 class="panel-title">Hit Quality</h3>
-                  </div>
-                  <div class="panel-body">
-                    <div id="hipScatter"></div>
-                  </div>
-                </div>
-            </div>
-             -->
-       </div>
+			<div class="col-sm-6">
+				<div class="panel panel-default">
+					<div tooltip="This chart displays all swings and misses (whiffs). Points are shown with 10% opacity so you can conclude the darker areas to be weaker hit areas." class="panel-heading">
+						<h3 class="panel-title">Whiffs (Catcher POV)</h3>
+					</div>
+					<div class="panel-body">
+						<div id="whiffsChart"></div>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-6">
+				<div class="panel panel-default">
+					<div
+						tooltip="This chart displays hit quality for only balls in play that end up in an actual hit. Bubbles are assigned a radius according to their weighed on-base average (wOBA) value."
+						class="panel-heading">
+						<h3 class="panel-title">Hit Quality by wOBA (Catcher POV)</h3>
+					</div>
+					<div class="panel-body">
+						<div id="wobaChart"></div>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
 </div>
