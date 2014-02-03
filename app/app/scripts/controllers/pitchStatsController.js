@@ -201,7 +201,6 @@ controllers.pitchStatsController = [ '$rootScope', '$scope', '$log', '$timeout',
                 type : 'area',
                 zoomType : 'x',
                 renderTo : 'pitchSpeeds',
-                spacingTop : 0,
                 spacingBottom : 0,
                 spacingLeft : 0,
                 spacingRight : 0
