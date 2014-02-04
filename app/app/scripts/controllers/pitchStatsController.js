@@ -256,7 +256,7 @@ controllers.pitchStatsController = [ '$rootScope', '$scope', '$log', '$timeout',
         whiffSeries = [];
 
         /* initialize to set the relative bubble sizes */
-        wobaSeries = [ [ 0, -10, 0 ], [ 0, -10, 5 ] ];
+        wobaSeries = [ [ 0, -10, 0.5 ], [ 0, -10, 3 ] ];
 
         if (pitches) {
             for ( var i = 0; i < pitches.length; i++) {
