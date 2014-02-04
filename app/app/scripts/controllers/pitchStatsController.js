@@ -9,6 +9,7 @@ controllers.pitchStatsController = [ '$rootScope', '$scope', '$log', '$timeout',
     var whiffSeries = [];
     var wobaDestroyFunction = null;
     var wobaSeries = [];
+    var rawPitches = [];
 
     var plateBoundaries = [ {
         label : {
@@ -26,8 +27,8 @@ controllers.pitchStatsController = [ '$rootScope', '$scope', '$log', '$timeout',
     $scope.loading = true;
     $scope.filtersService = filtersService;
     $scope.pitchTypes = [];
-    $scope.model = {
-        selectedPitch : {}
+    $scope.pitchFilters = {
+        pitchType : {}
     };
     $scope.pitchSpeeds = {
         categories : [],
@@ -54,17 +55,41 @@ controllers.pitchStatsController = [ '$rootScope', '$scope', '$log', '$timeout',
         $scope.$watch('filtersService.filters', function(atbatFilters) {
             filtersService.loadingData = true;
             pitchesService.getPitches($scope.playerId, $scope.playerType, atbatFilters, $scope.filters).then(function(pitches) {
-                aggregatePitchStats(pitches);
-                $timeout(function() {
-                    renderPitchSpeeds();
-                    renderWhiffsChart();
-                    renderWobaChart();
-                }, 10);
+                rawPitches = pitches;
+                regenPitchStats();
                 $scope.loading = false;
                 filtersService.loadingData = false;
             });
         }, true);
+        $scope.$watch('pitchFilters.pitchType', function(pitchType) {
+            $timeout(function() {
+                regenPitchStats();
+            }, 10);
+        }, true);
     }
+
+    /**
+     * To be run whenever the atbat or pitch filters have changed
+     */
+    function regenPitchStats() {
+        $log.debug('Genearating pitch stats');
+        aggregatePitchStats();
+        $timeout(function() {
+            renderPitchSpeeds();
+            renderWhiffsChart();
+            renderWobaChart();
+        }, 10);
+    }
+
+    /**
+     * Add a selected pitch to the list
+     * 
+     * @param {string}
+     *            pitchCode - like FF, FC, SL, etc.
+     */
+    $scope.togglePitchSelection = function(pitchCode) {
+        $scope.pitchFilters.pitchType[pitchCode] = !($scope.pitchFilters.pitchType[pitchCode]);
+    };
 
     /**
      * Render the wOBA bubble chart
@@ -248,20 +273,32 @@ controllers.pitchStatsController = [ '$rootScope', '$scope', '$log', '$timeout',
      * @param {Array}
      *            pitches
      */
-    function aggregatePitchStats(pitches) {
+    function aggregatePitchStats() {
         var pitchTypes = {};
-        var pitchSpeeds = {};
         var minSpeed = null;
         var maxSpeed = null;
-        whiffSeries = [];
 
         /* initialize to set the relative bubble sizes */
         wobaSeries = [ [ 0, -10, 0.5 ], [ 0, -10, 3 ] ];
+        whiffSeries = [];
+        var pitchSpeeds = {};
 
-        if (pitches) {
-            for ( var i = 0; i < pitches.length; i++) {
-                var pitch = new pojos.Pitch(pitches[i]);
+        var pitchTypeFilters = $scope.pitchFilters.pitchType;
+        var havePitchTypeFilters = false;
+        for ( var key in pitchTypeFilters) {
+            if (pitchTypeFilters[key]) {
+                havePitchTypeFilters = true;
+                break;
+            }
+        }
+
+        $log.debug('Do we have pitch filters?: ' + havePitchTypeFilters);
+
+        if (rawPitches) {
+            for ( var i = 0; i < rawPitches.length; i++) {
+                var pitch = new pojos.Pitch(rawPitches[i]);
                 var pitchCode = pitch.getPitchType();
+
                 var aggregator = pitchTypes[pitchCode];
                 if (!aggregator) {
                     aggregator = {
@@ -285,10 +322,12 @@ controllers.pitchStatsController = [ '$rootScope', '$scope', '$log', '$timeout',
                 }
                 aggregator.count++;
 
-                var wOba = pitch.getWeightedObaValue();
-                if (angular.isDefined(wOba)) {
-                    if (angular.isDefined(pitch.px) && angular.isDefined(pitch.pz)) {
-                        wobaSeries.push([ pitch.px, pitch.pz, wOba ]);
+                if (!havePitchTypeFilters || pitchTypeFilters[pitchCode]) {
+                    var wOba = pitch.getWeightedObaValue();
+                    if (angular.isDefined(wOba)) {
+                        if (angular.isDefined(pitch.px) && angular.isDefined(pitch.pz)) {
+                            wobaSeries.push([ pitch.px, pitch.pz, wOba ]);
+                        }
                     }
                 }
 
@@ -302,7 +341,7 @@ controllers.pitchStatsController = [ '$rootScope', '$scope', '$log', '$timeout',
                     aggregator.swing++;
                     if (pitch.isWhiff()) {
                         aggregator.whiff++;
-                        if (angular.isDefined(pitch.px) && angular.isDefined(pitch.pz)) {
+                        if ((!havePitchTypeFilters || pitchTypeFilters[pitchCode]) && angular.isDefined(pitch.px) && angular.isDefined(pitch.pz)) {
                             whiffSeries.push([ pitch.px, pitch.pz ]);
                         }
                     }
@@ -329,29 +368,32 @@ controllers.pitchStatsController = [ '$rootScope', '$scope', '$log', '$timeout',
                 } else if (hipTrajectory === 'popup') {
                     aggregator.popup++;
                 }
-                var speed = parseInt(pitch.start_speed, 10);
-                if (speed) {
 
-                    if (!minSpeed || minSpeed > speed) {
-                        minSpeed = speed;
-                    }
-                    if (!maxSpeed || maxSpeed < speed) {
-                        maxSpeed = speed;
-                    }
+                if (!havePitchTypeFilters || pitchTypeFilters[pitchCode]) {
+                    var speed = parseInt(pitch.start_speed, 10);
+                    if (speed) {
 
-                    var speedKey = speed + ':' + pitchCode;
-                    if (pitchSpeeds[speedKey]) {
-                        pitchSpeeds[speedKey]++;
-                    } else {
-                        pitchSpeeds[speedKey] = 1;
+                        if (!minSpeed || minSpeed > speed) {
+                            minSpeed = speed;
+                        }
+                        if (!maxSpeed || maxSpeed < speed) {
+                            maxSpeed = speed;
+                        }
+
+                        var speedKey = speed + ':' + pitchCode;
+                        if (pitchSpeeds[speedKey]) {
+                            pitchSpeeds[speedKey]++;
+                        } else {
+                            pitchSpeeds[speedKey] = 1;
+                        }
                     }
                 }
             }
         }
 
         var model = [];
-        for ( var key in pitchTypes) {
-            model.push(pitchTypes[key]);
+        for ( var pitchTypeKey in pitchTypes) {
+            model.push(pitchTypes[pitchTypeKey]);
         }
         $scope.pitchTypes = model;
         buildPitchSpeedSeries(pitchSpeeds, minSpeed, maxSpeed, Object.keys(pitchTypes));

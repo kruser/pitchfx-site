@@ -33,9 +33,10 @@
 	     -->
 		<div class="row">
 			<div class="col-md-12 table-responsive">
-				<table class="pitch-table table table-condensed table-striped">
+				<table class="pitch-table table table-condensed table-striped table-hover">
 					<thead>
 						<tr>
+						    <th></th>
 							<th tooltip="The type of pitch" tooltip-append-to-body="true">Pitch</th>
 							<th tooltip="Total count of these pitches"
 								tooltip-append-to-body="true">#</th>
@@ -65,8 +66,10 @@
 								tooltip-append-to-body="true">PU</th>
 						</tr>
 					</thead>
-					<tr
+					<tr style="cursor:pointer"
+					    ng-click="togglePitchSelection(row.pitchCode)"
 						ng-repeat="row in pitchTypes | orderBy:'count':true | limitTo:8">
+						<td><i class="fa fa-fw" ng-class="{'fa-check-square-o': pitchFilters.pitchType[row.pitchCode], 'fa-square-o':!pitchFilters.pitchType[row.pitchCode]}"></i></td>
 						<td>{{row.displayName}}</td>
 						<td>{{row.count}}</td>
 						<td tooltip="{{row.ball}}" tooltip-append-to-body="true">{{row.ball/row.count*100|number:1}}%</td>
