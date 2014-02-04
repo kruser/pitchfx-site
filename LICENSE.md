@@ -1,5 +1,3 @@
-Copyright 2014 Ryan Kruse 
-
 GNU GENERAL PUBLIC LICENSE
 ==========================
 
