@@ -17,6 +17,7 @@ app.configure('development', function() {
 app.configure('production', function() {
     app.use(express.favicon(path.join(__dirname, 'public', 'favicon.ico')));
     app.use(express.static(path.join(__dirname, 'public')));
+    app.use(express.compress());
     app.set('views', __dirname + '/views');
 });
 
@@ -24,7 +25,6 @@ app.configure(function() {
     app.engine('html', require('ejs').renderFile);
     app.set('view engine', 'html');
     app.use(express.logger('dev'));
-    app.use(express.compress());
     app.use(express.bodyParser());
     app.use(express.methodOverride());
 
