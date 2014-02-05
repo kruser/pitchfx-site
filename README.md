@@ -29,6 +29,7 @@ To install and start this node application, execute these commands
 
     cd app
     npm install
+    sudo npm install -g grunt-cli
     grunt serve
 
 ### APIs
