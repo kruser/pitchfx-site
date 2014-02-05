@@ -258,6 +258,57 @@ function adjustQueryByFilter(query, filter) {
         }
     }
     
+    if (filter.balls) {
+        var balls = [];
+
+        if (filter.balls['0']) {
+            balls.push(0);
+        }
+        if (filter.balls['1']) {
+            balls.push(1);
+        }
+        if (filter.balls['2']) {
+            balls.push(2);
+        }
+        if (filter.balls['3']) {
+            balls.push(3);
+        }
+        if (filter.balls['4']) {
+            balls.push(4);
+        }
+        if (balls.length > 0) {
+            topLevelFilters.push({
+                'b' : {
+                    '$in' : balls
+                }
+            });
+        }
+    }
+    
+    if (filter.strikes) {
+        var strikes = [];
+
+        if (filter.strikes['0']) {
+            strikes.push(0);
+        }
+        if (filter.strikes['1']) {
+            strikes.push(1);
+        }
+        if (filter.strikes['2']) {
+            strikes.push(2);
+        }
+        if (filter.strikes['3']) {
+            strikes.push(3);
+        }
+        if (strikes.length > 0) {
+            topLevelFilters.push({
+                's' : {
+                    '$in' : strikes
+                }
+            });
+        }
+    }
+    
     if (filter.gameType) {
         var gameTypes = [];
         if (filter.gameType.S) {

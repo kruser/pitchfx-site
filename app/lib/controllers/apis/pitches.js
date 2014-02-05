@@ -23,11 +23,6 @@ exports.query = function(req, res) {
     var atbatFilter = JSON.parse(req.query.atbatFilter);
     adjustQueryByAtBatFilter(query, atbatFilter);
 
-    /*
-    var pitchFilter = JSON.parse(req.query.pitchFilter);
-    adjustQueryByPitchFilter(query, pitchFilter);
-    */
-
     console.log(JSON.stringify(query, null, 4));
 
     MongoClient.connect("mongodb://localhost:27017/mlbatbat", function(err, db) {
@@ -37,44 +32,6 @@ exports.query = function(req, res) {
         });
     });
 };
-
-/**
- * Adjust the DB query by the incoming pitch filter
- * 
- * @param {*}
- *            query
- * @param {*}
- *            filter the filter
- */
-function adjustQueryByPitchFilter(query, filter) {
-    var topLevelFilters = [];
-    if (filter.balls) {
-        var balls = [];
-
-        if (filter.balls['0']) {
-            balls.push(0);
-        }
-        if (filter.balls['1']) {
-            balls.push(1);
-        }
-        if (filter.balls['2']) {
-            balls.push(2);
-        }
-        if (filter.balls['3']) {
-            balls.push(3);
-        }
-        if (balls.length > 0) {
-            /* need to update atbat-mongodb with this info
-            topLevelFilters.push({
-                'b' : {
-                    '$in' : balls
-                }
-            });
-            */
-        }
-    }
-    query.$and = query.$and.concat(topLevelFilters);
-}
 
 /**
  * Adjusts the mongoDB query using the filter provided from the API call
@@ -117,6 +74,57 @@ function adjustQueryByAtBatFilter(query, filter) {
         }
     }
 
+    if (filter.balls) {
+        var balls = [];
+
+        if (filter.balls['0']) {
+            balls.push(0);
+        }
+        if (filter.balls['1']) {
+            balls.push(1);
+        }
+        if (filter.balls['2']) {
+            balls.push(2);
+        }
+        if (filter.balls['3']) {
+            balls.push(3);
+        }
+        if (filter.balls['4']) {
+            balls.push(4);
+        }
+        if (balls.length > 0) {
+            topLevelFilters.push({
+                'atbat.b' : {
+                    '$in' : balls
+                }
+            });
+        }
+    }
+    
+    if (filter.strikes) {
+        var strikes = [];
+
+        if (filter.strikes['0']) {
+            strikes.push(0);
+        }
+        if (filter.strikes['1']) {
+            strikes.push(1);
+        }
+        if (filter.strikes['2']) {
+            strikes.push(2);
+        }
+        if (filter.strikes['3']) {
+            strikes.push(3);
+        }
+        if (strikes.length > 0) {
+            topLevelFilters.push({
+                'atbat.s' : {
+                    '$in' : strikes
+                }
+            });
+        }
+    }
+    
     if (filter.gameType) {
         var gameTypes = [];
         if (filter.gameType.S) {

@@ -4,39 +4,13 @@
 		<h3>Loading pitches...</h3>
 	</div>
 	<div ng-hide="loading">
-	    <!-- 
-		<div class="panel panel-default" style="margin-top: .25em;">
-			<div class="panel-body row">
-				<div class="col-sm-6">
-					<label class="control-label">Balls</label>
-					<div class="btn-group btn-group-sm btn-group-justified">
-						<a type="button" class="btn btn-default"
-							ng-model="filters.balls.0" btn-checkbox>0</a> <a type="button"
-							class="btn btn-default" ng-model="filters.balls.1" btn-checkbox>1</a>
-						<a type="button" class="btn btn-default"
-							ng-model="filters.balls.2" btn-checkbox>2</a> <a type="button"
-							class="btn btn-default" ng-model="filters.balls.3" btn-checkbox>3</a>
-					</div>
-				</div>
-				<div class="col-sm-6">
-					<label class="control-label">Strikes</label>
-					<div class="btn-group btn-group-sm btn-group-justified">
-						<a type="button" class="btn btn-default"
-							ng-model="filters.strikes.0" btn-checkbox>0</a> <a type="button"
-							class="btn btn-default" ng-model="filters.strikes.1" btn-checkbox>1</a>
-						<a type="button" class="btn btn-default"
-							ng-model="filters.strikes.2" btn-checkbox>2</a>
-					</div>
-				</div>
-			</div>
-		</div>
-	     -->
 		<div class="row">
 			<div class="col-md-12 table-responsive">
-				<table class="pitch-table table table-condensed table-striped table-hover">
+				<table
+					class="pitch-table table table-condensed table-striped table-hover">
 					<thead>
 						<tr>
-						    <th></th>
+							<th></th>
 							<th tooltip="The type of pitch" tooltip-append-to-body="true">Pitch</th>
 							<th tooltip="Total count of these pitches"
 								tooltip-append-to-body="true">#</th>
@@ -66,10 +40,11 @@
 								tooltip-append-to-body="true">PU</th>
 						</tr>
 					</thead>
-					<tr style="cursor:pointer"
-					    ng-click="togglePitchSelection(row.pitchCode)"
+					<tr style="cursor: pointer"
+						ng-click="togglePitchSelection(row.pitchCode)"
 						ng-repeat="row in pitchTypes | orderBy:'count':true | limitTo:8">
-						<td><i class="fa fa-fw" ng-class="{'fa-check-square-o': pitchFilters.pitchType[row.pitchCode], 'fa-square-o':!pitchFilters.pitchType[row.pitchCode]}"></i></td>
+						<td><i class="fa fa-fw"
+							ng-class="{'fa-check-square-o': pitchFilters.pitchType[row.pitchCode], 'fa-square-o':!pitchFilters.pitchType[row.pitchCode]}"></i></td>
 						<td>{{row.displayName}}</td>
 						<td>{{row.count}}</td>
 						<td tooltip="{{row.ball}}" tooltip-append-to-body="true">{{row.ball/row.count*100|number:1}}%</td>
@@ -91,7 +66,9 @@
 		<div class="row">
 			<div class="col-sm-6">
 				<div class="panel panel-default">
-					<div tooltip="This chart displays all swings and misses (whiffs). Points are shown with 25% opacity so you can conclude the darker areas to be weaker hit areas." class="panel-heading">
+					<div
+						tooltip="This chart displays all swings and misses (whiffs). Points are shown with 25% opacity so you can conclude the darker areas to be weaker hit areas."
+						class="panel-heading">
 						<h3 class="panel-title">Whiffs (Catcher POV)</h3>
 					</div>
 					<div class="panel-body">
@@ -101,7 +78,9 @@
 			</div>
 			<div class="col-sm-6">
 				<div class="panel panel-default">
-					<div tooltip="This chart displays hit quality for only balls in play that end up in an actual hit. Bubbles are assigned a radius according to their weighed on-base average (wOBA) value." class="panel-heading">
+					<div
+						tooltip="This chart displays hit quality for only balls in play that end up in an actual hit. Bubbles are assigned a radius according to their weighed on-base average (wOBA) value."
+						class="panel-heading">
 						<h3 class="panel-title">Hit Quality by wOBA (Catcher POV)</h3>
 					</div>
 					<div class="panel-body">
@@ -109,7 +88,8 @@
 					</div>
 				</div>
 			</div>
-		</div><div class="row">
+		</div>
+		<div class="row">
 			<div class="col-md-12">
 				<div class="panel panel-default">
 					<div class="panel-heading">
@@ -121,6 +101,6 @@
 				</div>
 			</div>
 		</div>
-		
+
 	</div>
 </div>
