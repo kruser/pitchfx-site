@@ -1,4 +1,6 @@
 var MongoClient = require('mongodb').MongoClient;
+var mongoUtils = require('../../utils/mongoUtils');
+var arrayUtils = require('../../utils/arrayUtils');
 
 /**
  * Query atbats for a batter or a pitcher. If there isn't a "batter" or
@@ -53,78 +55,10 @@ function adjustQueryByAtBatFilter(query, filter) {
         });
     }
 
-    if (filter.outs) {
-        var outs = [];
+    arrayUtils.pushIfExists(topLevelFilters, mongoUtils.buildInFilter(filter.outs, 'atbat.o_start'));
+    arrayUtils.pushIfExists(topLevelFilters, mongoUtils.buildInFilter(filter.balls, 'atbat.b'));
+    arrayUtils.pushIfExists(topLevelFilters, mongoUtils.buildInFilter(filter.strikes, 'atbat.s'));
 
-        if (filter.outs['0']) {
-            outs.push(0);
-        }
-        if (filter.outs['1']) {
-            outs.push(1);
-        }
-        if (filter.outs['2']) {
-            outs.push(2);
-        }
-        if (outs.length > 0) {
-            topLevelFilters.push({
-                'atbat.o_start' : {
-                    '$in' : outs
-                }
-            });
-        }
-    }
-
-    if (filter.balls) {
-        var balls = [];
-
-        if (filter.balls['0']) {
-            balls.push(0);
-        }
-        if (filter.balls['1']) {
-            balls.push(1);
-        }
-        if (filter.balls['2']) {
-            balls.push(2);
-        }
-        if (filter.balls['3']) {
-            balls.push(3);
-        }
-        if (filter.balls['4']) {
-            balls.push(4);
-        }
-        if (balls.length > 0) {
-            topLevelFilters.push({
-                'atbat.b' : {
-                    '$in' : balls
-                }
-            });
-        }
-    }
-    
-    if (filter.strikes) {
-        var strikes = [];
-
-        if (filter.strikes['0']) {
-            strikes.push(0);
-        }
-        if (filter.strikes['1']) {
-            strikes.push(1);
-        }
-        if (filter.strikes['2']) {
-            strikes.push(2);
-        }
-        if (filter.strikes['3']) {
-            strikes.push(3);
-        }
-        if (strikes.length > 0) {
-            topLevelFilters.push({
-                'atbat.s' : {
-                    '$in' : strikes
-                }
-            });
-        }
-    }
-    
     if (filter.gameType) {
         var gameTypes = [];
         if (filter.gameType.S) {
@@ -147,15 +81,8 @@ function adjustQueryByAtBatFilter(query, filter) {
         }
     }
 
-    var inningsQuery = buildInningQuery(filter.inning);
-    if (inningsQuery) {
-        topLevelFilters.push(inningsQuery);
-    }
-
-    var runnerQuery = buildRunnersQuery(filter.runners);
-    if (runnerQuery) {
-        topLevelFilters.push(runnerQuery);
-    }
+    arrayUtils.pushIfExists(topLevelFilters, buildInningQuery(filter.inning));
+    arrayUtils.pushIfExists(topLevelFilters, buildRunnersQuery(filter.runners));
 
     if (filter.date) {
         if (filter.date.start && filter.date.end) {
