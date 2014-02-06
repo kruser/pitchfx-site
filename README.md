@@ -27,9 +27,11 @@ You'll also need to setup your atbat database using the ETL program <a href="htt
 #### Install
 To install and start this node application, execute these commands
 
+    sudo npm install -g grunt-cli
+    sudo npm install -g bower
     cd app
     npm install
-    sudo npm install -g grunt-cli
+    bower install
     grunt serve
 
 ### APIs
