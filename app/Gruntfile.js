@@ -141,12 +141,7 @@ module.exports = function(grunt) {
         // so
         // additional tasks can operate on them
         useminPrepare : {
-            html : [ 
-              '<%= yeoman.app %>/<%= yeoman.views %>/index.html', 
-              '<%= yeoman.app %>/<%= yeoman.views %>/index.jade', 
-              '<%= yeoman.app %>/<%= yeoman.views %>/templates/css.html',
-              '<%= yeoman.app %>/<%= yeoman.views %>/templates/scripts.html',
-            ],
+            html : [ '<%= yeoman.app %>/<%= yeoman.views %>/index.html', '<%= yeoman.app %>/<%= yeoman.views %>/index.jade', '<%= yeoman.app %>/<%= yeoman.views %>/templates/css.html', '<%= yeoman.app %>/<%= yeoman.views %>/templates/scripts.html', ],
             options : {
                 dest : '<%= yeoman.dist %>'
             }
@@ -156,8 +151,14 @@ module.exports = function(grunt) {
         usemin : {
             html : [ '<%= yeoman.views %>/{,*/}*.html', '<%= yeoman.views %>/{,*/}*.jade', '<%= yeoman.views %>/{,*/}*.ejs' ],
             css : [ '<%= yeoman.dist %>/styles/{,*/}*.css' ],
+            js : '<%= yeoman.dist %>/scripts/*.js',
             options : {
-                assetsDirs : [ '<%= yeoman.dist %>' ]
+                assetsDirs : [ '<%= yeoman.dist %>' ],
+                patterns : {
+                    // FIXME While usemin won't have full support for revved
+                    // files we have to put all references manually here
+                    js : [ [ /(images\/.*?\.(?:gif|jpeg|jpg|png|webp|svg))/gm, 'Update the JS to reference our revved images' ] ]
+                }
             }
         },
 
@@ -267,63 +268,30 @@ module.exports = function(grunt) {
             }
         }
     });
-    
+
     grunt.registerTask('express-keepalive', 'Keep grunt running', function() {
         this.async();
-      });
+    });
 
-      grunt.registerTask('serve', function (target) {
+    grunt.registerTask('serve', function(target) {
         if (target === 'dist') {
-          return grunt.task.run(['build', 'express:prod', 'open', 'express-keepalive']);
+            return grunt.task.run([ 'build', 'express:prod', 'open', 'express-keepalive' ]);
         }
 
-        grunt.task.run([
-          'clean:server',
-          'concurrent:server',
-          'autoprefixer',
-          'express:dev',
-          'open',
-          'watch'
-        ]);
-      });
+        grunt.task.run([ 'clean:server', 'concurrent:server', 'autoprefixer', 'express:dev', 'open', 'watch' ]);
+    });
 
-      grunt.registerTask('server', function () {
+    grunt.registerTask('server', function() {
         grunt.log.warn('The `server` task has been deprecated. Use `grunt serve` to start a server.');
-        grunt.task.run(['serve']);
-      });
+        grunt.task.run([ 'serve' ]);
+    });
 
-      grunt.registerTask('test', [
-        'clean:server',
-        'concurrent:test',
-        'autoprefixer',
-        'karma'
-      ]);
+    grunt.registerTask('test', [ 'clean:server', 'concurrent:test', 'autoprefixer', 'karma' ]);
 
-      grunt.registerTask('build', [
-        'clean:dist',
-        'useminPrepare',
-        'concurrent:dist',
-        'autoprefixer',
-        'concat',
-        'ngmin',
-        'copy:dist',
-        'cdnify',
-        'cssmin',
-        'uglify',
-        'rev',
-        'usemin'
-      ]);
+    grunt.registerTask('build', [ 'clean:dist', 'useminPrepare', 'concurrent:dist', 'autoprefixer', 'concat', 'ngmin', 'copy:dist', 'cdnify', 'cssmin', 'uglify', 'rev', 'usemin' ]);
 
-      grunt.registerTask('heroku', [
-        'build',
-        'clean:heroku',
-        'copy:heroku'    
-      ]);
+    grunt.registerTask('heroku', [ 'build', 'clean:heroku', 'copy:heroku' ]);
 
-      grunt.registerTask('default', [
-        'newer:jshint',
-        'test',
-        'build'
-      ]);
-      
+    grunt.registerTask('default', [ 'newer:jshint', 'test', 'build' ]);
+
 };
