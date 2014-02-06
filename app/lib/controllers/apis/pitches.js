@@ -3,6 +3,22 @@ var mongoUtils = require('../../utils/mongoUtils');
 var arrayUtils = require('../../utils/arrayUtils');
 
 /**
+ * Explains the document of properties that we're interested in. This will make
+ * the wire object much lighter than returning everything from the Pitch collection.
+ */
+var pitchIncludes = {
+    'atbat.des' : 1,
+    'hip.des' : 1,
+    'pitch_type' : 1,
+    'type' : 1,
+    'des' : 1,
+    'px' : 1,
+    'pz' : 1,
+    'start_speed' : 1,
+    '_id' : 0
+};
+
+/**
  * Query atbats for a batter or a pitcher. If there isn't a "batter" or
  * "pitcher" query parameter than this method will throw a 500.
  * 
@@ -28,7 +44,7 @@ exports.query = function(req, res) {
     console.log(JSON.stringify(query, null, 4));
 
     MongoClient.connect("mongodb://localhost:27017/mlbatbat", function(err, db) {
-        db.collection('pitches').find(query).toArray(function(err, docs) {
+        db.collection('pitches').find(query, pitchIncludes).toArray(function(err, docs) {
             res.json(docs);
             db.close();
         });
