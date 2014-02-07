@@ -15,5 +15,6 @@ All panorams on the home screen are used under the Creative Commons license as i
 * http://en.wikipedia.org/wiki/File:Wrigley_Field_-_panorama_-_upper_deck_-_2009-07-29.jpg
 * http://en.wikipedia.org/wiki/File:Fenway10.jpg
 * http://commons.wikimedia.org/wiki/File:Busch_Stadium_Panorama_2.jpg
+* http://en.wikipedia.org/wiki/File:OrioleParkAtCamdenYardsJune2013.jpg
 
 

@@ -41,6 +41,9 @@ body {
 	.kruser-home .jumbotron.panorama-4 {
 		background-image: url('/images/panoramas/WrigleyField.jpg');
 	}
+	.kruser-home .jumbotron.panorama-5 {
+		background-image: url('/images/panoramas/CamdonYards.jpg');
+	}
 	.kruser-home .jumbotron.panorama h1 {
 		color:  #fff;
 		text-shadow: black 0.1em 0.1em 0.2em

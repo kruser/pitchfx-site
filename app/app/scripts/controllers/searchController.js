@@ -8,7 +8,7 @@ controllers.searchController = [ '$scope', '$log', '$window', 'playerService', f
     $scope.playersLoading = false;
     
     /* match theme.css */
-    $scope.backgroundIndex = 'panorama-' + Math.floor((Math.random() * 4) + 1);
+    $scope.backgroundIndex = 'panorama-' + Math.floor((Math.random() * 5) + 1);
 
     /**
      * Search for players
