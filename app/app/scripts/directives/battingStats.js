@@ -3,7 +3,7 @@ var directives = directives || {};
 /**
  * The directive to show all
  */
-directives.battingStats = [ 'playerService', 'filtersService', '$log', '$route', function(playerService, filtersService, $log, $route) {
+directives.battingStats = [ 'playerService', 'filtersService', '$log', '$route', '$routeParams', function(playerService, filtersService, $log, $route, $routeParams) {
     "use strict";
 
     return {
@@ -29,8 +29,14 @@ directives.battingStats = [ 'playerService', 'filtersService', '$log', '$route',
                 active : false
             }, ];
             scope.filtersService = filtersService;
-            scope.playerType = (scope.playerPosition === '1') ? 'pitcher' : 'batter';
+            
             scope.$on('$routeChangeSuccess', function(event, toState, toParams, fromState, fromParams) {
+                if ($routeParams.playerCard) {
+                    scope.playerType = $routeParams.playerCard;
+                } else {
+                    scope.playerType = (scope.playerPosition === '1') ? 'pitcher' : 'batter';
+                }  
+                $log.debug('pt: ' + scope.playerType);
                 if (toState && toState.$$route) {
                     var route = toState.$$route.meta;
                     for ( var int = 0; int < scope.tabs.length; int++) {

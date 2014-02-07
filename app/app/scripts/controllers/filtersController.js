@@ -3,7 +3,7 @@ var controllers = controllers || {};
 /**
  * A controller that manages hitting stats for a player
  */
-controllers.filtersController = [ '$scope', '$log', '$timeout', '$angularCacheFactory', 'filtersService', function($scope, $log, $timeout, $angularCacheFactory, filtersService) {
+controllers.filtersController = [ '$scope', '$log', '$timeout', '$angularCacheFactory', '$routeParams', '$route', '$location', 'filtersService', function($scope, $log, $timeout, $angularCacheFactory, $routeParams, $route, $location, filtersService) {
     var filterCache = $angularCacheFactory('filterCache', {
         storageMode : 'localStorage',
         maxAge: 3600000,
@@ -11,7 +11,14 @@ controllers.filtersController = [ '$scope', '$log', '$timeout', '$angularCacheFa
         recycleFreq: 60000,
         cacheFlushInterval: 3600000,
     });
-
+    
+    $log.debug($routeParams);
+    if ($routeParams.playerCard) {
+        $scope.playerCard = $routeParams.playerCard;
+    }  else {
+        $scope.playerCard = ($scope.playerPosition === '1') ? 'pitcher' : 'batter';
+    }
+    
     var filtersFromCache = filterCache.get('filters');
     if (filtersFromCache && filtersFromCache.length > 0) {
         $scope.filters = filtersFromCache[0];
@@ -58,6 +65,12 @@ controllers.filtersController = [ '$scope', '$log', '$timeout', '$angularCacheFa
             }
         };
     }
+    
+    $scope.$watch('playerCard', function(playerCard) {
+        if ($routeParams.playerCard !== playerCard){
+            $location.path('/' + $route.current.$$route.meta + '/' + playerCard);  
+        }
+    }, true);
 
     $scope.$watch('[filters]', function(filters) {
         filterCache.put('filters', filters);

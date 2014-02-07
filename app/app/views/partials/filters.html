@@ -7,6 +7,13 @@
 	</div>
 	<form class="form panel-body" ng-class="{'hidden-xs':!filtersOpen}">
 	    <div class="form-group">
+            <label class="control-label">Player card</label>
+            <div class="btn-group btn-group-sm btn-group-justified">
+                <a type="button" class="btn btn-primary" ng-model="playerCard" btn-radio="'batter'">Batter</a> 
+                <a type="button" class="btn btn-primary" ng-model="playerCard" btn-radio="'pitcher'">Pitcher</a> 
+            </div>
+        </div>
+	    <div class="form-group">
             <label class="control-label">Game Type</label>
             <div class="btn-group btn-group-sm btn-group-justified">
                 <a type="button" class="btn btn-default" ng-model="filters.gameType.S" btn-checkbox>Spring</a> 
