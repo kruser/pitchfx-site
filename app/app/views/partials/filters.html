@@ -8,9 +8,13 @@
 	<form class="form panel-body" ng-class="{'hidden-xs':!filtersOpen}">
 	    <div class="form-group">
             <label class="control-label">Player card</label>
-            <div class="btn-group btn-group-sm btn-group-justified">
-                <a type="button" class="btn btn-primary" ng-model="playerCard" btn-radio="'batter'">Batter</a> 
-                <a type="button" class="btn btn-primary" ng-model="playerCard" btn-radio="'pitcher'">Pitcher</a> 
+            <div 
+                tooltip="When Batter is selected, all stats are from the batter's perspective. When Pitcher is selected, all stats are shown from the pitcher's perspective, i.e. opposing batters."
+                class="btn-group btn-group-sm btn-group-justified">
+                <a type="button" 
+                    class="btn btn-primary" ng-model="playerCard" btn-radio="'batter'">Batter</a> 
+                <a type="button"
+                    class="btn btn-primary" ng-model="playerCard" btn-radio="'pitcher'">Pitcher</a> 
             </div>
         </div>
 	    <div class="form-group">
