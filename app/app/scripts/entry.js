@@ -12,11 +12,11 @@ app.controller('searchController', controllers.searchController);
 app.directive('rkBattingStats', directives.battingStats);
 app.directive('rkFilters', directives.filters);
 app.config([ '$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
-    $routeProvider.when('/atbats', {
+    $routeProvider.when('/atbats/:direction?', {
         meta : 'atbats',
         controller : controllers.battingStatsController,
         templateUrl : '/partials/atbats.html',
-    }).when('/pitches', {
+    }).when('/pitches/:direction?', {
         meta : 'pitches',
         controller : controllers.pitchStatsController,
         templateUrl : '/partials/pitches.html',

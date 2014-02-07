@@ -27,6 +27,7 @@ controllers.pitchStatsController = [ '$rootScope', '$scope', '$log', '$timeout',
     $scope.loading = true;
     $scope.filtersService = filtersService;
     $scope.pitchTypes = [];
+    $scope.pitchCount = 0;
     $scope.pitchFilters = {
         pitchType : {}
     };
@@ -56,6 +57,7 @@ controllers.pitchStatsController = [ '$rootScope', '$scope', '$log', '$timeout',
             filtersService.loadingData = true;
             pitchesService.getPitches($scope.playerId, $scope.playerType, atbatFilters, $scope.filters).then(function(pitches) {
                 rawPitches = pitches;
+                $scope.pitchCount = pitches.length;
                 regenPitchStats();
                 $scope.loading = false;
                 filtersService.loadingData = false;

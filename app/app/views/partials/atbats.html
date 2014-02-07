@@ -4,7 +4,10 @@
 		<br> <i class="fa fa-spinner fa-spin fa-4x"></i>
 		<h3>Loading at-bats...</h3>
 	</div>
-	<div ng-hide="loading">
+	<div ng-hide="loading || stats.plateAppearances" class="alert alert-danger jumbotron" style="margin-top:1em;">
+	   <strong>Hold up!</strong> There are no atbats available for this player based on your filter. Try adjusting your dates or other criteria. 
+	</div>
+	<div ng-hide="loading || !stats.plateAppearances">
 	   <div class="table-responsive">
 			<table class="table table-condensed">
 				<thead>

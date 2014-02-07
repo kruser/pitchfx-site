@@ -3,7 +3,10 @@
 		<br> <br> <i class="fa fa-spinner fa-spin fa-4x"></i>
 		<h3>Loading pitches...</h3>
 	</div>
-	<div ng-hide="loading">
+	<div ng-show="!loading && pitchCount == 0" class="alert alert-danger jumbotron" style="margin-top:1em;">
+       <strong>Hold up!</strong> There are no pitches available for this player based on your filter. Try adjusting your dates or other criteria. 
+    </div>
+    <div ng-hide="loading || pitchCount == 0">
 		<div class="row">
 			<div class="col-md-12 table-responsive">
 				<table
