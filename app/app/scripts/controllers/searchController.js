@@ -6,6 +6,9 @@ var controllers = controllers || {};
 controllers.searchController = [ '$scope', '$log', '$window', 'playerService', function($scope, $log, $window, playerService) {
 
     $scope.playersLoading = false;
+    
+    /* match theme.css */
+    $scope.backgroundIndex = 'panorama-' + Math.floor((Math.random() * 4) + 1);
 
     /**
      * Search for players

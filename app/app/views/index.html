@@ -37,9 +37,9 @@
 		</div>
 	</header>
 	<div ng-app="home" class="kruser-home">
-		<div ng-controller="searchController" class="jumbotron on">
+		<div ng-controller="searchController" ng-class="[backgroundIndex]" class="jumbotron on panorama">
 			<div class="container">
-				<h1>Player Search</h1>
+				<h1 class="text-info">Find a Player</h1>
 				<input ng-model="playerSelection"
 						typeahead-wait-ms="200" typeahead-loading="playersLoading"
 						typeahead="player as player.getFullName() for player in searchPlayers($viewValue)"

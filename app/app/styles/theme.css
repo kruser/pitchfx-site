@@ -1,9 +1,14 @@
+/* @override 
+	http://localhost:9000/styles/theme.css */
+
 body {
 	padding-top: 50px;
 }
+
 .avatar {
 	width: 8em;
 }
+
 .container.container-full {
 	padding: 0px;
 }
@@ -16,6 +21,30 @@ body {
 .kruser-home {
 	background: url('/images/ball.svg') #eee fixed;
 	background-size: 100%;
+}
+
+/* Panoramas for big screens */
+@media ( min-width : 600px) {
+	.kruser-home .jumbotron.panorama {
+		background-size: 100% 100%;
+		background-repeat: no-repeat;
+	}
+	.kruser-home .jumbotron.panorama-1 {
+		background-image: url('/images/panoramas/BuschStadium.jpg');
+	}
+	.kruser-home .jumbotron.panorama-2 {
+		background-image: url('/images/panoramas/Fenway.jpg');
+	}
+	.kruser-home .jumbotron.panorama-3 {
+		background-image: url('/images/panoramas/TargetField.jpg');
+	}
+	.kruser-home .jumbotron.panorama-4 {
+		background-image: url('/images/panoramas/WrigleyField.jpg');
+	}
+	.kruser-home .jumbotron.panorama h1 {
+		color:  #fff;
+		text-shadow: black 0.1em 0.1em 0.2em
+	}
 }
 
 .kruser-home .jumbotron.off {
@@ -33,21 +62,26 @@ body {
 .player-header {
 	background-size: 100%;
 }
+
 .player-header.well {
 	padding: 0px;
 }
+
 .player-header .full {
 	background: rgba(255, 255, 255, .85);
 	padding: .5em .75em;
 }
+
 .player-header .mug-container {
 	background: #fff;
 	padding: .25em;
 	border-radius: 6px;
 }
+
 .player-header .mug {
 	width: 3.5em;
 }
+
 .player-header-bio {
 	margin-left: .5em;
 }
@@ -59,16 +93,20 @@ body {
 .rk-batting-stats .progress {
 	margin-bottom: 0px;
 }
+
 .rk-batting-stats .runners-gate {
 	margin-bottom: .25em;
 }
+
 .rk-filters input.form-control {
 	padding: 8px .5em;
 }
+
 #pitchSpeeds {
 	height: 300px;
 }
+
 .developer-info {
-    border-bottom: 1px dashed #ccc;  
-    margin-bottom: 1em;
-} 
+	border-bottom: 1px dashed #ccc;
+	margin-bottom: 1em;
+}
