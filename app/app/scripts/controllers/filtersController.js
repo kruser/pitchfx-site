@@ -22,6 +22,7 @@ controllers.filtersController = [ '$scope', '$log', '$timeout', '$angularCacheFa
     var filtersFromCache = filterCache.get('filters');
     if (filtersFromCache && filtersFromCache.length > 0) {
         $scope.filters = filtersFromCache[0];
+        $scope.filters.playerCard = ($scope.playerPosition === '1') ? 'pitcher' : 'batter';
         if ($scope.playerPosition === '1') {
             $scope.filters.pitcherHand = '';
         } else if ($scope.playerBats !== 'S') {
@@ -29,6 +30,7 @@ controllers.filtersController = [ '$scope', '$log', '$timeout', '$angularCacheFa
         }
     } else {
         $scope.filters = {
+            playerCard : ($scope.playerPosition === '1') ? 'pitcher' : 'batter',
             pitcherHand : '',
             batterHand : '',
             date : {
@@ -66,17 +68,9 @@ controllers.filtersController = [ '$scope', '$log', '$timeout', '$angularCacheFa
         };
     }
 
-    $scope.$watch('playerCard', function(playerCard) {
-        if ($routeParams.playerCard !== playerCard) {
-            $location.path('/' + $route.current.$$route.meta + '/' + playerCard);
-        }
-    }, true);
-
     $scope.$watch('[filters]', function(filters) {
-        if ($scope.playerCard) {
-            filterCache.put('filters', filters);
-            filtersService.filters = filters;
-        }
+        filterCache.put('filters', filters);
+        filtersService.filters = filters;
     }, true);
 
     /**

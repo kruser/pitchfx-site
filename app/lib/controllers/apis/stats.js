@@ -15,10 +15,9 @@ exports.query = function(req, res) {
 
     /* Supported parameters */
     var filter = JSON.parse(req.query.filter);
-
     var playerId = parseInt(req.params.playerId, 10);
     var query = {};
-    if (req.params.type === 'batter') {
+    if (filter.playerCard === 'batter') {
         query.batter = playerId;
     } else {
         query.pitcher = playerId;

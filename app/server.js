@@ -45,8 +45,8 @@ app.get('/api/atbats', atbatsApi.query);
 app.get('/api/players', playersApi.query);
 app.get('/api/players/:playerId', playersApi.getPlayer);
 app.get('/api/player_info/:playerId', playerInfoApi.getPlayer);
-app.get('/api/stats/:playerId/:type', statsApi.query);
-app.get('/api/pitches/:playerId/:type', pitchesApi.query);
+app.get('/api/stats/:playerId', statsApi.query);
+app.get('/api/pitches/:playerId', pitchesApi.query);
 app.get('/player/:playerId/:playerName', controllers.player);
 
 // Angular Routes

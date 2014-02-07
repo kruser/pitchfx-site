@@ -17,7 +17,7 @@ controllers.battingStatsController = [ '$scope', '$log', '$timeout', 'filtersSer
     function init() {
         $scope.$watch('filtersService.filters', function(filters) {
             filtersService.loadingData = true;
-            statsService.getStats($scope.playerId, $scope.playerType, filters).then(function(stats) {
+            statsService.getStats($scope.playerId, filters).then(function(stats) {
                 $scope.stats = stats;
                 renderCharts();
                 $scope.loading = false;

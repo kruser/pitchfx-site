@@ -35,19 +35,6 @@ controllers.pitchStatsController = [ '$rootScope', '$scope', '$log', '$timeout',
         categories : [],
         series : [],
     };
-    $scope.filters = {
-        balls : {
-            0 : false,
-            1 : false,
-            2 : false,
-            3 : false,
-        },
-        strikes : {
-            0 : false,
-            1 : false,
-            2 : false,
-        },
-    };
 
     /**
      * Setup the controller
@@ -55,7 +42,7 @@ controllers.pitchStatsController = [ '$rootScope', '$scope', '$log', '$timeout',
     function init() {
         $scope.$watch('filtersService.filters', function(atbatFilters) {
             filtersService.loadingData = true;
-            pitchesService.getPitches($scope.playerId, $scope.playerType, atbatFilters, $scope.filters).then(function(pitches) {
+            pitchesService.getPitches($scope.playerId, atbatFilters).then(function(pitches) {
                 rawPitches = pitches;
                 $scope.pitchCount = pitches.length;
                 regenPitchStats();

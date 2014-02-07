@@ -29,16 +29,17 @@ var pitchIncludes = {
  */
 exports.query = function(req, res) {
     var playerId = parseInt(req.params.playerId, 10);
+    var atbatFilter = JSON.parse(req.query.atbatFilter);
+
     var query = {
         '$and' : [],
     };
-    if (req.params.type === 'batter') {
+    if (atbatFilter.playerCard === 'batter') {
         query['atbat.batter'] = playerId;
     } else {
         query['atbat.pitcher'] = playerId;
     }
 
-    var atbatFilter = JSON.parse(req.query.atbatFilter);
     adjustQueryByAtBatFilter(query, atbatFilter);
 
     console.log(JSON.stringify(query, null, 4));

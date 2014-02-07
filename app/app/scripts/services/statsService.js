@@ -12,16 +12,14 @@ services.statsService = [ '$log', '$http', function($log, $http) {
      * 
      * @param {int}
      *            playerId - the player ID
-     * @param {string}
-     *            type - one of (batter|pitcher)
      * @param {*}
      *            filter - the filter object
      */
-    this.getStats = function(playerId, type, filter) {
+    this.getStats = function(playerId, filter) {
         var params = {
             filter : filter,
         };
-        return $http.get('/api/stats/' + playerId + '/' + type, {
+        return $http.get('/api/stats/' + playerId, {
             params : params
         }).then(function(result) {
             return result.data;

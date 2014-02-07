@@ -31,12 +31,6 @@ directives.battingStats = [ 'playerService', 'filtersService', '$log', '$route',
             scope.filtersService = filtersService;
             
             scope.$on('$routeChangeSuccess', function(event, toState, toParams, fromState, fromParams) {
-                if ($routeParams.playerCard) {
-                    scope.playerType = $routeParams.playerCard;
-                } else {
-                    scope.playerType = (scope.playerPosition === '1') ? 'pitcher' : 'batter';
-                }  
-                $log.debug('pt: ' + scope.playerType);
                 if (toState && toState.$$route) {
                     var route = toState.$$route.meta;
                     for ( var int = 0; int < scope.tabs.length; int++) {
