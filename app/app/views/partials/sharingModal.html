@@ -3,10 +3,24 @@
 		<button type="button" class="close" ng-click="dismiss()">
 			<i class="fa fa-times"></i>
 		</button>
-		<h4 class="modal-title fa fa-share-square fa-2x"> Sharing these stats</h4>
+		<h4 class="modal-title fa fa-share-square fa-2x"> Sharing stats</h4>
 	</div>
-	<div class="modal-body" ng-hide="complete">
-		<p>Copy the URL below to share any way you'd like</p>
+	<div class="modal-body"">
+		<div class="row">
+			<div class="col-xs-12">
+				<div id="addthis_toolbox" addthis:url="{{model.url}}"
+					class="addthis_toolbox addthis_default_style addthis_32x32_style">
+					<a class="addthis_button_preferred_1"></a> 
+					<a class="addthis_button_preferred_2"></a> 
+					<a class="addthis_button_preferred_3"></a> 
+					<a class="addthis_button_preferred_4"></a>
+					<a class="addthis_button_preferred_5"></a>
+				</div>
+			</div>
+		</div>
+
+        <br>
+		<p>...or copy the URL below to share any way you'd like</p>
 		<div class="row">
 			<div class="col-md-12 form-group">
 				<textarea name="shareUrl" ng-model="model.url" class="form-control"></textarea>

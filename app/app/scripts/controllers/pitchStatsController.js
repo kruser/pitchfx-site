@@ -3,7 +3,7 @@ var controllers = controllers || {};
 /**
  * A controller that manages hitting stats for a player
  */
-controllers.pitchStatsController = [ '$rootScope', '$scope', '$log', '$timeout', 'filtersService', 'pitchesService', 'chartingService', function($rootScope, $scope, $log, $timeout, filtersService, pitchesService, chartingService) {
+controllers.pitchStatsController = [ '$rootScope', '$scope', '$log', '$timeout', '$location', 'filtersService', 'pitchesService', 'chartingService', function($rootScope, $scope, $log, $timeout, $location, filtersService, pitchesService, chartingService) {
 
     var whiffsDestroyFunction = null;
     var whiffSeries = [];
@@ -28,13 +28,20 @@ controllers.pitchStatsController = [ '$rootScope', '$scope', '$log', '$timeout',
     $scope.filtersService = filtersService;
     $scope.pitchTypes = [];
     $scope.pitchCount = 0;
-    $scope.pitchFilters = {
-        pitchType : {}
-    };
     $scope.pitchSpeeds = {
         categories : [],
         series : [],
     };
+
+    var filtersFromUrl = $location.search().pitchFilters;
+    if (filtersFromUrl) {
+        var parsedFilters = JSON.parse(filtersFromUrl);
+        $scope.pitchFilters = parsedFilters;
+    } else {
+        $scope.pitchFilters = {
+            pitchType : {}
+        };
+    }
 
     /**
      * Setup the controller
@@ -50,7 +57,8 @@ controllers.pitchStatsController = [ '$rootScope', '$scope', '$log', '$timeout',
                 filtersService.loadingData = false;
             });
         }, true);
-        $scope.$watch('pitchFilters.pitchType', function(pitchType) {
+        $scope.$watch('pitchFilters', function(pitchFilters) {
+            $scope.filtersService.pitchFilters = pitchFilters;
             $timeout(function() {
                 regenPitchStats();
             }, 10);

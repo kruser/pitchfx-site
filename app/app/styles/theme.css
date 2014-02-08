@@ -1,6 +1,5 @@
 /* @override 
 	http://localhost:9000/styles/theme.css */
-
 body {
 	padding-top: 50px;
 }
@@ -24,7 +23,7 @@ body {
 }
 
 /* Panoramas for big screens */
-@media ( min-width : 600px) {
+@media ( min-width : 480px) {
 	.kruser-home .jumbotron.panorama {
 		background-size: 100% 100%;
 		background-repeat: no-repeat;
@@ -45,8 +44,14 @@ body {
 		background-image: url('/images/panoramas/CamdonYards.jpg');
 	}
 	.kruser-home .jumbotron.panorama h1 {
-		color:  #fff;
+		color: #fff;
 		text-shadow: black 0.1em 0.1em 0.2em
+	}
+}
+@media ( min-width : 768px) {
+	.nav>li>a.fa {
+		padding-right: 5px;
+		padding-left: 5px;
 	}
 }
 
