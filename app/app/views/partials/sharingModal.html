@@ -1,0 +1,16 @@
+<div>
+	<div class="modal-header">
+		<button type="button" class="close" ng-click="dismiss()">
+			<i class="fa fa-times"></i>
+		</button>
+		<h4 class="modal-title fa fa-share-square fa-2x"> Sharing these stats</h4>
+	</div>
+	<div class="modal-body" ng-hide="complete">
+		<p>Copy the URL below to share any way you'd like</p>
+		<div class="row">
+			<div class="col-md-12 form-group">
+				<textarea name="shareUrl" ng-model="model.url" class="form-control"></textarea>
+			</div>
+		</div>
+	</div>
+</div>

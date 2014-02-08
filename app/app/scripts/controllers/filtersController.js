@@ -12,60 +12,40 @@ controllers.filtersController = [ '$scope', '$log', '$timeout', '$angularCacheFa
         cacheFlushInterval : 3600000,
     });
 
-    $log.debug($routeParams);
-    if ($routeParams.playerCard) {
-        $scope.playerCard = $routeParams.playerCard;
+    var filtersFromUrl = $location.search().filter;
+    if (filtersFromUrl) {
+        var parsedFilters = JSON.parse(filtersFromUrl)[0];
+        $scope.filters = parsedFilters;
     } else {
-        $scope.playerCard = ($scope.playerPosition === '1') ? 'pitcher' : 'batter';
-    }
-
-    var filtersFromCache = filterCache.get('filters');
-    if (filtersFromCache && filtersFromCache.length > 0) {
-        $scope.filters = filtersFromCache[0];
-        $scope.filters.playerCard = ($scope.playerPosition === '1') ? 'pitcher' : 'batter';
-        if ($scope.playerPosition === '1') {
-            $scope.filters.pitcherHand = '';
-        } else if ($scope.playerBats !== 'S') {
-            $scope.filters.batterHand = '';
-        }
-    } else {
-        $scope.filters = {
-            playerCard : ($scope.playerPosition === '1') ? 'pitcher' : 'batter',
-            pitcherHand : '',
-            batterHand : '',
-            date : {
-                start : getStartingDate(),
-                end : moment().format('YYYY-MM-DD'),
-            },
-            runners : {
-                gate : 'OR',
-                empty : false,
-                first : false,
-                second : false,
-                third : false,
-            },
-            outs : {
-                0 : false,
-                1 : false,
-                2 : false,
-            },
-            balls : {
-                0 : false,
-                1 : false,
-                2 : false,
-                3 : false,
-            },
-            strikes : {
-                0 : false,
-                1 : false,
-                2 : false,
-            },
-            gameType : {
-                S : false,
-                R : true,
-                P : false,
+        var filtersFromCache = filterCache.get('filters');
+        if (filtersFromCache && filtersFromCache.length > 0) {
+            $scope.filters = filtersFromCache[0];
+            $scope.filters.playerCard = ($scope.playerPosition === '1') ? 'pitcher' : 'batter';
+            if ($scope.playerPosition === '1') {
+                $scope.filters.pitcherHand = '';
+            } else if ($scope.playerBats !== 'S') {
+                $scope.filters.batterHand = '';
             }
-        };
+        } else {
+            $scope.filters = {
+                playerCard : ($scope.playerPosition === '1') ? 'pitcher' : 'batter',
+                pitcherHand : '',
+                batterHand : '',
+                date : {
+                    start : getStartingDate(),
+                    end : moment().format('YYYY-MM-DD'),
+                },
+                runners : {
+                    gate : 'OR',
+                },
+                outs : {},
+                balls : {},
+                strikes : {},
+                gameType : {
+                    R : true,
+                }
+            };
+        }
     }
 
     $scope.$watch('[filters]', function(filters) {

@@ -9,6 +9,8 @@ app.service('pitchesService', services.pitchesService);
 app.service('chartingService', services.chartingService);
 app.service('styleService', services.styleService);
 app.controller('searchController', controllers.searchController);
+app.controller('sharingController', controllers.sharingController);
+app.controller('sharingModalController', controllers.sharingModalController);
 app.directive('rkBattingStats', directives.battingStats);
 app.directive('rkFilters', directives.filters);
 app.config([ '$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
