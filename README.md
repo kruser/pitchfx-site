@@ -1,6 +1,3 @@
-If you are seeing this message, the site is not yet complete.
-============
-
 PitchFX.org
 ============
 
