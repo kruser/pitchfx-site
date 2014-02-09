@@ -25,6 +25,9 @@ app.config([ '$routeProvider', '$locationProvider', function($routeProvider, $lo
     }).when('/scouting', {
         meta : 'scouting',
         templateUrl : '/partials/scouting.html',
+    }).when('/twitter', {
+        meta : 'twitter',
+        templateUrl : '/partials/twitter.html',
     }).otherwise({
         redirectTo : '/atbats'
     });

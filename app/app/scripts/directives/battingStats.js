@@ -27,6 +27,10 @@ directives.battingStats = [ 'playerService', 'filtersService', '$log', '$route',
                 route: 'scouting',
                 label : 'Scout Assist',
                 active : false
+            }, {
+                route: 'twitter',
+                label : 'Twitter',
+                active : false
             }, ];
             scope.filtersService = filtersService;
             
