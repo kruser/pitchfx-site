@@ -1,6 +1,6 @@
 <div class="rk-batting-stats">
 	<ul class="nav nav-tabs">
-	   <li ng-repeat="tab in tabs" ng-class="{'active':tab.active}"><a ng-href="#/{{tab.route}}"><i class="fa fa-circle-o" ng-class="{'fa-dot-circle-o':tab.active && !filtersService.loadingData, 'fa-spin fa-spinner':tab.active && filtersService.loadingData}"></i> {{tab.label}}</a></li>
+	   <li ng-repeat="tab in tabs" ng-class="{'active':tab.active}"><a ng-href="#/{{tab.route}}" ng-onClick="_gaq.push(['_trackEvent', 'Videos', '{{tab.route}}']);"><i class="fa fa-circle-o" ng-class="{'fa-dot-circle-o':tab.active && !filtersService.loadingData, 'fa-spin fa-spinner':tab.active && filtersService.loadingData}"></i> {{tab.label}}</a></li>
 	</ul>
 	<div ng-view></div>
 </div>
