@@ -27,6 +27,31 @@ controllers.battingStatsController = [ '$scope', '$log', '$timeout', 'filtersSer
     }
 
     /**
+     * Gets an HTML label for the tooltip of balls hit-in-play
+     * 
+     * @param {string}
+     *            hipType - one of (grounder|liner|flyball|popup)
+     * @returns {string} the tooltip contents
+     */
+    function hipTypesTooltip() {
+        $log.debug(this);
+        var tooltip = '<b>Field Distribution</b>';
+        if ($scope.stats.hitBallDistribution && $scope.stats.hitBallDistribution[this.key]) {
+            var fields = $scope.stats.hitBallDistribution[this.key];
+            if (fields.L) {
+                tooltip += '<br><b>Left:</b> ' + fields.L + ' (' + (fields.L / this.y * 100).toFixed(1) + '%)';
+            }
+            if (fields.C) {
+                tooltip += '<br><b>Center:</b> ' + fields.C + ' (' + (fields.C / this.y * 100).toFixed(1) + '%)';
+            }
+            if (fields.R) {
+                tooltip += '<br><b>Right:</b> ' + fields.R + ' (' + (fields.R / this.y * 100).toFixed(1) + '%)';
+            }
+        }
+        return tooltip;
+    }
+    
+    /**
      * Renders advanced charts
      */
     function renderCharts() {
@@ -56,7 +81,7 @@ controllers.battingStatsController = [ '$scope', '$log', '$timeout', 'filtersSer
                 type : 'scatter',
                 renderTo : 'hipScatter',
                 backgroundColor : 'transparent',
-                plotBackgroundImage: '/images/stadiums/1.svg',
+                plotBackgroundImage : '/images/stadiums/1.svg',
                 margin : [ 0, 0, 0, 0 ],
                 spacingTop : 0,
                 spacingBottom : 0,
@@ -152,6 +177,9 @@ controllers.battingStatsController = [ '$scope', '$log', '$timeout', 'filtersSer
                             format : '<b>{point.name}</b><br>{point.y} ({point.percentage:.1f}%)'
                         }
                     }
+                },
+                tooltip : {
+                    formatter : hipTypesTooltip
                 },
                 title : {
                     text : '',

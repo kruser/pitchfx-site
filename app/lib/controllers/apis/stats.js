@@ -1,4 +1,5 @@
 var MongoClient = require('mongodb').MongoClient;
+var AtBat = require('../../pojos/AtBat').AtBat;
 var mongoUtils = require('../../utils/mongoUtils');
 var arrayUtils = require('../../utils/arrayUtils');
 
@@ -62,10 +63,11 @@ function calculateResults(docs) {
         runnersPotentialBases : 0,
         runnersMovedBases : 0,
         hitBalls : {},
+        hitBallDistribution : {},
     };
     if (docs) {
         for ( var i = 0; i < docs.length; i++) {
-            var atbatDoc = docs[i];
+            var atbatDoc = new AtBat(docs[i]);
             accumulateAtBat(atbatDoc, results);
         }
     }
@@ -157,7 +159,7 @@ function calcBattingAverage(results) {
 /**
  * Accumulate AtBats
  * 
- * @param atBat
+ * @param {pojos.AtBat} atBat
  * @param results
  */
 function accumulateAtBat(atBat, results) {
@@ -167,6 +169,18 @@ function accumulateAtBat(atBat, results) {
             results.hitBalls[trajectory] = [];
         }
         results.hitBalls[trajectory].push([ atBat.hip.x, 0 - atBat.hip.y ]);
+        
+        if (!results.hitBallDistribution[trajectory]) {
+            results.hitBallDistribution[trajectory] = {};
+        }
+        var field = atBat.getField();
+        if (field){
+            if (!results.hitBallDistribution[trajectory][field]) {
+                results.hitBallDistribution[trajectory][field] = 1; 
+            } else {
+                results.hitBallDistribution[trajectory][field]++; 
+            }
+        }
     }
 
     results.runnersMovedBases += atBat.runnersMovedBases;
