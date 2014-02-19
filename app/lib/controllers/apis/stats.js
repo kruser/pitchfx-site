@@ -4,6 +4,19 @@ var mongoUtils = require('../../utils/mongoUtils');
 var arrayUtils = require('../../utils/arrayUtils');
 
 /**
+ * These are the fields we'll pull from the DB
+ */
+var atbatIncludes = {
+    'des' : 1,
+    'hip' : 1,
+    'runnersMovedBases' : 1,
+    'runnersPotentialBases' : 1,
+    'runner' : 1,
+    'event' : 1,
+    '_id' : 0
+};
+
+/**
  * Query atbats for a batter or a pitcher. If there isn't a "batter" or
  * "pitcher" query parameter than this method will throw a 500.
  * 
@@ -29,7 +42,7 @@ exports.query = function(req, res) {
     console.log(JSON.stringify(query, null, 4));
 
     MongoClient.connect("mongodb://localhost:27017/mlbatbat", function(err, db) {
-        db.collection('atbats').find(query).toArray(function(err, docs) {
+        db.collection('atbats').find(query, atbatIncludes).toArray(function(err, docs) {
             res.json(calculateResults(docs));
             db.close();
         });
@@ -159,7 +172,8 @@ function calcBattingAverage(results) {
 /**
  * Accumulate AtBats
  * 
- * @param {pojos.AtBat} atBat
+ * @param {pojos.AtBat}
+ *            atBat
  * @param results
  */
 function accumulateAtBat(atBat, results) {
@@ -169,16 +183,16 @@ function accumulateAtBat(atBat, results) {
             results.hitBalls[trajectory] = [];
         }
         results.hitBalls[trajectory].push([ atBat.hip.x, 0 - atBat.hip.y ]);
-        
+
         if (!results.hitBallDistribution[trajectory]) {
             results.hitBallDistribution[trajectory] = {};
         }
         var field = atBat.getField();
-        if (field){
+        if (field) {
             if (!results.hitBallDistribution[trajectory][field]) {
-                results.hitBallDistribution[trajectory][field] = 1; 
+                results.hitBallDistribution[trajectory][field] = 1;
             } else {
-                results.hitBallDistribution[trajectory][field]++; 
+                results.hitBallDistribution[trajectory][field]++;
             }
         }
     }
@@ -251,7 +265,7 @@ function adjustQueryByFilter(query, filter) {
             'stand' : filter.batterHand
         });
     }
-    
+
     arrayUtils.pushIfExists(topLevelFilters, mongoUtils.buildInFilter(filter.outs, 'o_start'));
     arrayUtils.pushIfExists(topLevelFilters, mongoUtils.buildInFilter(filter.balls, 'b'));
     arrayUtils.pushIfExists(topLevelFilters, mongoUtils.buildInFilter(filter.strikes, 's'));
