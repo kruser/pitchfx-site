@@ -51,6 +51,7 @@ controllers.filtersController = [ '$scope', '$log', '$timeout', '$angularCacheFa
     $scope.$watch('[filters]', function(filters) {
         filterCache.put('filters', filters);
         filtersService.filters = filters;
+        _gaq.push(['_trackEvent', 'filters', 'atbats', $scope.playerId]);
     }, true);
 
     /**

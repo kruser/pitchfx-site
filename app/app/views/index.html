@@ -31,8 +31,8 @@
 			<div id="navbar-main" ng-class="{'in':openMenu}"
 				class="navbar-collapse collapse navbar-right">
 				<ul class="nav navbar-nav">
-					<li><a target="_blank" href="https://github.com/kruser/pitchfx-site/issues">Got Issues?</a></li>
-					<li tooltip="Follow us on Twitter" tooltip-placement="bottom"><a href="https://twitter.com/PitchFX_org" target="_blank" class="fa fa-twitter-square fa-2x"></a></li>
+					<li><a target="_blank" onClick="_gaq.push(['_trackEvent', 'links', 'github', 'pitchfx-issues']);" href="https://github.com/kruser/pitchfx-site/issues">Got Issues?</a></li>
+					<li tooltip="Follow us on Twitter" tooltip-placement="bottom"><a onClick="_gaq.push(['_trackEvent', 'links', 'Twitter', 'pitchfx']);" href="https://twitter.com/PitchFX_org" target="_blank" class="fa fa-twitter-square fa-2x"></a></li>
 				</ul>
 			</div>
 		</div>
@@ -62,7 +62,7 @@
 				</p>
 				<h3 class="text-primary fa fa-lightbulb-o"> Ideas</h3>
 				<p>
-					    If you have an <strong>idea</strong> for a feature, file an issue on our <a href="https://github.com/kruser/pitchfx-site/issues">GitHub page</a>. 
+					    If you have an <strong>idea</strong> for a feature, file an issue on our <a href="https://github.com/kruser/pitchfx-site/issues" onClick="_gaq.push(['_trackEvent', 'links', 'github', 'issues']);" >GitHub page</a>. 
 					    We read every submission. If you find your idea has already been submitted, please comment and watch the issue. Issues that are generating a lot of interest will bubble to the top of the queue.
 				</p>
 				<h3 class="text-primary fa fa-code"> Code</h3>
@@ -93,11 +93,21 @@
                         </p>
                         <p>
                             <a href="https://twitter.com/RyanKruse"
-                                class="fa fa-twitter fa-2x"></a><a
-                                href="http://www.linkedin.com/in/ryankruse"
-                                class="fa fa-linkedin fa-2x"></a><a
-                                href="mailto:ryan@kruseonline.net" class="fa fa-envelope fa-2x"></a><a
-                                href="https://github.com/kruser/" class="fa fa-github fa-2x"></a>
+                               target="_blank"
+                               onClick="_gaq.push(['_trackEvent', 'links', 'twitter', 'ryan']);"
+                               class="fa fa-twitter fa-2x"></a>
+                            <a href="http://www.linkedin.com/in/ryankruse"
+                               target="_blank"
+                               onClick="_gaq.push(['_trackEvent', 'links', 'linkedin', 'ryan']);"
+                               class="fa fa-linkedin fa-2x"></a>
+                            <a href="mailto:ryan@kruseonline.net" 
+                               target="_blank"
+                               onClick="_gaq.push(['_trackEvent', 'links', 'mail', 'ryan']);"
+                               class="fa fa-envelope fa-2x"></a>
+                            <a href="https://github.com/kruser/" 
+                               target="_blank"
+                               onClick="_gaq.push(['_trackEvent', 'links', 'github', 'ryan']);"
+                               class="fa fa-github fa-2x"></a>
                         </p>
                     </div>
                 </div>
@@ -112,7 +122,7 @@
                         <h3 class="hidden-xs">Your Name Here</h3>
                         <p>
                             Are you a software engineer with
-                            a love of baseball? Visit our <a href="https://github.com/kruser/pitchfx-site">GitHub</a> page to
+                            a love of baseball? Visit our <a onClick="_gaq.push(['_trackEvent', 'links', 'github', 'pitchfx-site']);" href="https://github.com/kruser/pitchfx-site">GitHub</a> page to
                             join in. Just fork the code, implement a feature or fix a bug, and submit pull requests back to the main line. 
                             If they're good, they're going in.
                         </p>
@@ -124,7 +134,7 @@
 			<div class="container">
 				<h2>The Data</h2>
 				<p>
-					Using the <a href="https://github.com/kruser/atbat-mongodb"
+					Using the <a onClick="_gaq.push(['_trackEvent', 'links', 'github', 'atbat-mongodb']);" href="https://github.com/kruser/atbat-mongodb"
 						target="_blank">atbat-mongodb</a> project, we pull pitch and
 					at-bat data from each day's baseball games and store it in our own
 					MongoDB database. Data is available back to the 2010 season.
@@ -143,7 +153,7 @@
                 that have made sites like PitchFX.org possible.
                 </small>
                 </p>
-                <small>Copyright 2014 Ryan Kruse | <a target="_blank" href="https://github.com/kruser/pitchfx-site/blob/master/ATTRIBUTION.md">Other attributions</a></small>
+                <small>Copyright 2014 Ryan Kruse | <a target="_blank" onClick="_gaq.push(['_trackEvent', 'links', 'github', 'pitchfx-site-attribution']);" href="https://github.com/kruser/pitchfx-site/blob/master/ATTRIBUTION.md">Other attributions</a></small>
             </div>
         </div>
 	</div>

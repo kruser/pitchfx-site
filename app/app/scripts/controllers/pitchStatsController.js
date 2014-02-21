@@ -62,6 +62,7 @@ controllers.pitchStatsController = [ '$rootScope', '$scope', '$log', '$timeout',
             $timeout(function() {
                 regenPitchStats();
             }, 10);
+            _gaq.push(['_trackEvent', 'filters', 'pitches', $scope.playerId]);
         }, true);
     }
 

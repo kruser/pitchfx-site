@@ -41,6 +41,7 @@ directives.battingStats = [ 'playerService', 'filtersService', '$log', '$route',
                         var tab = scope.tabs[int];
                         tab.active = (tab.route === route);
                     }
+                    _gaq.push(['_trackEvent', 'tabs', route, scope.playerId]);
                 }
             });
         }

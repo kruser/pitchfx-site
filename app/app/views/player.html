@@ -27,12 +27,12 @@
 				<form ng-controller="searchController"
 					class="navbar-form navbar-left">
 					<div class="form-group">
-						<input ng-model="playerSelection" typeahead-wait-ms="200"
+						<input ng-model="playerSelection" typeahead-wait-ms="200" style="min-width:250px;"
 							typeahead-loading="playersLoading"
 							typeahead="player as player.getFullName() for player in searchPlayers($viewValue)"
 							typeahead-on-select="playerSelected()" type="text"
 							typeahead-template-url="/partials/playerSearchTemplate.html"
-							placeholder="Find a player" class="form-control">
+							placeholder="Find another player" class="form-control">
 					</div>
 				</form>
 				<ul class="nav navbar-nav">
