@@ -13,7 +13,7 @@ app.controller('sharingController', controllers.sharingController);
 app.controller('sharingModalController', controllers.sharingModalController);
 app.directive('rkBattingStats', directives.battingStats);
 app.directive('rkFilters', directives.filters);
-app.directive('errSrc', directives.errSrc);
+app.directive('defaultAvatar', directives.defaultAvatar);
 app.config([ '$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
     $routeProvider.when('/atbats', {
         meta : 'atbats',
