@@ -45,6 +45,7 @@
 						typeahead-wait-ms="200" typeahead-loading="playersLoading"
 						typeahead="player as player.getFullName() for player in searchPlayers($viewValue)"
 						typeahead-on-select="playerSelected()" type="text"
+						typeahead-template-url="/partials/playerSearchTemplate.html"
 						placeholder="Search for a player by name" class="form-control">
 			</div>
 		</div>
