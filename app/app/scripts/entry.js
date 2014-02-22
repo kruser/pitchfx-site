@@ -30,6 +30,6 @@ app.config([ '$routeProvider', '$locationProvider', function($routeProvider, $lo
         meta : 'twitter',
         templateUrl : '/partials/twitter.html',
     }).otherwise({
-        redirectTo : '/atbats'
+        redirectTo : document.body.getAttribute("data-default-route")
     });
 } ]);
