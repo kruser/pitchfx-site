@@ -10,7 +10,7 @@
     
     <% include templates/css.html %>
 </head>
-<body ng-app="pitchfx">
+<body ng-app="pitchfx" data-default-route="<%if (playerInfo.primary_position==1) { %>/pitches<%} else {%>/atbats<%}%>">
 	<header class="navbar navbar-default navbar-fixed-top">
 		<div class="container">
 			<div class="navbar-header">
