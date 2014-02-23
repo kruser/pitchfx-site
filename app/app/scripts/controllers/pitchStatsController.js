@@ -11,18 +11,17 @@ controllers.pitchStatsController = [ '$rootScope', '$scope', '$log', '$timeout',
     var wobaSeries = [];
     var rawPitches = [];
 
-    var plateBoundaries = [ {
-        label : {
-            text : 'plate'
+    var strikeZone = {
+        name : 'Zone',
+        type : 'line',
+        color : '#3a87ad',
+        marker : {
+            enabled : false
         },
-        value : 0.709,
-        width : 1,
-        color : 'rgba(49,126,172,.5)',
-    }, {
-        value : -0.709,
-        width : 1,
-        color : 'rgba(49,126,172,.5)',
-    } ];
+        showInLegend : false,
+        enableMouseTracking : false,
+        data : [ [ -0.709, 3.5 ], [ 0.709, 3.5 ], [ 0.709, 1.5 ], [ -0.709, 1.5 ], [ -0.709, 3.5 ] ]
+    };
 
     $scope.loading = true;
     $scope.filtersService = filtersService;
@@ -62,7 +61,7 @@ controllers.pitchStatsController = [ '$rootScope', '$scope', '$log', '$timeout',
             $timeout(function() {
                 regenPitchStats();
             }, 10);
-            _gaq.push(['_trackEvent', 'filters', 'pitches', $scope.playerId]);
+            _gaq.push([ '_trackEvent', 'filters', 'pitches', $scope.playerId ]);
         }, true);
     }
 
@@ -105,6 +104,11 @@ controllers.pitchStatsController = [ '$rootScope', '$scope', '$log', '$timeout',
             credits : {
                 enabled : false
             },
+            plotOptions : {
+                series : {
+                    animation : false
+                }
+            },
             title : {
                 text : '',
                 enabled : false,
@@ -119,7 +123,6 @@ controllers.pitchStatsController = [ '$rootScope', '$scope', '$log', '$timeout',
                 startOnTick : true,
                 endOnTick : true,
                 showLastLabel : true,
-                plotLines : plateBoundaries,
             },
             yAxis : {
                 max : 5,
@@ -131,7 +134,7 @@ controllers.pitchStatsController = [ '$rootScope', '$scope', '$log', '$timeout',
             legend : {
                 enabled : false,
             },
-            series : [ {
+            series : [ strikeZone, {
                 name : 'wOBA Value',
                 data : wobaSeries,
                 color : 'rgb(136, 193, 73)',
@@ -174,7 +177,6 @@ controllers.pitchStatsController = [ '$rootScope', '$scope', '$log', '$timeout',
                 startOnTick : true,
                 endOnTick : true,
                 showLastLabel : true,
-                plotLines : plateBoundaries,
             },
             yAxis : {
                 max : 5,
@@ -204,9 +206,12 @@ controllers.pitchStatsController = [ '$rootScope', '$scope', '$log', '$timeout',
                             }
                         }
                     },
+                },
+                series : {
+                    animation : false
                 }
             },
-            series : [ {
+            series : [ strikeZone, {
                 name : 'Whiffs',
                 color : 'rgba(223, 83, 83, .2)',
                 data : whiffSeries,
