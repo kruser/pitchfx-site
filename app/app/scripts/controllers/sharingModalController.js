@@ -9,9 +9,9 @@ var addthis_config = {
  */
 controllers.sharingModalController = [ '$scope', '$http', '$timeout', '$location', '$log', '$modalInstance', 'filtersService', function($scope, $http, $timeout, $location, $log, $modalInstance, filtersService) {
 
-    $scope.model = {
-        url : getFilteredUrl(),
-    };
+    $scope.model = {};
+    $scope.model.url = getFilteredUrl();
+    $scope.model.urlEncoded = encodeURI($scope.model.url);
 
     /**
      * Close the modal

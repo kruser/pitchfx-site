@@ -19,10 +19,12 @@ app.config([ '$routeProvider', '$locationProvider', function($routeProvider, $lo
         meta : 'atbats',
         controller : controllers.battingStatsController,
         templateUrl : '/partials/atbats.html',
+        reloadOnSearch: false,
     }).when('/pitches', {
         meta : 'pitches',
         controller : controllers.pitchStatsController,
         templateUrl : '/partials/pitches.html',
+        reloadOnSearch: false,
     }).when('/scouting', {
         meta : 'scouting',
         templateUrl : '/partials/scouting.html',
