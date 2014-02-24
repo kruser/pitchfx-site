@@ -50,7 +50,7 @@ controllers.battingStatsController = [ '$scope', '$log', '$timeout', 'filtersSer
         }
         return tooltip;
     }
-    
+
     /**
      * Renders advanced charts
      */
@@ -122,6 +122,9 @@ controllers.battingStatsController = [ '$scope', '$log', '$timeout', 'filtersSer
                 gridLineColor : 'transparent'
             },
             plotOptions : {
+                series : {
+                    animation : false
+                },
                 scatter : {
                     marker : {
                         radius : 5,
