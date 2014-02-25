@@ -104,6 +104,7 @@ function calculateResults(docs, statsYear) {
 function completeStats(results) {
     calcBattingAverage(results);
     calcWOBA(results);
+    calcWRAA(results);
     calcSLG(results);
     calcOBP(results);
     calcBABIP(results);
@@ -111,7 +112,7 @@ function completeStats(results) {
 }
 
 /**
- * Calculates Runners Moved Indicator
+ * Calculate Runners Moved Indicator
  * 
  * @param results
  */
@@ -155,7 +156,7 @@ function calcSLG(results) {
 }
 
 /**
- * Weighted On Base Average calculation
+ * Calculate Weighted On Base Average
  * 
  * @param results
  */
@@ -173,7 +174,19 @@ function calcWOBA(results) {
 }
 
 /**
- * Batting average calculation
+ * Calculate Weighted Runs Above Average
+ * 
+ * @param results
+ */
+function calcWRAA(results) {
+    var coefficients = statsConstantsService.getCoefficients(results.year);
+    if (results.plateAppearances) {
+        results.wRAA = ((results.wOBA - coefficients.wOBA) / coefficients.wOBAScale) * results.plateAppearances;
+    }
+}
+
+/**
+ * Calculate Batting Average
  * 
  * @param results
  */
