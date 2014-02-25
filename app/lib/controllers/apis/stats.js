@@ -37,11 +37,11 @@ exports.query = function(req, res) {
         query.batter = playerId;
     } else {
         query.pitcher = playerId;
-    };
+    }
     var statsYear = moment().year();
     if (filter.date && filter.date.end) {
-        var statsYear = moment(filter.date.end).year();
-    };
+        statsYear = moment(filter.date.end).year();
+    }
 
     adjustQueryByFilter(query, filter);
 
@@ -163,13 +163,7 @@ function calcSLG(results) {
 function calcWOBA(results) {
     var coefficients = statsConstantsService.getCoefficients(results.year);
     if (results.plateAppearances) {
-        results.wOBA = ((results.walks * coefficients.wBB) 
-            + (results.hitByPitch * coefficients.wHBP) 
-            + (results.singles * coefficients.w1B) 
-            + (results.doubles * coefficients.w2B) 
-            + (results.triples * coefficients.w3B) 
-            + (results.homeRuns * coefficients.wHR) 
-            + (results.rboe * 0.92)) / results.plateAppearances;
+        results.wOBA = ((results.walks * coefficients.wBB) + (results.hitByPitch * coefficients.wHBP) + (results.singles * coefficients.w1B) + (results.doubles * coefficients.w2B) + (results.triples * coefficients.w3B) + (results.homeRuns * coefficients.wHR) + (results.rboe * 0.92)) / results.plateAppearances;
     }
 }
 
