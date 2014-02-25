@@ -1,7 +1,9 @@
+var moment = require('moment');
 var MongoClient = require('mongodb').MongoClient;
 var AtBat = require('../../pojos/AtBat').AtBat;
 var mongoUtils = require('../../utils/mongoUtils');
 var arrayUtils = require('../../utils/arrayUtils');
+var statsConstantsService = require('../../services/statsConstantsService');
 
 /**
  * These are the fields we'll pull from the DB
@@ -35,7 +37,11 @@ exports.query = function(req, res) {
         query.batter = playerId;
     } else {
         query.pitcher = playerId;
-    }
+    };
+    var statsYear = moment().year();
+    if (filter.date && filter.date.end) {
+        var statsYear = moment(filter.date.end).year();
+    };
 
     adjustQueryByFilter(query, filter);
 
@@ -43,7 +49,7 @@ exports.query = function(req, res) {
 
     MongoClient.connect("mongodb://localhost:27017/mlbatbat", function(err, db) {
         db.collection('atbats').find(query, atbatIncludes).toArray(function(err, docs) {
-            res.json(calculateResults(docs));
+            res.json(calculateResults(docs, statsYear));
             db.close();
         });
     });
@@ -55,8 +61,9 @@ exports.query = function(req, res) {
  * @param docs
  * @returns {*} results
  */
-function calculateResults(docs) {
+function calculateResults(docs, statsYear) {
     var results = {
+        year : statsYear,
         BA : 0.0,
         wOBA : 0.0,
         singles : 0,
@@ -148,13 +155,20 @@ function calcSLG(results) {
 }
 
 /**
- * Weighted OBA calculation
+ * Weighted On Base Average calculation
  * 
  * @param results
  */
 function calcWOBA(results) {
+    var coefficients = statsConstantsService.getCoefficients(results.year);
     if (results.plateAppearances) {
-        results.wOBA = ((results.walks * 0.72) + (results.hitByPitch * 0.75) + (results.singles * 0.9) + (results.doubles * 1.24) + (results.triples * 1.56) + (results.homeRuns * 1.95) + (results.rboe * 0.92)) / results.plateAppearances;
+        results.wOBA = ((results.walks * coefficients.wBB) 
+            + (results.hitByPitch * coefficients.wHBP) 
+            + (results.singles * coefficients.w1B) 
+            + (results.doubles * coefficients.w2B) 
+            + (results.triples * coefficients.w3B) 
+            + (results.homeRuns * coefficients.wHR) 
+            + (results.rboe * 0.92)) / results.plateAppearances;
     }
 }
 
