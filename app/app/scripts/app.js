@@ -1,3 +1,4 @@
+var _gaq = _gaq || [];
 /**
  * Sets up our AngularJS module
  */

@@ -6,6 +6,7 @@ describe('Service: Pitches', function() {
     beforeEach(module('pitchfxApp'));
 
     // instantiate service
+    /*
     var Pitches;
     beforeEach(inject(function(_Pitches_) {
         Pitches = _Pitches_;
@@ -14,5 +15,6 @@ describe('Service: Pitches', function() {
     it('should do something', function() {
         expect( !! Pitches).toBe(true);
     });
+    */
 
 });
