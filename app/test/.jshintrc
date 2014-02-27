@@ -10,6 +10,7 @@
   "trailing": true,
   "undef": true,
   "unused": true,
+  "maxdepth": 3,
   "globals": {
     "after": false,
     "afterEach": false,

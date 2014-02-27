@@ -336,6 +336,7 @@ angular.module('pitchfxApp').controller('PitchstatsCtrl', ['$rootScope', '$scope
 
                     if (!havePitchTypeFilters || pitchTypeFilters[pitchCode]) {
                         wOba = pitch.getWeightedObaValue();
+                        /*jshint  maxdepth:5 */
                         if (angular.isDefined(wOba)) {
                             if (angular.isDefined(pitch.px) && angular.isDefined(pitch.pz)) {
                                 wobaSeries.push([pitch.px, pitch.pz, wOba]);
@@ -351,6 +352,7 @@ angular.module('pitchfxApp').controller('PitchstatsCtrl', ['$rootScope', '$scope
 
                     if (pitch.isSwing()) {
                         aggregator.swing++;
+                        /*jshint  maxdepth:5 */
                         if (pitch.isWhiff()) {
                             aggregator.whiff++;
                             if ((!havePitchTypeFilters || pitchTypeFilters[pitchCode]) && angular.isDefined(pitch.px) && angular.isDefined(pitch.pz)) {
