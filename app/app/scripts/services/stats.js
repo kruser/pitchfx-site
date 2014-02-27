@@ -1,12 +1,6 @@
-var services = services || {};
+'use strict';
 
-/**
- * An AngularJS service with stat aggregator functions and web service calls
- * into the stats API
- */
-services.statsService = [ '$log', '$http', function($log, $http) {
-    "use strict";
-
+angular.module('pitchfxApp').service('Stats', [ '$log', '$http', function($log, $http) {
     /**
      * Get stats from the backend
      * 
@@ -25,4 +19,4 @@ services.statsService = [ '$log', '$http', function($log, $http) {
             return result.data;
         });
     };
-} ];
+} ]);

@@ -1,11 +1,6 @@
-var services = services || {};
+'use strict';
 
-/**
- * Helper function for charting
- */
-services.chartingService = [ '$log', '$window', function($log, $window) {
-    "use strict";
-
+angular.module('pitchfxApp').service('Charting', [ '$log', '$window', function($log, $window) {
     /**
      * Highcharts has native support for charts that are 100% width, but the
      * height of the chart is a fixed pixel amount. This doesn't fit nicely with
@@ -28,9 +23,7 @@ services.chartingService = [ '$log', '$window', function($log, $window) {
 
         var rs = function() {
             squareChart(highchart);
-        };
-        
-        var destroy = function() {
+        }, destroy = function() {
             angular.element($window).unbind('resize', rs);
         };
 
@@ -50,4 +43,4 @@ services.chartingService = [ '$log', '$window', function($log, $window) {
             highchart.setSize(square, square, false);
         }
     }
-} ];
+} ]);

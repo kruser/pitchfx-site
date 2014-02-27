@@ -1,9 +1,6 @@
-var controllers = controllers || {};
+'use strict';
 
-/**
- * A controller that manages hitting stats for a player
- */
-controllers.pitchStatsController = [ '$rootScope', '$scope', '$log', '$timeout', '$location', 'filtersService', 'pitchesService', 'chartingService', function($rootScope, $scope, $log, $timeout, $location, filtersService, pitchesService, chartingService) {
+angular.module('pitchfxApp').controller('PitchstatsCtrl', [ '$rootScope', '$scope', '$log', '$timeout', '$location', 'Filters', 'Pitches', 'Charting', function($rootScope, $scope, $log, $timeout, $location, filtersService, pitchesService, chartingService) {
 
     var whiffsDestroyFunction = null;
     var whiffSeries = [];
@@ -298,7 +295,7 @@ controllers.pitchStatsController = [ '$rootScope', '$scope', '$log', '$timeout',
         $log.debug('Do we have pitch filters?: ' + havePitchTypeFilters);
 
         if (rawPitches) {
-            for ( var i = 0; i < rawPitches.length; i++) {
+            for (var i = 0; i < rawPitches.length; i++) {
                 var pitch = new pojos.Pitch(rawPitches[i]);
                 var pitchCode = pitch.getPitchType();
 
@@ -420,12 +417,12 @@ controllers.pitchStatsController = [ '$rootScope', '$scope', '$log', '$timeout',
         var series = [];
 
         var allSpeeds = [];
-        for ( var j = 0; j < pitchTypes.length; j++) {
+        for (var j = 0; j < pitchTypes.length; j++) {
             var vertical = {
                 name : pojos.Pitch.getPitchDisplayName(pitchTypes[j]),
                 data : [],
             };
-            for ( var i = minSpeed; i <= maxSpeed; i++) {
+            for (var i = minSpeed; i <= maxSpeed; i++) {
                 if (j === 0) {
                     allSpeeds.push(i);
                 }
@@ -444,4 +441,4 @@ controllers.pitchStatsController = [ '$rootScope', '$scope', '$log', '$timeout',
     }
 
     init();
-} ];
+} ]);

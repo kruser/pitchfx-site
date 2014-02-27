@@ -1,12 +1,6 @@
-var services = services || {};
+'use strict';
 
-/**
- * An AngularJS service with functions to interact with player centric web
- * services
- */
-services.playerService = [ '$http', '$q', '$log', function($http, $q, $log) {
-    "use strict";
-
+angular.module('pitchfxApp').service('Player', [ '$http', function($http) {
     /**
      * Get player info including things like, name, height, weight, etc.
      * 
@@ -41,7 +35,7 @@ services.playerService = [ '$http', '$q', '$log', function($http, $q, $log) {
             var players;
             players = [];
             if (result.data && result.data.length > 0) {
-                for ( var i = 0; i < result.data.length; i++) {
+                for (var i = 0; i < result.data.length; i++) {
                     var player = new pojos.Player(result.data[i]);
                     players.push(player);
                 }
@@ -72,9 +66,10 @@ services.playerService = [ '$http', '$q', '$log', function($http, $q, $log) {
             return result.data;
         });
     };
-    
+
     /**
      * Get at-bats for a pitcher
+     * 
      * @param {int}
      *            playerId - the player id of the batter
      * @param {Date}
@@ -95,4 +90,4 @@ services.playerService = [ '$http', '$q', '$log', function($http, $q, $log) {
         });
     };
 
-} ];
+} ]);

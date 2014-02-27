@@ -1,9 +1,4 @@
-var controllers = controllers || {};
-
-/**
- * A controller that manages hitting stats for a player
- */
-controllers.battingStatsController = [ '$scope', '$log', '$timeout', 'filtersService', 'statsService', 'chartingService', function($scope, $log, $timeout, filtersService, statsService, chartingService) {
+angular.module('pitchfxApp').controller('BattingstatsCtrl', [ '$scope', '$log', '$timeout', 'Filters', 'Stats', 'Charting', function($scope, $log, $timeout, filtersService, statsService, chartingService) {
 
     var hipChart = null;
     var hipScatter = null;
@@ -55,7 +50,9 @@ controllers.battingStatsController = [ '$scope', '$log', '$timeout', 'filtersSer
      * Renders advanced charts
      */
     function renderCharts() {
-        /* render charts with a timeout to let the screen size snap first */
+        /*
+         * render charts with a timeout to let the screen size snap first
+         */
         $timeout(function() {
             renderHipTypes();
             renderHipScatter();
@@ -201,4 +198,4 @@ controllers.battingStatsController = [ '$scope', '$log', '$timeout', 'filtersSer
     }
 
     init();
-} ];
+} ]);

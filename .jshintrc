@@ -1,13 +1,21 @@
 {
+  "curly": true,
+  "eqeqeq": true,
+  "eqnull": true,
+  "expr": true,
+  "latedef": true,
+  "onevar": true,
+  "noarg": true,
+  "node": true,
+  "trailing": true,
+  "undef": true,
+  "unused": true,
   "globals": {
     "angular": true,
-    "moment": true,
-    "Modernizr": true,
+    "_gaq" : true,
     "Highcharts": true,
-    "require": true,
-    "__dirname" : true,
-    "console" : true,
-    "process" : true,
-    "exports" : true
+	"pojos": true,
+    "moment": true,
+	"addthis": true
   }
 }

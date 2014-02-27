@@ -80,7 +80,7 @@ pojos.Pitch.prototype.getWeightedObaValue = function() {
             return 1.95;
         } else if (/field error/i.test(des)) {
             return 1.56;
-        } 
+        }
     }
     return undefined;
 };

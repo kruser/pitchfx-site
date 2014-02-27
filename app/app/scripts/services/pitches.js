@@ -1,17 +1,14 @@
-var services = services || {};
+'use strict';
 
-/**
- * An AngularJS service to aid in retrieval of pitches based on a filter
- */
-services.pitchesService = [ '$log', '$http', function($log, $http) {
-    "use strict";
+angular.module('pitchfxApp').service('Pitches', [ '$log', '$http', function($log, $http) {
 
     /**
      * Get pitches from the backend
      * 
      * @param {int}
      *            playerId - the player ID
-     * @param {*} atbatFilter - the atbat filter object
+     * @param {*}
+     *            atbatFilter - the atbat filter object
      */
     this.getPitches = function(playerId, atbatFilter) {
         var params = {
@@ -23,4 +20,4 @@ services.pitchesService = [ '$log', '$http', function($log, $http) {
             return result.data;
         });
     };
-} ];
+} ]);

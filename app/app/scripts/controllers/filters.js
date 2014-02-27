@@ -1,9 +1,9 @@
-var controllers = controllers || {};
+'use strict';
 
 /**
  * A controller that manages hitting stats for a player
  */
-controllers.filtersController = [ '$scope', '$log', '$timeout', '$angularCacheFactory', '$routeParams', '$route', '$location', 'filtersService', function($scope, $log, $timeout, $angularCacheFactory, $routeParams, $route, $location, filtersService) {
+angular.module('pitchfxApp').controller('FiltersCtrl', [ '$scope', '$log', '$timeout', '$angularCacheFactory', '$routeParams', '$route', '$location', 'Filters', function($scope, $log, $timeout, $angularCacheFactory, $routeParams, $route, $location, filtersService) {
     var filterCache = $angularCacheFactory('filterCache', {
         storageMode : 'localStorage',
         maxAge : 3600000,
@@ -51,7 +51,7 @@ controllers.filtersController = [ '$scope', '$log', '$timeout', '$angularCacheFa
     $scope.$watch('[filters]', function(filters) {
         filterCache.put('filters', filters);
         filtersService.filters = filters;
-        _gaq.push(['_trackEvent', 'filters', 'atbats', $scope.playerId]);
+        _gaq.push([ '_trackEvent', 'filters', 'atbats', $scope.playerId ]);
     }, true);
 
     /**
@@ -73,4 +73,4 @@ controllers.filtersController = [ '$scope', '$log', '$timeout', '$angularCacheFa
         }
     }
 
-} ];
+} ]);

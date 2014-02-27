@@ -1,13 +1,6 @@
-var controllers = controllers || {};
+'use strict';
 
-var addthis_config = {
-    "data_track_addressbar" : true
-};
-
-/**
- * A controller that manages all sharing
- */
-controllers.sharingModalController = [ '$scope', '$http', '$timeout', '$location', '$log', '$modalInstance', 'filtersService', function($scope, $http, $timeout, $location, $log, $modalInstance, filtersService) {
+angular.module('pitchfxApp').controller('SharingmodalCtrl', [ '$scope', '$http', '$timeout', '$location', '$log', '$modalInstance', 'Filters', function($scope, $http, $timeout, $location, $log, $modalInstance, filtersService) {
 
     $scope.model = {};
     $scope.model.url = getFilteredUrl();
@@ -36,4 +29,4 @@ controllers.sharingModalController = [ '$scope', '$http', '$timeout', '$location
         return filteredUrl;
     }
 
-} ];
+} ]);

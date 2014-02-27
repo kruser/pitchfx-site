@@ -1,11 +1,6 @@
-var directives = directives || {};
+'use strict';
 
-/**
- * The directive to show all
- */
-directives.filters = [ 'playerService', '$log', function(playerService, $log) {
-    "use strict";
-
+angular.module('pitchfxApp').directive('filters', [ function() {
     return {
         restrict : 'E',
         replace : true,
@@ -15,6 +10,6 @@ directives.filters = [ 'playerService', '$log', function(playerService, $log) {
             'playerBats' : '@'
         },
         templateUrl : '/partials/filters.html',
-        controller : controllers.filtersController,
+        controller : 'FiltersCtrl',
     };
-} ];
+} ]);

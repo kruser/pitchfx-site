@@ -10,7 +10,7 @@
     
     <% include templates/css.html %>
 </head>
-<body ng-app="pitchfx" data-default-route="<%if (playerInfo.primary_position==1) { %>/pitches<%} else {%>/atbats<%}%>">
+<body ng-app="pitchfxApp" data-default-route="<%if (playerInfo.primary_position==1) { %>/pitches<%} else {%>/atbats<%}%>">
 	<header class="navbar navbar-default navbar-fixed-top">
 		<div class="container">
 			<div class="navbar-header">
@@ -24,7 +24,7 @@
 			</div>
 			<div id="navbar-main" ng-class="{'in':openMenu}"
 				class="navbar-collapse collapse navbar-right">
-				<form ng-controller="searchController"
+				<form ng-controller="SearchCtrl"
 					class="navbar-form navbar-left">
 					<div class="form-group">
 						<input ng-model="playerSelection" typeahead-wait-ms="200" style="min-width:250px;"
@@ -39,7 +39,7 @@
 					<li><a href="/#about">About </a></li>
 					<li><a target="_blank" href="https://github.com/kruser/pitchfx-site/issues">Got Issues?</a></li>
 					<li tooltip="Follow us on Twitter" tooltip-placement="bottom"><a href="https://twitter.com/PitchFX_org" target="_blank" class="fa fa-twitter-square fa-2x"></a></li>
-					<li tooltip="Share this filtered view" tooltip-placement="bottom" ng-controller="sharingController"><a ng-click="shareFilteredPage()" class="fa fa-share-square fa-2x"></a></li>
+					<li tooltip="Share this filtered view" tooltip-placement="bottom" ng-controller="SharingCtrl"><a ng-click="shareFilteredPage()" class="fa fa-share-square fa-2x"></a></li>
 				</ul>
 			</div>
 		</div>
@@ -75,17 +75,18 @@
 					</div>
 				</div>
 			</div>
-			<rk-filters player-id="<%= playerInfo.player_id %>" player-position="<%= playerInfo.primary_position %>" player-bats="<%= playerInfo.bats %>"></rk-filters>
+			<filters player-id="<%= playerInfo.player_id %>" player-position="<%= playerInfo.primary_position %>" player-bats="<%= playerInfo.bats %>"></filters>
 		</div>
 		<div class="col-sm-8 col-md-8 col-lg-9 col-xl-9">
-			<rk-batting-stats player-id="<%= playerInfo.player_id %>" player-position="<%= playerInfo.primary_position %>"></rk-batting-stats>
+			<batting-stats player-id="<%= playerInfo.player_id %>" player-position="<%= playerInfo.primary_position %>"></batting-stats>
 		</div>
 	</div>
 </body>
 <% include templates/scripts.html %>
 <script type="text/javascript">
 var addthis_config = {
-  services_exclude: 'print'
+  services_exclude: 'print',
+  data_track_addressbar : true
 };
 var addthis_share = {
   passthrough : {

@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html>
 <head>
@@ -12,7 +13,7 @@
 
 <% include templates/css.html %>
 </head>
-<body ng-app="pitchfx">
+<body ng-app="pitchfxApp">
 	<a class="hidden-xs hidden-md" href="https://github.com/kruser/pitchfx-site" target="_blank"><img
 		style="position: fixed; top: 50px; right: 0; border: 0;"
 		src="https://s3.amazonaws.com/github/ribbons/forkme_right_white_ffffff.png"
@@ -38,7 +39,7 @@
 		</div>
 	</header>
 	<div ng-app="home" class="kruser-home">
-		<div ng-controller="searchController" ng-class="[backgroundIndex]" class="jumbotron on panorama">
+		<div ng-controller="SearchCtrl" ng-class="[backgroundIndex]" class="jumbotron on panorama">
 			<div class="container">
 				<h1 class="text-info">Find a Player</h1>
 				<input ng-model="playerSelection"

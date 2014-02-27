@@ -1,12 +1,12 @@
-var controllers = controllers || {};
+'use strict';
 
 /**
  * A controller that manages searching players
  */
-controllers.searchController = [ '$scope', '$log', '$window', 'playerService', function($scope, $log, $window, playerService) {
+angular.module('pitchfxApp').controller('SearchCtrl', [ '$scope', '$log', '$window', 'Player', function($scope, $log, $window, playerService) {
 
     $scope.playersLoading = false;
-    
+
     /* match theme.css */
     $scope.backgroundIndex = 'panorama-' + Math.floor((Math.random() * 5) + 1);
 
@@ -32,4 +32,4 @@ controllers.searchController = [ '$scope', '$log', '$window', 'playerService', f
         }
     };
 
-} ];
+} ]);
