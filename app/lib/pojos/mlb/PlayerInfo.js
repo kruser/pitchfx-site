@@ -1,14 +1,15 @@
-var moment = require('moment');
-var extend = require('node.extend');
+var moment = require('moment'),
+    extend = require('node.extend'),
+    pitchfx = pitchfx || {};
 
 /**
  * @class pojos.PlayerInfo
  * @classdesc the player_info object as it comes from the MLBAM APIs
- * 
+ *
  * @param {object}
  *            dataObj - the player_info data as it comes from the wire
  */
-PlayerInfo = function(dataObj) {
+pitchfx.PlayerInfo = function(dataObj) {
     extend(this, dataObj);
 };
 
@@ -17,7 +18,7 @@ PlayerInfo = function(dataObj) {
  * @instance
  * @returns {moment} the birthday
  */
-PlayerInfo.prototype.getBirthDate = function() {
+pitchfx.PlayerInfo.prototype.getBirthDate = function() {
     return moment(this.birth_date);
 };
 
@@ -26,11 +27,11 @@ PlayerInfo.prototype.getBirthDate = function() {
  * @instance
  * @returns {moment} the mlb debut date
  */
-PlayerInfo.prototype.getMlbDebut = function() {
+pitchfx.PlayerInfo.prototype.getMlbDebut = function() {
     if (this.pro_debut_date) {
         return moment(this.pro_debut_date);
     }
     return undefined;
 };
 
-exports.PlayerInfo = PlayerInfo;
+exports.PlayerInfo = pitchfx.PlayerInfo;

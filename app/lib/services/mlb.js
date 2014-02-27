@@ -3,7 +3,7 @@ var PlayerInfo = require('../pojos/mlb/PlayerInfo').PlayerInfo;
 
 /**
  * Get player_info from MLBAM by ID. populated
- * 
+ *
  * @param {string}
  *            playerId - the MLBAM id of the player
  * @param {function(playerInfo)}

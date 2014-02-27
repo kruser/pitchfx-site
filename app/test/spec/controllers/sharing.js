@@ -1,28 +1,28 @@
 'use strict';
 
-describe('Controller: SharingCtrl', function () {
+describe('Controller: SharingCtrl', function() {
 
-  // load the controller's module
-  beforeEach(module('pitchfxApp'));
+    // load the controller's module
+    beforeEach(module('pitchfxApp'));
 
-  var SharingCtrl,
-    scope,
-    $httpBackend;
+    var SharingCtrl,
+        scope,
+        $httpBackend;
 
-  // Initialize the controller and a mock scope
-  beforeEach(inject(function (_$httpBackend_, $controller, $rootScope) {
-    $httpBackend = _$httpBackend_;
-    $httpBackend.expectGET('/api/awesomeThings')
-      .respond(['HTML5 Boilerplate', 'AngularJS', 'Karma', 'Express']);
-    scope = $rootScope.$new();
-    SharingCtrl = $controller('SharingCtrl', {
-      $scope: scope
+    // Initialize the controller and a mock scope
+    beforeEach(inject(function(_$httpBackend_, $controller, $rootScope) {
+        $httpBackend = _$httpBackend_;
+        $httpBackend.expectGET('/api/awesomeThings')
+            .respond(['HTML5 Boilerplate', 'AngularJS', 'Karma', 'Express']);
+        scope = $rootScope.$new();
+        SharingCtrl = $controller('SharingCtrl', {
+            $scope: scope
+        });
+    }));
+
+    it('should attach a list of awesomeThings to the scope', function() {
+        expect(scope.awesomeThings).toBeUndefined();
+        $httpBackend.flush();
+        expect(scope.awesomeThings.length).toBe(4);
     });
-  }));
-
-  it('should attach a list of awesomeThings to the scope', function () {
-    expect(scope.awesomeThings).toBeUndefined();
-    $httpBackend.flush();
-    expect(scope.awesomeThings.length).toBe(4);
-  });
 });

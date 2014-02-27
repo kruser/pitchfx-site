@@ -14,6 +14,9 @@ module.exports = function(grunt) {
 
     // Time how long tasks take. Can help when optimizing build times
     require('time-grunt')(grunt);
+    
+    // Load jsbeautifier
+    grunt.loadNpmTasks('grunt-jsbeautifier');
 
     // Define the configuration for all the tasks
     grunt.initConfig({
@@ -82,7 +85,7 @@ module.exports = function(grunt) {
         // Make sure code styles are up to par and there are no obvious mistakes
         jshint : {
             options : {
-                jshintrc : '.jshintrc',
+                jshintrc : '../.jshintrc',
                 reporter : require('jshint-stylish')
             },
             all : [ '<%= yeoman.app %>/scripts/{,*/}*.js' ],
@@ -92,6 +95,11 @@ module.exports = function(grunt) {
                 },
                 src : [ 'test/spec/{,*/}*.js' ]
             }
+        },
+        
+        jsbeautifier : {
+            files : ['app/scripts/**/*.js', 'lib/**/*.js', 'test/spec/**/*.js' ],
+            options : {}
         },
 
         // Empties folders to start fresh

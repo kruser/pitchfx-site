@@ -14,8 +14,8 @@
     "angular": true,
     "_gaq" : true,
     "Highcharts": true,
-	"pojos": true,
     "moment": true,
-	"addthis": true
+	"addthis": true,
+    "pitchfx":true
   }
 }

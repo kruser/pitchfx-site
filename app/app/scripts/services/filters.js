@@ -1,5 +1,8 @@
 'use strict';
 
-angular.module('pitchfxApp').service('Filters', [ function() {
-    this.filters = {};
-} ]);
+angular.module('pitchfxApp').service('Filters', [
+
+    function() {
+        this.filters = {};
+    }
+]);

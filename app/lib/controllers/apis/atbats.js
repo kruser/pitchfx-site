@@ -3,7 +3,7 @@ var MongoClient = require('mongodb').MongoClient;
 /**
  * Query atbats for a batter or a pitcher. If there isn't a "batter" or
  * "pitcher" query parameter than this method will throw a 500.
- * 
+ *
  * @param req -
  *            the express request
  * @param res -
@@ -12,12 +12,12 @@ var MongoClient = require('mongodb').MongoClient;
 exports.query = function(req, res) {
 
     /* Supported parameters */
-    var batter = req.query.batter;
-    var pitcher = req.query.pitcher;
-    var start = req.query.from;
-    var end = req.query.to;
+    var batter = req.query.batter,
+        pitcher = req.query.pitcher,
+        start = req.query.from,
+        end = req.query.to,
+        query = {};
 
-    var query = {};
     if (batter) {
         query.batter = parseInt(batter, 10);
     }
@@ -26,22 +26,22 @@ exports.query = function(req, res) {
     }
     if (!pitcher && !batter) {
         res.send(500, {
-            error : 'pitcher or batter parameters are required'
+            error: 'pitcher or batter parameters are required'
         });
         return;
     }
     if (start && end) {
         query.start_tfs_zulu = {
-            '$gte' : new Date(start),
-            '$lte' : new Date(end)
+            '$gte': new Date(start),
+            '$lte': new Date(end)
         };
     } else if (start) {
         query.start_tfs_zulu = {
-            '$gte' : new Date(start)
+            '$gte': new Date(start)
         };
     } else if (end) {
         query.start_tfs_zulu = {
-            '$lt' : new Date(end)
+            '$lt': new Date(end)
         };
     }
 

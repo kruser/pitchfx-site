@@ -1,10 +1,9 @@
-var request = require('request');
 var mlb = require('../../services/mlb');
 
 /**
  * Get player_info from MLBAM by ID. The req.params.id is expected to be
  * populated
- * 
+ *
  * @param req -
  *            the express request
  * @param res -
