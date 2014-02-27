@@ -20,6 +20,7 @@ angular.module('pitchfxApp', ['ui.bootstrap', 'ngTouch', 'ngRoute', 'jmdobry.ang
             meta: 'twitter',
             templateUrl: '/partials/twitter.html',
         }).otherwise({
+            /* global document */
             redirectTo: document.body.getAttribute('data-default-route')
         });
     }
