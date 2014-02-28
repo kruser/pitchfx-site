@@ -64,11 +64,12 @@ angular.module('pitchfxApp').controller('BattingstatsCtrl', ['$scope', '$log', '
          * The scatter plot for hit balls
          */
         function renderHipScatter() {
+            var series = [],
+                trajectory;
+
             if (hipScatterDestroyFunction) {
                 hipScatterDestroyFunction();
             }
-            var series = [],
-                trajectory;
             for (trajectory in $scope.stats.hitBalls) {
                 series.push({
                     name: trajectory,

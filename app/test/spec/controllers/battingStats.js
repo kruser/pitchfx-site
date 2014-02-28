@@ -25,8 +25,8 @@ describe('Controller: BattingstatsCtrl', function() {
         expect(true).toBe(true);
     });
     */
-    
-    it('Dummy', function(){
+
+    it('Dummy', function() {
         expect(true).toBe(true);
     });
 });
