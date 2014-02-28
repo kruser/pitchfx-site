@@ -1,5 +1,4 @@
-PitchFX.org
-============
+# [PitchFX.org](http://pitchfx.org) [![Build Status](https://travis-ci.org/kruser/pitchfx-site.png?branch=master)](https://travis-ci.org/kruser/pitchfx-site)
 
 ### Overview
 PitchFX.org is are webapp for searching PitchFX data. This app is built with a MEAN stack, meaning the following technologies.
