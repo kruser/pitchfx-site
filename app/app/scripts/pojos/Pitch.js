@@ -50,7 +50,7 @@ pitchfx.Pitch.prototype.isWhiff = function() {
  * @returns {Boolean} true if this pitch resulted in a hit
  */
 pitchfx.Pitch.prototype.isHit = function() {
-    return this.des === 'In play, no out';
+    return (/in play,\s*(no out|run.*)/i.test(this.des));
 };
 
 /**
