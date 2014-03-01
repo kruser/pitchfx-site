@@ -3,6 +3,7 @@
 describe('Directive: filters', function() {
 
     // load the directive's module
+    /*
     beforeEach(module('pitchfxApp'));
 
     var element,

@@ -5,6 +5,7 @@ describe('Controller: PitchstatsCtrl', function() {
     // load the controller's module
     beforeEach(module('pitchfxApp'));
 
+    /*
     var PitchstatsCtrl,
         scope,
         $httpBackend;
