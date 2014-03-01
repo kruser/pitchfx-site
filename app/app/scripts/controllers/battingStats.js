@@ -198,7 +198,6 @@ angular.module('pitchfxApp').controller('BattingstatsCtrl', ['$scope', '$log', '
                 chartingService.keepSquare(hipChart);
             } else {
                 hipChart.series[0].setData(series, true);
-                var guh;
             }
         }
 
