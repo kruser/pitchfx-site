@@ -1,8 +1,7 @@
 language: node_js
 node_js:
   - '0.10'
+before_install: cd app
 before_script:
-  - 'cd app'
   - 'npm install -g bower grunt-cli'
   - 'bower install'
-  - 'grunt jshint'
