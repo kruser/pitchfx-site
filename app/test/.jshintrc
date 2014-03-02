@@ -24,6 +24,7 @@
     "it": false,
     "spyOn": false,
     "pitchfx" : false
+    "moment" : false
   }
 }
 
