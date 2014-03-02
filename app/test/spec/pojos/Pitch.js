@@ -21,15 +21,15 @@ describe('POJO: Pitch', function() {
 
     it('Test a ball', function() {
         var pitch = new pitchfx.Pitch({
-            "atbat" : {
-                "des" : "Josmil Pinto doubles (1) on a line drive to left fielder Jim Adduci.   Clete Thomas scores.  "
+            "atbat": {
+                "des": "Josmil Pinto doubles (1) on a line drive to left fielder Jim Adduci.   Clete Thomas scores.  "
             },
-            "px" : -0.44,
-            "type" : "B",
-            "des" : "Ball",
-            "pz" : 4.735,
-            "start_speed" : 89.4,
-            "pitch_type" : "FC"
+            "px": -0.44,
+            "type": "B",
+            "des": "Ball",
+            "pz": 4.735,
+            "start_speed": 89.4,
+            "pitch_type": "FC"
         });
         expect(pitch.isBall()).toBe(true);
         expect(pitch.isSwing()).toBe(false);
@@ -43,18 +43,18 @@ describe('POJO: Pitch', function() {
 
     it('Test a double', function() {
         var pitch = new pitchfx.Pitch({
-            "hip" : {
-                "des" : "Double"
+            "hip": {
+                "des": "Double"
             },
-            "atbat" : {
-                "des" : "Josmil Pinto doubles (1) on a line drive to left fielder Jim Adduci.   Clete Thomas scores.  "
+            "atbat": {
+                "des": "Josmil Pinto doubles (1) on a line drive to left fielder Jim Adduci.   Clete Thomas scores.  "
             },
-            "px" : -0.107,
-            "type" : "X",
-            "des" : "In play, run(s)",
-            "pz" : 3.364,
-            "start_speed" : 70,
-            "pitch_type" : "CU"
+            "px": -0.107,
+            "type": "X",
+            "des": "In play, run(s)",
+            "pz": 3.364,
+            "start_speed": 70,
+            "pitch_type": "CU"
         });
         expect(pitch.isBall()).toBe(false);
         expect(pitch.isSwing()).toBe(true);
@@ -69,18 +69,18 @@ describe('POJO: Pitch', function() {
 
     it('Test a groundout', function() {
         var pitch = new pitchfx.Pitch({
-            "hip" : {
-                "des" : "Groundout"
+            "hip": {
+                "des": "Groundout"
             },
-            "atbat" : {
-                "des" : "Josmil Pinto grounds out, shortstop Jurickson Profar to first baseman Mitch Moreland.  "
+            "atbat": {
+                "des": "Josmil Pinto grounds out, shortstop Jurickson Profar to first baseman Mitch Moreland.  "
             },
-            "px" : 0.187,
-            "type" : "X",
-            "des" : "In play, out(s)",
-            "pz" : 0.92,
-            "start_speed" : 80.1,
-            "pitch_type" : "CH"
+            "px": 0.187,
+            "type": "X",
+            "des": "In play, out(s)",
+            "pz": 0.92,
+            "start_speed": 80.1,
+            "pitch_type": "CH"
         });
         expect(pitch.isBall()).toBe(false);
         expect(pitch.isSwing()).toBe(true);
