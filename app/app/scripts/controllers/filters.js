@@ -77,7 +77,5 @@ angular.module('pitchfxApp').controller('FiltersCtrl', ['$scope', '$log', '$time
             _gaq.push(['_trackEvent', 'filters', 'atbats', $scope.playerId]);
         }, true);
 
-
-
     }
 ]);
