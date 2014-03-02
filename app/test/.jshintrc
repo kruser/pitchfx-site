@@ -23,7 +23,7 @@
     "inject": false,
     "it": false,
     "spyOn": false,
-    "pitchfx" : false
+    "pitchfx" : false,
     "moment" : false
   }
 }
