@@ -30,7 +30,7 @@ exports.generate = function(req, res) {
                 if (player.first && player.last) {
                     url = {
                         loc: 'http://pitchfx.org/player/' + player.id + '/' + player.first.toLowerCase() + '-' + player.last.toLowerCase(),
-                        lastMod: lastMod,
+                        lastmod: lastMod,
                         changefreq: 'weekly',
                         priority: 1
                     };
