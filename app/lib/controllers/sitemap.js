@@ -17,7 +17,7 @@ exports.generate = function(req, res) {
 
     urlSet.url.push({
         loc: 'http://pitchfx.org',
-        lastMod: lastMod,
+        lastmod: lastMod,
         changefreq: 'monthly',
         priority: 1
     });
