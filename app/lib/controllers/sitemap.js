@@ -9,6 +9,9 @@ var js2xmlparser = require("js2xmlparser"),
 exports.generate = function(req, res) {
 
     var urlSet = {
+        '@': {
+            xmlns: 'http://www.sitemaps.org/schemas/sitemap/0.9'
+        },
         url: []
     },
         url,
