@@ -7,7 +7,8 @@
     "mongodb": "*",
     "request": "*",
     "node.extend": "*",
-    "moment": "*"
+    "moment": "*",
+    "js2xmlparser": "*"
   },
   "devDependencies": {
     "grunt": "~0.4.2",
