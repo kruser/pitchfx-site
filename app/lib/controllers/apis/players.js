@@ -39,7 +39,7 @@ exports.query = function(req, res) {
         query = {},
         splitty,
         options = {
-            'sort': 'last',
+            'sort': {'lastSeen':-1},
             'skip': from,
             'limit': size
         };
