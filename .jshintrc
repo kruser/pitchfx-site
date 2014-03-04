@@ -17,6 +17,7 @@
     "Highcharts": true,
     "moment": true,
 	"addthis": true,
-    "pitchfx":true
+    "pitchfx":true,
+    "Modernizr": true
   }
 }
