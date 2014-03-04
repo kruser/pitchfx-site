@@ -18,6 +18,7 @@ module.exports = function(config) {
       'app/bower_components/angular-cache/dist/angular-cache.js',
       'app/bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
       'app/bower_components/moment/moment.js',
+      'app/bower_components/modernizr/modernizr.js',
       'app/scripts/*.js',
       'app/scripts/**/*.js',
       'test/mock/**/*.js',
