@@ -1,7 +1,8 @@
 'use strict';
 
 angular.module('pitchfxApp').service('Charting', ['$log', '$window',
-    function($log, $window) {
+    function($log, $window)
+    {
         /**
          * Highcharts has native support for charts that are 100% width, but the
          * height of the chart is a fixed pixel amount. This doesn't fit nicely with
@@ -19,12 +20,15 @@ angular.module('pitchfxApp').service('Charting', ['$log', '$window',
          * @returns {function} a funtion to call when you want to destroy the
          *          bindings
          */
-        this.keepSquare = function(highchart) {
+        this.keepSquare = function(highchart)
+        {
             squareChart(highchart);
 
-            var rs = function() {
+            var rs = function()
+            {
                 squareChart(highchart);
-            }, destroy = function() {
+            }, destroy = function()
+                {
                     angular.element($window).unbind('resize', rs);
                 };
 
@@ -38,8 +42,10 @@ angular.module('pitchfxApp').service('Charting', ['$log', '$window',
          * @param {*}
          *            highchart - the highchart to keep square
          */
-        function squareChart(highchart) {
-            if (highchart) {
+        function squareChart(highchart)
+        {
+            if (highchart)
+            {
                 var square = highchart.container.parentNode.offsetWidth;
                 highchart.setSize(square, square, false);
             }

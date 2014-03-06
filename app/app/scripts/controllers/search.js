@@ -4,7 +4,8 @@
  * A controller that manages searching players
  */
 angular.module('pitchfxApp').controller('SearchCtrl', ['$scope', '$log', '$window', 'Player',
-    function($scope, $log, $window, playerService) {
+    function($scope, $log, $window, playerService)
+    {
 
         $scope.playersLoading = false;
 
@@ -14,9 +15,11 @@ angular.module('pitchfxApp').controller('SearchCtrl', ['$scope', '$log', '$windo
         /**
          * Search for players
          */
-        $scope.searchPlayers = function(text) {
+        $scope.searchPlayers = function(text)
+        {
             $scope.playersLoading = true;
-            return playerService.searchPlayers(text).then(function(players) {
+            return playerService.searchPlayers(text).then(function(players)
+            {
                 $scope.playersLoading = false;
                 return players;
             });
@@ -25,9 +28,11 @@ angular.module('pitchfxApp').controller('SearchCtrl', ['$scope', '$log', '$windo
         /**
          * redirect to the player's page
          */
-        $scope.playerSelected = function() {
+        $scope.playerSelected = function()
+        {
             var player, url;
-            if ($scope.playerSelection && $scope.playerSelection.id) {
+            if ($scope.playerSelection && $scope.playerSelection.id)
+            {
                 player = $scope.playerSelection;
                 url = '/player/' + player.id + '/' + player.getUrlFriendlyName();
                 $window.location.href = url;

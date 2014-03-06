@@ -1,5 +1,6 @@
 var yearlyCoefficients = {
-    '2014': {
+    '2014':
+    {
         'wOBA': 0.314,
         'wOBAScale': 1.277,
         'wBB': 0.690,
@@ -14,7 +15,8 @@ var yearlyCoefficients = {
         'RperW': 9.264,
         'cFIP': 3.048
     },
-    '2013': {
+    '2013':
+    {
         'wOBA': 0.314,
         'wOBAScale': 1.277,
         'wBB': 0.690,
@@ -29,7 +31,8 @@ var yearlyCoefficients = {
         'RperW': 9.264,
         'cFIP': 3.048
     },
-    '2012': {
+    '2012':
+    {
         'wOBA': 0.315,
         'wOBAScale': 1.245,
         'wBB': 0.691,
@@ -44,7 +47,8 @@ var yearlyCoefficients = {
         'RperW': 9.544,
         'cFIP': 3.095
     },
-    '2011': {
+    '2011':
+    {
         'wOBA': 0.316,
         'wOBAScale': 1.264,
         'wBB': 0.694,
@@ -59,7 +63,8 @@ var yearlyCoefficients = {
         'RperW': 9.454,
         'cFIP': 3.025
     },
-    '2010': {
+    '2010':
+    {
         'wOBA': 0.321,
         'wOBAScale': 1.251,
         'wBB': 0.701,
@@ -74,7 +79,8 @@ var yearlyCoefficients = {
         'RperW': 9.643,
         'cFIP': 3.079
     },
-    '2009': {
+    '2009':
+    {
         'wOBA': 0.329,
         'wOBAScale': 1.210,
         'wBB': 0.707,
@@ -89,7 +95,8 @@ var yearlyCoefficients = {
         'RperW': 9.994,
         'cFIP': 3.097
     },
-    '2008': {
+    '2008':
+    {
         'wOBA': 0.328,
         'wOBAScale': 1.211,
         'wBB': 0.708,
@@ -104,7 +111,8 @@ var yearlyCoefficients = {
         'RperW': 10.032,
         'cFIP': 3.132
     },
-    '2007': {
+    '2007':
+    {
         'wOBA': 0.331,
         'wOBAScale': 1.192,
         'wBB': 0.711,
@@ -126,6 +134,7 @@ var yearlyCoefficients = {
  *            statsYear - the year of the stats
  * @returns {Array} coefficients Source: http://www.fangraphs.com/guts.aspx
  */
-exports.getCoefficients = function(statsYear) {
+exports.getCoefficients = function(statsYear)
+{
     return yearlyCoefficients[statsYear];
 };

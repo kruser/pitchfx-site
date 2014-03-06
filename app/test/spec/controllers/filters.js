@@ -1,6 +1,7 @@
 'use strict';
 
-describe('Controller: FiltersCtrl', function() {
+describe('Controller: FiltersCtrl', function()
+{
 
     // load the controller's module
     beforeEach(module('pitchfxApp'));
@@ -10,15 +11,18 @@ describe('Controller: FiltersCtrl', function() {
         $httpBackend;
 
     // Initialize the controller and a mock scope
-    beforeEach(inject(function(_$httpBackend_, $controller, $rootScope) {
+    beforeEach(inject(function(_$httpBackend_, $controller, $rootScope)
+    {
         $httpBackend = _$httpBackend_;
         scope = $rootScope.$new();
-        FiltersCtrl = $controller('FiltersCtrl', {
+        FiltersCtrl = $controller('FiltersCtrl',
+        {
             $scope: scope
         });
     }));
 
-    it('Test the initial filter', function() {
+    it('Test the initial filter', function()
+    {
         var filters = scope.filters;
         expect(filters).toBeTruthy();
 

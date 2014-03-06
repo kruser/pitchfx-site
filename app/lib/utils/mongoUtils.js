@@ -7,24 +7,33 @@
  *            fieldName - the name of the MongoDB field
  * @returns {object} the filter, can be undefined if no values pass
  */
-exports.buildInFilter = function(object, fieldName) {
+exports.buildInFilter = function(object, fieldName)
+{
     var values = [],
         filter = {}, key;
-    for (key in object) {
-        if (object[key]) {
-            if (/^\d+$/.test(key)) {
+    for (key in object)
+    {
+        if (object[key])
+        {
+            if (/^\d+$/.test(key))
+            {
                 values.push(parseInt(key, 10));
-            } else {
+            }
+            else
+            {
                 values.push(key);
             }
         }
     }
-    if (values.length > 0) {
+    if (values.length > 0)
+    {
         filter[fieldName] = {
             '$in': values
         };
         return filter;
-    } else {
+    }
+    else
+    {
         return undefined;
     }
 };

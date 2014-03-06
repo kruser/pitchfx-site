@@ -2,7 +2,8 @@
 
 angular.module('pitchfxApp').service('Filters', [
 
-    function() {
+    function()
+    {
         this.filters = {};
     }
 ]);

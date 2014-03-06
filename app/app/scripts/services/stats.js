@@ -1,7 +1,8 @@
 'use strict';
 
 angular.module('pitchfxApp').service('Stats', ['$log', '$http',
-    function($log, $http) {
+    function($log, $http)
+    {
         /**
          * Get stats from the backend
          *
@@ -10,13 +11,16 @@ angular.module('pitchfxApp').service('Stats', ['$log', '$http',
          * @param {*}
          *            filter - the filter object
          */
-        this.getStats = function(playerId, filter) {
+        this.getStats = function(playerId, filter)
+        {
             var params = {
                 filter: filter,
             };
-            return $http.get('/api/stats/' + playerId, {
+            return $http.get('/api/stats/' + playerId,
+            {
                 params: params
-            }).then(function(result) {
+            }).then(function(result)
+            {
                 return result.data;
             });
         };

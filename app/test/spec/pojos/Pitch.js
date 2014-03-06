@@ -1,7 +1,9 @@
 'use strict';
 
-describe('POJO: Pitch', function() {
-    it('Test pitch display names', function() {
+describe('POJO: Pitch', function()
+{
+    it('Test pitch display names', function()
+    {
         var p = pitchfx.Pitch;
         expect(p.getPitchDisplayName('FA')).toBe('Fastball');
         expect(p.getPitchDisplayName('FF')).toBe('4-seam');
@@ -19,9 +21,12 @@ describe('POJO: Pitch', function() {
         expect(p.getPitchDisplayName('UN')).toBe('Unknown');
     });
 
-    it('Test a ball', function() {
-        var pitch = new pitchfx.Pitch({
-            "atbat": {
+    it('Test a ball', function()
+    {
+        var pitch = new pitchfx.Pitch(
+        {
+            "atbat":
+            {
                 "des": "Josmil Pinto doubles (1) on a line drive to left fielder Jim Adduci.   Clete Thomas scores.  "
             },
             "px": -0.44,
@@ -41,12 +46,16 @@ describe('POJO: Pitch', function() {
         expect(pitch.getHipTrajectory()).toBe('');
     });
 
-    it('Test a double', function() {
-        var pitch = new pitchfx.Pitch({
-            "hip": {
+    it('Test a double', function()
+    {
+        var pitch = new pitchfx.Pitch(
+        {
+            "hip":
+            {
                 "des": "Double"
             },
-            "atbat": {
+            "atbat":
+            {
                 "des": "Josmil Pinto doubles (1) on a line drive to left fielder Jim Adduci.   Clete Thomas scores.  "
             },
             "px": -0.107,
@@ -67,12 +76,16 @@ describe('POJO: Pitch', function() {
         expect(pitch.getPitchType()).toBe('CU');
     });
 
-    it('Test a groundout', function() {
-        var pitch = new pitchfx.Pitch({
-            "hip": {
+    it('Test a groundout', function()
+    {
+        var pitch = new pitchfx.Pitch(
+        {
+            "hip":
+            {
                 "des": "Groundout"
             },
-            "atbat": {
+            "atbat":
+            {
                 "des": "Josmil Pinto grounds out, shortstop Jurickson Profar to first baseman Mitch Moreland.  "
             },
             "px": 0.187,

@@ -1,7 +1,8 @@
 'use strict';
 
 angular.module('pitchfxApp').service('Player', ['$http',
-    function($http) {
+    function($http)
+    {
         /**
          * Get player info including things like, name, height, weight, etc.
          *
@@ -9,8 +10,10 @@ angular.module('pitchfxApp').service('Player', ['$http',
          *            playerId
          * @returns {Promise<pojo.PlayerInfo>} the playerInfo data
          */
-        this.getPlayerInfo = function(playerId) {
-            return $http.get('/api/player_info/' + playerId).then(function(response) {
+        this.getPlayerInfo = function(playerId)
+        {
+            return $http.get('/api/player_info/' + playerId).then(function(response)
+            {
                 return new pitchfx.PlayerInfo(response.data);
             });
         };
@@ -25,18 +28,23 @@ angular.module('pitchfxApp').service('Player', ['$http',
          * @returns {Promise<pitchfx.Player>} a promise, when fufilled contains an
          *          array of data objects representing players
          */
-        this.searchPlayers = function(searchText) {
+        this.searchPlayers = function(searchText)
+        {
             var params = {
                 search: searchText,
                 size: 10
             };
-            return $http.get('/api/players', {
+            return $http.get('/api/players',
+            {
                 params: params
-            }).then(function(result) {
+            }).then(function(result)
+            {
                 var players = [],
                     player, i = 0;
-                if (result.data && result.data.length > 0) {
-                    for (i = 0; i < result.data.length; i++) {
+                if (result.data && result.data.length > 0)
+                {
+                    for (i = 0; i < result.data.length; i++)
+                    {
                         player = new pitchfx.Player(result.data[i]);
                         players.push(player);
                     }
@@ -55,15 +63,18 @@ angular.module('pitchfxApp').service('Player', ['$http',
          * @param {Date}
          *            to
          */
-        this.getAtBatsForBatter = function(playerId, from, to) {
+        this.getAtBatsForBatter = function(playerId, from, to)
+        {
             var params = {
                 batter: playerId,
                 from: from,
                 to: to,
             };
-            return $http.get('/api/atbats', {
+            return $http.get('/api/atbats',
+            {
                 params: params
-            }).then(function(result) {
+            }).then(function(result)
+            {
                 return result.data;
             });
         };
@@ -78,15 +89,18 @@ angular.module('pitchfxApp').service('Player', ['$http',
          * @param {Date}
          *            to
          */
-        this.getAtBatsForPitcher = function(playerId, from, to) {
+        this.getAtBatsForPitcher = function(playerId, from, to)
+        {
             var params = {
                 pitcher: playerId,
                 from: from,
                 to: to,
             };
-            return $http.get('/api/atbats', {
+            return $http.get('/api/atbats',
+            {
                 params: params
-            }).then(function(result) {
+            }).then(function(result)
+            {
                 return result.data;
             });
         };

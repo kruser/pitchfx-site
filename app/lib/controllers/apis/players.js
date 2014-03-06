@@ -8,12 +8,15 @@ var MongoClient = require('mongodb').MongoClient;
  * @param res -
  *            the express response
  */
-exports.getPlayer = function(req, res) {
+exports.getPlayer = function(req, res)
+{
     var query = {
         'id': parseInt(req.params.playerId, 10)
     };
-    MongoClient.connect("mongodb://localhost:27017/mlbatbat", function(err, db) {
-        db.collection('players').findOne(query, function(err, doc) {
+    MongoClient.connect("mongodb://localhost:27017/mlbatbat", function(err, db)
+    {
+        db.collection('players').findOne(query, function(err, doc)
+        {
             res.json(doc);
             db.close();
         });
@@ -30,7 +33,8 @@ exports.getPlayer = function(req, res) {
  * @param res -
  *            the express response
  */
-exports.query = function(req, res) {
+exports.query = function(req, res)
+{
 
     /* Supported parameters */
     var search = req.query.search,
@@ -39,22 +43,31 @@ exports.query = function(req, res) {
         query = {},
         splitty,
         options = {
-            'sort': {'lastSeen':-1},
+            'sort':
+            {
+                'lastSeen': -1
+            },
             'skip': from,
             'limit': size
         };
-    if (search) {
+    if (search)
+    {
         splitty = search.split(" ");
-        if (splitty.length > 1) {
+        if (splitty.length > 1)
+        {
             query = {
                 'first': new RegExp(splitty[0], 'i'),
                 'last': new RegExp(splitty[1], 'i')
             };
-        } else {
+        }
+        else
+        {
             query = {
-                '$or': [{
+                '$or': [
+                {
                     'first': new RegExp(search, 'i')
-                }, {
+                },
+                {
                     'last': new RegExp(search, 'i')
                 }]
             };
@@ -63,8 +76,10 @@ exports.query = function(req, res) {
 
     console.log(query);
 
-    MongoClient.connect("mongodb://localhost:27017/mlbatbat", function(err, db) {
-        db.collection('players').find(query, options).toArray(function(err, docs) {
+    MongoClient.connect("mongodb://localhost:27017/mlbatbat", function(err, db)
+    {
+        db.collection('players').find(query, options).toArray(function(err, docs)
+        {
             res.json(docs);
             db.close();
         });

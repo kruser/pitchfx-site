@@ -1,7 +1,8 @@
 'use strict';
 
 angular.module('pitchfxApp').service('Pitches', ['$log', '$http',
-    function($log, $http) {
+    function($log, $http)
+    {
 
         /**
          * Get pitches from the backend
@@ -11,13 +12,16 @@ angular.module('pitchfxApp').service('Pitches', ['$log', '$http',
          * @param {*}
          *            atbatFilter - the atbat filter object
          */
-        this.getPitches = function(playerId, atbatFilter) {
+        this.getPitches = function(playerId, atbatFilter)
+        {
             var params = {
                 atbatFilter: atbatFilter,
             };
-            return $http.get('/api/pitches/' + playerId, {
+            return $http.get('/api/pitches/' + playerId,
+            {
                 params: params
-            }).then(function(result) {
+            }).then(function(result)
+            {
                 return result.data;
             });
         };

@@ -1,6 +1,7 @@
 'use strict';
 
-describe('Controller: BattingstatsCtrl', function() {
+describe('Controller: BattingstatsCtrl', function()
+{
 
     // load the controller's module
     beforeEach(module('pitchfxApp'));
@@ -8,9 +9,11 @@ describe('Controller: BattingstatsCtrl', function() {
     var BattingstatsCtrl, scope, $httpBackend;
 
     // Initialize the controller and a mock scope
-    beforeEach(inject(function(_$httpBackend_, $controller, $rootScope) {
+    beforeEach(inject(function(_$httpBackend_, $controller, $rootScope)
+    {
         $httpBackend = _$httpBackend_;
-        $httpBackend.expectGET('/api/stats/123?filter=%7B%7D').respond({
+        $httpBackend.expectGET('/api/stats/123?filter=%7B%7D').respond(
+        {
             "year": 2014,
             "BA": 0.3314447592067989,
             "wOBA": 0.38983497536945805,
@@ -30,7 +33,8 @@ describe('Controller: BattingstatsCtrl', function() {
             "rboe": 1,
             "runnersPotentialBases": 487,
             "runnersMovedBases": 125,
-            "hitBalls": {
+            "hitBalls":
+            {
                 "liner": [
                     [136.55, -95.38],
                     [74.3, -64.26]
@@ -47,12 +51,14 @@ describe('Controller: BattingstatsCtrl', function() {
         });
         scope = $rootScope.$new();
         scope.playerId = 123;
-        BattingstatsCtrl = $controller('BattingstatsCtrl', {
+        BattingstatsCtrl = $controller('BattingstatsCtrl',
+        {
             $scope: scope
         });
     }));
 
-    it('Test for stats to be present', function() {
+    it('Test for stats to be present', function()
+    {
         expect(scope.stats).toBeUndefined();
         $httpBackend.flush();
         expect(scope.stats).toBeTruthy();

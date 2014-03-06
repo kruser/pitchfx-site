@@ -26,58 +26,80 @@ var pitchIncludes = {
  *            inning - the innings portion of the filter
  *
  */
-function buildInningQuery(inning) {
-    if (inning) {
+function buildInningQuery(inning)
+{
+    if (inning)
+    {
         var innings = [];
-        if (inning['1']) {
+        if (inning['1'])
+        {
             innings.push(1);
         }
-        if (inning['2']) {
+        if (inning['2'])
+        {
             innings.push(2);
         }
-        if (inning['3']) {
+        if (inning['3'])
+        {
             innings.push(3);
         }
-        if (inning['4']) {
+        if (inning['4'])
+        {
             innings.push(4);
         }
-        if (inning['5']) {
+        if (inning['5'])
+        {
             innings.push(5);
         }
-        if (inning['6']) {
+        if (inning['6'])
+        {
             innings.push(6);
         }
-        if (inning['7']) {
+        if (inning['7'])
+        {
             innings.push(7);
         }
-        if (inning['8']) {
+        if (inning['8'])
+        {
             innings.push(8);
         }
-        if (inning['9']) {
+        if (inning['9'])
+        {
             innings.push(9);
         }
 
-        if (inning.extra && innings.length > 0) {
+        if (inning.extra && innings.length > 0)
+        {
             return {
-                '$or': [{
-                    'inning.number': {
+                '$or': [
+                {
+                    'inning.number':
+                    {
                         '$gt': 9
                     }
-                }, {
-                    'inning.number': {
+                },
+                {
+                    'inning.number':
+                    {
                         '$in': innings
                     }
                 }]
             };
-        } else if (innings.length > 0) {
+        }
+        else if (innings.length > 0)
+        {
             return {
-                'inning.number': {
+                'inning.number':
+                {
                     '$in': innings
                 }
             };
-        } else if (inning.extra) {
+        }
+        else if (inning.extra)
+        {
             return {
-                'inning.number': {
+                'inning.number':
+                {
                     '$gt': 9
                 }
             };
@@ -93,57 +115,80 @@ function buildInningQuery(inning) {
  *            runners - the runners portion of the filter
  * @returns {*}
  */
-function buildRunnersQuery(runners) {
+function buildRunnersQuery(runners)
+{
 
     var bases = [],
         runnerFilter = {};
 
-    if (runners && runners.gate) {
-        if (runners.first) {
-            bases.push({
-                'on_1b': {
+    if (runners && runners.gate)
+    {
+        if (runners.first)
+        {
+            bases.push(
+            {
+                'on_1b':
+                {
                     '$exists': true
                 }
             });
         }
-        if (runners.second) {
-            bases.push({
-                'on_2b': {
+        if (runners.second)
+        {
+            bases.push(
+            {
+                'on_2b':
+                {
                     '$exists': true
                 }
             });
         }
-        if (runners.third) {
-            bases.push({
-                'on_3b': {
+        if (runners.third)
+        {
+            bases.push(
+            {
+                'on_3b':
+                {
                     '$exists': true
                 }
             });
         }
-        if (runners.empty) {
-            bases.push({
-                '$and': [{
-                    'on_1b': {
+        if (runners.empty)
+        {
+            bases.push(
+            {
+                '$and': [
+                {
+                    'on_1b':
+                    {
                         '$exists': false
                     }
-                }, {
-                    'on_2b': {
+                },
+                {
+                    'on_2b':
+                    {
                         '$exists': false
                     }
-                }, {
-                    'on_3b': {
+                },
+                {
+                    'on_3b':
+                    {
                         '$exists': false
                     }
                 }]
             });
         }
-        if (bases.length > 0) {
+        if (bases.length > 0)
+        {
             runnerFilter = {};
-            if (runners.gate === 'OR') {
+            if (runners.gate === 'OR')
+            {
                 return {
                     '$or': bases,
                 };
-            } else {
+            }
+            else
+            {
                 return {
                     '$and': bases,
                 };
@@ -160,17 +205,22 @@ function buildRunnersQuery(runners) {
  * @param query
  * @param filter
  */
-function adjustQueryByAtBatFilter(query, filter) {
+function adjustQueryByAtBatFilter(query, filter)
+{
 
     var topLevelFilters = [],
         gameTypes = [];
-    if (filter.pitcherHand) {
-        topLevelFilters.push({
+    if (filter.pitcherHand)
+    {
+        topLevelFilters.push(
+        {
             'atbat.p_throws': filter.pitcherHand
         });
     }
-    if (filter.batterHand) {
-        topLevelFilters.push({
+    if (filter.batterHand)
+    {
+        topLevelFilters.push(
+        {
             'atbat.stand': filter.batterHand
         });
     }
@@ -179,22 +229,29 @@ function adjustQueryByAtBatFilter(query, filter) {
     arrayUtils.pushIfExists(topLevelFilters, mongoUtils.buildInFilter(filter.balls, 'atbat.b'));
     arrayUtils.pushIfExists(topLevelFilters, mongoUtils.buildInFilter(filter.strikes, 'atbat.s'));
 
-    if (filter.gameType) {
+    if (filter.gameType)
+    {
         gameTypes = [];
-        if (filter.gameType.S) {
+        if (filter.gameType.S)
+        {
             gameTypes.push('S');
         }
-        if (filter.gameType.R) {
+        if (filter.gameType.R)
+        {
             gameTypes.push('R');
         }
-        if (filter.gameType.P) {
+        if (filter.gameType.P)
+        {
             gameTypes.push('D');
             gameTypes.push('L');
             gameTypes.push('W');
         }
-        if (gameTypes.length > 0) {
-            topLevelFilters.push({
-                'game.game_type': {
+        if (gameTypes.length > 0)
+        {
+            topLevelFilters.push(
+            {
+                'game.game_type':
+                {
                     '$in': gameTypes
                 }
             });
@@ -204,23 +261,35 @@ function adjustQueryByAtBatFilter(query, filter) {
     arrayUtils.pushIfExists(topLevelFilters, buildInningQuery(filter.inning));
     arrayUtils.pushIfExists(topLevelFilters, buildRunnersQuery(filter.runners));
 
-    if (filter.date) {
-        if (filter.date.start && filter.date.end) {
-            topLevelFilters.push({
-                'tfs_zulu': {
+    if (filter.date)
+    {
+        if (filter.date.start && filter.date.end)
+        {
+            topLevelFilters.push(
+            {
+                'tfs_zulu':
+                {
                     '$gte': new Date(filter.date.start),
                     '$lte': new Date(filter.date.end)
                 }
             });
-        } else if (filter.date.start) {
-            topLevelFilters.push({
-                'tfs_zulu': {
+        }
+        else if (filter.date.start)
+        {
+            topLevelFilters.push(
+            {
+                'tfs_zulu':
+                {
                     '$gte': new Date(filter.date.start)
                 }
             });
-        } else if (filter.date.end) {
-            topLevelFilters.push({
-                'tfs_zulu': {
+        }
+        else if (filter.date.end)
+        {
+            topLevelFilters.push(
+            {
+                'tfs_zulu':
+                {
                     '$lt': new Date(filter.date.end)
                 }
             });
@@ -239,15 +308,19 @@ function adjustQueryByAtBatFilter(query, filter) {
  * @param res -
  *            the express response
  */
-exports.query = function(req, res) {
+exports.query = function(req, res)
+{
     var playerId = parseInt(req.params.playerId, 10),
         atbatFilter = JSON.parse(req.query.atbatFilter),
         query = {
             '$and': [],
         };
-    if (atbatFilter.playerCard === 'batter') {
+    if (atbatFilter.playerCard === 'batter')
+    {
         query['atbat.batter'] = playerId;
-    } else {
+    }
+    else
+    {
         query['atbat.pitcher'] = playerId;
     }
 
@@ -255,8 +328,10 @@ exports.query = function(req, res) {
 
     console.log(JSON.stringify(query, null, 4));
 
-    MongoClient.connect("mongodb://localhost:27017/mlbatbat", function(err, db) {
-        db.collection('pitches').find(query, pitchIncludes).toArray(function(err, docs) {
+    MongoClient.connect("mongodb://localhost:27017/mlbatbat", function(err, db)
+    {
+        db.collection('pitches').find(query, pitchIncludes).toArray(function(err, docs)
+        {
             res.json(docs);
             db.close();
         });

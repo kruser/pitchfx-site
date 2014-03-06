@@ -1,15 +1,18 @@
 'use strict';
 
 angular.module('pitchfxApp').controller('SharingmodalCtrl', ['$scope', '$http', '$timeout', '$location', '$log', '$modalInstance', 'Filters',
-    function($scope, $http, $timeout, $location, $log, $modalInstance, filtersService) {
+    function($scope, $http, $timeout, $location, $log, $modalInstance, filtersService)
+    {
 
         /**
          * Get the URL plus the filter
          */
-        function getFilteredUrl() {
+        function getFilteredUrl()
+        {
             var absUrl = $location.absUrl().split('?')[0].replace('localhost:9000', 'pitchfx.org'),
                 filteredUrl = absUrl + '?filter=' + JSON.stringify(filtersService.filters);
-            if (filtersService.pitchFilters) {
+            if (filtersService.pitchFilters)
+            {
                 filteredUrl += '&pitchFilters=' + JSON.stringify(filtersService.pitchFilters);
             }
             return filteredUrl;
@@ -22,11 +25,13 @@ angular.module('pitchfxApp').controller('SharingmodalCtrl', ['$scope', '$http', 
         /**
          * Close the modal
          */
-        $scope.dismiss = function() {
+        $scope.dismiss = function()
+        {
             $modalInstance.dismiss('cancel');
         };
 
-        $timeout(function() {
+        $timeout(function()
+        {
             addthis.toolbox("#addthis_toolbox");
         }, 500);
 

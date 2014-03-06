@@ -9,12 +9,17 @@ var mlb = require('../../services/mlb');
  * @param res -
  *            the express response
  */
-exports.getPlayer = function(req, res) {
+exports.getPlayer = function(req, res)
+{
     var playerId = req.params.playerId;
-    mlb.getPlayerInfo(playerId, function(player) {
-        if (player) {
+    mlb.getPlayerInfo(playerId, function(player)
+    {
+        if (player)
+        {
             res.json(player);
-        } else {
+        }
+        else
+        {
             var msg = 'Can not find player: ' + playerId;
             console.error(msg);
             res.send(404, msg);

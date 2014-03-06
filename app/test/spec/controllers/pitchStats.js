@@ -1,6 +1,7 @@
 'use strict';
 
-describe('Controller: PitchstatsCtrl', function() {
+describe('Controller: PitchstatsCtrl', function()
+{
 
     // load the controller's module
     beforeEach(module('pitchfxApp'));
@@ -8,10 +9,13 @@ describe('Controller: PitchstatsCtrl', function() {
     var PitchstatsCtrl, scope, $httpBackend;
 
     // Initialize the controller and a mock scope
-    beforeEach(inject(function(_$httpBackend_, $controller, $rootScope) {
+    beforeEach(inject(function(_$httpBackend_, $controller, $rootScope)
+    {
         $httpBackend = _$httpBackend_;
-        $httpBackend.expectGET('/api/pitches/123?atbatFilter=%7B%7D').respond([{
-            "atbat": {
+        $httpBackend.expectGET('/api/pitches/123?atbatFilter=%7B%7D').respond([
+        {
+            "atbat":
+            {
                 "des": "Josmil Pinto grounds out, shortstop Jurickson Profar to first baseman Mitch Moreland.  "
             },
             "px": 0.301,
@@ -20,8 +24,10 @@ describe('Controller: PitchstatsCtrl', function() {
             "pz": 3.047,
             "start_speed": 84.5,
             "pitch_type": "CH"
-        }, {
-            "atbat": {
+        },
+        {
+            "atbat":
+            {
                 "des": "Josmil Pinto grounds out, shortstop Jurickson Profar to first baseman Mitch Moreland.  "
             },
             "px": -0.252,
@@ -30,8 +36,10 @@ describe('Controller: PitchstatsCtrl', function() {
             "pz": 0.464,
             "start_speed": 79,
             "pitch_type": "CH"
-        }, {
-            "atbat": {
+        },
+        {
+            "atbat":
+            {
                 "des": "Josmil Pinto grounds out, shortstop Jurickson Profar to first baseman Mitch Moreland.  "
             },
             "px": -0.097,
@@ -40,8 +48,10 @@ describe('Controller: PitchstatsCtrl', function() {
             "pz": 3.33,
             "start_speed": 80,
             "pitch_type": "CH"
-        }, {
-            "atbat": {
+        },
+        {
+            "atbat":
+            {
                 "des": "Josmil Pinto grounds out, shortstop Jurickson Profar to first baseman Mitch Moreland.  "
             },
             "px": 0.272,
@@ -50,8 +60,10 @@ describe('Controller: PitchstatsCtrl', function() {
             "pz": 5.18,
             "start_speed": 71.3,
             "pitch_type": "CU"
-        }, {
-            "atbat": {
+        },
+        {
+            "atbat":
+            {
                 "des": "Josmil Pinto doubles (1) on a line drive to left fielder Jim Adduci.   Clete Thomas scores.  "
             },
             "px": -0.44,
@@ -63,19 +75,22 @@ describe('Controller: PitchstatsCtrl', function() {
         }]);
         scope = $rootScope.$new();
         scope.playerId = 123;
-        PitchstatsCtrl = $controller('PitchstatsCtrl', {
+        PitchstatsCtrl = $controller('PitchstatsCtrl',
+        {
             $scope: scope
         });
     }));
 
-    it('Test pitch counts', function() {
+    it('Test pitch counts', function()
+    {
         expect(scope.loading).toBe(true);
         expect(scope.pitchCount).toBe(0);
         $httpBackend.flush();
         expect(scope.pitchCount).toBe(5);
     });
 
-    it('Test pitch speeds chart', function() {
+    it('Test pitch speeds chart', function()
+    {
         $httpBackend.flush();
         /* there is a 19 MPH difference between slowest and fastest pitches */
         expect(scope.pitchSpeeds.categories.length).toBe(19);
@@ -89,7 +104,8 @@ describe('Controller: PitchstatsCtrl', function() {
         expect(scope.pitchSpeeds.series[1].data[1]).toBeFalsy();
     });
 
-    it('Test out the pitch table', function() {
+    it('Test out the pitch table', function()
+    {
         expect(scope.pitchTypes.length).toBe(0);
         $httpBackend.flush();
         expect(scope.pitchTypes.length).toBe(3);

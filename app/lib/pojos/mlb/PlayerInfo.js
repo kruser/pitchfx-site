@@ -1,6 +1,7 @@
 var moment = require('moment'),
     extend = require('node.extend'),
-    pitchfx = pitchfx || {};
+    pitchfx = pitchfx ||
+    {};
 
 /**
  * @class pojos.PlayerInfo
@@ -9,7 +10,8 @@ var moment = require('moment'),
  * @param {object}
  *            dataObj - the player_info data as it comes from the wire
  */
-pitchfx.PlayerInfo = function(dataObj) {
+pitchfx.PlayerInfo = function(dataObj)
+{
     extend(this, dataObj);
 };
 
@@ -18,7 +20,8 @@ pitchfx.PlayerInfo = function(dataObj) {
  * @instance
  * @returns {moment} the birthday
  */
-pitchfx.PlayerInfo.prototype.getBirthDate = function() {
+pitchfx.PlayerInfo.prototype.getBirthDate = function()
+{
     return moment(this.birth_date);
 };
 
@@ -27,8 +30,10 @@ pitchfx.PlayerInfo.prototype.getBirthDate = function() {
  * @instance
  * @returns {moment} the mlb debut date
  */
-pitchfx.PlayerInfo.prototype.getMlbDebut = function() {
-    if (this.pro_debut_date) {
+pitchfx.PlayerInfo.prototype.getMlbDebut = function()
+{
+    if (this.pro_debut_date)
+    {
         return moment(this.pro_debut_date);
     }
     return undefined;

@@ -1,4 +1,5 @@
-var pitchfx = pitchfx || {};
+var pitchfx = pitchfx ||
+{};
 
 /**
  * @class pojos.Player
@@ -7,7 +8,8 @@ var pitchfx = pitchfx || {};
  * @param {object}
  *            dataObj - the player data as it comes from the wire
  */
-pitchfx.Player = function(dataObj) {
+pitchfx.Player = function(dataObj)
+{
     angular.extend(this, dataObj);
 };
 
@@ -16,7 +18,8 @@ pitchfx.Player = function(dataObj) {
  * @instance
  * @returns {string} the full name of the player
  */
-pitchfx.Player.prototype.getFullName = function() {
+pitchfx.Player.prototype.getFullName = function()
+{
     return this.first + ' ' + this.last;
 };
 
@@ -28,7 +31,8 @@ pitchfx.Player.prototype.getFullName = function() {
  * @instance
  * @returns {string} the url friendly name
  */
-pitchfx.Player.prototype.getUrlFriendlyName = function() {
+pitchfx.Player.prototype.getUrlFriendlyName = function()
+{
     var url = this.first + '-' + this.last;
     return url.replace(/\./g, '').toLowerCase();
 };

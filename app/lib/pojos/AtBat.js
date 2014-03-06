@@ -1,5 +1,6 @@
 var extend = require('node.extend'),
-    pitchfx = pitchfx || {};
+    pitchfx = pitchfx ||
+    {};
 
 /**
  * @class pojos.AtBat
@@ -8,7 +9,8 @@ var extend = require('node.extend'),
  * @param {object}
  *            dataObj - the data object from the mongo collection
  */
-pitchfx.AtBat = function(dataObj) {
+pitchfx.AtBat = function(dataObj)
+{
     extend(this, dataObj);
 };
 
@@ -19,13 +21,20 @@ pitchfx.AtBat = function(dataObj) {
  *          hit ball. Note that foul ball outs may not be accurate if they're
  *          behind the plate.
  */
-pitchfx.AtBat.prototype.getField = function() {
-    if (this.hip && typeof this.hip.angle !== 'undefined') {
-        if (this.hip.angle < 75) {
+pitchfx.AtBat.prototype.getField = function()
+{
+    if (this.hip && typeof this.hip.angle !== 'undefined')
+    {
+        if (this.hip.angle < 75)
+        {
             return 'L';
-        } else if (this.hip.angle > 105) {
+        }
+        else if (this.hip.angle > 105)
+        {
             return 'R';
-        } else {
+        }
+        else
+        {
             return 'C';
         }
     }

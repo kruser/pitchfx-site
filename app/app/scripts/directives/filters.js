@@ -2,11 +2,13 @@
 
 angular.module('pitchfxApp').directive('filters', [
 
-    function() {
+    function()
+    {
         return {
             restrict: 'E',
             replace: true,
-            scope: {
+            scope:
+            {
                 'playerId': '@',
                 'playerPosition': '@',
                 'playerBats': '@'
