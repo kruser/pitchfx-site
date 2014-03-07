@@ -14,7 +14,7 @@ exports.getPlayerInfo = function(playerId, callback)
 {
     request('http://mlb.mlb.com/lookup/json/named.player_info.bam?sport_code=%27mlb%27&player_id=' + playerId, function(error, response, data)
     {
-        if (response.statusCode === 200)
+        if (response && response.statusCode === 200)
         {
             var json = JSON.parse(data);
             if (json.player_info && json.player_info.queryResults)
