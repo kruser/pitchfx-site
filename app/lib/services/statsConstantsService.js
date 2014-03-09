@@ -136,5 +136,12 @@ var yearlyCoefficients = {
  */
 exports.getCoefficients = function(statsYear)
 {
-    return yearlyCoefficients[statsYear];
+    if (statsYear in yearlyCoefficients)
+    {
+        return yearlyCoefficients[statsYear];
+    }
+    else
+    {
+        return yearlyCoefficients[Object.keys(yearlyCoefficients)[0]];
+    }
 };
