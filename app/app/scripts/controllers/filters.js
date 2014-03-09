@@ -6,9 +6,6 @@
 angular.module('pitchfxApp').controller('FiltersCtrl', ['$scope', '$log', '$timeout', '$angularCacheFactory', '$routeParams', '$route', '$location', 'Filters',
     function($scope, $log, $timeout, $angularCacheFactory, $routeParams, $route, $location, filtersService)
     {
-
-        $scope.dateInputSupported = Modernizr.inputtypes.date;
-
         /**
          * Gets the recommended starting date for the filters.
          *
