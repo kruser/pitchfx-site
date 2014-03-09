@@ -29,13 +29,11 @@
 			<label class="control-label">Date Range</label>
 			<div class="row">
 				<div class="col-xs-6 col-sm-12">
-					<input class="form-control" ng-if="dateInputSupported" ng-required type="date" placeholder="Start date" ng-model="filters.date.start" min="2010-02-01">
-					<input class="form-control" ng-if="!dateInputSupported" ng-required show-weeks="false" type="text" placeholder="Start date" datepicker-popup="MM/dd/yyyy" ng-model="filters.date.start" min="'02/01/2010'"/>
+					<input class="form-control" show-weeks="false" type="text" placeholder="Start date" datepicker-popup="MM/dd/yyyy" ng-model="filters.date.start" min="'02/01/2010'"/>
     				<br class="hidden-xs">
 				</div>
 				<div class="col-xs-6 col-sm-12">
-					<input class="form-control" ng-if="dateInputSupported" ng-required type="date" placeholder="End date" ng-model="filters.date.end" min="2010-02-01">
-					<input class="form-control" ng-if="!dateInputSupported" ng-required show-weeks="false" type="text" placeholder="End date" datepicker-popup="MM/dd/yyyy" ng-model="filters.date.end" min="'02/01/2010'"//>
+					<input class="form-control" show-weeks="false" type="text" placeholder="End date" datepicker-popup="MM/dd/yyyy" ng-model="filters.date.end" min="'02/01/2010'"/>
 				</div>
 			</div>
 		</div>
