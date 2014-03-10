@@ -103,10 +103,6 @@ angular.module('pitchfxApp').controller('FiltersCtrl', ['$scope', '$log', '$time
             }, true);
         }
 
-        $timeout(function()
-        {
-            init();
-        });
-
+        init();
     }
 ]);
