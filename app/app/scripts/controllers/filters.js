@@ -32,74 +32,81 @@ angular.module('pitchfxApp').controller('FiltersCtrl', ['$scope', '$log', '$time
             }
         }
 
-        var filterCache = $angularCacheFactory('filterCache',
+        function init()
         {
-            storageMode: 'localStorage',
-            maxAge: 3600000,
-            deleteOnExpire: 'aggressive',
-            recycleFreq: 60000,
-            cacheFlushInterval: 3600000,
-        }),
-            filtersFromUrl = $location.search().filter,
-            parsedFilters, filtersFromCache;
-
-
-        if (filtersFromUrl)
-        {
-            parsedFilters = JSON.parse(filtersFromUrl)[0];
-            $scope.filters = parsedFilters;
-        }
-        else
-        {
-            filtersFromCache = filterCache.get('filters');
-            if (filtersFromCache && filtersFromCache.length > 0)
+            var filterCache = $angularCacheFactory('filterCache',
             {
-                $scope.filters = filtersFromCache[0];
-                $scope.filters.playerCard = ($scope.playerPosition === '1') ? 'pitcher' : 'batter';
-                if ($scope.playerPosition === '1')
-                {
-                    $scope.filters.pitcherHand = '';
-                }
-                else if ($scope.playerBats !== 'S')
-                {
-                    $scope.filters.batterHand = '';
-                }
+                storageMode: 'localStorage',
+                maxAge: 3600000,
+                deleteOnExpire: 'aggressive',
+                recycleFreq: 60000,
+                cacheFlushInterval: 3600000,
+            }),
+                filtersFromUrl = $location.search().filter,
+                parsedFilters, filtersFromCache;
+
+            if (filtersFromUrl)
+            {
+                parsedFilters = JSON.parse(filtersFromUrl)[0];
+                $scope.filters = parsedFilters;
             }
             else
             {
-                $scope.filters = {
-                    playerCard: ($scope.playerPosition === '1') ? 'pitcher' : 'batter',
-                    pitcherHand: '',
-                    batterHand: '',
-                    date:
+                filtersFromCache = filterCache.get('filters');
+                if (filtersFromCache && filtersFromCache.length > 0)
+                {
+                    $scope.filters = filtersFromCache[0];
+                    $scope.filters.playerCard = ($scope.playerPosition === '1') ? 'pitcher' : 'batter';
+                    if ($scope.playerPosition === '1')
                     {
-                        start: getStartingDate(),
-                        end: moment().format('YYYY-MM-DD'),
-                    },
-                    runners:
-                    {
-                        gate: 'OR',
-                    },
-                    outs:
-                    {},
-                    balls:
-                    {},
-                    strikes:
-                    {},
-                    gameType:
-                    {
-                        R: true,
+                        $scope.filters.pitcherHand = '';
                     }
-                };
+                    else if ($scope.playerBats !== 'S')
+                    {
+                        $scope.filters.batterHand = '';
+                    }
+                }
+                else
+                {
+                    $scope.filters = {
+                        playerCard: ($scope.playerPosition === '1') ? 'pitcher' : 'batter',
+                        pitcherHand: '',
+                        batterHand: '',
+                        date:
+                        {
+                            start: getStartingDate(),
+                            end: moment().format('YYYY-MM-DD'),
+                        },
+                        runners:
+                        {
+                            gate: 'OR',
+                        },
+                        outs:
+                        {},
+                        balls:
+                        {},
+                        strikes:
+                        {},
+                        gameType:
+                        {
+                            R: true,
+                        }
+                    };
+                }
             }
+
+            $scope.$watch('[filters]', function(filters)
+            {
+                filterCache.put('filters', filters);
+                filtersService.filters = filters;
+                _gaq.push(['_trackEvent', 'filters', 'atbats', $scope.playerId]);
+            }, true);
         }
 
-        $scope.$watch('[filters]', function(filters)
+        $timeout(function()
         {
-            filterCache.put('filters', filters);
-            filtersService.filters = filters;
-            _gaq.push(['_trackEvent', 'filters', 'atbats', $scope.playerId]);
-        }, true);
+            init();
+        });
 
     }
 ]);
