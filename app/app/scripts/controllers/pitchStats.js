@@ -142,7 +142,7 @@ angular.module('pitchfxApp').controller('PitchstatsCtrl', ['$rootScope', '$scope
                 series: $scope.pitchSpeeds.series
             });
         }
-        
+
         /**
          * Pull together stats based on pitch types and place the resulting array on
          * the $scope

@@ -1,4 +1,5 @@
-var pitchfx = pitchfx || {};
+var pitchfx = pitchfx ||
+{};
 
 /**
  * @class pitchfx.Zone
@@ -21,12 +22,13 @@ pitchfx.Zone.prototype.addPitch = function(pitch)
 
 /**
  * Get the whiff rate across all pitches in this zone
- * 
+ *
  * @returns {Number}
  */
 pitchfx.Zone.prototype.getWhiffsPerSwingRate = function()
 {
-    var whiffs = 0, swings = 0;
+    var whiffs = 0,
+        swings = 0;
 
     angular.forEach(this.pitches, function(pitch)
     {
@@ -48,12 +50,13 @@ pitchfx.Zone.prototype.getWhiffsPerSwingRate = function()
 
 /**
  * Get the swing rate across all pitches in this zone
- * 
+ *
  * @returns {Number}
  */
 pitchfx.Zone.prototype.getSwingRate = function()
 {
-    var pitches = this.pitches.length, swings = 0;
+    var pitches = this.pitches.length,
+        swings = 0;
     if (pitches === 0)
     {
         return 0;
