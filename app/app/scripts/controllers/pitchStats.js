@@ -1,33 +1,11 @@
 'use strict';
 
-angular.module('pitchfxApp').controller('PitchstatsCtrl', ['$rootScope', '$scope', '$log', '$timeout', '$location', 'Filters', 'Pitches', 'Charting',
-    function($rootScope, $scope, $log, $timeout, $location, filtersService, pitchesService, chartingService)
+angular.module('pitchfxApp').controller('PitchstatsCtrl', ['$rootScope', '$scope', '$log', '$timeout', '$location', 'Filters', 'Pitches',
+    function($rootScope, $scope, $log, $timeout, $location, filtersService, pitchesService)
     {
 
-        var whiffsDestroyFunction,
-            whiffSeries = [],
-            wobaDestroyFunction,
-            wobaSeries = [],
-            rawPitches = [],
-            filtersFromUrl = $location.search().pitchFilters,
-            strikeZone = {
-                name: 'Zone',
-                type: 'line',
-                color: '#3a87ad',
-                marker:
-                {
-                    enabled: false
-                },
-                showInLegend: false,
-                enableMouseTracking: false,
-                data: [
-                    [-0.709, 3.5],
-                    [0.709, 3.5],
-                    [0.709, 1.5],
-                    [-0.709, 1.5],
-                    [-0.709, 3.5]
-                ]
-            };
+        var rawPitches = [],
+            filtersFromUrl = $location.search().pitchFilters;
 
         $scope.loading = true;
         $scope.filtersService = filtersService;
@@ -63,6 +41,7 @@ angular.module('pitchfxApp').controller('PitchstatsCtrl', ['$rootScope', '$scope
                     rawPitches = pitches;
                     $scope.pitchCount = pitches.length;
                     regenPitchStats();
+
                     $scope.loading = false;
                     filtersService.loadingData = false;
                 });
@@ -88,8 +67,6 @@ angular.module('pitchfxApp').controller('PitchstatsCtrl', ['$rootScope', '$scope
             $timeout(function()
             {
                 renderPitchSpeeds();
-                renderWhiffsChart();
-                renderWobaChart();
             }, 10);
         }
 
@@ -103,174 +80,6 @@ angular.module('pitchfxApp').controller('PitchstatsCtrl', ['$rootScope', '$scope
         {
             $scope.pitchFilters.pitchType[pitchCode] = !($scope.pitchFilters.pitchType[pitchCode]);
         };
-
-        /**
-         * Render the wOBA bubble chart
-         */
-        function renderWobaChart()
-        {
-            if (wobaDestroyFunction)
-            {
-                wobaDestroyFunction();
-            }
-            var wobaChart = new Highcharts.Chart(
-            {
-                chart:
-                {
-                    type: 'bubble',
-                    zoomType: 'xy',
-                    renderTo: 'wobaChart',
-                },
-                credits:
-                {
-                    enabled: false
-                },
-                plotOptions:
-                {
-                    series:
-                    {
-                        animation: false
-                    }
-                },
-                title:
-                {
-                    text: '',
-                    enabled: false,
-                },
-                xAxis:
-                {
-                    max: 2,
-                    min: -2,
-                    title:
-                    {
-                        enabled: true,
-                        text: 'Plate Offset (ft)'
-                    },
-                    startOnTick: true,
-                    endOnTick: true,
-                    showLastLabel: true,
-                },
-                yAxis:
-                {
-                    max: 5,
-                    min: 0,
-                    title:
-                    {
-                        text: 'Height (ft)'
-                    }
-                },
-                legend:
-                {
-                    enabled: false,
-                },
-                series: [strikeZone,
-                {
-                    name: 'wOBA Value',
-                    data: wobaSeries,
-                    color: 'rgb(136, 193, 73)',
-                    marker:
-                    {
-                        fillOpacity: 0.1,
-                        lineColor: 'rgb(136, 193, 73, 0.1)'
-                    }
-                }]
-            });
-            wobaDestroyFunction = chartingService.keepSquare(wobaChart);
-        }
-
-        /**
-         * Renders the whiffs
-         */
-        function renderWhiffsChart()
-        {
-            if (whiffsDestroyFunction)
-            {
-                whiffsDestroyFunction();
-            }
-            var whiffChart = new Highcharts.Chart(
-            {
-                chart:
-                {
-                    type: 'scatter',
-                    zoomType: 'xy',
-                    renderTo: 'whiffsChart',
-                },
-                credits:
-                {
-                    enabled: false
-                },
-                title:
-                {
-                    text: '',
-                    enabled: false
-                },
-                xAxis:
-                {
-                    max: 2,
-                    min: -2,
-                    title:
-                    {
-                        enabled: true,
-                        text: 'Plate Offset (ft)'
-                    },
-                    startOnTick: true,
-                    endOnTick: true,
-                    showLastLabel: true,
-                },
-                yAxis:
-                {
-                    max: 5,
-                    min: 0,
-                    title:
-                    {
-                        text: 'Height (ft)'
-                    }
-                },
-                legend:
-                {
-                    enabled: false,
-                },
-                plotOptions:
-                {
-                    scatter:
-                    {
-                        marker:
-                        {
-                            radius: 5,
-                            states:
-                            {
-                                hover:
-                                {
-                                    enabled: true,
-                                    lineColor: 'rgb(100,100,100)'
-                                }
-                            }
-                        },
-                        states:
-                        {
-                            hover:
-                            {
-                                marker:
-                                {
-                                    enabled: false
-                                }
-                            }
-                        },
-                    },
-                    series:
-                    {
-                        animation: false
-                    }
-                },
-                series: [strikeZone,
-                {
-                    name: 'Whiffs',
-                    color: 'rgba(223, 83, 83, .2)',
-                    data: whiffSeries,
-                }]
-            });
-            whiffsDestroyFunction = chartingService.keepSquare(whiffChart);
-        }
 
         /**
          * Render pitch speeds chart
@@ -333,7 +142,7 @@ angular.module('pitchfxApp').controller('PitchstatsCtrl', ['$rootScope', '$scope
                 series: $scope.pitchSpeeds.series
             });
         }
-
+        
         /**
          * Pull together stats based on pitch types and place the resulting array on
          * the $scope
@@ -343,23 +152,9 @@ angular.module('pitchfxApp').controller('PitchstatsCtrl', ['$rootScope', '$scope
          */
         function aggregatePitchStats()
         {
-            var pitchTypes = {},
-                pitchSpeeds = {},
-                minSpeed,
-                maxSpeed,
-                pitch,
-                pitchCode,
-                pitchTypeFilters = $scope.pitchFilters.pitchType,
+            var pitchTypes = {}, pitchSpeeds = {}, minSpeed, maxSpeed, pitch, pitchCode, pitchTypeFilters = $scope.pitchFilters.pitchType,
                 havePitchTypeFilters = false,
-                key, i, aggregator, wOba, speed, hipTrajectory, speedKey, pitchTypeKey, model;
-
-
-            /* initialize to set the relative bubble sizes */
-            wobaSeries = [
-                [0, -10, 0.5],
-                [0, -10, 3]
-            ];
-            whiffSeries = [];
+                key, i, aggregator, speed, hipTrajectory, speedKey, pitchTypeKey, model;
 
             for (key in pitchTypeFilters)
             {
@@ -403,19 +198,6 @@ angular.module('pitchfxApp').controller('PitchstatsCtrl', ['$rootScope', '$scope
                     }
                     aggregator.count++;
 
-                    if (!havePitchTypeFilters || pitchTypeFilters[pitchCode])
-                    {
-                        wOba = pitch.getWeightedObaValue();
-                        /*jshint  maxdepth:5 */
-                        if (angular.isDefined(wOba))
-                        {
-                            if (angular.isDefined(pitch.px) && angular.isDefined(pitch.pz))
-                            {
-                                wobaSeries.push([pitch.px, pitch.pz, wOba]);
-                            }
-                        }
-                    }
-
                     if (pitch.isBall())
                     {
                         aggregator.ball++;
@@ -428,15 +210,6 @@ angular.module('pitchfxApp').controller('PitchstatsCtrl', ['$rootScope', '$scope
                     if (pitch.isSwing())
                     {
                         aggregator.swing++;
-                        /*jshint  maxdepth:5 */
-                        if (pitch.isWhiff())
-                        {
-                            aggregator.whiff++;
-                            if ((!havePitchTypeFilters || pitchTypeFilters[pitchCode]) && angular.isDefined(pitch.px) && angular.isDefined(pitch.pz))
-                            {
-                                whiffSeries.push([pitch.px, pitch.pz]);
-                            }
-                        }
                     }
                     if (pitch.isBallInPlay())
                     {
@@ -472,12 +245,12 @@ angular.module('pitchfxApp').controller('PitchstatsCtrl', ['$rootScope', '$scope
                         aggregator.popup++;
                     }
 
+                    /* jshint maxdepth:5 */
                     if (!havePitchTypeFilters || pitchTypeFilters[pitchCode])
                     {
                         speed = parseInt(pitch.start_speed, 10);
                         if (speed)
                         {
-
                             if (!minSpeed || minSpeed > speed)
                             {
                                 minSpeed = speed;
@@ -497,6 +270,8 @@ angular.module('pitchfxApp').controller('PitchstatsCtrl', ['$rootScope', '$scope
                                 pitchSpeeds[speedKey] = 1;
                             }
                         }
+
+                        /* Build the pitches 2d array */
                     }
                 }
             }
@@ -527,8 +302,7 @@ angular.module('pitchfxApp').controller('PitchstatsCtrl', ['$rootScope', '$scope
             $log.debug(pitchTypes);
             $scope.pitchSpeeds.categories = pitchTypes;
             var series = [],
-                vertical, key, frequency,
-                allSpeeds = [],
+                vertical, key, frequency, allSpeeds = [],
                 j = 0,
                 i = 0;
             for (j = 0; j < pitchTypes.length; j++)

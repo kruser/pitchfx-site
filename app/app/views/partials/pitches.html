@@ -67,30 +67,31 @@
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-sm-6">
-				<div class="panel panel-default">
-					<div
-						tooltip="This chart displays all swings and misses (whiffs). Points are shown with 25% opacity so you can conclude the darker areas to be weaker hit areas."
-						class="panel-heading">
-						<h3 class="panel-title">Whiffs (Catcher POV)</h3>
-					</div>
-					<div class="panel-body">
-						<div id="whiffsChart"></div>
-					</div>
-				</div>
-			</div>
-			<div class="col-sm-6">
-				<div class="panel panel-default">
-					<div
-						tooltip="This chart displays hit quality for only balls in play that end up in an actual hit. Bubbles are assigned a radius according to their weighed on-base average (wOBA) value."
-						class="panel-heading">
-						<h3 class="panel-title">Hit Quality by wOBA (Catcher POV)</h3>
-					</div>
-					<div class="panel-body">
-						<div id="wobaChart"></div>
-					</div>
-				</div>
-			</div>
+		    <div class="col-sm-4 col-lg-3">
+				<ul class="hidden-xs nav nav-pills nav-stacked">
+					<li class="active"><a href="#">wOBA</a></li>
+					<li class=""><a href="#">SLG</a></li>
+					<li class=""><a href="#">BABIP</a></li>
+					<li class=""><a href="#">Swing %</a></li>
+					<li class=""><a href="#">Whiff %</a></li>
+					<li class=""><a href="#">Whiffs/Swing</a></li>
+					<li class=""><a href="#">Fields & Trajectories</a></li>
+		        </ul>
+		        <select class="visible-xs form-control">
+		            <option>wOBA</option>
+		            <option>SLG</option>
+		            <option>BABIP</option>
+		            <option>Swing %</option>
+		            <option>Whiff %</option>
+		            <option>Whiffs/Swing</option>
+		            <option>Fields & Trajectories</option>
+		        </select>
+		    </div>
+		    <div class="col-sm-8 col-lg-9">
+		       <div class="panel panel-info">
+		          <div id="pitchChart"></div>
+	           </div>
+		    </div>
 		</div>
 		<div class="row">
 			<div class="col-md-12">
