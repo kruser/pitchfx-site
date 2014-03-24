@@ -24,9 +24,26 @@ pitchfx.Zone.prototype.addPitch = function(pitch)
  * 
  * @returns {Number}
  */
-pitchfx.Zone.prototype.getWhiffsPerSwing = function()
+pitchfx.Zone.prototype.getWhiffsPerSwingRate = function()
 {
-    return 0.0;
+    var whiffs = 0, swings = 0;
+
+    angular.forEach(this.pitches, function(pitch)
+    {
+        if (pitch.isSwing())
+        {
+            swings++;
+        }
+        if (pitch.isWhiff())
+        {
+            whiffs++;
+        }
+    });
+    if (swings === 0)
+    {
+        return 0;
+    }
+    return whiffs / swings;
 };
 
 /**
@@ -36,5 +53,18 @@ pitchfx.Zone.prototype.getWhiffsPerSwing = function()
  */
 pitchfx.Zone.prototype.getSwingRate = function()
 {
-    return 0.0;
+    var pitches = this.pitches.length, swings = 0;
+    if (pitches === 0)
+    {
+        return 0;
+    }
+
+    angular.forEach(this.pitches, function(pitch)
+    {
+        if (pitch.isSwing())
+        {
+            swings++;
+        }
+    });
+    return swings / pitches;
 };

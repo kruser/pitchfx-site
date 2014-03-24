@@ -50,7 +50,7 @@ pitchfx.Pitch.prototype.isSwing = function()
  */
 pitchfx.Pitch.prototype.isWhiff = function()
 {
-    return this.des === 'Swinging Strike';
+    return (/Swinging Strike.*/i.test(this.des));
 };
 
 /**

@@ -3,8 +3,10 @@ var pitchfx = pitchfx || {};
 /**
  * @class pitchfx.Zones
  * @classdesc a zone contains a 2D array of pitch zones that pitches can be
- *            added to
+ *            added to. The inner 60% of values will always be the strike zone.
  * 
+ * For example, given a 10x10 2D array, the middle 6x6 will represent the strike
+ * zone.
  */
 pitchfx.Zones = function()
 {
@@ -68,12 +70,10 @@ pitchfx.Zones.prototype.getRow = function(y)
     if (y < this.bottomBounds)
     {
         return 0;
-    }
-    else if (y > this.topBounds)
+    } else if (y > this.topBounds)
     {
         return this.rows - 1;
-    }
-    else
+    } else
     {
         return parseInt((y - this.bottomBounds) / this.squareHeight, 10);
     }
@@ -91,8 +91,58 @@ pitchfx.Zones.prototype.addPitch = function(pitch)
     {
         return;
     }
-    var col = this.getColumn(pitch.px),
-        row = this.getRow(pitch.pz),
-        zone = this.pitchZones[col][row];
+    var col = this.getColumn(pitch.px), row = this.getRow(pitch.pz), zone = this.pitchZones[col][row];
     zone.addPitch(pitch);
+};
+
+/**
+ * Get the swing rates for each zone
+ * 
+ * @returns {Array} a grid of rates
+ */
+pitchfx.Zones.prototype.getSwingRates = function()
+{
+    return this.buildZoneStats(function(pitchZone)
+    {
+        return pitchZone.getSwingRate();
+    });
+};
+
+/**
+ * Get a grid of whiffs per swing rates
+ * 
+ * @returns {Array} a grid of rates
+ */
+pitchfx.Zones.prototype.getWhiffsPerSwingRates = function()
+{
+    return this.buildZoneStats(function(pitchZone)
+    {
+        return pitchZone.getWhiffsPerSwingRate();
+    });
+};
+
+/**
+ * This function is responsible for iterating over all pitch zones and creating
+ * a new 2d array of only a single stat.
+ * 
+ * @param {function(pitchfx.Zone)}
+ *            pitchZoneCallback - this function will be called on each pitchZone
+ *            object. The return value is what will be stuck in each cell of the
+ *            2d array.
+ * @returns {Array}
+ * @private
+ */
+pitchfx.Zones.prototype.buildZoneStats = function(pitchZoneCallback)
+{
+    var zones = [], cols;
+    angular.forEach(this.pitchZones, function(value)
+    {
+        cols = [];
+        angular.forEach(value, function(pitchZone)
+        {
+            cols.push(pitchZoneCallback(pitchZone));
+        });
+        zones.push(cols);
+    });
+    return zones;
 };
