@@ -43,9 +43,9 @@ pitchfx.Zone.prototype.getWhiffsPerSwingRate = function()
     });
     if (swings === 0)
     {
-        return 0;
+        return new pitchfx.ZoneStat(0, '0/0');
     }
-    return whiffs / swings;
+    return new pitchfx.ZoneStat(whiffs / swings, whiffs + '/' + swings);
 };
 
 /**
@@ -59,7 +59,7 @@ pitchfx.Zone.prototype.getSwingRate = function()
         swings = 0;
     if (pitches === 0)
     {
-        return 0;
+        return new pitchfx.ZoneStat(0, '0/0');
     }
 
     angular.forEach(this.pitches, function(pitch)
@@ -69,5 +69,5 @@ pitchfx.Zone.prototype.getSwingRate = function()
             swings++;
         }
     });
-    return swings / pitches;
+    return new pitchfx.ZoneStat(swings / pitches, swings + '/' + pitches);
 };

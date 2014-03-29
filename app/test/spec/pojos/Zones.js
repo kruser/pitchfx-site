@@ -178,9 +178,9 @@ describe('POJO: Zones', function()
             zones.addPitch(new pitchfx.Pitch(pitch));
         });
         swingRates = zones.getSwingRates();
-        expect(swingRates[0][0]).toBe(0);
-        expect(swingRates[9][9]).toBe(0);
-        expect(swingRates[5][5]).toBe(0.2);
+        expect(swingRates[0][0].stat).toBe(0);
+        expect(swingRates[9][9].stat).toBe(0);
+        expect(swingRates[5][5].stat).toBe(0.2);
     });
 
     it('Test whiff/swing rate functions', function()
@@ -351,15 +351,25 @@ describe('POJO: Zones', function()
                 "start_speed": 92.9,
                 "pitch_type": "FF"
             }],
-            whiffRates;
+            whiffRates, csv;
 
         angular.forEach(pitches, function(pitch)
         {
             zones.addPitch(new pitchfx.Pitch(pitch));
         });
         whiffRates = zones.getWhiffsPerSwingRates();
-        expect(whiffRates[0][0]).toBe(0);
-        expect(whiffRates[9][9]).toBe(0);
-        expect(whiffRates[5][5].toFixed(2)).toBe('0.29');
+        csv = pitchfx.Zones.gridToCsv(whiffRates, 'Whiff Rates');
+
+        expect(/Whiff Rates$/m.test(csv)).toBe(true);
+
+        expect(whiffRates[0][0].stat).toBe(0);
+        expect(/^0,0,0$/m.test(csv)).toBe(true);
+
+        expect(whiffRates[9][9].stat).toBe(0);
+        expect(/^9,9,0$/m.test(csv)).toBe(true);
+
+        expect(whiffRates[5][5].stat.toFixed(2)).toBe('0.29');
+        expect(/^5,5,0.28\d+$/m.test(csv)).toBe(true);
+        
     });
 });

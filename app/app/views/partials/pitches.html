@@ -68,28 +68,13 @@
 		</div>
 		<div class="row">
 		    <div class="col-sm-4 col-lg-3">
-				<ul class="hidden-xs nav nav-pills nav-stacked">
-					<li class="active"><a href="#">wOBA</a></li>
-					<li class=""><a href="#">SLG</a></li>
-					<li class=""><a href="#">BABIP</a></li>
-					<li class=""><a href="#">Swing %</a></li>
-					<li class=""><a href="#">Whiff %</a></li>
-					<li class=""><a href="#">Whiffs/Swing</a></li>
-					<li class=""><a href="#">Fields & Trajectories</a></li>
+				<ul class="nav nav-pills nav-stacked">
+					<li ng-repeat="zoneChart in model.zoneCharts" ng-class="{'active':model.selectedZoneChart == zoneChart}"><a href="" ng-click="model.selectedZoneChart = zoneChart">{{zoneChart.title}}</a></li>
 		        </ul>
-		        <select class="visible-xs form-control">
-		            <option>wOBA</option>
-		            <option>SLG</option>
-		            <option>BABIP</option>
-		            <option>Swing %</option>
-		            <option>Whiff %</option>
-		            <option>Whiffs/Swing</option>
-		            <option>Fields & Trajectories</option>
-		        </select>
 		    </div>
 		    <div class="col-sm-8 col-lg-9">
 		       <div class="panel panel-info">
-		          <div id="pitchChart"></div>
+		          <heatmap points="model.zonePoints" max="model.zoneMax" style="width:400px;height:400px;"></heatmap>
 	           </div>
 		    </div>
 		</div>
