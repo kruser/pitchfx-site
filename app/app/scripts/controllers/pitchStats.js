@@ -123,7 +123,7 @@ angular.module('pitchfxApp').controller('PitchstatsCtrl', ['$rootScope', '$scope
             else if (zoneChartId === 'whiffRate')
             {
                 $scope.model.zonePoints = zones.getWhiffsPerSwingRates();
-                $scope.model.zoneMax = 0.400;
+                $scope.model.zoneMax = 0.600;
             }
         }
 

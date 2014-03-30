@@ -28,7 +28,8 @@ pitchfx.Zone.prototype.addPitch = function(pitch)
 pitchfx.Zone.prototype.getWhiffsPerSwingRate = function()
 {
     var whiffs = 0,
-        swings = 0;
+        swings = 0,
+        val = 0;
 
     angular.forEach(this.pitches, function(pitch)
     {
@@ -43,9 +44,10 @@ pitchfx.Zone.prototype.getWhiffsPerSwingRate = function()
     });
     if (swings === 0)
     {
-        return new pitchfx.ZoneStat(0, '0/0');
+        return new pitchfx.ZoneStat(0, '0% (0/0)');
     }
-    return new pitchfx.ZoneStat(whiffs / swings, whiffs + '/' + swings);
+    val = whiffs / swings;
+    return new pitchfx.ZoneStat(val, (val * 100).toFixed(0) + '% ('+whiffs + '/' + swings + ')');
 };
 
 /**
@@ -56,10 +58,10 @@ pitchfx.Zone.prototype.getWhiffsPerSwingRate = function()
 pitchfx.Zone.prototype.getSwingRate = function()
 {
     var pitches = this.pitches.length,
-        swings = 0;
+        swings = 0, val = 0;
     if (pitches === 0)
     {
-        return new pitchfx.ZoneStat(0, '0/0');
+        return new pitchfx.ZoneStat(0, '0% (0/0)');
     }
 
     angular.forEach(this.pitches, function(pitch)
@@ -69,5 +71,7 @@ pitchfx.Zone.prototype.getSwingRate = function()
             swings++;
         }
     });
-    return new pitchfx.ZoneStat(swings / pitches, swings + '/' + pitches);
+
+    val = swings/pitches;
+    return new pitchfx.ZoneStat(val, (val * 100).toFixed(0) + '% (' + swings + '/' + pitches + ')');
 };
