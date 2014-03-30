@@ -10,6 +10,7 @@ angular.module('pitchfxApp').directive('defaultAvatar', [
                 element.bind('error', function()
                 {
                     element.attr('src', '/images/default-player.png');
+                    element.addClass('defaultAvatar');
                 });
             }
         };

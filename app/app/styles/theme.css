@@ -84,6 +84,32 @@ body {
 	background: #fff;
 	padding: .25em;
 	border-radius: 6px;
+	position: relative;
+}
+.player-header .mug-container img.defaultAvatar {
+	position: relative;
+	z-index: 1;
+}
+.player-header .mug-container .logoBlock{
+	background-color:#0C0F13;
+	position: absolute;
+	top: 7px;
+	left: 17px;
+	width: 22px;
+	height: 12px;
+	border-radius: 2px;
+}
+.STL.player-header .mug-container .logoBlock, .ARI.player-header .mug-container .logoBlock, .CIN.player-header .mug-container .logoBlock {
+	background-color: #AC030F;
+}
+.BAL.player-header .mug-container .logoBlock{
+	background-color: #F2F1FB;
+}
+.TEX.player-header .mug-container .logoBlock{
+	background-color: #11143B;
+}
+.CHC.player-header .mug-container .logoBlock {
+	background-color: #15206E;
 }
 
 .player-header .mug {

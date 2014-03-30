@@ -48,7 +48,7 @@
 	<div class="container container-full">
 		<div class="col-sm-4 col-md-4 col-lg-3 col-xl-3">
 			<div
-				class="player-header well well-sm">
+				class="<%= playerInfo.team_abbrev %> player-header well well-sm">
 				<div class="full">
 					<div class="clearfix">
 						<div class="mug-container pull-left">
@@ -57,6 +57,7 @@
 								ng-src="http://mlb.mlb.com/images/players/mugshot/ph_<%= playerInfo.player_id %>.jpg"
 								default-avatar
 								class="mug img-responsive img-rounded">
+							<div class="logoBlock"></div>
 						</div>
 						<div class="player-header-bio pull-left">
 							<h3><%= playerInfo.name_display_first_last %></h3>
