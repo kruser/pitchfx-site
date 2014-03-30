@@ -1,4 +1,5 @@
-var pitchfx = pitchfx || {};
+var pitchfx = pitchfx ||
+{};
 
 /**
  * @class pitchfx.ZoneStat

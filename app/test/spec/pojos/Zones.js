@@ -370,6 +370,6 @@ describe('POJO: Zones', function()
 
         expect(whiffRates[5][5].stat.toFixed(2)).toBe('0.29');
         expect(/^5,5,0.28\d+$/m.test(csv)).toBe(true);
-        
+
     });
 });

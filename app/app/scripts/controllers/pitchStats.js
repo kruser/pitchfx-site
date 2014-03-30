@@ -1,356 +1,387 @@
 'use strict';
 
-angular.module('pitchfxApp').controller('PitchstatsCtrl', [ '$rootScope', '$scope', '$log', '$timeout', '$location', 'Filters', 'Pitches', function($rootScope, $scope, $log, $timeout, $location, filtersService, pitchesService)
-{
-
-    var rawPitches = [], filtersFromUrl = $location.search().pitchFilters, zones;
-
-    $scope.loading = true;
-    $scope.filtersService = filtersService;
-    $scope.pitchTypes = [];
-    $scope.pitchCount = 0;
-    $scope.pitchSpeeds = {
-        categories : [],
-        series : [],
-    };
-    $scope.model = {
-        zoneCharts : [ {
-            title : 'Swing %',
-            id : 'swingRate'
-        }, {
-            title : 'Whiffs/Swing',
-            id : 'whiffRate'
-        }, ],
-    };
-
-    $scope.model.selectedZoneChart = $scope.model.zoneCharts[0];
-
-    if (filtersFromUrl)
+angular.module('pitchfxApp').controller('PitchstatsCtrl', ['$rootScope', '$scope', '$log', '$timeout', '$location', 'Filters', 'Pitches',
+    function($rootScope, $scope, $log, $timeout, $location, filtersService, pitchesService)
     {
-        $scope.pitchFilters = JSON.parse(filtersFromUrl);
-    } else
-    {
-        $scope.pitchFilters = {
-            pitchType : {}
+
+        var rawPitches = [],
+            filtersFromUrl = $location.search().pitchFilters,
+            zones;
+
+        $scope.loading = true;
+        $scope.filtersService = filtersService;
+        $scope.pitchTypes = [];
+        $scope.pitchCount = 0;
+        $scope.pitchSpeeds = {
+            categories: [],
+            series: [],
         };
-    }
-
-    /**
-     * Setup the controller
-     */
-    function init()
-    {
-        $scope.$watch('filtersService.filters', function(atbatFilters)
-        {
-            filtersService.loadingData = true;
-            pitchesService.getPitches($scope.playerId, atbatFilters).then(function(pitches)
+        $scope.model = {
+            zoneCharts: [
             {
-                rawPitches = pitches;
-                $scope.pitchCount = pitches.length;
-                $scope.loading = false;
-                filtersService.loadingData = false;
-                regenPitchStats();
-            });
-        }, true);
-        $scope.$watch('pitchFilters', function(pitchFilters)
+                title: 'Swing %',
+                id: 'swingRate'
+            },
+            {
+                title: 'Whiffs/Swing',
+                id: 'whiffRate'
+            }, ],
+        };
+
+        $scope.model.selectedZoneChart = $scope.model.zoneCharts[0];
+
+        if (filtersFromUrl)
         {
-            $scope.filtersService.pitchFilters = pitchFilters;
+            $scope.pitchFilters = JSON.parse(filtersFromUrl);
+        }
+        else
+        {
+            $scope.pitchFilters = {
+                pitchType:
+                {}
+            };
+        }
+
+        /**
+         * Setup the controller
+         */
+        function init()
+        {
+            $scope.$watch('filtersService.filters', function(atbatFilters)
+            {
+                filtersService.loadingData = true;
+                pitchesService.getPitches($scope.playerId, atbatFilters).then(function(pitches)
+                {
+                    rawPitches = pitches;
+                    $scope.pitchCount = pitches.length;
+                    $scope.loading = false;
+                    filtersService.loadingData = false;
+                    regenPitchStats();
+                });
+            }, true);
+            $scope.$watch('pitchFilters', function(pitchFilters)
+            {
+                $scope.filtersService.pitchFilters = pitchFilters;
+                $timeout(function()
+                {
+                    regenPitchStats();
+                }, 10);
+                _gaq.push(['_trackEvent', 'filters', 'pitches', $scope.playerId]);
+            }, true);
+            $scope.$watch('model.selectedZoneChart', function()
+            {
+                renderZoneChart();
+            }, true);
+        }
+
+        /**
+         * To be run whenever the atbat or pitch filters have changed
+         */
+        function regenPitchStats()
+        {
+            if ($scope.loading)
+            {
+                return;
+            }
+
+            $log.debug('Genearating pitch stats');
+            aggregatePitchStats();
             $timeout(function()
             {
-                regenPitchStats();
+                renderPitchSpeeds();
+                renderZoneChart();
             }, 10);
-            _gaq.push([ '_trackEvent', 'filters', 'pitches', $scope.playerId ]);
-        }, true);
-        $scope.$watch('model.selectedZoneChart', function()
-        {
-            renderZoneChart();
-        }, true);
-    }
-
-    /**
-     * To be run whenever the atbat or pitch filters have changed
-     */
-    function regenPitchStats()
-    {
-        if ($scope.loading)
-        {
-            return;
         }
 
-        $log.debug('Genearating pitch stats');
-        aggregatePitchStats();
-        $timeout(function()
+        /**
+         * Add a selected pitch to the list
+         *
+         * @param {string}
+         *            pitchCode - like FF, FC, SL, etc.
+         */
+        $scope.togglePitchSelection = function(pitchCode)
         {
-            renderPitchSpeeds();
-            renderZoneChart();
-        }, 10);
-    }
+            $scope.pitchFilters.pitchType[pitchCode] = !($scope.pitchFilters.pitchType[pitchCode]);
+        };
 
-    /**
-     * Add a selected pitch to the list
-     * 
-     * @param {string}
-     *            pitchCode - like FF, FC, SL, etc.
-     */
-    $scope.togglePitchSelection = function(pitchCode)
-    {
-        $scope.pitchFilters.pitchType[pitchCode] = !($scope.pitchFilters.pitchType[pitchCode]);
-    };
-
-    /**
-     * Render the pitch zones based on the currently selected chart
-     */
-    function renderZoneChart()
-    {
-        if (!zones)
+        /**
+         * Render the pitch zones based on the currently selected chart
+         */
+        function renderZoneChart()
         {
-            return;
+            if (!zones)
+            {
+                return;
+            }
+
+            var zoneChartId = $scope.model.selectedZoneChart.id;
+            if (zoneChartId === 'swingRate')
+            {
+                $scope.model.zonePoints = zones.getSwingRates();
+                $scope.model.zoneMax = 0.800;
+            }
+            else if (zoneChartId === 'whiffRate')
+            {
+                $scope.model.zonePoints = zones.getWhiffsPerSwingRates();
+                $scope.model.zoneMax = 0.400;
+            }
         }
 
-        var zoneChartId = $scope.model.selectedZoneChart.id;
-        if (zoneChartId === 'swingRate')
+        /**
+         * Render pitch speeds chart
+         */
+        function renderPitchSpeeds()
         {
-            $scope.model.zonePoints = zones.getSwingRates();
-            $scope.model.zoneMax = 0.800;
-        }
-        else if (zoneChartId === 'whiffRate')
-        {
-            $scope.model.zonePoints = zones.getWhiffsPerSwingRates();
-            $scope.model.zoneMax = 0.400;
-        }
-    }
-
-    /**
-     * Render pitch speeds chart
-     */
-    function renderPitchSpeeds()
-    {
-        new Highcharts.Chart({
-            chart : {
-                type : 'area',
-                zoomType : 'x',
-                renderTo : 'pitchSpeeds',
-                spacingBottom : 0,
-                spacingLeft : 0,
-                spacingRight : 0
-            },
-            credits : {
-                enabled : false
-            },
-            title : {
-                text : '',
-                enabled : false
-            },
-            xAxis : {
-                categories : $scope.pitchSpeeds.categories,
-                title : {
-                    text : 'MPH',
-                }
-            },
-            yAxis : {
-                title : {
-                    text : 'Pitch Frequency'
+            new Highcharts.Chart(
+            {
+                chart:
+                {
+                    type: 'area',
+                    zoomType: 'x',
+                    renderTo: 'pitchSpeeds',
+                    spacingBottom: 0,
+                    spacingLeft: 0,
+                    spacingRight: 0
                 },
-            },
-            tooltip : {
-                shared : true,
-            },
-            plotOptions : {
-                area : {
-                    stacking : 'normal',
-                    lineColor : '#666666',
-                    lineWidth : 1,
-                    marker : {
-                        lineWidth : 1,
-                        lineColor : '#666666'
-                    }
-                }
-            },
-            series : $scope.pitchSpeeds.series
-        });
-    }
-
-    /**
-     * Pull together stats based on pitch types and place the resulting array on
-     * the $scope
-     * 
-     * @param {Array}
-     *            pitches
-     */
-    function aggregatePitchStats()
-    {
-        var pitchTypes = {}, pitchSpeeds = {}, minSpeed, maxSpeed, pitch, pitchCode, pitchTypeFilters = $scope.pitchFilters.pitchType, havePitchTypeFilters = false, key, i, aggregator, speed, hipTrajectory, speedKey, pitchTypeKey, model;
-        zones = new pitchfx.Zones();
-
-        for (key in pitchTypeFilters)
-        {
-            if (pitchTypeFilters[key])
-            {
-                havePitchTypeFilters = true;
-                break;
-            }
-        }
-
-        $log.debug('Do we have pitch filters?: ' + havePitchTypeFilters);
-
-        if (rawPitches)
-        {
-            for (i = 0; i < rawPitches.length; i++)
-            {
-                pitch = new pitchfx.Pitch(rawPitches[i]);
-                pitchCode = pitch.getPitchType();
-
-                aggregator = pitchTypes[pitchCode];
-                if (!aggregator)
+                credits:
                 {
-                    aggregator = {
-                        pitchCode : pitchCode,
-                        displayName : pitchfx.Pitch.getPitchDisplayName(pitch.getPitchType()),
-                        count : 0,
-                        ball : 0,
-                        strike : 0,
-                        swing : 0,
-                        whiff : 0,
-                        foul : 0,
-                        bip : 0,
-                        hit : 0,
-                        out : 0,
-                        grounder : 0,
-                        liner : 0,
-                        flyball : 0,
-                        popup : 0,
-                    };
-                    pitchTypes[pitchCode] = aggregator;
-                }
-                aggregator.count++;
-
-                if (pitch.isBall())
+                    enabled: false
+                },
+                title:
                 {
-                    aggregator.ball++;
-                } else
+                    text: '',
+                    enabled: false
+                },
+                xAxis:
                 {
-                    aggregator.strike++;
-                }
-
-                if (pitch.isSwing())
-                {
-                    aggregator.swing++;
-                }
-                if (pitch.isBallInPlay())
-                {
-                    aggregator.bip++;
-                }
-                if (pitch.isFoul())
-                {
-                    aggregator.foul++;
-                }
-                if (pitch.isHit())
-                {
-                    aggregator.hit++;
-                }
-                if (pitch.isOut())
-                {
-                    aggregator.out++;
-                }
-                hipTrajectory = pitch.getHipTrajectory();
-                if (hipTrajectory === 'grounder')
-                {
-                    aggregator.grounder++;
-                } else if (hipTrajectory === 'liner')
-                {
-                    aggregator.liner++;
-                } else if (hipTrajectory === 'flyball')
-                {
-                    aggregator.flyball++;
-                } else if (hipTrajectory === 'popup')
-                {
-                    aggregator.popup++;
-                }
-
-                /* jshint maxdepth:5 */
-                if (!havePitchTypeFilters || pitchTypeFilters[pitchCode])
-                {
-                    speed = parseInt(pitch.start_speed, 10);
-                    if (speed)
+                    categories: $scope.pitchSpeeds.categories,
+                    title:
                     {
-                        if (!minSpeed || minSpeed > speed)
+                        text: 'MPH',
+                    }
+                },
+                yAxis:
+                {
+                    title:
+                    {
+                        text: 'Pitch Frequency'
+                    },
+                },
+                tooltip:
+                {
+                    shared: true,
+                },
+                plotOptions:
+                {
+                    area:
+                    {
+                        stacking: 'normal',
+                        lineColor: '#666666',
+                        lineWidth: 1,
+                        marker:
                         {
-                            minSpeed = speed;
-                        }
-                        if (!maxSpeed || maxSpeed < speed)
-                        {
-                            maxSpeed = speed;
-                        }
-
-                        speedKey = speed + ':' + pitchCode;
-                        if (pitchSpeeds[speedKey])
-                        {
-                            pitchSpeeds[speedKey]++;
-                        } else
-                        {
-                            pitchSpeeds[speedKey] = 1;
+                            lineWidth: 1,
+                            lineColor: '#666666'
                         }
                     }
-
-                    /* Build the pitches 2d array */
-                    zones.addPitch(pitch);
-                }
-            }
+                },
+                series: $scope.pitchSpeeds.series
+            });
         }
 
-        model = [];
-        for (pitchTypeKey in pitchTypes)
+        /**
+         * Pull together stats based on pitch types and place the resulting array on
+         * the $scope
+         *
+         * @param {Array}
+         *            pitches
+         */
+        function aggregatePitchStats()
         {
-            model.push(pitchTypes[pitchTypeKey]);
-        }
-        $scope.pitchTypes = model;
-        buildPitchSpeedSeries(pitchSpeeds, minSpeed, maxSpeed, Object.keys(pitchTypes));
-    }
+            var pitchTypes = {}, pitchSpeeds = {}, minSpeed, maxSpeed, pitch, pitchCode, pitchTypeFilters = $scope.pitchFilters.pitchType,
+                havePitchTypeFilters = false,
+                key, i, aggregator, speed, hipTrajectory, speedKey, pitchTypeKey, model;
+            zones = new pitchfx.Zones();
 
-    /**
-     * Builds up the series and categories necessary to print the highcharts
-     * 
-     * @param {Object}
-     *            pitchSpeeds
-     * @param {number}
-     *            minSpeed
-     * @param {number}
-     *            maxSpeed
-     * @param {Array}
-     *            pitchCodes
-     */
-    function buildPitchSpeedSeries(pitchSpeeds, minSpeed, maxSpeed, pitchTypes)
-    {
-        $log.debug(pitchTypes);
-        $scope.pitchSpeeds.categories = pitchTypes;
-        var series = [], vertical, key, frequency, allSpeeds = [], j = 0, i = 0;
-        for (j = 0; j < pitchTypes.length; j++)
-        {
-            vertical = {
-                name : pitchfx.Pitch.getPitchDisplayName(pitchTypes[j]),
-                data : [],
-            };
-            for (i = minSpeed; i <= maxSpeed; i++)
+            for (key in pitchTypeFilters)
             {
-                if (j === 0)
+                if (pitchTypeFilters[key])
                 {
-                    allSpeeds.push(i);
-                }
-                key = i + ':' + pitchTypes[j];
-                frequency = pitchSpeeds[key];
-                if (frequency)
-                {
-                    vertical.data.push(frequency);
-                } else
-                {
-                    vertical.data.push(null);
+                    havePitchTypeFilters = true;
+                    break;
                 }
             }
-            series.push(vertical);
-        }
-        $scope.pitchSpeeds.categories = allSpeeds;
-        $scope.pitchSpeeds.series = series;
-    }
 
-    init();
-} ]);
+            $log.debug('Do we have pitch filters?: ' + havePitchTypeFilters);
+
+            if (rawPitches)
+            {
+                for (i = 0; i < rawPitches.length; i++)
+                {
+                    pitch = new pitchfx.Pitch(rawPitches[i]);
+                    pitchCode = pitch.getPitchType();
+
+                    aggregator = pitchTypes[pitchCode];
+                    if (!aggregator)
+                    {
+                        aggregator = {
+                            pitchCode: pitchCode,
+                            displayName: pitchfx.Pitch.getPitchDisplayName(pitch.getPitchType()),
+                            count: 0,
+                            ball: 0,
+                            strike: 0,
+                            swing: 0,
+                            whiff: 0,
+                            foul: 0,
+                            bip: 0,
+                            hit: 0,
+                            out: 0,
+                            grounder: 0,
+                            liner: 0,
+                            flyball: 0,
+                            popup: 0,
+                        };
+                        pitchTypes[pitchCode] = aggregator;
+                    }
+                    aggregator.count++;
+
+                    if (pitch.isBall())
+                    {
+                        aggregator.ball++;
+                    }
+                    else
+                    {
+                        aggregator.strike++;
+                    }
+
+                    if (pitch.isSwing())
+                    {
+                        aggregator.swing++;
+                    }
+                    if (pitch.isBallInPlay())
+                    {
+                        aggregator.bip++;
+                    }
+                    if (pitch.isFoul())
+                    {
+                        aggregator.foul++;
+                    }
+                    if (pitch.isHit())
+                    {
+                        aggregator.hit++;
+                    }
+                    if (pitch.isOut())
+                    {
+                        aggregator.out++;
+                    }
+                    hipTrajectory = pitch.getHipTrajectory();
+                    if (hipTrajectory === 'grounder')
+                    {
+                        aggregator.grounder++;
+                    }
+                    else if (hipTrajectory === 'liner')
+                    {
+                        aggregator.liner++;
+                    }
+                    else if (hipTrajectory === 'flyball')
+                    {
+                        aggregator.flyball++;
+                    }
+                    else if (hipTrajectory === 'popup')
+                    {
+                        aggregator.popup++;
+                    }
+
+                    /* jshint maxdepth:5 */
+                    if (!havePitchTypeFilters || pitchTypeFilters[pitchCode])
+                    {
+                        speed = parseInt(pitch.start_speed, 10);
+                        if (speed)
+                        {
+                            if (!minSpeed || minSpeed > speed)
+                            {
+                                minSpeed = speed;
+                            }
+                            if (!maxSpeed || maxSpeed < speed)
+                            {
+                                maxSpeed = speed;
+                            }
+
+                            speedKey = speed + ':' + pitchCode;
+                            if (pitchSpeeds[speedKey])
+                            {
+                                pitchSpeeds[speedKey]++;
+                            }
+                            else
+                            {
+                                pitchSpeeds[speedKey] = 1;
+                            }
+                        }
+
+                        /* Build the pitches 2d array */
+                        zones.addPitch(pitch);
+                    }
+                }
+            }
+
+            model = [];
+            for (pitchTypeKey in pitchTypes)
+            {
+                model.push(pitchTypes[pitchTypeKey]);
+            }
+            $scope.pitchTypes = model;
+            buildPitchSpeedSeries(pitchSpeeds, minSpeed, maxSpeed, Object.keys(pitchTypes));
+        }
+
+        /**
+         * Builds up the series and categories necessary to print the highcharts
+         *
+         * @param {Object}
+         *            pitchSpeeds
+         * @param {number}
+         *            minSpeed
+         * @param {number}
+         *            maxSpeed
+         * @param {Array}
+         *            pitchCodes
+         */
+        function buildPitchSpeedSeries(pitchSpeeds, minSpeed, maxSpeed, pitchTypes)
+        {
+            $log.debug(pitchTypes);
+            $scope.pitchSpeeds.categories = pitchTypes;
+            var series = [],
+                vertical, key, frequency, allSpeeds = [],
+                j = 0,
+                i = 0;
+            for (j = 0; j < pitchTypes.length; j++)
+            {
+                vertical = {
+                    name: pitchfx.Pitch.getPitchDisplayName(pitchTypes[j]),
+                    data: [],
+                };
+                for (i = minSpeed; i <= maxSpeed; i++)
+                {
+                    if (j === 0)
+                    {
+                        allSpeeds.push(i);
+                    }
+                    key = i + ':' + pitchTypes[j];
+                    frequency = pitchSpeeds[key];
+                    if (frequency)
+                    {
+                        vertical.data.push(frequency);
+                    }
+                    else
+                    {
+                        vertical.data.push(null);
+                    }
+                }
+                series.push(vertical);
+            }
+            $scope.pitchSpeeds.categories = allSpeeds;
+            $scope.pitchSpeeds.series = series;
+        }
+
+        init();
+    }
+]);
