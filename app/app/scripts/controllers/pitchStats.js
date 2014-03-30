@@ -111,12 +111,12 @@ angular.module('pitchfxApp').controller('PitchstatsCtrl', [ '$rootScope', '$scop
         if (zoneChartId === 'swingRate')
         {
             $scope.model.zonePoints = zones.getSwingRates();
-            $scope.model.zoneMax = 700;
+            $scope.model.zoneMax = 0.800;
         }
         else if (zoneChartId === 'whiffRate')
         {
             $scope.model.zonePoints = zones.getWhiffsPerSwingRates();
-            $scope.model.zoneMax = 200;
+            $scope.model.zoneMax = 0.400;
         }
     }
 

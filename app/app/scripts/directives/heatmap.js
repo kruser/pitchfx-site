@@ -1,55 +1,91 @@
 'use strict';
 
 /**
- * Provides an angularJS wrapper around the heatmap.js library
+ * Provides an angularJS wrapper some heatmap library
  */
 angular.module('pitchfxApp').directive('heatmap', [function()
 {
     return {
-        template : '<div></div>',
+        template : '<div id="heatmap"></div>',
         restrict : 'E',
-        replace : true,
+        replace : false,
         scope : {
             'points' : '=',
             'max' : '=',
+            'chartName' : '=',
         },
-        link : function($scope, element)
+        link : function($scope)
         {
-            $scope.$watch('[points, max]', function()
+            $scope.$watch('[points, max, chartName]', function()
             {
                 redrawHeatmap();
             }, true);
             
             function redrawHeatmap()
             {
-                if (!$scope.points || !$scope.max)
+                if (!$scope.points || !$scope.max || !$scope.chartName)
                 {
                     return;
                 }
                 
-                var config = {
-                    radius : 20,
-                    element : element[0],
-                    visible : true,
-                    opacity : 40,
-                },
-                /*global heatmapFactory:true */
-                heatmap = heatmapFactory.create(config),
-                i,
-                j,
-                zoneStat;
-                
-                for (i = 0; i < $scope.points.length; i++)
-                {
-                    for (j = 0; j < $scope.points[i].length; j++)
-                    {
-                        zoneStat = $scope.points[i][j];
-                        if (zoneStat.stat)
-                        {
-                            heatmap.store.addDataPoint(i * 40, j * 40, zoneStat.stat * 1000);
+                new Highcharts.Chart({
+                    data: {
+                        csv: pitchfx.Zones.gridToCsv($scope.points)
+                    },
+                    chart : {
+                        type : 'heatmap',
+                        renderTo : 'heatmap',
+                    },
+
+                    credits : {
+                        enabled : false
+                    },
+                    title: {
+                        text: $scope.chartName,
+                        align: 'left'
+                    },
+                    xAxis: {
+                        min: 0,
+                        max: 9,
+                        labels : {
+                            enabled : false
                         }
-                    }
-                }
+                    },
+
+                    yAxis: {
+                        title: {
+                            text: null
+                        },
+                        labels: {
+                            enabled :false
+                        },
+                        minPadding: 0,
+                        maxPadding: 0,
+                        startOnTick: false,
+                        endOnTick: false,
+                        min: 0,
+                        max: 9
+                    },
+
+                    colorAxis: {
+                        stops: [
+                            [0, '#033c73'],
+                            [$scope.max / 2, '#fcf8e3'],
+                            [$scope.max, '#c71c22']
+                        ],
+                        min: 0,
+                        max: $scope.max
+                    },
+
+                    series: [{
+                        borderWidth: 0,
+                        tooltip: {
+                            headerFormat: 'Temperature<br/>',
+                            pointFormat: '{point.x:%e %b, %Y} {point.y}:00: <b>{point.value} </b>'
+                        }
+                    }]
+                });
+                
             }
         }
     };
