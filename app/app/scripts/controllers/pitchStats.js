@@ -19,12 +19,67 @@ angular.module('pitchfxApp').controller('PitchstatsCtrl', ['$rootScope', '$scope
         $scope.model = {
             zoneCharts: [
             {
-                title: 'Swing %',
-                id: 'swingRate'
+                title: 'Swing Rate',
+                id: 'swingRate',
+                max: 0.800,
+                generator: function()
+                {
+                    $scope.model.zonePoints = zones.getSwingRates();
+                }
+            },
+            {
+                title: 'Whiff Rate',
+                id: 'whiffRate',
+                max: 0.200,
+                generator: function()
+                {
+                    $scope.model.zonePoints = zones.getWhiffRates();
+                }
             },
             {
                 title: 'Whiffs/Swing',
-                id: 'whiffRate'
+                id: 'whiffsPerSwing',
+                max: 0.600,
+                generator: function()
+                {
+                    $scope.model.zonePoints = zones.getWhiffsPerSwingRates();
+                }
+            },
+            {
+                title: 'Grounders/BIP',
+                id: 'grounders',
+                max: 0.700,
+                generator: function()
+                {
+                    $scope.model.zonePoints = zones.getGrounderRates();
+                }
+            },
+            {
+                title: 'Linedrives/BIP',
+                id: 'liners',
+                max: 0.400,
+                generator: function()
+                {
+                    $scope.model.zonePoints = zones.getLinerRates();
+                }
+            },
+            {
+                title: 'Flyballs/BIP',
+                id: 'flyballs',
+                max: 0.500,
+                generator: function()
+                {
+                    $scope.model.zonePoints = zones.getFlyballRates();
+                }
+            },
+            {
+                title: 'Popups/BIP',
+                id: 'popups',
+                max: 0.600,
+                generator: function()
+                {
+                    $scope.model.zonePoints = zones.getPopupRates();
+                }
             }, ],
         };
 
@@ -114,17 +169,7 @@ angular.module('pitchfxApp').controller('PitchstatsCtrl', ['$rootScope', '$scope
                 return;
             }
 
-            var zoneChartId = $scope.model.selectedZoneChart.id;
-            if (zoneChartId === 'swingRate')
-            {
-                $scope.model.zonePoints = zones.getSwingRates();
-                $scope.model.zoneMax = 0.800;
-            }
-            else if (zoneChartId === 'whiffRate')
-            {
-                $scope.model.zonePoints = zones.getWhiffsPerSwingRates();
-                $scope.model.zoneMax = 0.600;
-            }
+            $scope.model.selectedZoneChart.generator();
         }
 
         /**

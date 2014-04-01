@@ -116,6 +116,19 @@ pitchfx.Zones.prototype.getSwingRates = function()
 };
 
 /**
+ * Get the whiff rates for each zone
+ *
+ * @returns {Array} a grid of rates
+ */
+pitchfx.Zones.prototype.getWhiffRates = function()
+{
+    return this.buildZoneStats(function(pitchZone)
+    {
+        return pitchZone.getWhiffRate();
+    });
+};
+
+/**
  * Get a grid of whiffs per swing rates
  *
  * @returns {Array} a grid of rates
@@ -125,6 +138,54 @@ pitchfx.Zones.prototype.getWhiffsPerSwingRates = function()
     return this.buildZoneStats(function(pitchZone)
     {
         return pitchZone.getWhiffsPerSwingRate();
+    });
+};
+
+/**
+ * Get a grid of grounder/bip rates
+ * @returns
+ */
+pitchfx.Zones.prototype.getGrounderRates = function()
+{
+    return this.buildZoneStats(function(pitchZone)
+    {
+        return pitchZone.getTrajectoryRate('grounder');
+    });
+};
+
+/**
+ * Get a grid of liner/bip rates
+ * @returns
+ */
+pitchfx.Zones.prototype.getLinerRates = function()
+{
+    return this.buildZoneStats(function(pitchZone)
+    {
+        return pitchZone.getTrajectoryRate('liner');
+    });
+};
+
+/**
+ * Get a grid of flyball/bip rates
+ * @returns
+ */
+pitchfx.Zones.prototype.getFlyballRates = function()
+{
+    return this.buildZoneStats(function(pitchZone)
+    {
+        return pitchZone.getTrajectoryRate('flyball');
+    });
+};
+
+/**
+ * Get a grid of popup/bip rates
+ * @returns
+ */
+pitchfx.Zones.prototype.getPopupRates = function()
+{
+    return this.buildZoneStats(function(pitchZone)
+    {
+        return pitchZone.getTrajectoryRate('popup');
     });
 };
 
