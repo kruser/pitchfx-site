@@ -1,13 +1,13 @@
-# PitchFX.org Developer Guide
+# BaseballMod.com Developer Guide
 
 ## Overview
-PitchFX.org is a webapp for searching PitchFX baseball data. It is architected using all open-source 
+BaseballMod.com is a webapp for searching PitchFX baseball data. It is architected using all open-source 
 technologies and is meant to be developed and improved by the baseball development community. This
-document is a guide for all developers wanting to build features for PitchFX.org or contribute simple
+document is a guide for all developers wanting to build features for BaseballMod.com or contribute simple
 bug fixes.
 
-Developers contributing significantly to the code base will get attribution on the PitchFX.org home
-page. This is an excellent way to get recognized by the several MLB teams that visit PitchFX.org
+Developers contributing significantly to the code base will get attribution on the BaseballMod.com home
+page. This is an excellent way to get recognized by the several MLB teams that visit BaseballMod.com
 and even watch/star this github repository.
 
 Still interested in contributing? Read on....
@@ -43,8 +43,8 @@ this project.
 Before checking out this website's code base you'll want to install NodeJS. Installation binaries are provided
 for all popular operating systems by visiting the NodeJS website here: http://nodejs.org/
 
-#### Installing the PitchFX.org web application
-First clone the pitchfx.org repository and move into that directory.
+#### Installing the BaseballMod.com web application
+First clone the BaseballMod.com repository and move into that directory.
 
     git clone https://github.com/kruser/pitchfx-site.git
     cd pitchfx-site
@@ -63,7 +63,7 @@ browser without even a refresh. Give it a try by editing a simple file like *app
 If things are setup correctly, your browser should reflect your changes immediately.
 
 #### Working on the webapp
-The pitchfx.org app was created using a Yeoman generator. If you've never used Yeoman, you'll need to install
+The BaseballMod.com app was created using a Yeoman generator. If you've never used Yeoman, you'll need to install
 it now.
 
     npm install -g yo
@@ -75,7 +75,7 @@ Next up you'll want to install the *angular-fullstack* yeoman generator.
 
     npm install generator-angular-fullstack
     
-PitchFX.org uses AngularJS heavily for the UI for templating and dependency injection. If you've never
+BaseballMod.com uses AngularJS heavily for the UI for templating and dependency injection. If you've never
 used AngularJS before you'll need to learn a few things before continuing. You can either visit http://angularjs.org
 or watch this great video: http://www.youtube.com/watch?v=i9MHigUZKEM
 
@@ -95,7 +95,7 @@ put the files in the appropriate location so you don't have to make these decisi
 More information about the generator can be found here: https://www.npmjs.org/package/generator-angular-fullstack
 
 #### What to work on?
-PitchFX.org uses GitHub issue tracking for all issues, enhancements and discussions. If you're looking
+BaseballMod.com uses GitHub issue tracking for all issues, enhancements and discussions. If you're looking
 for something to work on, just look through the open issue list here: https://github.com/kruser/pitchfx-site/issues?state=open
 
 If you find something interesting that isn't assigned to anybody feel free to comment on it and start
@@ -103,7 +103,7 @@ working on it. If you have an idea for something that isn't there, you can submi
 we'll discuss it with you.
 
 #### How to submit code?
-PitchFX.org uses GitHub pull requests for all code submissions. In short, that means you'll...
+BaseballMod.com uses GitHub pull requests for all code submissions. In short, that means you'll...
 * clone this repo
 * create a branch for your work
 * submit a pull request back using that branch

@@ -22,7 +22,7 @@ exports.generate = function(req, res)
 
     urlSet.url.push(
     {
-        loc: 'http://pitchfx.org',
+        loc: 'http://baseballmod.com',
         lastmod: lastMod,
         changefreq: 'monthly',
         priority: 1
@@ -40,7 +40,7 @@ exports.generate = function(req, res)
                 if (player.first && player.last)
                 {
                     url = {
-                        loc: 'http://pitchfx.org/player/' + player.id + '/' + player.first.toLowerCase() + '-' + player.last.toLowerCase(),
+                        loc: 'http://baseballmod.com/player/' + player.id + '/' + player.first.toLowerCase() + '-' + player.last.toLowerCase(),
                         lastmod: lastMod,
                         changefreq: 'weekly',
                         priority: 1

@@ -1,4 +1,4 @@
-PitchFX.org Attributions
+BaseballMod.com Attributions
 ==========================
 
 ## Libraries

@@ -9,7 +9,7 @@ angular.module('pitchfxApp').controller('SharingmodalCtrl', ['$scope', '$http', 
          */
         function getFilteredUrl()
         {
-            var absUrl = $location.absUrl().split('?')[0].replace('localhost:9000', 'pitchfx.org'),
+            var absUrl = $location.absUrl().split('?')[0].replace('localhost:9000', 'baseballmod.com'),
                 filteredUrl = absUrl + '?filter=' + JSON.stringify(filtersService.filters);
             if (filtersService.pitchFilters)
             {
