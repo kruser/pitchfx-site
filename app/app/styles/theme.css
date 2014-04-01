@@ -111,6 +111,9 @@ body {
 .CHC.player-header .mug-container .logoBlock {
 	background-color: #15206E;
 }
+.WSH.player-header .mug-container .logoBlock {
+    background-color: #DC1317;
+}
 
 .player-header .mug {
 	width: 3.5em;
