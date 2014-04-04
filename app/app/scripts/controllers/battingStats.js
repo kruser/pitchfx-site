@@ -107,7 +107,8 @@ angular.module('pitchfxApp').controller('BattingstatsCtrl', ['$scope', '$log', '
                 },
                 credits:
                 {
-                    enabled: false
+                    text : 'BaseballMod.com',
+                    href : ''
                 },
                 title:
                 {
@@ -209,7 +210,8 @@ angular.module('pitchfxApp').controller('BattingstatsCtrl', ['$scope', '$log', '
                     },
                     credits:
                     {
-                        enabled: false
+                        text : 'BaseballMod.com',
+                        href : ''
                     },
                     plotOptions:
                     {

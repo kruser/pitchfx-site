@@ -217,7 +217,8 @@ angular.module('pitchfxApp').controller('PitchstatsCtrl', ['$rootScope', '$scope
                 },
                 credits:
                 {
-                    enabled: false
+                    text : 'BaseballMod.com',
+                    href : ''
                 },
                 title:
                 {
