@@ -8,6 +8,7 @@ BaseballMod.com Attributions
 * NodeJS
 * ExpressJS
 * MongoDB
+* Highcharts (http://www.highcharts.com/) - used under the Creative Commons
 
 ## Panoramas
 All panorams on the home screen are used under the Creative Commons license as indicated on their wikipedia pages
