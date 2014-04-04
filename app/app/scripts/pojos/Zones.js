@@ -103,6 +103,45 @@ pitchfx.Zones.prototype.addPitch = function(pitch)
 };
 
 /**
+ * Get the wOBA value per ball in play for each zone
+ *
+ * @returns {Array} a grid of rates
+ */
+pitchfx.Zones.prototype.getWOBA = function()
+{
+    return this.buildZoneStats(function(pitchZone)
+    {
+        return pitchZone.getWOBA();
+    });
+};
+
+/**
+ * Get the batting average on balls in play for each zone
+ *
+ * @returns {Array} a grid of rates
+ */
+pitchfx.Zones.prototype.getBABIP = function()
+{
+    return this.buildZoneStats(function(pitchZone)
+    {
+        return pitchZone.getBABIP();
+    });
+};
+
+/**
+ * Get the balls in play rates for each zone
+ *
+ * @returns {Array} a grid of rates
+ */
+pitchfx.Zones.prototype.getBIPRate = function()
+{
+    return this.buildZoneStats(function(pitchZone)
+    {
+        return pitchZone.getBIPRate();
+    });
+};
+
+/**
  * Get the swing rates for each zone
  *
  * @returns {Array} a grid of rates
