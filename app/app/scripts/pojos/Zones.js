@@ -107,7 +107,7 @@ pitchfx.Zones.prototype.addPitch = function(pitch)
  *
  * @returns {Array} a grid of rates
  */
-pitchfx.Zones.prototype.getWOBA = function()
+pitchfx.Zones.prototype.getWOBARates = function()
 {
     return this.buildZoneStats(function(pitchZone)
     {
@@ -120,7 +120,7 @@ pitchfx.Zones.prototype.getWOBA = function()
  *
  * @returns {Array} a grid of rates
  */
-pitchfx.Zones.prototype.getBABIP = function()
+pitchfx.Zones.prototype.getBABIPRates = function()
 {
     return this.buildZoneStats(function(pitchZone)
     {
@@ -133,7 +133,7 @@ pitchfx.Zones.prototype.getBABIP = function()
  *
  * @returns {Array} a grid of rates
  */
-pitchfx.Zones.prototype.getBIPRate = function()
+pitchfx.Zones.prototype.getBIPRates = function()
 {
     return this.buildZoneStats(function(pitchZone)
     {

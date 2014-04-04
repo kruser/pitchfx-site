@@ -24,7 +24,7 @@ angular.module('pitchfxApp').controller('PitchstatsCtrl', ['$rootScope', '$scope
                 max: 0.400,
                 generator: function()
                 {
-                    $scope.model.zonePoints = zones.getWOBA();
+                    $scope.model.zonePoints = zones.getWOBARates();
                 }
             },
             {
@@ -33,7 +33,7 @@ angular.module('pitchfxApp').controller('PitchstatsCtrl', ['$rootScope', '$scope
                 max: 0.400,
                 generator: function()
                 {
-                    $scope.model.zonePoints = zones.getBABIP();
+                    $scope.model.zonePoints = zones.getBABIPRates();
                 }
             },
             {

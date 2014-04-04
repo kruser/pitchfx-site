@@ -75,7 +75,11 @@ pitchfx.Pitch.prototype.isOut = function()
  */
 pitchfx.Pitch.prototype.isHomeRun = function()
 {
-    return (/home run/i.test(this.des));
+    if (this.hip && this.hip.des)
+    {
+        return (/home run/i.test(this.hip.des));
+    }
+    return false;
 };
 
 /**
