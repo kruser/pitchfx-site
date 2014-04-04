@@ -39,10 +39,10 @@ angular.module('pitchfxApp').controller('PitchstatsCtrl', ['$rootScope', '$scope
             {
                 title: 'BIP Rate',
                 id: 'bipRate',
-                max: 0.500,
+                max: 0.400,
                 generator: function()
                 {
-                    $scope.model.zonePoints = zones.getBIPRate();
+                    $scope.model.zonePoints = zones.getBIPRates();
                 }
             },
             {
