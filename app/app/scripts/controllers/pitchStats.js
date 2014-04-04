@@ -21,7 +21,7 @@ angular.module('pitchfxApp').controller('PitchstatsCtrl', ['$rootScope', '$scope
             {
                 title: 'wOBA/BIP',
                 id: 'woba',
-                max: 0.400,
+                max: 0.500,
                 generator: function()
                 {
                     $scope.model.zonePoints = zones.getWOBARates();

@@ -48,7 +48,7 @@ pitchfx.Zone.prototype.getWOBA = function()
     }
 
     val = wobavalue / bip;
-    return new pitchfx.ZoneStat(val, val.toFixed(3) + ' (' + wobavalue.toFixed(2) + '/' + bip + ')');
+    return new pitchfx.ZoneStat(val, val.toFixed(3) + ' (' + bip + ' BIP)');
 };
 
 /**
