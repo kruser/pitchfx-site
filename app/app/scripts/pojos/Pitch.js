@@ -71,6 +71,18 @@ pitchfx.Pitch.prototype.isOut = function()
 };
 
 /**
+ * @returns {Boolean} true if this pitch resulted in a home run
+ */
+pitchfx.Pitch.prototype.isHomeRun = function()
+{
+    if (this.hip && this.hip.des)
+    {
+        return (/home run/i.test(this.hip.des));
+    }
+    return false;
+};
+
+/**
  * @returns {number} if this pitch resulted in an event that contributes to
  *          weighted on-base average, that value is returned here. In the case
  *          the pitch doesn't result in an event, this function returned
