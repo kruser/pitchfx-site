@@ -21,6 +21,98 @@ pitchfx.Zone.prototype.addPitch = function(pitch)
 };
 
 /**
+ * Get the wOBA value across all balls in play in this zone
+ *
+ * @returns {pitchfx.ZoneStat}
+ */
+pitchfx.Zone.prototype.getWOBA = function()
+{
+    var bip = 0,
+        wobavalue = 0,
+        val = 0;
+
+    angular.forEach(this.pitches, function(pitch)
+    {
+        if (pitch.getWeightedObaValue())
+        {
+            wobavalue += pitch.getWeightedObaValue(pitch);
+        }
+        if (pitch.isBallInPlay())
+        {
+            bip++;
+        }
+    });
+    if (bip === 0)
+    {
+        return new pitchfx.ZoneStat(0, '0% (0/0)');
+    }
+
+    val = wobavalue / bip;
+    return new pitchfx.ZoneStat(val, val.toFixed(3) + ' (' + wobavalue.toFixed(2) + '/' + bip + ')');
+};
+
+/**
+ * Get the batting average on balls in play across all hit pitches in this zone
+ *
+ * @returns {Number}
+ */
+pitchfx.Zone.prototype.getBABIP = function()
+{
+    var hits = 0,
+        bip = 0,
+        val = 0;
+
+    angular.forEach(this.pitches, function(pitch)
+    {
+        if (!pitch.isHomeRun())
+        {
+            if (pitch.isHit())
+            {
+                hits++;
+            }
+            if (pitch.isBallInPlay())
+            {
+                bip++;
+            }
+        }
+
+    });
+    if (bip === 0)
+    {
+        return new pitchfx.ZoneStat(0, '0% (0/0)');
+    }
+    val = hits / bip;
+    return new pitchfx.ZoneStat(val, val.toFixed(3) + ' (' + hits + '/' + bip + ')');
+};
+
+/**
+ * Get the balls in play rate across all pitches in this zone
+ *
+ * @returns {Number}
+ */
+pitchfx.Zone.prototype.getBIPRate = function()
+{
+    var pitches = this.pitches.length,
+        bip = 0,
+        val = 0;
+
+    angular.forEach(this.pitches, function(pitch)
+    {
+        if (pitch.isBallInPlay())
+        {
+            bip++;
+        }
+    });
+    if (pitches === 0)
+    {
+        return new pitchfx.ZoneStat(0, '0% (0/0)');
+    }
+
+    val = bip / pitches;
+    return new pitchfx.ZoneStat(val, (val * 100).toFixed(0) + '% (' + bip + '/' + pitches + ')');
+};
+
+/**
  * Get the whiff rate across all pitches in this zone
  *
  * @returns {Number}

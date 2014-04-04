@@ -19,6 +19,33 @@ angular.module('pitchfxApp').controller('PitchstatsCtrl', ['$rootScope', '$scope
         $scope.model = {
             zoneCharts: [
             {
+                title: 'wOBA/BIP',
+                id: 'woba',
+                max: 0.400,
+                generator: function()
+                {
+                    $scope.model.zonePoints = zones.getWOBARates();
+                }
+            },
+            {
+                title: 'BABIP',
+                id: 'babip',
+                max: 0.400,
+                generator: function()
+                {
+                    $scope.model.zonePoints = zones.getBABIPRates();
+                }
+            },
+            {
+                title: 'BIP Rate',
+                id: 'bipRate',
+                max: 0.400,
+                generator: function()
+                {
+                    $scope.model.zonePoints = zones.getBIPRates();
+                }
+            },
+            {
                 title: 'Swing Rate',
                 id: 'swingRate',
                 max: 0.800,

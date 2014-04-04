@@ -42,6 +42,7 @@ describe('POJO: Pitch', function()
         expect(pitch.isHit()).toBe(false);
         expect(pitch.isBallInPlay()).toBe(false);
         expect(pitch.isFoul()).toBe(false);
+        expect(pitch.isHomeRun()).toBe(false);
         expect(pitch.getWeightedObaValue()).toBe(undefined);
         expect(pitch.getHipTrajectory()).toBe('');
     });
@@ -71,6 +72,7 @@ describe('POJO: Pitch', function()
         expect(pitch.isHit()).toBe(true);
         expect(pitch.isBallInPlay()).toBe(true);
         expect(pitch.isFoul()).toBe(false);
+        expect(pitch.isHomeRun()).toBe(false);
         expect(pitch.getWeightedObaValue()).toBe(1.24);
         expect(pitch.getHipTrajectory()).toBe('liner');
         expect(pitch.getPitchType()).toBe('CU');
@@ -101,8 +103,40 @@ describe('POJO: Pitch', function()
         expect(pitch.isHit()).toBe(false);
         expect(pitch.isBallInPlay()).toBe(true);
         expect(pitch.isFoul()).toBe(false);
+        expect(pitch.isHomeRun()).toBe(false);
         expect(pitch.getWeightedObaValue()).toBe(undefined);
         expect(pitch.getHipTrajectory()).toBe('grounder');
         expect(pitch.getPitchType()).toBe('CH');
+    });
+
+    it('Test a home run', function()
+    {
+        var pitch = new pitchfx.Pitch(
+        {
+            "hip":
+            {
+                "des": "Home Run"
+            },
+            "atbat":
+            {
+                "des": "Josmil Pinto homers (1) on a fly ball to left center field.  "
+            },
+            "px": -0.03,
+            "type": "X",
+            "des": "In play, run(s)",
+            "pz": 2.49,
+            "start_speed": 88.4,
+            "pitch_type": "FC"
+        });
+        expect(pitch.isBall()).toBe(false);
+        expect(pitch.isSwing()).toBe(true);
+        expect(pitch.isWhiff()).toBe(false);
+        expect(pitch.isHit()).toBe(true);
+        expect(pitch.isBallInPlay()).toBe(true);
+        expect(pitch.isFoul()).toBe(false);
+        expect(pitch.isHomeRun()).toBe(true);
+        expect(pitch.getWeightedObaValue()).toBe(1.95);
+        expect(pitch.getHipTrajectory()).toBe('flyball');
+        expect(pitch.getPitchType()).toBe('FC');
     });
 });
