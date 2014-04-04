@@ -165,7 +165,7 @@ to beautify your code before you submit a pull request, doing so will mean that 
 
 So, immediately before committing your code you should run this super simple grunt task:
 
-    grunt jsbeautify
+    grunt jsbeautifier
     
 After running, you should see code changes to your files. Mainly these will be whitespace formatting
 issues, resulting in beautiful code.

@@ -4,6 +4,7 @@
  * Provides an angularJS wrapper some heatmap library
  */
 angular.module('pitchfxApp').directive('heatmap', [
+
     function()
     {
         return {
