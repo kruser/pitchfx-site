@@ -47,8 +47,8 @@ angular.module('pitchfxApp').directive('heatmap', [
 
                         credits:
                         {
-                            text : 'BaseballMod.com',
-                            href : ''
+                            text: 'BaseballMod.com',
+                            href: ''
                         },
                         title:
                         {

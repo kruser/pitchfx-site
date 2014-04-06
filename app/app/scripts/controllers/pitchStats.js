@@ -217,8 +217,8 @@ angular.module('pitchfxApp').controller('PitchstatsCtrl', ['$rootScope', '$scope
                 },
                 credits:
                 {
-                    text : 'BaseballMod.com',
-                    href : ''
+                    text: 'BaseballMod.com',
+                    href: ''
                 },
                 title:
                 {
@@ -330,6 +330,10 @@ angular.module('pitchfxApp').controller('PitchstatsCtrl', ['$rootScope', '$scope
                     if (pitch.isSwing())
                     {
                         aggregator.swing++;
+                        if (pitch.isWhiff())
+                        {
+                            aggregator.whiff++;
+                        }
                     }
                     if (pitch.isBallInPlay())
                     {
