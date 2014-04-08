@@ -71,15 +71,6 @@ body {
 	background-size: 100%;
 }
 
-.player-header.well {
-	padding: 0px;
-}
-
-.player-header .full {
-	background: rgba(255, 255, 255, .85);
-	padding: .5em .75em;
-}
-
 .player-header .mug-container {
 	background: #fff;
 	padding: .25em;
