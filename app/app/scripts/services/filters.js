@@ -35,6 +35,7 @@ angular.module('pitchfxApp').service('Filters', [ '$timeout', '$angularCacheFact
             filter.name = filterName;
             filterCache.put(filterName, filter);
             self.reloadSavedFilters();
+            _gaq.push([ '_trackEvent', 'filters', 'saved', filterName]);
         });
     };
 
