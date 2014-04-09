@@ -2,8 +2,8 @@
 	<div class="panel-heading clearfix"
 		ng-click="filtersOpen = !filtersOpen">
 		<h3 class="panel-title pull-left">Filter At-Bats</h3>
-		<span class="pull-right visible-xs fa"
-			ng-class="{'fa-chevron-circle-down':filtersOpen, 'fa-chevron-circle-up':!filtersOpen}"></span>
+		<button class="pull-right fa fa-thumb-tack hidden-xs" tooltip="Save this filter" ng-click="pinFilter()"></button>
+		<span class="pull-right visible-xs fa" ng-class="{'fa-chevron-circle-down':filtersOpen, 'fa-chevron-circle-up':!filtersOpen}"></span>
 	</div>
 	<form class="form panel-body" ng-class="{'hidden-xs':!filtersOpen}">
 	    <div class="form-group">
