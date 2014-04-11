@@ -170,7 +170,7 @@ pitchfx.Zone.prototype.getWhiffRate = function()
 };
 
 /**
- * Get the whiff rate for this zone
+ * Get the called strike rate for this zone
  *
  * @returns {pitchfx.ZoneStat}
  */
