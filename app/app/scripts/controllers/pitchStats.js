@@ -20,6 +20,7 @@ angular.module('pitchfxApp').controller('PitchstatsCtrl', ['$rootScope', '$scope
             zoneCharts: [
             {
                 title: 'wOBA/BIP',
+                group: 'Sabermetric Outcomes',
                 id: 'woba',
                 max: 0.500,
                 generator: function()
@@ -29,6 +30,7 @@ angular.module('pitchfxApp').controller('PitchstatsCtrl', ['$rootScope', '$scope
             },
             {
                 title: 'BABIP',
+                group: 'Sabermetric Outcomes',
                 id: 'babip',
                 max: 0.400,
                 generator: function()
@@ -38,6 +40,7 @@ angular.module('pitchfxApp').controller('PitchstatsCtrl', ['$rootScope', '$scope
             },
             {
                 title: 'BIP Rate',
+                group: 'Sabermetric Outcomes',
                 id: 'bipRate',
                 max: 0.400,
                 generator: function()
@@ -47,6 +50,7 @@ angular.module('pitchfxApp').controller('PitchstatsCtrl', ['$rootScope', '$scope
             },
             {
                 title: 'Swing Rate',
+                group: 'Plate Discipline',
                 id: 'swingRate',
                 max: 0.800,
                 generator: function()
@@ -56,6 +60,7 @@ angular.module('pitchfxApp').controller('PitchstatsCtrl', ['$rootScope', '$scope
             },
             {
                 title: 'Whiff Rate',
+                group: 'Plate Discipline',
                 id: 'whiffRate',
                 max: 0.200,
                 generator: function()
@@ -65,6 +70,7 @@ angular.module('pitchfxApp').controller('PitchstatsCtrl', ['$rootScope', '$scope
             },
             {
                 title: 'Whiffs/Swing',
+                group: 'Plate Discipline',
                 id: 'whiffsPerSwing',
                 max: 0.600,
                 generator: function()
@@ -74,6 +80,7 @@ angular.module('pitchfxApp').controller('PitchstatsCtrl', ['$rootScope', '$scope
             },
             {
                 title: 'Called Strike Rate',
+                group: 'Plate Discipline',
                 id: 'calledStrikeRate',
                 max: 0.500,
                 generator: function()
@@ -83,6 +90,7 @@ angular.module('pitchfxApp').controller('PitchstatsCtrl', ['$rootScope', '$scope
             },
             {
                 title: 'Grounders/BIP',
+                group: 'Batted Ball Results',
                 id: 'grounders',
                 max: 0.700,
                 generator: function()
@@ -92,6 +100,7 @@ angular.module('pitchfxApp').controller('PitchstatsCtrl', ['$rootScope', '$scope
             },
             {
                 title: 'Linedrives/BIP',
+                group: 'Batted Ball Results',
                 id: 'liners',
                 max: 0.400,
                 generator: function()
@@ -101,6 +110,7 @@ angular.module('pitchfxApp').controller('PitchstatsCtrl', ['$rootScope', '$scope
             },
             {
                 title: 'Flyballs/BIP',
+                group: 'Batted Ball Results',
                 id: 'flyballs',
                 max: 0.500,
                 generator: function()
@@ -110,6 +120,7 @@ angular.module('pitchfxApp').controller('PitchstatsCtrl', ['$rootScope', '$scope
             },
             {
                 title: 'Popups/BIP',
+                group: 'Batted Ball Results',
                 id: 'popups',
                 max: 0.600,
                 generator: function()

@@ -68,9 +68,13 @@
 		</div>
 		<div class="row">
 		    <div class="col-sm-4 col-lg-3">
-				<ul class="hidden-xs nav nav-pills nav-stacked">
-					<li ng-repeat="zoneChart in model.zoneCharts" ng-class="{'active':model.selectedZoneChart == zoneChart}"><a href="" ng-click="model.selectedZoneChart = zoneChart">{{zoneChart.title}}</a></li>
-		        </ul>
+		        <accordion close-others="true" class="hidden-xs">
+				    <accordion-group heading="{{zoneGroup.group}}" ng-repeat="zoneGroup in model.zoneCharts | unique:'group'" is-open="$index == 0">
+				        <ul class="nav nav-pills nav-stacked">
+                            <li ng-repeat="zoneChart in model.zoneCharts | filter:zoneGroup.group" ng-class="{'active':model.selectedZoneChart == zoneChart}"><a href="" ng-click="model.selectedZoneChart = zoneChart">{{zoneChart.title}}</a></li>
+                        </ul>
+				    </accordion-group>
+				</accordion>
 		        <select class="visible-xs form-control" style="margin-bottom:.3em;" ng-model="model.selectedZoneChart" ng-options="zoneChart as zoneChart.title for zoneChart in model.zoneCharts">
                 </select>
 		    </div>

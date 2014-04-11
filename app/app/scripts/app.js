@@ -2,7 +2,7 @@ var _gaq = _gaq || [];
 /**
  * Sets up our AngularJS module
  */
-angular.module('pitchfxApp', ['ui.bootstrap', 'ngTouch', 'ngRoute', 'jmdobry.angular-cache']).config(['$routeProvider',
+angular.module('pitchfxApp', ['ui.bootstrap', 'ui.unique', 'ngTouch', 'ngRoute', 'jmdobry.angular-cache']).config(['$routeProvider',
     function($routeProvider)
     {
         $routeProvider.when('/atbats',

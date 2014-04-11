@@ -10,7 +10,8 @@
     "angular-touch": "~1.2.10",
     "angular-cache": "~2.3.0",
     "angular-bootstrap": "~0.10.0",
-    "modernizr": "~2.7.1"
+    "modernizr": "~2.7.1",
+    "angular-ui-utils": "bower-unique"
   },
   "devDependencies": {
     "angular-mocks": "~1.2.0",

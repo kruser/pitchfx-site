@@ -147,3 +147,7 @@ body {
 	border-bottom: 1px dashed #ccc;
 	margin-bottom: 1em;
 }
+
+.accordion-toggle {
+	cursor: pointer;
+}
