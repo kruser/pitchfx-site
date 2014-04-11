@@ -974,4 +974,81 @@ describe('POJO: Zones', function()
         expect(/^5,5,1.06\d+$/m.test(csv)).toBe(true);
 
     });
+
+    it('Test called strike rate functions', function()
+    {
+        var zones = new pitchfx.Zones(),
+            pitches = [
+            {
+                "atbat":
+                {
+                    "des": "Josmil Pinto grounds out, shortstop Jurickson Profar to first baseman Mitch Moreland.  "
+                },
+                "px": 0,
+                "type": "S",
+                "des": "Called Strike",
+                "pz": 2.5,
+                "start_speed": 84.5,
+                "pitch_type": "CH"
+            },
+            {
+                "atbat":
+                {
+                    "des": "Josmil Pinto grounds out, shortstop Jurickson Profar to first baseman Mitch Moreland.  "
+                },
+                "px": 0,
+                "type": "B",
+                "des": "Ball",
+                "pz": 2.5,
+                "start_speed": 79,
+                "pitch_type": "CH"
+            },
+            {
+                "atbat":
+                {
+                    "des": "Josmil Pinto grounds out, shortstop Jurickson Profar to first baseman Mitch Moreland.  "
+                },
+                "px": 0,
+                "type": "S",
+                "des": "Called Strike",
+                "pz": 2.5,
+                "start_speed": 80,
+                "pitch_type": "CH"
+            },
+            {
+                "atbat":
+                {
+                    "des": "Josmil Pinto grounds out, shortstop Jurickson Profar to first baseman Mitch Moreland.  "
+                },
+                "px": 0,
+                "type": "B",
+                "des": "Ball",
+                "pz": 2.5,
+                "start_speed": 71.3,
+                "pitch_type": "CU"
+            },
+            {
+                "atbat":
+                {
+                    "des": "Josmil Pinto grounds out, shortstop Jurickson Profar to first baseman Mitch Moreland.  "
+                },
+                "px": 0,
+                "type": "S",
+                "des": "Foul",
+                "pz": 2.5,
+                "start_speed": 88.1,
+                "pitch_type": "FT"
+            }],
+            calledStrikeRates;
+
+        angular.forEach(pitches, function(pitch)
+        {
+            zones.addPitch(new pitchfx.Pitch(pitch));
+        });
+        calledStrikeRates = zones.getCalledStrikeRates();
+        expect(calledStrikeRates[0][0].stat).toBe(0);
+        expect(calledStrikeRates[9][9].stat).toBe(0);
+        expect(calledStrikeRates[5][5].stat).toBe(0.4);
+    });
+
 });
