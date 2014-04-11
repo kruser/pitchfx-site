@@ -4,6 +4,10 @@ body {
 	padding-top: 50px;
 }
 
+body.page-player {
+	padding-top: 32px;
+}
+
 .avatar {
 	width: 8em;
 }
@@ -137,4 +141,8 @@ body {
 .developer-info {
 	border-bottom: 1px dashed #ccc;
 	margin-bottom: 1em;
+}
+
+.page-player .navbar {
+    margin-bottom: 0px;
 }
