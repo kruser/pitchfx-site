@@ -73,6 +73,15 @@ angular.module('pitchfxApp').controller('PitchstatsCtrl', ['$rootScope', '$scope
                 }
             },
             {
+                title: 'Called Strike Rate',
+                id: 'calledStrikeRate',
+                max: 0.500,
+                generator: function()
+                {
+                    $scope.model.zonePoints = zones.getCalledStrikeRates();
+                }
+            },
+            {
                 title: 'Grounders/BIP',
                 id: 'grounders',
                 max: 0.700,

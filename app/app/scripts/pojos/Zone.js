@@ -170,6 +170,33 @@ pitchfx.Zone.prototype.getWhiffRate = function()
 };
 
 /**
+ * Get the whiff rate for this zone
+ *
+ * @returns {pitchfx.ZoneStat}
+ */
+pitchfx.Zone.prototype.getCalledStrikeRate = function()
+{
+    var pitches = this.pitches.length,
+        calledstrikes = 0,
+        val = 0;
+    if (pitches === 0)
+    {
+        return new pitchfx.ZoneStat(0, '0% (0/0)');
+    }
+
+    angular.forEach(this.pitches, function(pitch)
+    {
+        if (!pitch.isSwing() && !pitch.isBall())
+        {
+            calledstrikes++;
+        }
+    });
+
+    val = calledstrikes / pitches;
+    return new pitchfx.ZoneStat(val, (val * 100).toFixed(0) + '% (' + calledstrikes + '/' + pitches + ')');
+};
+
+/**
  * Get the swing rate across all pitches in this zone
  *
  * @returns {Number}

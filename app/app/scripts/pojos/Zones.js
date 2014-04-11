@@ -181,6 +181,19 @@ pitchfx.Zones.prototype.getWhiffsPerSwingRates = function()
 };
 
 /**
+ * Get a grid of called strike rates
+ *
+ * @returns {Array} a grid of rates
+ */
+pitchfx.Zones.prototype.getCalledStrikeRates = function()
+{
+    return this.buildZoneStats(function(pitchZone)
+    {
+        return pitchZone.getCalledStrikeRate();
+    });
+};
+
+/**
  * Get a grid of grounder/bip rates
  * @returns
  */
