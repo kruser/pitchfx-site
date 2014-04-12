@@ -142,6 +142,45 @@ pitchfx.Zones.prototype.getBIPRates = function()
 };
 
 /**
+ * Get a grid of balls in play per swing rates
+ *
+ * @returns {Array} a grid of rates
+ */
+pitchfx.Zones.prototype.getBIPPerSwingRates = function()
+{
+    return this.buildZoneStats(function(pitchZone)
+    {
+        return pitchZone.getBIPPerSwingRate();
+    });
+};
+
+/**
+ * Get the foul rates for each zone
+ *
+ * @returns {Array} a grid of rates
+ */
+pitchfx.Zones.prototype.getFoulRates = function()
+{
+    return this.buildZoneStats(function(pitchZone)
+    {
+        return pitchZone.getFoulRate();
+    });
+};
+
+/**
+ * Get a grid of fouls per swing rates
+ *
+ * @returns {Array} a grid of rates
+ */
+pitchfx.Zones.prototype.getFoulsPerSwingRates = function()
+{
+    return this.buildZoneStats(function(pitchZone)
+    {
+        return pitchZone.getFoulsPerSwingRate();
+    });
+};
+
+/**
  * Get the swing rates for each zone
  *
  * @returns {Array} a grid of rates
@@ -177,6 +216,32 @@ pitchfx.Zones.prototype.getWhiffsPerSwingRates = function()
     return this.buildZoneStats(function(pitchZone)
     {
         return pitchZone.getWhiffsPerSwingRate();
+    });
+};
+
+/**
+ * Get the contact rates for each zone
+ *
+ * @returns {Array} a grid of rates
+ */
+pitchfx.Zones.prototype.getContactRates = function()
+{
+    return this.buildZoneStats(function(pitchZone)
+    {
+        return pitchZone.getContactRate();
+    });
+};
+
+/**
+ * Get a grid of contact per swing rates
+ *
+ * @returns {Array} a grid of rates
+ */
+pitchfx.Zones.prototype.getContactPerSwingRates = function()
+{
+    return this.buildZoneStats(function(pitchZone)
+    {
+        return pitchZone.getContactPerSwingRate();
     });
 };
 

@@ -113,7 +113,121 @@ pitchfx.Zone.prototype.getBIPRate = function()
 };
 
 /**
- * Get the whiff rate across all pitches in this zone
+ * Get the balls in play rate across all swings in this zone
+ *
+ * @returns {Number}
+ */
+pitchfx.Zone.prototype.getBIPPerSwingRate = function()
+{
+    var bip = 0,
+        swings = 0,
+        val = 0;
+
+    angular.forEach(this.pitches, function(pitch)
+    {
+        if (pitch.isSwing())
+        {
+            swings++;
+        }
+        if (pitch.isBallInPlay())
+        {
+            bip++;
+        }
+    });
+    if (swings === 0)
+    {
+        return new pitchfx.ZoneStat(0, '0% (0/0)');
+    }
+    val = bip / swings;
+    return new pitchfx.ZoneStat(val, (val * 100).toFixed(0) + '% (' + bip + '/' + swings + ')');
+};
+
+/**
+ * Get the foul rate across all pitches in this zone
+ *
+ * @returns {Number}
+ */
+pitchfx.Zone.prototype.getFoulRate = function()
+{
+    var pitches = this.pitches.length,
+        fouls = 0,
+        val = 0;
+
+    angular.forEach(this.pitches, function(pitch)
+    {
+        if (pitch.isFoul())
+        {
+            fouls++;
+        }
+    });
+    if (pitches === 0)
+    {
+        return new pitchfx.ZoneStat(0, '0% (0/0)');
+    }
+
+    val = fouls / pitches;
+    return new pitchfx.ZoneStat(val, (val * 100).toFixed(0) + '% (' + fouls + '/' + pitches + ')');
+};
+
+/**
+ * Get the foul rate across all swings in this zone
+ *
+ * @returns {Number}
+ */
+pitchfx.Zone.prototype.getFoulsPerSwingRate = function()
+{
+    var fouls = 0,
+        swings = 0,
+        val = 0;
+
+    angular.forEach(this.pitches, function(pitch)
+    {
+        if (pitch.isSwing())
+        {
+            swings++;
+        }
+        if (pitch.isFoul())
+        {
+            fouls++;
+        }
+    });
+    if (swings === 0)
+    {
+        return new pitchfx.ZoneStat(0, '0% (0/0)');
+    }
+    val = fouls / swings;
+    return new pitchfx.ZoneStat(val, (val * 100).toFixed(0) + '% (' + fouls + '/' + swings + ')');
+};
+
+/**
+ * Get the whiff rate for this zone
+ *
+ * @returns {pitchfx.ZoneStat}
+ */
+pitchfx.Zone.prototype.getWhiffRate = function()
+{
+    var pitches = this.pitches.length,
+        whiffs = 0,
+        val = 0;
+    if (pitches === 0)
+    {
+        return new pitchfx.ZoneStat(0, '0% (0/0)');
+    }
+
+    angular.forEach(this.pitches, function(pitch)
+    {
+        if (pitch.isWhiff())
+        {
+            whiffs++;
+        }
+    });
+
+    val = whiffs / pitches;
+    return new pitchfx.ZoneStat(val, (val * 100).toFixed(0) + '% (' + whiffs + '/' + pitches + ')');
+};
+
+/**
+ * Get the whiff rate across all swings in this zone
  *
  * @returns {Number}
  */
@@ -143,14 +257,14 @@ pitchfx.Zone.prototype.getWhiffsPerSwingRate = function()
 };
 
 /**
- * Get the whiff rate for this zone
+ * Get the contact rate for this zone
  *
  * @returns {pitchfx.ZoneStat}
  */
-pitchfx.Zone.prototype.getWhiffRate = function()
+pitchfx.Zone.prototype.getContactRate = function()
 {
     var pitches = this.pitches.length,
-        whiffs = 0,
+        contact = 0,
         val = 0;
     if (pitches === 0)
     {
@@ -159,14 +273,44 @@ pitchfx.Zone.prototype.getWhiffRate = function()
 
     angular.forEach(this.pitches, function(pitch)
     {
-        if (pitch.isWhiff())
+        if (pitch.isBallInPlay() || pitch.isFoul())
         {
-            whiffs++;
+            contact++;
         }
     });
 
-    val = whiffs / pitches;
-    return new pitchfx.ZoneStat(val, (val * 100).toFixed(0) + '% (' + whiffs + '/' + pitches + ')');
+    val = contact / pitches;
+    return new pitchfx.ZoneStat(val, (val * 100).toFixed(0) + '% (' + contact + '/' + pitches + ')');
+};
+
+/**
+ * Get the contact rate across all swings in this zone
+ *
+ * @returns {Number}
+ */
+pitchfx.Zone.prototype.getContactPerSwingRate = function()
+{
+    var contact = 0,
+        swings = 0,
+        val = 0;
+
+    angular.forEach(this.pitches, function(pitch)
+    {
+        if (pitch.isSwing())
+        {
+            swings++;
+        }
+        if (pitch.isBallInPlay() || pitch.isFoul())
+        {
+            contact++;
+        }
+    });
+    if (swings === 0)
+    {
+        return new pitchfx.ZoneStat(0, '0% (0/0)');
+    }
+    val = contact / swings;
+    return new pitchfx.ZoneStat(val, (val * 100).toFixed(0) + '% (' + contact + '/' + swings + ')');
 };
 
 /**

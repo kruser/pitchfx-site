@@ -19,38 +19,8 @@ angular.module('pitchfxApp').controller('PitchstatsCtrl', ['$rootScope', '$scope
         $scope.model = {
             zoneCharts: [
             {
-                title: 'wOBA/BIP',
-                group: 'Sabermetric Outcomes',
-                id: 'woba',
-                max: 0.500,
-                generator: function()
-                {
-                    $scope.model.zonePoints = zones.getWOBARates();
-                }
-            },
-            {
-                title: 'BABIP',
-                group: 'Sabermetric Outcomes',
-                id: 'babip',
-                max: 0.400,
-                generator: function()
-                {
-                    $scope.model.zonePoints = zones.getBABIPRates();
-                }
-            },
-            {
-                title: 'BIP Rate',
-                group: 'Sabermetric Outcomes',
-                id: 'bipRate',
-                max: 0.400,
-                generator: function()
-                {
-                    $scope.model.zonePoints = zones.getBIPRates();
-                }
-            },
-            {
                 title: 'Swing Rate',
-                group: 'Plate Discipline',
+                group: 'Pitch Results',
                 id: 'swingRate',
                 max: 0.800,
                 generator: function()
@@ -59,33 +29,83 @@ angular.module('pitchfxApp').controller('PitchstatsCtrl', ['$rootScope', '$scope
                 }
             },
             {
+                title: 'Contact Rate',
+                group: 'Pitch Results',
+                id: 'contactRate',
+                max: 0.600,
+                generator: function()
+                {
+                    $scope.model.zonePoints = zones.getContactRates();
+                }
+            },
+            {
                 title: 'Whiff Rate',
-                group: 'Plate Discipline',
+                group: 'Pitch Results',
                 id: 'whiffRate',
-                max: 0.200,
+                max: 0.400,
                 generator: function()
                 {
                     $scope.model.zonePoints = zones.getWhiffRates();
                 }
             },
             {
+                title: 'Called Strike Rate',
+                group: 'Pitch Results',
+                id: 'calledStrikeRate',
+                max: 0.500,
+                generator: function()
+                {
+                    $scope.model.zonePoints = zones.getCalledStrikeRates();
+                }
+            },
+            {
+                title: 'Ball In Play Rate',
+                group: 'Pitch Results',
+                id: 'bipRate',
+                max: 0.400,
+                generator: function()
+                {
+                    $scope.model.zonePoints = zones.getBIPRates();
+                }
+            },
+            {
+                title: 'Contact/Swing',
+                group: 'Swing Results',
+                id: 'contactPerSwing',
+                max: 0.800,
+                generator: function()
+                {
+                    $scope.model.zonePoints = zones.getContactPerSwingRates();
+                }
+            },
+            {
                 title: 'Whiffs/Swing',
-                group: 'Plate Discipline',
+                group: 'Swing Results',
                 id: 'whiffsPerSwing',
-                max: 0.600,
+                max: 0.400,
                 generator: function()
                 {
                     $scope.model.zonePoints = zones.getWhiffsPerSwingRates();
                 }
             },
             {
-                title: 'Called Strike Rate',
-                group: 'Plate Discipline',
-                id: 'calledStrikeRate',
+                title: 'Fouls/Swing',
+                group: 'Swing Results',
+                id: 'foulsPerSwing',
                 max: 0.500,
                 generator: function()
                 {
-                    $scope.model.zonePoints = zones.getCalledStrikeRates();
+                    $scope.model.zonePoints = zones.getFoulsPerSwingRates();
+                }
+            },
+            {
+                title: 'BIP/Swing',
+                group: 'Swing Results',
+                id: 'bipPerSwing',
+                max: 0.500,
+                generator: function()
+                {
+                    $scope.model.zonePoints = zones.getBIPPerSwingRates();
                 }
             },
             {
@@ -126,6 +146,26 @@ angular.module('pitchfxApp').controller('PitchstatsCtrl', ['$rootScope', '$scope
                 generator: function()
                 {
                     $scope.model.zonePoints = zones.getPopupRates();
+                }
+            },
+            {
+                title: 'wOBA/BIP',
+                group: 'Sabermetric Results',
+                id: 'woba',
+                max: 0.500,
+                generator: function()
+                {
+                    $scope.model.zonePoints = zones.getWOBARates();
+                }
+            },
+            {
+                title: 'BABIP',
+                group: 'Sabermetric Results',
+                id: 'babip',
+                max: 0.400,
+                generator: function()
+                {
+                    $scope.model.zonePoints = zones.getBABIPRates();
                 }
             }, ],
         };
