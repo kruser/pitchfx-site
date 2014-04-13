@@ -4,14 +4,17 @@
 		<br> <i class="fa fa-spinner fa-spin fa-4x"></i>
 		<h3>Loading at-bats...</h3>
 	</div>
-	<div ng-hide="loading || stats.plateAppearances" class="alert alert-danger jumbotron" style="margin-top:1em;">
+	<!-- 
+	<div ng-hide="loading" class="alert alert-danger jumbotron" style="margin-top:1em;">
 	   <strong>Hold up!</strong> There are no atbats available for this player based on your filter. Try adjusting your dates or other criteria. 
 	</div>
-	<div ng-hide="loading || !stats.plateAppearances">
+	 -->
+	<div ng-hide="loading">
 	   <div class="table-responsive">
 			<table class="table table-condensed">
 				<thead>
 					<tr>
+						<th></th>
 						<th>PA</th>
 						<th>AB</th>
 						<th>H</th>
@@ -27,8 +30,9 @@
 						<th>RBOE</th>
 					</tr>
 				</thead>
-				<tbody>
-					<tr>
+				<tbody >
+					<tr ng-class="{'info':stats.name === filtersService.filters.name}" ng-repeat="stats in statLines | orderBy:'name'">
+						<td>{{stats.name}}</td>
 						<td>{{stats.plateAppearances}}</td>
 						<td>{{stats.atbats}}</td>
 						<td>{{stats.singles + stats.doubles + stats.triples + stats.homeRuns}}</td>

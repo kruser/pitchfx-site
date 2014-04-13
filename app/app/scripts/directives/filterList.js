@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('pitchfxApp').directive('filterList', [ 'Filters', function(filterService)
+angular.module('pitchfxApp').directive('filterList', [ 'Filters', '$log', function(filterService, $log)
 {
     return {
         templateUrl : '/partials/filterList.html',
@@ -10,11 +10,13 @@ angular.module('pitchfxApp').directive('filterList', [ 'Filters', function(filte
         {
             scope.filterService = filterService;
 
-            scope.deleteFilter = function(filter)
+            scope.deleteFilter = function(filter, $event)
             {
+                $event.stopImmediatePropagation();
                 if (filter)
                 {
-                    filterService.unpinFilter(filter.name);
+                    $log.debug('DELETING A FILTER: ' + filter.name);
+                    filterService.unpinFilter(filter);
                 }
             };
             

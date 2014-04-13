@@ -6,7 +6,7 @@
 	           <strong class="filterLabel">{{filter.name}}</strong>
 	       </div>
 	       <em style="position:absolute;right:1.2em;top:.5em;"><small>({{getCardAbbreviation(filter)}})</small></em>
-	       <i class="fa fa-times" ng-show="hovering" ng-click="deleteFilter(filter)" style="position:absolute;right:.25em;top:.25em;"></i>
+	       <i class="fa fa-times" ng-show="hovering" ng-click="deleteFilter(filter, $event)" style="position:absolute;right:.25em;top:.25em;"></i>
 	   </div> 
    </div>
 </div>

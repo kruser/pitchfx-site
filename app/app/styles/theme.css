@@ -155,7 +155,6 @@ body {
 	height: 2.5em;
 	display: inline-block;
 	position: relative;
-	cursor: pointer;
 }
 
 .filterBox.last {
@@ -168,4 +167,5 @@ body {
 	white-space: nowrap;
 	overflow: hidden;
 	padding-bottom: .5em;
+	cursor: pointer;
 }

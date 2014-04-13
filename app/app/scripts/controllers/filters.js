@@ -135,6 +135,7 @@ angular.module('pitchfxApp').controller('FiltersCtrl', [ '$scope', '$log', '$tim
 
         modalInstance.result.then(function(filterName)
         {
+            $scope.filters.name = filterName;
             filterService.pinFilter(filterName, $scope.filters);
         });
     };

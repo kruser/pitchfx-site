@@ -60,17 +60,17 @@ angular.module('pitchfxApp').service('Filters', [ '$timeout', '$angularCacheFact
     /**
      * Remove a saved filter
      * 
-     * @param {string}
-     *            filterName - just the name (key) of the filter to delete
+     * @param {object}
+     *            filter - the filter to delete
      */
-    this.unpinFilter = function(filterName)
+    this.unpinFilter = function(filter)
     {
         var self = this;
         $timeout(function()
         {
-            filterCache.remove(filterName);
+            filterCache.remove(filter.name + '_' + filter.playerCard);
             self.reloadSavedFilters();
-            _gaq.push([ '_trackEvent', 'filters', 'deleted', filterName ]);
+            _gaq.push([ '_trackEvent', 'filters', 'deleted', filter.name ]);
         });
     };
 
