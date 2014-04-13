@@ -59,9 +59,10 @@ describe('Controller: BattingstatsCtrl', function()
 
     it('Test for stats to be present', function()
     {
-        expect(scope.stats).toBeUndefined();
+        expect(scope.statLines.length).toBe(0);
         $httpBackend.flush();
-        expect(scope.stats).toBeTruthy();
+        expect(scope.currentLine).toBeTruthy();
+        expect(scope.statLines.length).toBe(1);
     });
 
 });

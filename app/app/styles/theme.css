@@ -48,6 +48,7 @@ body {
 		text-shadow: black 0.1em 0.1em 0.2em
 	}
 }
+
 @media ( min-width : 768px) {
 	.nav>li>a.fa {
 		padding-right: 5px;
@@ -150,4 +151,26 @@ body {
 
 .accordion-toggle {
 	cursor: pointer;
+}
+
+.filterBox {
+	border-top: 1px solid #fff;
+	border-left: 1px solid #fff;
+	padding: .5em 2.25em 0 .5em;
+	height: 2.5em;
+	display: inline-block;
+	position: relative;
+	cursor: pointer;
+}
+
+.filterBox.last {
+	border-right: 1px solid #fff;
+}
+
+.filterBox .filterLabelContainer {
+	max-width: 9em;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+	padding-bottom: .5em;
 }

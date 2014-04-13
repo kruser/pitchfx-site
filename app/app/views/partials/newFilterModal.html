@@ -1,0 +1,21 @@
+<div>
+	<form name="filterForm" ng-submit="saveFilter()">
+		<div class="modal-header">
+			<button type="button" class="close" ng-click="dismiss()">
+				<i class="fa fa-times"></i>
+			</button>
+			<h4 class="modal-title fa fa-thumb-tack fa-2x"> Pin your filter</h4>
+		</div>
+		<div class="modal-body">
+			<div class="row">
+				<div class="col-md-12 form-group">
+					<input name="filterName" ng-model="model.filterName" ng-required="true"
+						ng-max="100" class="form-control" placeholder="Name your filter"></input>
+				</div>
+			</div>
+		</div>
+		<div class="modal-footer">
+			<button type="submit" class="btn btn-primary pull-right">Save Me</button>
+		</div>
+	</form>
+</div>
