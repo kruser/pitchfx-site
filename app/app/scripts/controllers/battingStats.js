@@ -15,6 +15,7 @@ angular.module('pitchfxApp').controller('BattingstatsCtrl', [ '$scope', '$log', 
     {
         $scope.$watch('filtersService.filters', function(filters)
         {
+            filters = filters || {};
             filtersService.loadingData = true;
             statsService.getStats($scope.playerId, filters).then(function(statLine)
             {

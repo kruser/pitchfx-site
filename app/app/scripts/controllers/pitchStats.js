@@ -131,6 +131,7 @@ angular.module('pitchfxApp').controller('PitchstatsCtrl', ['$rootScope', '$scope
         {
             $scope.$watch('filtersService.filters', function(atbatFilters)
             {
+                atbatFilters = atbatFilters || {};
                 filtersService.loadingData = true;
                 pitchesService.getPitches($scope.playerId, atbatFilters).then(function(pitches)
                 {
