@@ -4,10 +4,6 @@ body {
 	padding-top: 50px;
 }
 
-body.page-player {
-	padding-top: 32px;
-}
-
 .avatar {
 	width: 8em;
 }
@@ -52,6 +48,7 @@ body.page-player {
 		text-shadow: black 0.1em 0.1em 0.2em
 	}
 }
+
 @media ( min-width : 768px) {
 	.nav>li>a.fa {
 		padding-right: 5px;
@@ -81,12 +78,14 @@ body.page-player {
 	border-radius: 6px;
 	position: relative;
 }
+
 .player-header .mug-container img.defaultAvatar {
 	position: relative;
 	z-index: 1;
 }
-.player-header .mug-container .logoBlock{
-	background-color:#0C0F13;
+
+.player-header .mug-container .logoBlock {
+	background-color: #0C0F13;
 	position: absolute;
 	top: 7px;
 	left: 17px;
@@ -94,20 +93,26 @@ body.page-player {
 	height: 12px;
 	border-radius: 2px;
 }
-.STL.player-header .mug-container .logoBlock, .ARI.player-header .mug-container .logoBlock, .CIN.player-header .mug-container .logoBlock {
+
+.STL.player-header .mug-container .logoBlock,.ARI.player-header .mug-container .logoBlock,.CIN.player-header .mug-container .logoBlock
+	{
 	background-color: #AC030F;
 }
-.BAL.player-header .mug-container .logoBlock{
+
+.BAL.player-header .mug-container .logoBlock {
 	background-color: #F2F1FB;
 }
-.TEX.player-header .mug-container .logoBlock{
+
+.TEX.player-header .mug-container .logoBlock {
 	background-color: #11143B;
 }
+
 .CHC.player-header .mug-container .logoBlock {
 	background-color: #15206E;
 }
+
 .WSH.player-header .mug-container .logoBlock {
-    background-color: #DC1317;
+	background-color: #DC1317;
 }
 
 .player-header .mug {
@@ -143,6 +148,24 @@ body.page-player {
 	margin-bottom: 1em;
 }
 
-.page-player .navbar {
-    margin-bottom: 0px;
+.filterBox {
+	border-top: 1px solid #fff;
+	border-left: 1px solid #fff;
+	padding: .5em 2.25em 0 .5em;
+	height: 2.5em;
+	display: inline-block;
+	position: relative;
+	cursor: pointer;
+}
+
+.filterBox.last {
+	border-right: 1px solid #fff;
+}
+
+.filterBox .filterLabelContainer {
+	max-width: 9em;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+	padding-bottom: .5em;
 }

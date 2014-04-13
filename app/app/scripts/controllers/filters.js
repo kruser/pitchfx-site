@@ -3,10 +3,10 @@
 /**
  * A controller that manages hitting stats for a player
  */
-angular.module('pitchfxApp').controller('FiltersCtrl', [ '$scope', '$log', '$timeout', '$angularCacheFactory', '$routeParams', '$route', '$location', '$modal', 'Filters', function($scope, $log, $timeout, $angularCacheFactory, $routeParams, $route, $location, $modal, filtersService)
+angular.module('pitchfxApp').controller('FiltersCtrl', [ '$scope', '$log', '$timeout', '$angularCacheFactory', '$routeParams', '$route', '$location', '$modal', 'Filters', function($scope, $log, $timeout, $angularCacheFactory, $routeParams, $route, $location, $modal, filterService)
 {
-
-    $scope.dateInputSupported = Modernizr.inputtypes.date;
+    var initialized = false;
+    $scope.filterService = filterService;
 
     /**
      * Gets the recommended starting date for the filters.
@@ -46,9 +46,9 @@ angular.module('pitchfxApp').controller('FiltersCtrl', [ '$scope', '$log', '$tim
         } else
         {
             filtersFromCache = filterCache.get('filters');
-            if (filtersFromCache && filtersFromCache.length > 0)
+            if (filtersFromCache && filtersFromCache.name)
             {
-                $scope.filters = filtersFromCache[0];
+                $scope.filters = filtersFromCache;
                 $scope.filters.playerCard = ($scope.playerPosition === '1') ? 'pitcher' : 'batter';
                 if ($scope.playerPosition === '1')
                 {
@@ -80,11 +80,39 @@ angular.module('pitchfxApp').controller('FiltersCtrl', [ '$scope', '$log', '$tim
             }
         }
 
-        $scope.$watch('[filters]', function(filters)
+        /*
+         * Update the filter UI when they have been updated on the filterService
+         */
+        $scope.$watch('filterService.filters', function(filters)
         {
-            filterCache.put('filters', filters);
-            filtersService.filters = filters;
-            _gaq.push([ '_trackEvent', 'filters', 'atbats', $scope.playerId ]);
+            if (filters)
+            {
+                $log.debug('TIME TO UPDATE FILTERS');
+                $scope.filters = angular.copy(filters);
+                filterCache.put('filters', filters);
+            }
+        });
+
+        /*
+         * Update the filterService when the filters UI has been touched
+         */
+        $scope.$watch('filters', function(filters)
+        {
+            $log.debug('FILTERS HAVE BEEN UPDATED');
+            if (!angular.equals(filters, filterService.filters))
+            {
+                $log.debug('LOOKS LIKE A LEGIT CHANGE');
+                $log.debug(filters);
+                filterCache.put('filters', filters);
+                if (initialized)
+                {
+                    $log.debug('RESETTING FILTER NAME');
+                    filters.name = undefined;
+                    _gaq.push([ '_trackEvent', 'filters', 'atbats', $scope.playerId ]);
+                }
+                filterService.filters = filters;
+                initialized = true;
+            }
         }, true);
     }
 
@@ -100,7 +128,7 @@ angular.module('pitchfxApp').controller('FiltersCtrl', [ '$scope', '$log', '$tim
 
         modalInstance.result.then(function(filterName)
         {
-            filtersService.pinFilter(filterName, $scope.filters);
+            filterService.pinFilter(filterName, $scope.filters);
         });
     };
 
