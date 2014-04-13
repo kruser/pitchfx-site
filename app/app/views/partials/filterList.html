@@ -1,7 +1,7 @@
 <div class="filterList hidden-xs bg-info animated slideInDown">
    <div class="container">
 	   <div class="text-info filterBox" ng-click="setActiveFilter(filter)" ng-class="{'last':$last, 'bg-primary':filterService.filters.name == filter.name}" ng-repeat="filter in filterService.pinnedFilters | orderBy:'name' | filter:filterService.filters.playerCard" ng-mouseover="hovering=true" ng-mouseout="hovering=false"
-	       tooltip="{{filter.name}}" tooltip-placement="bottom">
+	       tooltip="{{filter.name}}" tooltip-placement="bottom" tooltip-append-to-body="true">
 	       <div class="fa fa-filter filterLabelContainer">
 	           <strong class="filterLabel">{{filter.name}}</strong>
 	       </div>
