@@ -50,66 +50,94 @@
 				</tbody>
 			</table>
 		</div>
-		<div class="row">
+		<div class="table-responsive atbats-table-data" ng-show="statLines.length > 1">
+            <table class="table table-condensed">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>wOBA</th>
+                        <th>BA</th>
+                        <th>OBP</th>
+                        <th>SLG</th>
+                        <th>BABIP</th>
+                        <th>RMI</th>
+                    </tr>
+                </thead>
+                <tbody >
+                    <tr ng-class="{'info':stats.name === filtersService.filters.name}" ng-repeat="stats in statLines | orderBy:'name'">
+                        <td>{{stats.name}}</td>
+                        <td>{{stats.wOBA | number:3 }}</td>
+                        <td>{{stats.BA | number:3 }}</td>
+                        <td>{{stats.obp | number:3 }}</td>
+                        <td>{{stats.slg | number:3 }}</td>
+                        <td>{{stats.babip | number:3 }}</td>
+                        <td>{{stats.rmi | number:3 }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+		<div class="atbats-bars-data" ng-show="statLines.length == 1">
+			<div class="row">
+				<div class="col-xs-6 form-group">
+					<h4>
+						{{currentLine.wOBA | number:3 }} <small>wOBA</small>
+					</h4>
+					<div class="progress">
+						<div class="progress-bar progress-bar-info" role="progressbar"
+							ng-style="{'width':currentLine.wOBA*100 + '%'}"></div>
+					</div>
+				</div>
+				<div class="col-xs-6 form-group">
+					<h4>
+						{{currentLine.BA | number:3 }} <small>BA</small>
+					</h4>
+					<div class="progress">
+						<div class="progress-bar progress-bar-info" role="progressbar"
+							ng-style="{'width':currentLine.BA*100 + '%'}"></div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-6 form-group">
+					<h4>
+						{{currentLine.obp | number:3 }} <small>OBP</small>
+					</h4>
+					<div class="progress">
+						<div class="progress-bar progress-bar-info" role="progressbar"
+							ng-style="{'width':currentLine.obp*100 + '%'}"></div>
+					</div>
+				</div>
+				<div class="col-xs-6 form-group">
+					<h4>
+						{{currentLine.slg | number:3 }} <small>SLG</small>
+					</h4>
+					<div class="progress">
+						<div class="progress-bar progress-bar-info" role="progressbar"
+							ng-style="{'width':currentLine.slg*100 + '%'}"></div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
 			<div class="col-xs-6 form-group">
 				<h4>
-					{{stats.wOBA | number:3 }} <small>wOBA</small>
+					{{currentLine.babip | number:3 }} <small>BABIP</small>
 				</h4>
 				<div class="progress">
 					<div class="progress-bar progress-bar-info" role="progressbar"
-						ng-style="{'width':stats.wOBA*100 + '%'}"></div>
+						ng-style="{'width':currentLine.babip*100 + '%'}"></div>
 				</div>
 			</div>
 			<div class="col-xs-6 form-group">
 				<h4>
-					{{stats.BA | number:3 }} <small>BA</small>
-				</h4>
-				<div class="progress">
-					<div class="progress-bar progress-bar-info" role="progressbar"
-						ng-style="{'width':stats.BA*100 + '%'}"></div>
-				</div>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-xs-6 form-group">
-				<h4>
-					{{stats.obp | number:3 }} <small>OBP</small>
-				</h4>
-				<div class="progress">
-					<div class="progress-bar progress-bar-info" role="progressbar"
-						ng-style="{'width':stats.obp*100 + '%'}"></div>
-				</div>
-			</div>
-			<div class="col-xs-6 form-group">
-				<h4>
-					{{stats.slg | number:3 }} <small>SLG</small>
-				</h4>
-				<div class="progress">
-					<div class="progress-bar progress-bar-info" role="progressbar"
-						ng-style="{'width':stats.slg*100 + '%'}"></div>
-				</div>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-xs-6 form-group">
-				<h4>
-					{{stats.babip | number:3 }} <small>BABIP</small>
-				</h4>
-				<div class="progress">
-					<div class="progress-bar progress-bar-info" role="progressbar"
-						ng-style="{'width':stats.babip*100 + '%'}"></div>
-				</div>
-			</div>
-			<div class="col-xs-6 form-group">
-				<h4>
-					{{stats.rmi | number:3 }} <small
+					{{currentLine.rmi | number:3 }} <small
 						tooltip="Runner Movement Indicator (RMI), measures the ability for a batter to move their runners around the bases. For example, with a runner on first, the batter can move them a potential three bases. If they actually move them one base, they are awarded a 0.333 RMI.">RMI</small>
 				</h4>
 				<div class="progress">
 					<div class="progress-bar progress-bar-info" role="progressbar"
-						ng-style="{'width':stats.rmi*100 + '%'}"></div>
+						ng-style="{'width':currentLine.rmi*100 + '%'}"></div>
 				</div>
 			</div>
+		</div>
 		</div>
 		<div class="row">
 			<div class="col-sm-6">
