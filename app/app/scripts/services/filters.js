@@ -23,7 +23,7 @@ angular.module('pitchfxApp').service('Filters', [ '$timeout', '$angularCacheFact
             this.pinnedFilters.push(filterCache.get(filterNames[key]));
         }
     };
-    
+
     /**
      * Set the active filter
      * 
@@ -51,7 +51,7 @@ angular.module('pitchfxApp').service('Filters', [ '$timeout', '$angularCacheFact
         $timeout(function()
         {
             filter.name = filterName;
-            filterCache.put(filterName, filter);
+            filterCache.put(filterName + '_' + filter.playerCard, filter);
             self.reloadSavedFilters();
             _gaq.push([ '_trackEvent', 'filters', 'saved', filterName ]);
         });
@@ -74,6 +74,64 @@ angular.module('pitchfxApp').service('Filters', [ '$timeout', '$angularCacheFact
         });
     };
 
-    this.reloadSavedFilters();
+    /**
+     * @param {int}
+     *            year - the year of the filter
+     * @param {string}
+     *            cardType - one of (batter|pitcher)
+     */
+    this.buildYearFilter = function(year, cardType)
+    {
+        var filter = {
+            playerCard : cardType,
+            pitcherHand : '',
+            batterHand : '',
+            name : year.toString(),
+            date : {
+                start : moment([ year, 0, 1 ]).format('YYYY-MM-DD'),
+                end : moment([ year, 11, 31 ]).format('YYYY-MM-DD'),
+            },
+            runners : {
+                gate : 'OR',
+            },
+            outs : {},
+            balls : {},
+            strikes : {},
+            gameType : {
+                R : true,
+            }
+        };
+        return filter;
+    };
+
+    /**
+     * Stage your pinned filters for the past three years. To be called in the
+     * case you don't have any saved already.
+     */
+    this.setupPinnedFilters = function()
+    {
+        if (this.pinnedFilters.length === 0)
+        {
+            var currentYear = moment().year(), i, year;
+            for (i = 0; i < 3; i++)
+            {
+                year = currentYear - i;
+                filterCache.put(year.toString() + '_pitcher', this.buildYearFilter(year, 'pitcher'));
+                filterCache.put(year.toString() + '_batter', this.buildYearFilter(year, 'batter'));
+            }
+            this.reloadSavedFilters();
+        }
+    };
+
+    /**
+     * set it up
+     */
+    this.init = function()
+    {
+        this.reloadSavedFilters();
+        this.setupPinnedFilters();
+    };
+
+    this.init();
 
 } ]);

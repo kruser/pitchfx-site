@@ -22,13 +22,17 @@ angular.module('pitchfxApp').controller('FiltersCtrl', [ '$scope', '$log', '$tim
         {
             /* last year */
             return moment([ currentYear - 1, 0, 1 ]).format('YYYY-MM-DD');
-        } else
+        }
+        else
         {
             /* this year */
             return moment([ currentYear, 0, 1 ]).format('YYYY-MM-DD');
         }
     }
 
+    /**
+     * Set it up!
+     */
     function init()
     {
         var filterCache = $angularCacheFactory('filterCache', {
@@ -43,7 +47,8 @@ angular.module('pitchfxApp').controller('FiltersCtrl', [ '$scope', '$log', '$tim
         {
             parsedFilters = JSON.parse(filtersFromUrl)[0];
             $scope.filters = parsedFilters;
-        } else
+        }
+        else
         {
             filtersFromCache = filterCache.get('filters');
             if (filtersFromCache && filtersFromCache.name)
@@ -53,11 +58,13 @@ angular.module('pitchfxApp').controller('FiltersCtrl', [ '$scope', '$log', '$tim
                 if ($scope.playerPosition === '1')
                 {
                     $scope.filters.pitcherHand = '';
-                } else if ($scope.playerBats !== 'S')
+                }
+                else if ($scope.playerBats !== 'S')
                 {
                     $scope.filters.batterHand = '';
                 }
-            } else
+            }
+            else
             {
                 $scope.filters = {
                     playerCard : ($scope.playerPosition === '1') ? 'pitcher' : 'batter',
