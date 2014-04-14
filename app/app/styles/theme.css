@@ -109,6 +109,9 @@ body {
 .OAK.player-header .mug-container .logoBlock {
     background-color: #0B0D10;
 }
+.KC.player-header .mug-container .logoBlock {
+    background-color: #06195A;
+}
 
 .player-header .mug {
 	width: 3.5em;
