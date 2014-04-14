@@ -68,18 +68,6 @@ body {
 	text-decoration: none;
 }
 /* @end */
-.player-header {
-	background-size: 100%;
-}
-
-.player-header.well {
-	padding: 0px;
-}
-
-.player-header .full {
-	background: rgba(255, 255, 255, .85);
-	padding: .5em .75em;
-}
 
 .player-header .mug-container {
 	background: #fff;
@@ -114,6 +102,12 @@ body {
 }
 .WSH.player-header .mug-container .logoBlock {
     background-color: #DC1317;
+}
+.LAA.player-header .mug-container .logoBlock {
+    background-color: #BA0C14;
+}
+.OAK.player-header .mug-container .logoBlock {
+    background-color: #0B0D10;
 }
 
 .player-header .mug {
