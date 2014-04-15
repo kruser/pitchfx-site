@@ -112,6 +112,9 @@ body {
 .KC.player-header .mug-container .logoBlock {
     background-color: #06195A;
 }
+.TOR.player-header .mug-container .logoBlock {
+    background-color: #102892;
+}
 
 .player-header .mug {
 	width: 3.5em;
