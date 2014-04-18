@@ -68,18 +68,17 @@ body {
 	text-decoration: none;
 }
 /* @end */
-
-.player-header .mug-container {
+.mug-container {
 	background: #fff;
 	padding: .25em;
 	border-radius: 6px;
 	position: relative;
 }
-.player-header .mug-container img.defaultAvatar {
+.mug-container img.defaultAvatar {
 	position: relative;
 	z-index: 1;
 }
-.player-header .mug-container .logoBlock{
+.mug-container .logoBlock{
 	background-color:#0C0F13;
 	position: absolute;
 	top: 7px;
@@ -88,35 +87,35 @@ body {
 	height: 12px;
 	border-radius: 2px;
 }
-.STL.player-header .mug-container .logoBlock, .ARI.player-header .mug-container .logoBlock, .CIN.player-header .mug-container .logoBlock {
+.STL .mug-container .logoBlock, .ARI .mug-container .logoBlock, .CIN .mug-container .logoBlock {
 	background-color: #AC030F;
 }
-.BAL.player-header .mug-container .logoBlock{
+.BAL .mug-container .logoBlock{
 	background-color: #F2F1FB;
 }
-.TEX.player-header .mug-container .logoBlock{
+.TEX .mug-container .logoBlock{
 	background-color: #11143B;
 }
-.CHC.player-header .mug-container .logoBlock {
+.CHC .mug-container .logoBlock {
 	background-color: #15206E;
 }
-.WSH.player-header .mug-container .logoBlock {
+.WSH .mug-container .logoBlock {
     background-color: #DC1317;
 }
-.LAA.player-header .mug-container .logoBlock {
+.LAA .mug-container .logoBlock {
     background-color: #BA0C14;
 }
-.OAK.player-header .mug-container .logoBlock {
+.OAK .mug-container .logoBlock {
     background-color: #0B0D10;
 }
-.KC.player-header .mug-container .logoBlock {
+.KC .mug-container .logoBlock {
     background-color: #06195A;
 }
-.TOR.player-header .mug-container .logoBlock {
+.TOR .mug-container .logoBlock {
     background-color: #102892;
 }
 
-.player-header .mug {
+.mug-container .mug {
 	width: 3.5em;
 }
 
