@@ -194,7 +194,7 @@ angular.module('pitchfxApp').controller('PitchstatsCtrl', ['$rootScope', '$scope
             {
                 atbatFilters = atbatFilters ||
                 {};
-                $scope.pitcherCard = (atbatFilters.playerCard === 'pitcher');
+                $scope.pitcherCard = (atbatFilters.playerCard !== 'batter');
                 filtersService.loadingData = true;
                 pitchesService.getPitches($scope.playerId, atbatFilters).then(function(pitches)
                 {
