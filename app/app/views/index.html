@@ -20,7 +20,7 @@
 	<header class="navbar navbar-default navbar-fixed-top">
 		<div class="container">
 			<div class="navbar-header">
-				<a class="navbar-brand">BaseballMod.com (beta)</a>
+				<a class="navbar-brand" href="/">BaseballMod.com (beta)</a>
 				<button ng-click="openMenu = !openMenu" type="button"
 					data-toggle="collapse" data-target="#navbar-main"
 					class="navbar-toggle">
@@ -31,6 +31,7 @@
 			<div id="navbar-main" ng-class="{'in':openMenu}"
 				class="navbar-collapse collapse navbar-right">
 				<ul class="nav navbar-nav">
+          <li><a href="/#about">About</a></li>
 					<li><a target="_blank" onClick="_gaq.push(['_trackEvent', 'links', 'github', 'pitchfx-issues']);" href="https://github.com/kruser/pitchfx-site/issues">Got Issues?</a></li>
 					<li tooltip="Follow us on Twitter" tooltip-placement="bottom"><a onClick="_gaq.push(['_trackEvent', 'links', 'Twitter', 'baseballmod']);" href="https://twitter.com/BaseballMod" target="_blank" class="fa fa-twitter-square fa-2x"></a></li>
 				</ul>
@@ -49,134 +50,7 @@
 						placeholder="Search for a player by name" class="form-control">
 			</div>
 		</div>
-		<div id="about" class="jumbotron off">
-			<div class="container">
-				<h2>About</h2>
-				<p>
-					Welcome to BaseballMod.com, where we have a database of MLB atbat and pitch data going back to the 2010 season. 
-					This site provides a way for you to view that data for any pitcher or batter based on filters you define, such as  
-					<strong>pitch speed, pitch types, base-out states</strong>, and many others.
-				</p>
-				<p>
-				    BaseballMod.com is in it's infancy, but can be much, much more. Here is how you can participate:
-				</p>
-				<h3 class="text-primary fa fa-lightbulb-o"> Ideas</h3>
-				<p>
-					    If you have an <strong>idea</strong> for a feature, file an issue on our <a href="https://github.com/kruser/pitchfx-site/issues" onClick="_gaq.push(['_trackEvent', 'links', 'github', 'issues']);" >GitHub page</a>. 
-					    We read every submission. If you find your idea has already been submitted, please comment and watch the issue. Issues that are generating a lot of interest will bubble to the top of the queue.
-				</p>
-				<h3 class="text-primary fa fa-code"> Code</h3>
-				<p>
-					    BaseballMod.com is open-source software. If you're a <strong>developer</strong>, I invite you to read our 
-					    <a onClick="_gaq.push(['_trackEvent', 'links', 'github', 'developerGuide']);" href="https://github.com/kruser/pitchfx-site/blob/master/DEVELOPER_GUIDE.md" target="_blank">Developer Guide</a>. 
-					    Developers that contribute significantly to the project will get visibility in the <a href="#developers">Developers</a> section.
-				</p>
-			</div>
-		</div>
-		<div id="developers" class="jumbotron on">
-            <div class="container">
-                <h2>The Developers</h2>
-                <div class="row developer-info">
-                    <div class="col-md-2 col-sm-4 col-xs-6">
-                        <img
-                            src="http://1.gravatar.com/avatar/049809472da1bf1352d2b4302d6880ab?size=400"
-                            class="img-circle img-responsive img-thumbnail">
-                        <h3 class="text-center visible-xs">Ryan Kruse</h3>
-                    </div>
-                    <div class="col-md-9 col-sm-8 col-xs-6">
-                        <h3 class="hidden-xs">Ryan Kruse</h3>
-                        <p>
-                            I'm the creator of
-                            BaseballMod.com and a software developer from Austin, TX. Originally
-                            from Minnesota, I'm an avid Twins fan. I love baseball and
-                            writing software.
-                        </p>
-                        <p>
-                            <a href="https://twitter.com/RyanKruse"
-                               target="_blank"
-                               onClick="_gaq.push(['_trackEvent', 'links', 'twitter', 'ryan']);"
-                               class="fa fa-twitter fa-2x"></a>
-                            <a href="http://www.linkedin.com/in/ryankruse"
-                               target="_blank"
-                               onClick="_gaq.push(['_trackEvent', 'links', 'linkedin', 'ryan']);"
-                               class="fa fa-linkedin fa-2x"></a>
-                            <a href="mailto:ryan@kruseonline.net" 
-                               target="_blank"
-                               onClick="_gaq.push(['_trackEvent', 'links', 'mail', 'ryan']);"
-                               class="fa fa-envelope fa-2x"></a>
-                            <a href="https://github.com/kruser/" 
-                               target="_blank"
-                               onClick="_gaq.push(['_trackEvent', 'links', 'github', 'ryan']);"
-                               class="fa fa-github fa-2x"></a>
-                        </p>
-                    </div>
-                </div>
-                <div class="row developer-info">
-                    <div class="col-md-2 col-sm-4 col-xs-6">
-                        <img
-                            src="http://en.gravatar.com/userimage/11765050/fadfc46b21eff695dc4b953d6e1164c1.jpg?size=400"
-                            class="img-circle img-responsive img-thumbnail">
-                        <h3 class="text-center visible-xs">Albert Lyu</h3>
-                    </div>
-                    <div class="col-md-9 col-sm-8 col-xs-6">
-                        <h3 class="hidden-xs">Albert Lyu</h3>
-                        <p>
-                            I'm a business intelligence developer from Chicago, IL. 
-                            When I am not writing code or reading about sports analytics, I am rooting for Northwestern Wildcat football.  
-                        </p>
-                        <p>
-                            <a href="https://twitter.com/albertlyu"
-                               target="_blank"
-                               onClick="_gaq.push(['_trackEvent', 'links', 'twitter', 'albert']);"
-                               class="fa fa-twitter fa-2x"></a>
-                            <a href="http://www.linkedin.com/in/albertlyu"
-                               target="_blank"
-                               onClick="_gaq.push(['_trackEvent', 'links', 'linkedin', 'albert']);"
-                               class="fa fa-linkedin fa-2x"></a>
-                            <a href="mailto:albert.yb.lyu@gmail.com" 
-                               target="_blank"
-                               onClick="_gaq.push(['_trackEvent', 'links', 'mail', 'albert']);"
-                               class="fa fa-envelope fa-2x"></a>
-                            <a href="https://github.com/albertlyu/" 
-                               target="_blank"
-                               onClick="_gaq.push(['_trackEvent', 'links', 'github', 'albert']);"
-                               class="fa fa-github fa-2x"></a>
-                        </p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-2 col-sm-4 col-xs-6">
-                        <img
-                            src="http://upload.wikimedia.org/wikipedia/commons/7/7c/User_font_awesome.svg"
-                            class="img-circle img-responsive img-thumbnail">
-                        <h3 class="text-center visible-xs">Your Name Here</h3>
-                    </div>
-                    <div class="col-md-9 col-sm-8 col-xs-6">
-                        <h3 class="hidden-xs">Your Name Here</h3>
-                        <p>
-                            Are you a software engineer with
-                            a love of baseball? Visit our <a onClick="_gaq.push(['_trackEvent', 'links', 'github', 'pitchfx-site']);" href="https://github.com/kruser/pitchfx-site">GitHub</a> page to
-                            join in. Just fork the code, implement a feature or fix a bug, and submit pull requests back to the main line. 
-                            If they're good, they're going in.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-		<div id="data" class="jumbotron off">
-			<div class="container">
-				<h2>The Data</h2>
-				<p>
-					Using the <a onClick="_gaq.push(['_trackEvent', 'links', 'github', 'atbat-mongodb']);" href="https://github.com/kruser/atbat-mongodb"
-						target="_blank">atbat-mongodb</a> project, we pull pitch and
-					at-bat data from each day's baseball games and store it in our own
-					MongoDB database. Data is available back to the 2010 season.
-				</p>
-				<p>Data from each day will be available by 6AM EST on the
-					following day.</p>
-			</div>
-		</div>
-
+    <% include partials/about.html %>
 		<div class="jumbotron on">
             <div class="container">
                 <p>
