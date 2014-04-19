@@ -114,6 +114,9 @@ body {
 .TOR .mug-container .logoBlock {
     background-color: #102892;
 }
+.LAD .mug-container .logoBlock {
+    background-color: #1A1F63;
+}
 
 .mug-container .mug {
 	width: 3.5em;

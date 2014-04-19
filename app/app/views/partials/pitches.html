@@ -66,6 +66,18 @@
 				</table>
 			</div>
 		</div>
+		<div class="row" ng-show="filtersService.filters.playerCard == 'pitcher'">
+            <div class="col-md-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Pitch Speeds</h3>
+                    </div>
+                    <div class="panel-body">
+                        <div id="pitchSpeeds"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
 		<div class="row">
 		    <div class="col-sm-4 col-lg-3">
 		        <accordion close-others="true" class="hidden-xs">
@@ -83,18 +95,6 @@
 		          <heatmap points="model.zonePoints" max="model.selectedZoneChart.max" chart-name="model.selectedZoneChart.title"></heatmap>
 	           </div>
 		    </div>
-		</div>
-		<div class="row">
-			<div class="col-md-12">
-				<div class="panel panel-default">
-					<div class="panel-heading">
-						<h3 class="panel-title">Pitch Speeds</h3>
-					</div>
-					<div class="panel-body">
-						<div id="pitchSpeeds"></div>
-					</div>
-				</div>
-			</div>
 		</div>
 
 	</div>

@@ -232,7 +232,10 @@ angular.module('pitchfxApp').controller('PitchstatsCtrl', ['$rootScope', '$scope
             aggregatePitchStats();
             $timeout(function()
             {
-                renderPitchSpeeds();
+                if ($scope.filtersService.filters.playerCard === 'pitcher')
+                {
+                    renderPitchSpeeds();
+                }
                 renderZoneChart();
             }, 10);
         }
@@ -432,7 +435,7 @@ angular.module('pitchfxApp').controller('PitchstatsCtrl', ['$rootScope', '$scope
                     }
 
                     /* jshint maxdepth:5 */
-                    if (!havePitchTypeFilters || pitchTypeFilters[pitchCode])
+                    if (pitchCode !== 'IN' && (!havePitchTypeFilters || pitchTypeFilters[pitchCode]))
                     {
                         speed = parseInt(pitch.start_speed, 10);
                         if (speed)
@@ -469,7 +472,10 @@ angular.module('pitchfxApp').controller('PitchstatsCtrl', ['$rootScope', '$scope
                 model.push(pitchTypes[pitchTypeKey]);
             }
             $scope.pitchTypes = model;
-            buildPitchSpeedSeries(pitchSpeeds, minSpeed, maxSpeed, Object.keys(pitchTypes));
+            if ($scope.filtersService.filters.playerCard === 'pitcher')
+            {
+                buildPitchSpeedSeries(pitchSpeeds, minSpeed, maxSpeed, Object.keys(pitchTypes));
+            }
         }
 
         /**
@@ -498,6 +504,10 @@ angular.module('pitchfxApp').controller('PitchstatsCtrl', ['$rootScope', '$scope
                     name: pitchfx.Pitch.getPitchDisplayName(pitchTypes[j]),
                     data: [],
                 };
+                if (vertical.name === 'Other')
+                {
+                    continue;
+                }
                 for (i = minSpeed; i <= maxSpeed; i++)
                 {
                     if (j === 0)
