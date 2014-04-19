@@ -9,6 +9,7 @@ angular.module('pitchfxApp').controller('PitchstatsCtrl', ['$rootScope', '$scope
             zones;
 
         $scope.loading = true;
+        $scope.pitcherCard = false;
         $scope.filtersService = filtersService;
         $scope.pitchTypes = [];
         $scope.pitchCount = 0;
@@ -193,6 +194,7 @@ angular.module('pitchfxApp').controller('PitchstatsCtrl', ['$rootScope', '$scope
             {
                 atbatFilters = atbatFilters ||
                 {};
+                $scope.pitcherCard = (atbatFilters.playerCard === 'pitcher');
                 filtersService.loadingData = true;
                 pitchesService.getPitches($scope.playerId, atbatFilters).then(function(pitches)
                 {
@@ -232,7 +234,7 @@ angular.module('pitchfxApp').controller('PitchstatsCtrl', ['$rootScope', '$scope
             aggregatePitchStats();
             $timeout(function()
             {
-                if ($scope.filtersService.filters.playerCard === 'pitcher')
+                if ($scope.pitcherCard)
                 {
                     renderPitchSpeeds();
                 }
@@ -472,7 +474,7 @@ angular.module('pitchfxApp').controller('PitchstatsCtrl', ['$rootScope', '$scope
                 model.push(pitchTypes[pitchTypeKey]);
             }
             $scope.pitchTypes = model;
-            if ($scope.filtersService.filters.playerCard === 'pitcher')
+            if ($scope.pitcherCard)
             {
                 buildPitchSpeedSeries(pitchSpeeds, minSpeed, maxSpeed, Object.keys(pitchTypes));
             }
