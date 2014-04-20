@@ -404,7 +404,10 @@ angular.module('pitchfxApp').controller('PitchstatsCtrl', ['$rootScope', '$scope
                             animation: false
                         },
                     },
-                    series: series
+                    series: series,
+                    exporting: {
+                        enabled: false
+                    }
                 });
                 $timeout(function(){
                     hitZonesDestroyFunction = chartingService.keepSquare(hitZonesChart);
