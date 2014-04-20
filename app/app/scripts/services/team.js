@@ -19,11 +19,11 @@ angular.module('pitchfxApp').service('Team', ['$http',
                     var dataObj = {
                         id: result.data[player].id,
                         first: result.data[player].first,
-                        last: result.data[player].last
+                        last: result.data[player].last,
+                        pos: result.data[player].position
                     };
                     players.push(new pitchfx.Player(dataObj));
                 }
-                console.log(players);
                 return players;
             });
         };

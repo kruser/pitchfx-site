@@ -56,7 +56,6 @@ angular.module('pitchfxApp').controller('RosterCtrl', ['$scope', '$window', 'Tea
 	$scope.openPlayer = function(player)
 	{
 		var url;
-		console.log(player);
 		if (player && player.id)
 		{
 			url = '/player/' + player.id + '/' + player.getUrlFriendlyName();
