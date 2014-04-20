@@ -31,8 +31,6 @@ angular.module('pitchfxApp').directive('heatmap', [
                         return;
                     }
 
-                    console.log('MY MAX: ' + $scope.max);
-                    console.log(pitchfx.Zones.gridToCsv($scope.points));
                     new Highcharts.Chart(
                     {
                         data:

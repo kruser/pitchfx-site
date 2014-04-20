@@ -118,26 +118,26 @@
 				</div>
 			</div>
 			<div class="row">
-			<div class="col-xs-6 form-group">
-				<h4>
-					{{currentLine.babip | number:3 }} <small>BABIP</small>
-				</h4>
-				<div class="progress">
-					<div class="progress-bar progress-bar-info" role="progressbar"
-						ng-style="{'width':currentLine.babip*100 + '%'}"></div>
+				<div class="col-xs-6 form-group">
+					<h4>
+						{{currentLine.babip | number:3 }} <small>BABIP</small>
+					</h4>
+					<div class="progress">
+						<div class="progress-bar progress-bar-info" role="progressbar"
+							ng-style="{'width':currentLine.babip*100 + '%'}"></div>
+					</div>
+				</div>
+				<div class="col-xs-6 form-group">
+					<h4>
+						{{currentLine.rmi | number:3 }} <small
+							tooltip="Runner Movement Indicator (RMI), measures the ability for a batter to move their runners around the bases. For example, with a runner on first, the batter can move them a potential three bases. If they actually move them one base, they are awarded a 0.333 RMI.">RMI</small>
+					</h4>
+					<div class="progress">
+						<div class="progress-bar progress-bar-info" role="progressbar"
+							ng-style="{'width':currentLine.rmi*100 + '%'}"></div>
+					</div>
 				</div>
 			</div>
-			<div class="col-xs-6 form-group">
-				<h4>
-					{{currentLine.rmi | number:3 }} <small
-						tooltip="Runner Movement Indicator (RMI), measures the ability for a batter to move their runners around the bases. For example, with a runner on first, the batter can move them a potential three bases. If they actually move them one base, they are awarded a 0.333 RMI.">RMI</small>
-				</h4>
-				<div class="progress">
-					<div class="progress-bar progress-bar-info" role="progressbar"
-						ng-style="{'width':currentLine.rmi*100 + '%'}"></div>
-				</div>
-			</div>
-		</div>
 		</div>
 		<div class="row">
 			<div class="col-sm-6">

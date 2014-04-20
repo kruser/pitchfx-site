@@ -1,14 +1,15 @@
 'use strict';
 
-angular.module('pitchfxApp').controller('PitchstatsCtrl', ['$rootScope', '$scope', '$log', '$timeout', '$location', 'Filters', 'Pitches',
-    function($rootScope, $scope, $log, $timeout, $location, filtersService, pitchesService)
+angular.module('pitchfxApp').controller('PitchstatsCtrl', ['$rootScope', '$scope', '$log', '$timeout', '$location', 'Filters', 'Pitches', 'Charting',
+    function($rootScope, $scope, $log, $timeout, $location, filtersService, pitchesService, chartingService)
     {
 
         var rawPitches = [],
             filtersFromUrl = $location.search().pitchFilters,
-            zones;
+            zones, hitZoneTrajectories = {}, hitZonesChart, hitZonesDestroyFunction;
 
         $scope.loading = true;
+        $scope.pitcherCard = false;
         $scope.filtersService = filtersService;
         $scope.pitchTypes = [];
         $scope.pitchCount = 0;
@@ -193,6 +194,7 @@ angular.module('pitchfxApp').controller('PitchstatsCtrl', ['$rootScope', '$scope
             {
                 atbatFilters = atbatFilters ||
                 {};
+                $scope.pitcherCard = (atbatFilters.playerCard !== 'batter');
                 filtersService.loadingData = true;
                 pitchesService.getPitches($scope.playerId, atbatFilters).then(function(pitches)
                 {
@@ -232,7 +234,14 @@ angular.module('pitchfxApp').controller('PitchstatsCtrl', ['$rootScope', '$scope
             aggregatePitchStats();
             $timeout(function()
             {
-                renderPitchSpeeds();
+                if ($scope.pitcherCard)
+                {
+                    renderPitchSpeeds();
+                }
+                else
+                {
+                    renderHitLocationsByZone();
+                }
                 renderZoneChart();
             }, 10);
         }
@@ -259,6 +268,150 @@ angular.module('pitchfxApp').controller('PitchstatsCtrl', ['$rootScope', '$scope
             }
 
             $scope.model.selectedZoneChart.generator();
+        }
+
+        /**
+         * Renders the hits by location scatter chart
+         */
+        function renderHitLocationsByZone()
+        {
+            var series = [],
+                trajectory;
+
+            $log.debug(hitZoneTrajectories);
+
+            for (trajectory in hitZoneTrajectories)
+            {
+                series.push(
+                {
+                    name: trajectory,
+                    data: hitZoneTrajectories[trajectory]
+                });
+            }
+
+            /* Add a strike zone */
+            series.push(
+            {
+                name: 'Zone',
+                type: 'line',
+                color: '#3a87ad',
+                marker:
+                {
+                    enabled: false
+                },
+                showInLegend: false,
+                enableMouseTracking: false,
+                data: [
+                    [180, -215],
+                    [180, -535],
+                    [570, -535],
+                    [570, -215],
+                    [180, -215],
+                ]
+            });
+
+            $log.debug(series);
+
+            if (hitZonesDestroyFunction)
+            {
+                hitZonesDestroyFunction();
+            }
+                hitZonesChart = new Highcharts.Chart(
+                {
+                    chart:
+                    {
+                        type: 'scatter',
+                        renderTo: 'hitLocationsByZone',
+                        backgroundColor: 'transparent',
+                        plotBackgroundImage: '/images/stadiums/grid.svg',
+                    },
+                    credits:
+                    {
+                        text: 'BaseballMod.com',
+                        href: ''
+                    },
+                    title:
+                    {
+                        text: '',
+                    },
+                    subtitle:
+                    {
+                        text: 'Catcher point-of-view',
+                        align: 'left'
+                    },
+                    xAxis:
+                    {
+                        min: 0,
+                        max: 750,
+                        labels:
+                        {
+                            enabled: false,
+                        },
+                        title:
+                        {
+                            enabled: false,
+                        },
+                        lineWidth: 0,
+                        minorGridLineWidth: 0,
+                        lineColor: 'transparent',
+                        minorTickLength: 0,
+                        tickLength: 0,
+                        plotLines: [
+                        {
+                            value: 250,
+                            color: 'green',
+                            dashStyle: 'shortdash',
+                            width: 2,
+                        },
+                        {
+                            value: 500,
+                            color: 'green',
+                            dashStyle: 'shortdash',
+                            width: 2,
+                        }]
+                    },
+                    yAxis:
+                    {
+                        max: 0,
+                        min: -750,
+                        labels:
+                        {
+                            enabled: false,
+                        },
+                        title:
+                        {
+                            enabled: false,
+                        },
+                        gridLineColor: 'transparent',
+                        plotLines: [
+                        {
+                            value: -250,
+                            color: 'green',
+                            dashStyle: 'shortdash',
+                            width: 2,
+                        },
+                        {
+                            value: -500,
+                            color: 'green',
+                            dashStyle: 'shortdash',
+                            width: 2,
+                        }]
+                    },
+                    plotOptions:
+                    {
+                        series:
+                        {
+                            animation: false
+                        },
+                    },
+                    series: series,
+                    exporting: {
+                        enabled: false
+                    }
+                });
+                $timeout(function(){
+                    hitZonesDestroyFunction = chartingService.keepSquare(hitZonesChart);
+                },100);
         }
 
         /**
@@ -337,6 +490,7 @@ angular.module('pitchfxApp').controller('PitchstatsCtrl', ['$rootScope', '$scope
                 havePitchTypeFilters = false,
                 key, i, aggregator, speed, hipTrajectory, speedKey, pitchTypeKey, model;
             zones = new pitchfx.Zones();
+            hitZoneTrajectories = {};
 
             for (key in pitchTypeFilters)
             {
@@ -432,7 +586,7 @@ angular.module('pitchfxApp').controller('PitchstatsCtrl', ['$rootScope', '$scope
                     }
 
                     /* jshint maxdepth:5 */
-                    if (!havePitchTypeFilters || pitchTypeFilters[pitchCode])
+                    if (pitchCode !== 'IN' && (!havePitchTypeFilters || pitchTypeFilters[pitchCode]))
                     {
                         speed = parseInt(pitch.start_speed, 10);
                         if (speed)
@@ -459,6 +613,7 @@ angular.module('pitchfxApp').controller('PitchstatsCtrl', ['$rootScope', '$scope
 
                         /* Build the pitches 2d array */
                         zones.addPitch(pitch);
+                        addHitZone(pitch);
                     }
                 }
             }
@@ -469,7 +624,58 @@ angular.module('pitchfxApp').controller('PitchstatsCtrl', ['$rootScope', '$scope
                 model.push(pitchTypes[pitchTypeKey]);
             }
             $scope.pitchTypes = model;
-            buildPitchSpeedSeries(pitchSpeeds, minSpeed, maxSpeed, Object.keys(pitchTypes));
+            if ($scope.pitcherCard)
+            {
+                buildPitchSpeedSeries(pitchSpeeds, minSpeed, maxSpeed, Object.keys(pitchTypes));
+            }
+        }
+
+        /**
+         * Add the pitch to the hit zones
+         *
+         */
+        function addHitZone(pitch)
+        {
+            if (!pitch.hip || !pitch.hip.trajectory)
+            {
+                return;
+            }
+
+            if (!hitZoneTrajectories[pitch.hip.trajectory])
+            {
+                hitZoneTrajectories[pitch.hip.trajectory] = [];
+            }
+
+            var col = 0,
+                row = 0;
+
+            if (pitch.px < -0.4)
+            {
+                col = 0;
+            }
+            else if (pitch.px >= 0.4)
+            {
+                col = 2;
+            }
+            else
+            {
+                col = 1;
+            }
+
+            if (pitch.pz < 1.75)
+            {
+                row = 2;
+            }
+            else if (pitch.pz > 3.25)
+            {
+                row = 0;
+            }
+            else
+            {
+                row = 1;
+            }
+
+            hitZoneTrajectories[pitch.hip.trajectory].push([pitch.hip.x + (col * 250), 0 - pitch.hip.y - (row * 250)]);
         }
 
         /**
@@ -498,6 +704,10 @@ angular.module('pitchfxApp').controller('PitchstatsCtrl', ['$rootScope', '$scope
                     name: pitchfx.Pitch.getPitchDisplayName(pitchTypes[j]),
                     data: [],
                 };
+                if (vertical.name === 'Other')
+                {
+                    continue;
+                }
                 for (i = minSpeed; i <= maxSpeed; i++)
                 {
                     if (j === 0)

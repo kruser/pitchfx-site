@@ -66,6 +66,18 @@
 				</table>
 			</div>
 		</div>
+		<div class="row" ng-show="pitcherCard">
+            <div class="col-md-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Pitch Speeds</h3>
+                    </div>
+                    <div class="panel-body">
+                        <div id="pitchSpeeds"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
 		<div class="row">
 		    <div class="col-sm-4 col-lg-3">
 		        <accordion close-others="true" class="hidden-xs">
@@ -84,18 +96,18 @@
 	           </div>
 		    </div>
 		</div>
-		<div class="row">
-			<div class="col-md-12">
-				<div class="panel panel-default">
-					<div class="panel-heading">
-						<h3 class="panel-title">Pitch Speeds</h3>
-					</div>
-					<div class="panel-body">
-						<div id="pitchSpeeds"></div>
-					</div>
-				</div>
-			</div>
-		</div>
+		<div class="row" ng-hide="pitcherCard">
+            <div class="col-md-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Hit Balls by Zone</h3>
+                    </div>
+                    <div class="panel-body">
+                        <div id="hitLocationsByZone"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
 	</div>
 </div>
