@@ -664,11 +664,11 @@ angular.module('pitchfxApp').controller('PitchstatsCtrl', ['$rootScope', '$scope
 
             if (pitch.pz < 1.75)
             {
-                row = 0;
+                row = 2;
             }
             else if (pitch.pz > 3.25)
             {
-                row = 2;
+                row = 0;
             }
             else
             {
