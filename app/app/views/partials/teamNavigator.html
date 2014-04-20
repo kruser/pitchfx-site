@@ -1,13 +1,13 @@
-<div id="selectTeam" class="jumbotron on">
+<div id="select" class="jumbotron on">
 	<div class="container">
-		<div class="row animated fadeInUpBig" ng-hide="currentRoster">
-		    <div ng-repeat="team in teams" class="col-lg-2 col-md-3 col-sm-4 col-xs-6" ng-click="openTeam(team)" style="padding-bottom: 5px; text-align:center;">
+		<div class="row animated fadeInUp" ng-hide="currentRoster">
+		    <div ng-repeat="team in teams" class="col-lg-2 col-md-3 col-sm-4 col-xs-6" ng-click="openTeam(team)" style="padding-top:5px; padding-bottom:5px; text-align:center;">
 		        <button type="button" class="btn btn-default default">
 		            <h4 class="text-center">{{team.display}}</h4>
 		        </button>
 		    </div>
 		</div>
-		<div class="row animated slideInRight" ng-show="currentRoster">
+		<div class="row animated fadeInUp" ng-show="currentRoster">
 			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 				<div class="row">
 				    <h3>Select a Batter<span class="hidden-xs"> from {{team}}</span>
