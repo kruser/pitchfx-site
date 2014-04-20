@@ -38,6 +38,7 @@ var playersApi = require('./lib/controllers/apis/players');
 var playerInfoApi = require('./lib/controllers/apis/playerInfo');
 var statsApi = require('./lib/controllers/apis/stats');
 var pitchesApi = require('./lib/controllers/apis/pitches');
+var rosterApi = require('./lib/controllers/apis/roster');
 var sitemap = require('./lib/controllers/sitemap');
 var controllers = require('./lib/controllers');
 
@@ -48,11 +49,12 @@ app.get('/api/players/:playerId', playersApi.getPlayer);
 app.get('/api/player_info/:playerId', playerInfoApi.getPlayer);
 app.get('/api/stats/:playerId', statsApi.query);
 app.get('/api/pitches/:playerId', pitchesApi.query);
+app.get('/api/roster', rosterApi.query);
 app.get('/player/:playerId/:playerName', controllers.player);
 
 // Angular Routes
 app.get('/partials/*', controllers.partials);
-app.get('/sitemap.xml', sitemap.generate); 
+app.get('/sitemap.xml', sitemap.generate);
 app.get('/*', controllers.index);
 
 // Start server

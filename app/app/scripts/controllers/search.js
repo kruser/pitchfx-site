@@ -34,6 +34,7 @@ angular.module('pitchfxApp').controller('SearchCtrl', ['$scope', '$log', '$windo
             if ($scope.playerSelection && $scope.playerSelection.id)
             {
                 player = $scope.playerSelection;
+                console.log(player);
                 url = '/player/' + player.id + '/' + player.getUrlFriendlyName();
                 $window.location.href = url;
             }
