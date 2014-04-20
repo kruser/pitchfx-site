@@ -1,52 +1,55 @@
-<div class="row" ng-hide="currentRoster">
-    <h3>Select a team:</h3>
-</div>
-<div class="row" ng-hide="currentRoster">
-    <div ng-repeat="team in teams" class="col-lg-2 col-md-3 col-sm-4 col-xs-6" ng-click="openTeam(team)" style="padding-bottom: 5px; text-align:center;">
-        <button type="button" class="btn btn-default default">
-            <h4 class="text-center">{{team.display}}</h4>
-        </button>
-    </div>
-</div>
-<div class="row" ng-show="currentRoster">
-	<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-		<div class="row">
-			<div>
-			    <h3>Select a batter<span class="hidden-xs"> from {{team}}</span>:
-			        <button type="button" class="btn btn-link" style="padding-bottom: 5px; text-align:center;">
-			            <h5 display="inline-block" ng-click="showTeams()">Or go back</h5>
-			        </button>
-			    </h3>
+<div id="selectTeam" class="jumbotron on">
+	<div class="container">
+		<div class="row animated fadeInUpBig" ng-hide="currentRoster">
+		    <div ng-repeat="team in teams" class="col-lg-2 col-md-3 col-sm-4 col-xs-6" ng-click="openTeam(team)" style="padding-bottom: 5px; text-align:center;">
+		        <button type="button" class="btn btn-default default">
+		            <h4 class="text-center">{{team.display}}</h4>
+		        </button>
 		    </div>
 		</div>
-		<div class="row">
-			<div>
-			    <div ng-repeat="player in currentRoster | orderBy:'last'" ng-if="player.pos !== 'P'" class="col-lg-4 col-md-6 col-sm-8 col-xs-6" ng-click="openPlayer(player)" style="padding-bottom: 5px; text-align:left;">
-			        <button type="button" class="btn btn-default default">
-			            <h4 class="text-center">{{player.pos}} <span class="hidden-xs">{{player.first}}</span> {{player.last}}</h4>
-			        </button>
-			    </div>
-		    </div>
-		</div>
-	</div>
-	<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-		<div class="row">
-			<div>
-			    <h3>Select a pitcher<span class="hidden-xs"> from {{team}}</span>:
-			        <button type="button" class="btn btn-link" style="padding-bottom: 5px; text-align:center;">
-			            <h5 display="inline-block" ng-click="showTeams()">Or go back</h5>
-			        </button>
-			    </h3>
-		    </div>
-		</div>
-		<div class="row">
-			<div>
-			    <div ng-repeat="player in currentRoster | orderBy:'last'" ng-if="player.pos == 'P'" class="col-lg-4 col-md-6 col-sm-8 col-xs-6" ng-click="openPlayer(player)" style="padding-bottom: 5px; text-align:left;">
-			        <button type="button" class="btn btn-default default">
-			            <h4 class="text-center">{{player.pos}} <span class="hidden-xs">{{player.first}}</span> {{player.last}}</h4>
-			        </button>
-			    </div>
-		    </div>
+		<div class="row animated slideInRight" ng-show="currentRoster">
+			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+				<div class="row">
+				    <h3>Select a Batter<span class="hidden-xs"> from {{team}}</span>
+				        <button type="button" class="btn btn-link" style="padding-bottom: 5px; text-align:center;">
+				            <h5 text-align="right" display="inline-block" ng-click="showTeams()">back</h5>
+				        </button>
+				    </h3>
+				</div>
+				<div class="row">
+				    <div ng-repeat="player in currentRoster | orderBy:'last'" ng-if="player.pos !== 'P'" class="col-lg-6 col-md-6 col-sm-8 col-xs-6" ng-click="openPlayer(player)" style="padding-bottom: 5px; text-align:left;">
+				        <div class="mug-container pull-left hidden-xs">
+				        	<div class="img-rounded pull-left" style="height:3em;width:3em;overflow:hidden;position:relative;">
+					        <img style="width:3em;position:absolute;top:-.8em;" default-avatar ng-src="http://mlb.mlb.com/images/players/mugshot/ph_{{player.id}}.jpg"></img>
+					    	</div>
+					    </div>
+					    <button type="button" display="inline-block" class="btn btn-default default btn-xs">
+				            <h5 class="text-center">{{player.pos}} <span class="hidden-xs">{{player.first}}</span> {{player.last}}</h5>
+				        </button>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+				<div class="row">
+				    <h3>Select a Pitcher<span class="hidden-xs"> from {{team}}</span>
+				        <button type="button" class="btn btn-link" style="padding-bottom: 5px; text-align:center;">
+				            <h5 text-align="right" display="inline-block" ng-click="showTeams()">back</h5>
+				        </button>
+				    </h3>
+				</div>
+				<div class="row">
+				    <div ng-repeat="player in currentRoster | orderBy:'last'" ng-if="player.pos == 'P'" class="col-lg-6 col-md-6 col-sm-8 col-xs-6" ng-click="openPlayer(player)" style="padding-bottom: 5px; text-align:left;">
+				        <div class="mug-container pull-left hidden-xs">
+					        <div class="img-rounded pull-left" style="height:3em;width:3em;overflow:hidden;position:relative;">
+						        <img style="width:3em;position:absolute;top:-.8em;" default-avatar ng-src="http://mlb.mlb.com/images/players/mugshot/ph_{{player.id}}.jpg"></img>
+						    </div>
+						</div>
+                   		<button type="button" display="inline-block" class="btn btn-default default btn-xs">
+				            <h5 class="text-center">{{player.pos}} <span class="hidden-xs">{{player.first}}</span> {{player.last}}</h5>
+				        </button>
+				    </div>
+				</div>
+			</div>
 		</div>
 	</div>
 </div>
