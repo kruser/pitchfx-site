@@ -33,9 +33,12 @@ exports.query = function(req, res)
     {
         db.collection('games').find(query, options).toArray(function(err, docs)
         {
-            if (docs[0].team[0].id === team) {
+            if (docs[0].team[0].id === team)
+            {
                 res.json(docs[0].team[0].player);
-            } else {
+            }
+            else
+            {
                 res.json(docs[0].team[1].player);
             }
             db.close();

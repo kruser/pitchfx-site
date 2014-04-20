@@ -6,7 +6,8 @@ angular.module('pitchfxApp').directive('teamNavigator', [
     {
         return {
             restrict: 'E',
-            scope: {},
+            scope:
+            {},
             templateUrl: '/partials/teamNavigator.html',
             controller: 'RosterCtrl'
         };

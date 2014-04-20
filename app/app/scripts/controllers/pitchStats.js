@@ -316,102 +316,104 @@ angular.module('pitchfxApp').controller('PitchstatsCtrl', ['$rootScope', '$scope
             {
                 hitZonesDestroyFunction();
             }
-                hitZonesChart = new Highcharts.Chart(
+            hitZonesChart = new Highcharts.Chart(
+            {
+                chart:
                 {
-                    chart:
+                    type: 'scatter',
+                    renderTo: 'hitLocationsByZone',
+                    backgroundColor: 'transparent',
+                    plotBackgroundImage: '/images/stadiums/grid.svg',
+                },
+                credits:
+                {
+                    text: 'BaseballMod.com',
+                    href: ''
+                },
+                title:
+                {
+                    text: '',
+                },
+                subtitle:
+                {
+                    text: 'Catcher point-of-view',
+                    align: 'left'
+                },
+                xAxis:
+                {
+                    min: 0,
+                    max: 750,
+                    labels:
                     {
-                        type: 'scatter',
-                        renderTo: 'hitLocationsByZone',
-                        backgroundColor: 'transparent',
-                        plotBackgroundImage: '/images/stadiums/grid.svg',
-                    },
-                    credits:
-                    {
-                        text: 'BaseballMod.com',
-                        href: ''
+                        enabled: false,
                     },
                     title:
                     {
-                        text: '',
+                        enabled: false,
                     },
-                    subtitle:
+                    lineWidth: 0,
+                    minorGridLineWidth: 0,
+                    lineColor: 'transparent',
+                    minorTickLength: 0,
+                    tickLength: 0,
+                    plotLines: [
                     {
-                        text: 'Catcher point-of-view',
-                        align: 'left'
+                        value: 250,
+                        color: 'green',
+                        dashStyle: 'shortdash',
+                        width: 2,
                     },
-                    xAxis:
                     {
-                        min: 0,
-                        max: 750,
-                        labels:
-                        {
-                            enabled: false,
-                        },
-                        title:
-                        {
-                            enabled: false,
-                        },
-                        lineWidth: 0,
-                        minorGridLineWidth: 0,
-                        lineColor: 'transparent',
-                        minorTickLength: 0,
-                        tickLength: 0,
-                        plotLines: [
-                        {
-                            value: 250,
-                            color: 'green',
-                            dashStyle: 'shortdash',
-                            width: 2,
-                        },
-                        {
-                            value: 500,
-                            color: 'green',
-                            dashStyle: 'shortdash',
-                            width: 2,
-                        }]
-                    },
-                    yAxis:
+                        value: 500,
+                        color: 'green',
+                        dashStyle: 'shortdash',
+                        width: 2,
+                    }]
+                },
+                yAxis:
+                {
+                    max: 0,
+                    min: -750,
+                    labels:
                     {
-                        max: 0,
-                        min: -750,
-                        labels:
-                        {
-                            enabled: false,
-                        },
-                        title:
-                        {
-                            enabled: false,
-                        },
-                        gridLineColor: 'transparent',
-                        plotLines: [
-                        {
-                            value: -250,
-                            color: 'green',
-                            dashStyle: 'shortdash',
-                            width: 2,
-                        },
-                        {
-                            value: -500,
-                            color: 'green',
-                            dashStyle: 'shortdash',
-                            width: 2,
-                        }]
+                        enabled: false,
                     },
-                    plotOptions:
+                    title:
                     {
-                        series:
-                        {
-                            animation: false
-                        },
+                        enabled: false,
                     },
-                    series: series,
-                    exporting: {
-                        enabled: false
-                    }
-                });
-                $timeout(function(){
-                    hitZonesDestroyFunction = chartingService.keepSquare(hitZonesChart);
-                },100);
+                    gridLineColor: 'transparent',
+                    plotLines: [
+                    {
+                        value: -250,
+                        color: 'green',
+                        dashStyle: 'shortdash',
+                        width: 2,
+                    },
+                    {
+                        value: -500,
+                        color: 'green',
+                        dashStyle: 'shortdash',
+                        width: 2,
+                    }]
+                },
+                plotOptions:
+                {
+                    series:
+                    {
+                        animation: false
+                    },
+                },
+                series: series,
+                exporting:
+                {
+                    enabled: false
+                }
+            });
+            $timeout(function()
+            {
+                hitZonesDestroyFunction = chartingService.keepSquare(hitZonesChart);
+            }, 100);
         }
 
         /**
