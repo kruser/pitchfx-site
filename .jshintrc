@@ -11,6 +11,7 @@
   "undef": true,
   "unused": true,
   "maxdepth": 3,
+  "devel": false,
   "globals": {
     "angular": true,
     "_gaq" : true,
