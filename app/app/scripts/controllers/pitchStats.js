@@ -316,8 +316,6 @@ angular.module('pitchfxApp').controller('PitchstatsCtrl', ['$rootScope', '$scope
             {
                 hitZonesDestroyFunction();
             }
-            $timeout(function()
-            {
                 hitZonesChart = new Highcharts.Chart(
                 {
                     chart:
@@ -408,8 +406,9 @@ angular.module('pitchfxApp').controller('PitchstatsCtrl', ['$rootScope', '$scope
                     },
                     series: series
                 });
-                hitZonesDestroyFunction = chartingService.keepSquare(hitZonesChart);
-            }, 10);
+                $timeout(function(){
+                    hitZonesDestroyFunction = chartingService.keepSquare(hitZonesChart);
+                },100);
         }
 
         /**
