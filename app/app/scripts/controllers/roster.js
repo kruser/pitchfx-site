@@ -3,7 +3,9 @@
 /**
  * A controller for rosters
  */
-angular.module('pitchfxApp').controller('RosterCtrl', ['$scope', 'Team', function ($scope, teamService) {
+angular.module('pitchfxApp').controller('RosterCtrl', ['$scope', '$window', 'Team',
+	function($scope, $window, teamService) {
+	
 	/**
      * All teams and their displays are hard-coded here
      */
@@ -41,9 +43,24 @@ angular.module('pitchfxApp').controller('RosterCtrl', ['$scope', 'Team', functio
     /**
 	 * Get team's roster
 	 */
-	$scope.openTeam = function(team) {
+	$scope.openTeam = function(team)
+	{
 		teamService.getRoster(team).then(function(result){
 			$scope.currentRoster = result;
 		});
+	};
+
+	/**
+	 * redirect to the player's page
+	 */
+	$scope.openPlayer = function(player)
+	{
+		var url;
+		console.log(player);
+		if (player && player.id)
+		{
+			url = '/player/' + player.id + '/' + player.getUrlFriendlyName();
+			$window.location.href = url;
+		}
 	};
 }]);

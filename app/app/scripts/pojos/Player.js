@@ -10,6 +10,7 @@ var pitchfx = pitchfx ||
  */
 pitchfx.Player = function(dataObj)
 {
+	console.log(dataObj);
     angular.extend(this, dataObj);
 };
 
