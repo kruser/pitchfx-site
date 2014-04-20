@@ -3,36 +3,47 @@
 /**
  * A controller for rosters
  */
-angular.module('pitchfxApp')
-  .controller('RosterCtrl', function ($scope) {
-      $scope.teams = [{ team: 'ARI', display: 'Arizona'},
-					{ team: 'ATL', display: 'Atlanta'},
-					{ team: 'BAL', display: 'Baltimore'},
-					{ team: 'BOS', display: 'Boston'},
-					{ team: 'CHC', display: 'Chicago (NL)'},
-					{ team: 'CIN', display: 'Cincinnati'},
-					{ team: 'CLE', display: 'Cleveland'},
-					{ team: 'COL', display: 'Colorado'},
-					{ team: 'CWS', display: 'Chicago (AL)'},
-					{ team: 'DET', display: 'Detroit'},
-					{ team: 'HOU', display: 'Houston'},
-					{ team: 'KC', display: 'Kansas City'},
-					{ team: 'LAA', display: 'Los Angeles (AL)'},
-					{ team: 'LAD', display: 'Los Angeles (NL)'},
-					{ team: 'MIA', display: 'Miami'},
-					{ team: 'MIL', display: 'Milwaukee'},
-					{ team: 'MIN', display: 'Minnesota'},
-					{ team: 'NYM', display: 'New York (NL)'},
-					{ team: 'NYY', display: 'New York (AL)'},
-					{ team: 'OAK', display: 'Oakland'},
-					{ team: 'PHI', display: 'Philadelphia'},
-					{ team: 'PIT', display: 'Pittsburgh'},
-					{ team: 'SD', display: 'San Diego'},
-					{ team: 'SEA', display: 'Seattle'},
-					{ team: 'SF', display: 'San Francisco'},
-					{ team: 'STL', display: 'St. Louis'},
-					{ team: 'TB', display: 'Tampa Bay'},
-					{ team: 'TEX', display: 'Texas'},
-					{ team: 'TOR', display: 'Toronto'},
-					{ team: 'WSH', display: 'Washington'}];
-    });
+angular.module('pitchfxApp').controller('RosterCtrl', ['$scope', 'Team', function ($scope, teamService) {
+	/**
+     * All teams and their displays are hard-coded here
+     */
+      $scope.teams = [{ name: 'ARI', display: 'Arizona'},
+					{ name: 'ATL', display: 'Atlanta'},
+					{ name: 'BAL', display: 'Baltimore'},
+					{ name: 'BOS', display: 'Boston'},
+					{ name: 'CHC', display: 'Chicago (NL)'},
+					{ name: 'CIN', display: 'Cincinnati'},
+					{ name: 'CLE', display: 'Cleveland'},
+					{ name: 'COL', display: 'Colorado'},
+					{ name: 'CWS', display: 'Chicago (AL)'},
+					{ name: 'DET', display: 'Detroit'},
+					{ name: 'HOU', display: 'Houston'},
+					{ name: 'KC', display: 'Kansas City'},
+					{ name: 'LAA', display: 'Los Angeles (AL)'},
+					{ name: 'LAD', display: 'Los Angeles (NL)'},
+					{ name: 'MIA', display: 'Miami'},
+					{ name: 'MIL', display: 'Milwaukee'},
+					{ name: 'MIN', display: 'Minnesota'},
+					{ name: 'NYM', display: 'New York (NL)'},
+					{ name: 'NYY', display: 'New York (AL)'},
+					{ name: 'OAK', display: 'Oakland'},
+					{ name: 'PHI', display: 'Philadelphia'},
+					{ name: 'PIT', display: 'Pittsburgh'},
+					{ name: 'SD', display: 'San Diego'},
+					{ name: 'SEA', display: 'Seattle'},
+					{ name: 'SF', display: 'San Francisco'},
+					{ name: 'STL', display: 'St. Louis'},
+					{ name: 'TB', display: 'Tampa Bay'},
+					{ name: 'TEX', display: 'Texas'},
+					{ name: 'TOR', display: 'Toronto'},
+					{ name: 'WSH', display: 'Washington'}];
+
+    /**
+	 * Get team's roster
+	 */
+	$scope.openTeam = function(team) {
+		teamService.getRoster(team).then(function(result){
+			$scope.currentRoster = result;
+		});
+	};
+}]);
