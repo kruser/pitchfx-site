@@ -9,6 +9,9 @@ var arrayUtils = require('../../utils/arrayUtils');
 var pitchIncludes = {
     'atbat.des': 1,
     'hip.des': 1,
+    'hip.trajectory': 1,
+    'hip.x': 1,
+    'hip.y': 1,
     'pitch_type': 1,
     'type': 1,
     'des': 1,

@@ -255,15 +255,31 @@ angular.module('pitchfxApp').controller('PitchstatsCtrl', [ '$rootScope', '$scop
      */
     function renderHitLocationsByZone()
     {
+        var series = [], trajectory;
+        
+        /*
+        for (trajectory in statLine.hitBalls)
+        {
+            series.push(
+            {
+                name: trajectory,
+                data: statLine.hitBalls[trajectory]
+            });
+        }
+        */
+        
         if (hitZonesDestroyFunction)
         {
             hitZonesDestroyFunction();
         }
         hitZonesChart = new Highcharts.Chart({
             chart : {
-                type : 'area',
-                zoomType : 'x',
+                type : 'scatter',
                 renderTo : 'hitLocationsByZone',
+                backgroundColor : 'transparent',
+                plotBackgroundImage : '/images/stadiums/grid.svg',
+                margin : [ 0, 0, 0, 0 ],
+                spacingTop : 0,
                 spacingBottom : 0,
                 spacingLeft : 0,
                 spacingRight : 0
@@ -277,31 +293,55 @@ angular.module('pitchfxApp').controller('PitchstatsCtrl', [ '$rootScope', '$scop
                 enabled : false
             },
             xAxis : {
-                categories : $scope.pitchSpeeds.categories,
+                min : 0,
+                max : 750,
+                labels : {
+                    enabled : true,
+                },
                 title : {
-                    text : '',
-                }
+                    enabled : false,
+                },
+                lineWidth : 0,
+                minorGridLineWidth : 0,
+                lineColor : 'transparent',
+                minorTickLength : 0,
+                tickLength : 0
             },
             yAxis : {
-                title : {
-                    text : ''
+                max : 0,
+                min : -750,
+                labels : {
+                    enabled : true,
                 },
-            },
-            tooltip : {
-                shared : true,
+                title : {
+                    enabled : false,
+                },
+                gridLineColor : 'transparent'
             },
             plotOptions : {
-                area : {
-                    stacking : 'normal',
-                    lineColor : '#666666',
-                    lineWidth : 1,
+                series : {
+                    animation : false
+                },
+                scatter : {
                     marker : {
-                        lineWidth : 1,
-                        lineColor : '#666666'
-                    }
+                        radius : 5,
+                        states : {
+                            hover : {
+                                enabled : true,
+                                lineColor : 'rgb(100,100,100)'
+                            }
+                        }
+                    },
+                    states : {
+                        hover : {
+                            marker : {
+                                enabled : false
+                            }
+                        }
+                    },
                 }
             },
-            series : $scope.pitchSpeeds.series
+            series : series
         });
         hitZonesDestroyFunction = chartingService.keepSquare(hitZonesChart);
     }
