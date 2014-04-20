@@ -13,11 +13,11 @@ angular.module('pitchfxApp').controller('RosterCtrl', ['$scope', '$window', 'Tea
 					{ name: 'ATL', display: 'Atlanta'},
 					{ name: 'BAL', display: 'Baltimore'},
 					{ name: 'BOS', display: 'Boston'},
+					{ name: 'CWS', display: 'Chicago (AL)'},
 					{ name: 'CHC', display: 'Chicago (NL)'},
 					{ name: 'CIN', display: 'Cincinnati'},
 					{ name: 'CLE', display: 'Cleveland'},
 					{ name: 'COL', display: 'Colorado'},
-					{ name: 'CWS', display: 'Chicago (AL)'},
 					{ name: 'DET', display: 'Detroit'},
 					{ name: 'HOU', display: 'Houston'},
 					{ name: 'KC', display: 'Kansas City'},
@@ -26,14 +26,14 @@ angular.module('pitchfxApp').controller('RosterCtrl', ['$scope', '$window', 'Tea
 					{ name: 'MIA', display: 'Miami'},
 					{ name: 'MIL', display: 'Milwaukee'},
 					{ name: 'MIN', display: 'Minnesota'},
-					{ name: 'NYM', display: 'New York (NL)'},
 					{ name: 'NYY', display: 'New York (AL)'},
+					{ name: 'NYM', display: 'New York (NL)'},
 					{ name: 'OAK', display: 'Oakland'},
 					{ name: 'PHI', display: 'Philadelphia'},
 					{ name: 'PIT', display: 'Pittsburgh'},
 					{ name: 'SD', display: 'San Diego'},
-					{ name: 'SEA', display: 'Seattle'},
 					{ name: 'SF', display: 'San Francisco'},
+					{ name: 'SEA', display: 'Seattle'},
 					{ name: 'STL', display: 'St. Louis'},
 					{ name: 'TB', display: 'Tampa Bay'},
 					{ name: 'TEX', display: 'Texas'},
@@ -46,6 +46,7 @@ angular.module('pitchfxApp').controller('RosterCtrl', ['$scope', '$window', 'Tea
 	$scope.openTeam = function(team)
 	{
 		teamService.getRoster(team).then(function(result){
+			$scope.team = team.name;
 			$scope.currentRoster = result;
 		});
 	};
@@ -62,4 +63,13 @@ angular.module('pitchfxApp').controller('RosterCtrl', ['$scope', '$window', 'Tea
 			$window.location.href = url;
 		}
 	};
+
+    /**
+	 * Go back to list of teams
+	 */
+	$scope.showTeams = function()
+	{
+		$scope.currentRoster = undefined;
+	};
+
 }]);

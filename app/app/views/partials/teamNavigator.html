@@ -1,10 +1,52 @@
 <div class="row" ng-hide="currentRoster">
-    <div ng-repeat="team in teams" class="col-lg-2 col-md-3 col-sm-4 col-xs-6" ng-click="openTeam(team)">
-        <h4 class="text-center">{{team.display}}</h4>
+    <h3>Select a team:</h3>
+</div>
+<div class="row" ng-hide="currentRoster">
+    <div ng-repeat="team in teams" class="col-lg-2 col-md-3 col-sm-4 col-xs-6" ng-click="openTeam(team)" style="padding-bottom: 5px; text-align:center;">
+        <button type="button" class="btn btn-default default">
+            <h4 class="text-center">{{team.display}}</h4>
+        </button>
     </div>
 </div>
 <div class="row" ng-show="currentRoster">
-    <div ng-repeat="player in currentRoster | orderBy:'last'" class="col-lg-2 col-md-3 col-sm-4 col-xs-6" ng-click="openPlayer(player)">
-		<h4 class="text-center">{{player.pos}} {{player.first}} {{player.last}}</h4>
-    </div>
+	<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+		<div class="row">
+			<div>
+			    <h3>Select a batter<span class="hidden-xs"> from {{team}}</span>:
+			        <button type="button" class="btn btn-link" style="padding-bottom: 5px; text-align:center;">
+			            <h5 display="inline-block" ng-click="showTeams()">Or go back</h5>
+			        </button>
+			    </h3>
+		    </div>
+		</div>
+		<div class="row">
+			<div>
+			    <div ng-repeat="player in currentRoster | orderBy:'last'" ng-if="player.pos !== 'P'" class="col-lg-4 col-md-6 col-sm-8 col-xs-6" ng-click="openPlayer(player)" style="padding-bottom: 5px; text-align:left;">
+			        <button type="button" class="btn btn-default default">
+			            <h4 class="text-center">{{player.pos}} <span class="hidden-xs">{{player.first}}</span> {{player.last}}</h4>
+			        </button>
+			    </div>
+		    </div>
+		</div>
+	</div>
+	<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+		<div class="row">
+			<div>
+			    <h3>Select a pitcher<span class="hidden-xs"> from {{team}}</span>:
+			        <button type="button" class="btn btn-link" style="padding-bottom: 5px; text-align:center;">
+			            <h5 display="inline-block" ng-click="showTeams()">Or go back</h5>
+			        </button>
+			    </h3>
+		    </div>
+		</div>
+		<div class="row">
+			<div>
+			    <div ng-repeat="player in currentRoster | orderBy:'last'" ng-if="player.pos == 'P'" class="col-lg-4 col-md-6 col-sm-8 col-xs-6" ng-click="openPlayer(player)" style="padding-bottom: 5px; text-align:left;">
+			        <button type="button" class="btn btn-default default">
+			            <h4 class="text-center">{{player.pos}} <span class="hidden-xs">{{player.first}}</span> {{player.last}}</h4>
+			        </button>
+			    </div>
+		    </div>
+		</div>
+	</div>
 </div>
