@@ -27,7 +27,7 @@
 				<form ng-controller="SearchCtrl"
 					class="navbar-form navbar-left">
 					<div class="form-group">
-						<input ng-model="playerSelection" typeahead-wait-ms="200" style="min-width:250px;"
+						<input ng-model="playerSelection" typeahead-wait-ms="200" style="min-width:245px;"
 							typeahead-loading="playersLoading"
 							typeahead="player as player.getFullName() for player in searchPlayers($viewValue)"
 							typeahead-on-select="playerSelected()" type="text"
