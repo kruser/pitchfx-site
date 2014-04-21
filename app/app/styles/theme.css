@@ -117,6 +117,9 @@ body {
 .LAD .mug-container .logoBlock {
     background-color: #1A1F63;
 }
+.PHI .mug-container .logoBlock {
+    background-color: #F11B2A;
+}
 
 .mug-container .mug {
 	width: 3.5em;
