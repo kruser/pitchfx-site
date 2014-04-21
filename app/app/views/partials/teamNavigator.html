@@ -11,22 +11,22 @@
 		  <button type="button" class="btn btn-info fa fa-arrow-left pull-right" ng-click="showTeams()">&nbsp;Back to All Teams</button>
 	    </div>
 		<div class="row">
-			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+			<div class="col-sm-6 col-xs-12">
 				<h3 style="margin-top:.25em">Select a Batter<span class="hidden-xs"> from {{team}}</span></h3>
 				<div class="row">
-				    <div ng-repeat="player in currentRoster | filter:isPositionPlayer(player) | orderBy:'last'" class="col-lg-6 col-md-6 col-sm-8 col-xs-6">
+				    <div ng-repeat="player in currentRoster | filter:isPositionPlayer(player) | orderBy:'last'" class="col-md-6 col-sm-12 col-xs-6">
 	    			    <player-button player="player">
 					</div>
 				</div>
 			</div>
-			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+			<div class="col-sm-6 col-xs-12">
 			    <h3 style="margin-top:.25em;">Select a Pitcher<span class="hidden-xs"> from {{team}}</span></h3>
 				<div class="row">
-				    <div ng-repeat="player in currentRoster | filter:isPitcher(player) | orderBy:'last'" class="col-lg-6 col-md-6 col-sm-8 col-xs-6">
+				    <div ng-repeat="player in currentRoster | filter:isPitcher(player) | orderBy:'last'" class="col-md-6 col-sm-12 col-xs-6">
 	                    <player-button player="player">
 	                </div>
 				</div>
-		</div>
+		    </div>
 		</div>
 	</div>
 </div>
