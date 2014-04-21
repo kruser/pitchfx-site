@@ -145,25 +145,12 @@ angular.module('pitchfxApp').controller('RosterCtrl', ['$scope', '$window', 'Tea
         };
 
         /**
-         * redirect to the player's page
-         */
-        $scope.openPlayer = function(player)
-        {
-            var url;
-            if (player && player.id)
-            {
-                url = '/player/' + player.id + '/' + player.getUrlFriendlyName();
-                $window.location.href = url;
-            }
-        };
-
-        /**
          * Go back to list of teams
          */
         $scope.showTeams = function()
         {
             $scope.currentRoster = undefined;
         };
-
+        
     }
 ]);

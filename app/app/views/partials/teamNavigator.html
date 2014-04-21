@@ -1,53 +1,32 @@
 <div class="container">
-	<div class="row animated fadeInUpBig" ng-hide="currentRoster">
+	<div class="row animated slideInLeft" ng-hide="currentRoster">
 	    <div ng-repeat="team in teams" class="col-lg-2 col-md-3 col-sm-4 col-xs-6" style="padding-bottom: .5em;">
 	        <button type="button" class="btn btn-default btn-block default" ng-click="openTeam(team)">
 	            <h4 class="text-center">{{team.display}}</h4>
 	        </button>
 	    </div>
 	</div>
-	<div class="row animated slideInRight" ng-show="currentRoster">
-		<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-			<div class="row">
-			    <h3>Select a Batter<span class="hidden-xs"> from {{team}}</span>
-			        <button type="button" class="btn btn-link" style="padding-bottom: 5px; text-align:center;">
-			            <h5 text-align="right" display="inline-block" ng-click="showTeams()">back</h5>
-			        </button>
-			    </h3>
-			</div>
-			<div class="row">
-			    <div ng-repeat="player in currentRoster | orderBy:'last'" ng-if="player.pos !== 'P'" class="col-lg-6 col-md-6 col-sm-8 col-xs-6" ng-click="openPlayer(player)" style="padding-bottom: 5px; text-align:left;">
-			        <div class="mug-container pull-left hidden-xs">
-			        	<div class="img-rounded pull-left" style="height:3em;width:3em;overflow:hidden;position:relative;">
-				        <img style="width:3em;position:absolute;top:-.8em;" default-avatar ng-src="http://mlb.mlb.com/images/players/mugshot/ph_{{player.id}}.jpg"></img>
-				    	</div>
-				    </div>
-				    <button type="button" display="inline-block" class="btn btn-default default btn-xs">
-			            <h5 class="text-center">{{player.pos}} <span class="hidden-xs">{{player.first}}</span> {{player.last}}</h5>
-			        </button>
+	<div class="animated slideInRight" ng-show="currentRoster">
+	    <div class="clearfix">
+		  <button type="button" class="btn btn-info fa fa-arrow-left pull-right" ng-click="showTeams()">&nbsp;Back to All Teams</button>
+	    </div>
+		<div class="row">
+			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+				<h3 style="margin-top:.25em">Select a Batter<span class="hidden-xs"> from {{team}}</span></h3>
+				<div class="row">
+				    <div ng-repeat="player in currentRoster | filter:isPositionPlayer(player) | orderBy:'last'" class="col-lg-6 col-md-6 col-sm-8 col-xs-6">
+	    			    <player-button player="player">
+					</div>
 				</div>
 			</div>
+			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+			    <h3 style="margin-top:.25em;">Select a Pitcher<span class="hidden-xs"> from {{team}}</span></h3>
+				<div class="row">
+				    <div ng-repeat="player in currentRoster | filter:isPitcher(player) | orderBy:'last'" class="col-lg-6 col-md-6 col-sm-8 col-xs-6">
+	                    <player-button player="player">
+	                </div>
+				</div>
 		</div>
-		<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-			<div class="row">
-			    <h3>Select a Pitcher<span class="hidden-xs"> from {{team}}</span>
-			        <button type="button" class="btn btn-link" style="padding-bottom: 5px; text-align:center;">
-			            <h5 text-align="right" display="inline-block" ng-click="showTeams()">back</h5>
-			        </button>
-			    </h3>
-			</div>
-			<div class="row">
-			    <div ng-repeat="player in currentRoster | orderBy:'last'" ng-if="player.pos == 'P'" class="col-lg-6 col-md-6 col-sm-8 col-xs-6" ng-click="openPlayer(player)" style="padding-bottom: 5px; text-align:left;">
-			        <div class="mug-container pull-left hidden-xs">
-				        <div class="img-rounded pull-left" style="height:3em;width:3em;overflow:hidden;position:relative;">
-					        <img style="width:3em;position:absolute;top:-.8em;" default-avatar ng-src="http://mlb.mlb.com/images/players/mugshot/ph_{{player.id}}.jpg"></img>
-					    </div>
-					</div>
-                  		<button type="button" display="inline-block" class="btn btn-default default btn-xs">
-			            <h5 class="text-center">{{player.pos}} <span class="hidden-xs">{{player.first}}</span> {{player.last}}</h5>
-			        </button>
-			    </div>
-			</div>
 		</div>
 	</div>
 </div>
