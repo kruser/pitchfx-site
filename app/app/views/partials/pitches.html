@@ -20,6 +20,7 @@
 							<th class="text-center" tooltip="Called a ball" tooltip-append-to-body="true">B</th>
 							<th class="text-center" tooltip="A strike by any means" tooltip-append-to-body="true">K</th>
 							<th class="text-center" tooltip="Swing" tooltip-append-to-body="true">Swing</th>
+							<th class="text-center" tooltip="Contact" tooltip-append-to-body="true">Contact</th>
 							<th class="text-center" tooltip="Swing and a miss" tooltip-append-to-body="true">Whiff</th>
 							<th class="text-center" tooltip="Pitches resulting in a foul ball"
 								tooltip-append-to-body="true">Foul</th>
@@ -53,6 +54,7 @@
 						<td class="text-right" tooltip="{{row.ball}}" tooltip-append-to-body="true">{{row.ball/row.count*100|number:1}}%</td>
 						<td class="text-right" tooltip="{{row.strike}}" tooltip-append-to-body="true">{{row.strike/row.count*100|number:1}}%</td>
 						<td class="text-right" tooltip="{{row.swing}}" tooltip-append-to-body="true">{{row.swing/row.count*100|number:1}}%</td>
+						<td class="text-right" tooltip="{{row.contact}}" tooltip-append-to-body="true">{{row.contact/row.count*100|number:1}}%</td>
 						<td class="text-right" tooltip="{{row.whiff}}" tooltip-append-to-body="true">{{row.whiff/row.count*100|number:1}}%</td>
 						<td class="text-right" tooltip="{{row.foul}}" tooltip-append-to-body="true">{{row.foul/row.count*100|number:1}}%</td>
 						<td class="text-right" tooltip="{{row.bip}}" tooltip-append-to-body="true">{{row.bip/row.count*100|number:1}}%</td>

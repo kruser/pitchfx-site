@@ -522,6 +522,7 @@ angular.module('pitchfxApp').controller('PitchstatsCtrl', ['$rootScope', '$scope
                             ball: 0,
                             strike: 0,
                             swing: 0,
+                            contact: 0,
                             whiff: 0,
                             foul: 0,
                             bip: 0,
@@ -548,6 +549,10 @@ angular.module('pitchfxApp').controller('PitchstatsCtrl', ['$rootScope', '$scope
                     if (pitch.isSwing())
                     {
                         aggregator.swing++;
+                    }
+                    if (pitch.isBallInPlay() || pitch.isFoul())
+                    {
+                        aggregator.contact++;
                     }
                     if (pitch.isBallInPlay())
                     {
