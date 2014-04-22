@@ -1,8 +1,9 @@
 var MongoClient = require('mongodb').MongoClient;
 
 /**
- * Query players on latest roster given a team code. The req.query.team_code is expected to be populated
- *
+ * Query players on latest roster given a team code. The req.query.team_code is
+ * expected to be populated
+ * 
  * @param req -
  *            the express request
  * @param res -
@@ -10,36 +11,38 @@ var MongoClient = require('mongodb').MongoClient;
  */
 exports.query = function(req, res)
 {
-    var team = req.query.team,
-        query = {
-            '$or': [
-            {
-                'home_name_abbrev': team
-            },
-            {
-                'away_name_abbrev': team
-            }]
+    var team = req.query.team, query = {
+        '$or' : [ {
+            'home_name_abbrev' : team
+        }, {
+            'away_name_abbrev' : team
+        } ]
+    }, options = {
+        'sort' : {
+            'start' : -1
         },
-        options = {
-            'sort':
-            {
-                'start': -1
-            },
-            'limit': 1
-        };
-
+        'limit' : 1
+    };
 
     MongoClient.connect("mongodb://localhost:27017/mlbatbat", function(err, db)
     {
-        db.collection('games').find(query, options).toArray(function(err, docs)
+        db.collection('games').findOne(query, options, function(err, doc)
         {
-            if (docs[0].team[0].id === team)
+            if (doc && doc.team && doc.team.length > 0)
             {
-                res.json(docs[0].team[0].player);
+
+                if (doc.team[0].id === team)
+                {
+                    res.json(doc.team[0].player);
+                }
+                else
+                {
+                    res.json(doc.team[1].player);
+                }
             }
             else
             {
-                res.json(docs[0].team[1].player);
+                res.send(404, 'Invalid Team');
             }
             db.close();
         });
