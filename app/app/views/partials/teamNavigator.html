@@ -1,6 +1,6 @@
 <div class="container">
 	<div class="row animated slideInLeft" ng-hide="currentRoster">
-	    <div ng-repeat="team in teams" class="col-lg-2 col-md-3 col-sm-4 col-xs-6" style="padding-bottom: .5em;">
+	    <div ng-repeat="team in teams" class="col-lg-2 col-md-3 col-sm-4 col-xs-6" style="padding-bottom: .5em; padding-left: .25em; padding-right: .25em">
 	        <button type="button" class="btn btn-default btn-block btn-lg default" ng-click="openTeam(team)">{{team.display}}</button>
 	    </div>
 	</div>
@@ -12,7 +12,7 @@
 			<div class="col-sm-6 col-xs-12">
 				<h3 style="margin-top:.25em">Select a Batter<span class="hidden-xs"> from {{team}}</span></h3>
 				<div class="row">
-				    <div ng-repeat="player in currentRoster | filter:isPositionPlayer(player) | orderBy:'last'" class="col-md-6 col-sm-12 col-xs-6">
+				    <div ng-repeat="player in currentRoster | filter:isPositionPlayer(player) | orderBy:'last'" class="col-md-6 col-sm-12 col-xs-6" style="padding-bottom: .5em; padding-left: .25em; padding-right: .25em">
 	    			    <player-button player="player">
 					</div>
 				</div>
@@ -20,7 +20,7 @@
 			<div class="col-sm-6 col-xs-12">
 			    <h3 style="margin-top:.25em;">Select a Pitcher<span class="hidden-xs"> from {{team}}</span></h3>
 				<div class="row">
-				    <div ng-repeat="player in currentRoster | filter:isPitcher(player) | orderBy:'last'" class="col-md-6 col-sm-12 col-xs-6">
+				    <div ng-repeat="player in currentRoster | filter:isPitcher(player) | orderBy:'last'" class="col-md-6 col-sm-12 col-xs-6" style="padding-bottom: .5em; padding-left: .25em; padding-right: .25em">
 	                    <player-button player="player">
 	                </div>
 				</div>
