@@ -28,7 +28,6 @@ exports.query = function(req, res)
     {
         db.collection('games').findOne(query, options, function(err, doc)
         {
-            console.log(doc);
             if (doc && doc.team && doc.team.length > 0)
             {
 
