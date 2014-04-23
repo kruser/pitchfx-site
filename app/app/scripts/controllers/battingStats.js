@@ -152,11 +152,6 @@ angular.module('pitchfxApp').controller('BattingstatsCtrl', ['$scope', '$log', '
                     renderTo: 'hipScatter',
                     backgroundColor: 'transparent',
                     plotBackgroundImage: '/images/stadiums/1.svg',
-                    margin: [0, 0, 0, 0],
-                    spacingTop: 0,
-                    spacingBottom: 0,
-                    spacingLeft: 0,
-                    spacingRight: 0
                 },
                 credits:
                 {
@@ -174,7 +169,7 @@ angular.module('pitchfxApp').controller('BattingstatsCtrl', ['$scope', '$log', '
                     max: 250,
                     labels:
                     {
-                        enabled: true,
+                        enabled: false,
                     },
                     title:
                     {
@@ -192,7 +187,7 @@ angular.module('pitchfxApp').controller('BattingstatsCtrl', ['$scope', '$log', '
                     min: -250,
                     labels:
                     {
-                        enabled: true,
+                        enabled: false,
                     },
                     title:
                     {
@@ -232,9 +227,16 @@ angular.module('pitchfxApp').controller('BattingstatsCtrl', ['$scope', '$log', '
                         },
                     }
                 },
-                series: series
+                series: series,
+                exporting:
+                {
+                    enabled: false
+                }
             });
-            hipScatterDestroyFunction = chartingService.keepSquare(hipScatter);
+            $timeout(function()
+            {
+                hipScatterDestroyFunction = chartingService.keepSquare(hipScatter);
+            }, 100);
         }
 
         /**

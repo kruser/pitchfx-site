@@ -151,6 +151,6 @@ angular.module('pitchfxApp').controller('RosterCtrl', ['$scope', '$window', 'Tea
         {
             $scope.currentRoster = undefined;
         };
-        
+
     }
 ]);

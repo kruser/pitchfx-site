@@ -2,29 +2,31 @@
 
 angular.module('pitchfxApp').directive('teamNavigator', [
 
-function()
-{
-    return {
-        restrict : 'E',
-        scope : {},
-        templateUrl : '/partials/teamNavigator.html',
-        controller : 'RosterCtrl',
-        link : function linkFunc($scope)
-        {
-            $scope.isPitcher = function()
+    function()
+    {
+        return {
+            restrict: 'E',
+            scope:
+            {},
+            templateUrl: '/partials/teamNavigator.html',
+            controller: 'RosterCtrl',
+            link: function linkFunc($scope)
             {
-                return function(player)
+                $scope.isPitcher = function()
                 {
-                    return (player && player.pos === 'P');
+                    return function(player)
+                    {
+                        return (player && player.pos === 'P');
+                    };
                 };
-            };
-            $scope.isPositionPlayer = function()
-            {
-                return function(player)
+                $scope.isPositionPlayer = function()
                 {
-                    return (player && player.pos !== 'P');
+                    return function(player)
+                    {
+                        return (player && player.pos !== 'P');
+                    };
                 };
-            };
-        }
-    };
-} ]);
+            }
+        };
+    }
+]);
