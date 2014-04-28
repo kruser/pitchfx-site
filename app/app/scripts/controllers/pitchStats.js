@@ -428,7 +428,6 @@ angular.module('pitchfxApp').controller('PitchstatsCtrl', ['$rootScope', '$scope
                     type: 'area',
                     zoomType: 'x',
                     renderTo: 'pitchSpeeds',
-                    spacingBottom: 0,
                     spacingLeft: 0,
                     spacingRight: 0
                 },
