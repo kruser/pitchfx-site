@@ -13,12 +13,21 @@ exports.query = function(req, res)
 {
     var team = req.query.team,
         query = {
-            '$or': [
+            '$and': [
             {
-                'home_name_abbrev': team
+                '$or': [
+                {
+                    'home_name_abbrev': team
+                },
+                {
+                    'away_name_abbrev': team
+                }]
             },
             {
-                'away_name_abbrev': team
+                'team.player':
+                {
+                    '$exists': true
+                }
             }]
         }, options = {
             'sort':
