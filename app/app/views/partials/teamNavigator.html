@@ -1,7 +1,8 @@
 <div class="container">
 	<div class="row animated slideInLeft" ng-hide="currentRoster">
 	    <div ng-repeat="team in teams" class="col-lg-2 col-md-3 col-sm-4 col-xs-6" style="padding-bottom: .5em;">
-	        <button type="button" class="btn btn-default btn-block btn-lg default" ng-click="openTeam(team)">{{team.display}}</button>
+	        <button type="button" class="hidden-xs btn btn-default btn-lg btn-block default" ng-click="openTeam(team)">{{team.display}}</button>
+	        <button type="button" class="visible-xs btn btn-default btn-block default" ng-click="openTeam(team)">{{team.display}}</button>
 	    </div>
 	</div>
 	<div class="animated slideInRight" ng-show="currentRoster">
