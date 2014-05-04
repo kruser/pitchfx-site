@@ -7,6 +7,10 @@ body {
 .avatar {
 	width: 8em;
 }
+.navbar-brand img {
+	height: 30px;
+    margin-top: -5px;
+}
 
 .container.container-full {
 	padding: 0px;
