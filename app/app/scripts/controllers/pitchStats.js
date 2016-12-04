@@ -548,6 +548,10 @@ angular.module('pitchfxApp').controller('PitchstatsCtrl', ['$rootScope', '$scope
                     if (pitch.isSwing())
                     {
                         aggregator.swing++;
+                        if (pitch.isWhiff())
+                        {
+                            aggregator.whiff++;
+                        }
                     }
                     if (pitch.isBallInPlay() || pitch.isFoul())
                     {
